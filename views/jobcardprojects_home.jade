@@ -140,7 +140,7 @@ block content
 												-if((!Projects[index].jobcard_analisederisco || !Projects[index].jobcard_analisederiscoAmbiental || !Projects[index].jobcard_analisederisco.jobcard_risk1 || !Projects[index].jobcard_analisederiscoAmbiental.jobcard_risk21) && Projects[index].jobcard_estadoactual == "On site")
 													a.tooltipped.pointer.analiseRisco(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Analise de Risco", data-user-new="#{Projects[index]._id}") <img width="30px" src="/img/risk2.png" style="margin-bottom:-2px">
 												-else
-													-if(Jobcards[index].jobcard_estadoactual == "On site")
+													-if(Projects[index].jobcard_estadoactual == "On site")
 														-if(Projects[index].jobcard_sitearrivaldate != undefined)
 															a.tooltipped.pointer.moreprojects(style="margin-left:0px; color:green", data-position="top", data-delay="10", data-tooltip="Projectos", datareferencia="#{Projects[index]._id}", datasiteid="#{Projects[index].jobcard_siteid}") <i class="material-icons selmecAzul">add_box</i>
 															//- a.tooltipped.pointer.generatordetalhesproject(style="margin-left: 0px; color:green",data-position="top", data-delay="10", data-tooltip="Generator Details", datareferencia="#{Projects[index]._id}", datasiteid="#{Projects[index].jobcard_siteid}") <img width="27px" src="/img/generator.png" style="margin-bottom:-2px">
