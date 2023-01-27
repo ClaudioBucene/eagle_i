@@ -6785,13 +6785,17 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 					 }, 3500);
 				
 				
-			 }else{
-				
-				setTimeout(function(){
-				 
-				 window.location.href="/energia/preventativemaint/inprogress";
-				}, 3500);
-			}
+			 }else if(jobcard_jobtype == "Preventative Maintenance"){
+						setTimeout(function(){
+						
+						window.location.href="/energia/preventativemaint/inprogress";
+						}, 3500);
+					}
+
+					else {
+						
+					}
+			
 
 
 	});
