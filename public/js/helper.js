@@ -8270,10 +8270,14 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 								}, 3500);
 	
 							}else{
-								setTimeout(function(){
-								window.location.href="/manutencao/ttnumberhome/new";
-							}, 3500);
-							}
+								if(dadojobtype == "Callout"){
+
+									setTimeout(function(){
+									window.location.href="/manutencao/ttnumberhome/new";
+									}, 3500);
+									
+								}
+						}
 				});
 
 
@@ -25307,7 +25311,8 @@ $(".detalhescsss").click(function(){
 									if(datajobtype=="Callout")
 										setTimeout(function(){window.location.href="/manutencao/ttnumberhome/inprogress"}, 1500)
 									else
-										setTimeout(function(){window.location.href="/manutencao/preventativemaint/inprogress"}, 1500)
+										if(datajobtype=="Preventative Maintenance")
+										   setTimeout(function(){window.location.href="/manutencao/preventativemaint/inprogress"}, 1500)
 
 								}
 						}
