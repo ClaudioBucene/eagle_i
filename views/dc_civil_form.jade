@@ -1,0 +1,65 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Civil for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12
+						label(for="civil_data_center") 
+						h6 Visual check on all civil Data Centre facilities (floor, roof, doors, walls, painting, gates, fence, water, paving, etc.)
+					.col.s6
+						input.bom(type="radio" id="civil_data_center_ok" name="civil_data_center" checked="#{DC.civil_data_center}"=='ok'? true:false value="ok")
+						label(for="civil_data_center_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="civil_data_center_no",  name='civil_data_center', checked="#{DC.civil_data_center}"=='not ok'? true:false value="not ok")
+						label(for="civil_data_center_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="civil_data_center_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="civil_data_center_comment",value="#{DC.civil_data_center_comment?DC.civil_data_center_comment:''}",  identifica="#{DC_insp._id}" ,name="civil_data_center_comment")				
+
+
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.civil_data_center
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_civil_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

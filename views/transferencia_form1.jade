@@ -1,0 +1,64 @@
+extends layout
+block content
+	.container.white
+		form(id="inspeccaoVeiculo", method="post",style="color:#12375c")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold  Transference Form
+				.row
+					.input-field.col.s12.m4
+						i.material-icons.prefix.selmecAzul person
+						label(for="motorista") From
+						input.preencher(id="motorista", type="text",  readonly, name="motorista", value="#{Transferencias ? Transferencias[0].motorista:DataU.nome}")
+					.input-field.col.s12.m4
+						i.material-icons.prefix.selmecAzul note
+						label(for="Matricula") R. Number
+						input.preencher(type="text", id="matricula", name="Matricula",style="arial", value="#{Transferencias ? Transferencias[0].matricula:DataU.matricula}")
+					.input-field.col.s12.m4
+						i.material-icons.prefix.selmecAzul date_range
+						label.selmecAzul(for="data_transferencia") Date Hours<span class="red-text"></span>
+						input.preencher(type="text", id="data_transferencia", readonly,name="data", value="#{Transferencias? Transferencias[0].data_transferencia : (new Date()).getDate()+'/'+((new Date()).getMonth()+1)+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours())+' : '+((new Date()).getMinutes())}")
+				.row
+					.input-field.col.s12.m3
+						i.material-icons.prefix
+						label(for="marca_modelo") Make & Model
+						input.preencher(id="marca_modelo", type="text", name="marca_modelo", style="arial",value="#{Transferencias ? Transferencias[0].marca_modelo:DataU.marca+' - '+DataU.modelo}")
+					.input-field.col.s12.m3
+						i.material-icons.prefix
+						label(for="supervisor") Nome do Supervisor
+						input.preencher(type="text",  id="supervisor", name="supervisor", readonly, value="#{Transferencias ? Transferencias[0].nome_supervisor:DataU.nome_supervisor}")
+					.col.s12.m3
+						label(for="provincia_trabalho") Receptor
+						select.browser-default(name="nome_receptor", id="nome_receptor", style="font-family:")
+							if Transferencias
+								option(value="#{Transferencias[0].nome_receptor}", selected="selected") #{Transferencias[0].nome_receptor}
+							else
+								-for(var i = 0; i < datta.length; i++)
+									option(value="#{datta[i].nome}") #{datta[i].nome}
+					.input-field.col.s12.m3(oninput="this.className = ''")
+							i.material-icons.prefix.selmecAzul network_check
+							label(for="quilometragem") Kilometers<span class="red-text"></span>
+							input.preencher(type="text", id="quilometragem", readonly, name="quilometragem", value="#{Transferencias ? Transferencias[0].quilometragem: DataU.kilometragem}")
+					.input-field.col.s12.m4.hide
+						i.material-icons.prefix.left 
+						label(for="quilometragem") Kilometragem
+						input(type="number", min="0", id="quilometragem", name="quilometragem", style="arial", value="#{Transferencias ? Transferencias[0].quilometragem:DataU.kilometragem}")
+				.row(style="margin-top:7px !important")
+					if !Transferencias
+						.col.s12.m6.center(style="margin-bottom: 10px;")
+							button#captarTransferencia(type="button", class="btn center waves-efect waves-light") Save
+						.col.s12.m6.center
+							button#cancelarTransferencia(type="button", class="btn waves-efect waves-light red") cancel
+					else
+						.col.s12.center
+							butoon#voltarTransferencia(type="button", class="btn waves-efect waves-light activarAzul") << Voltar
+		block js
+			script.
+				setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";}
+				}, 50);
+				

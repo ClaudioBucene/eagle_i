@@ -1,0 +1,28 @@
+extends layout
+block content
+	.container(style="padding-top:20px")
+		.col.m4.s6
+			.card.hover-reveal.personalised#verBalance
+				.card-image.waves-block
+					img.icn(src="/img/pettycash_addmore.png" style="width:100px" )
+				.card-content
+					h6.bold <span data-i18n="demo.pettycash_home.accountbalance"></span>
+		.col.m4.s6
+			.card.hover-reveal.personalised#verControl
+				.card-image.waves-block
+					img.icn(src="/img/pettycash_control.png" style="width:100px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.pettycash_home.accountcontrol"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setInterval(function(){document.getElementById("financasId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

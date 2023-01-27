@@ -1,0 +1,1788 @@
+mixin modals()
+	div(id="yes_no_modal", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal",style="color:#12375c")
+			p(id="yes_no_content_modal")
+		
+		div(class="modal-footer")
+			button(type="button", id="no_btn_modal_" class="btn red modal-action modal-close waves-effect waves-green btn-flat clicarrr", vvl="nao" style="margin-left: 20px !important") <span data-i18n="demo.inspdiaria_form.naoo"></span>
+			button(type="button", id="yes_btn_modal", vvl="sim" class="btn green modal-action modal-close waves-effect waves-green btn-flat clicarrr") <span data-i18n="demo.inspdiaria_form.simm"></span>
+	
+	div(id="yes_no_modal_return_stock", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal_return_stock",style="color:#12375c;  font-size:90% !important")
+			p(id="yes_no_content_modal_return_stock")
+		
+		div(class="modal-footer")
+			button.reducao_botao(type="button", id="no_btn_modal__return_stock" class="btn red modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") <span data-i18n="demo.utilizador_form.cancelar"></span>
+			button.reducao_botao(type="button", id="yes_btn_modal_return_stock", class="btn green modal-action modal-close waves-effect waves-green btn-flat") <span data-i18n="demo.utilizador_form.gravar"></span>
+	div(id="yes_no_modal_return_stock__", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal_return_stock__",style="color:#12375c;  font-size:90% !important")
+			p(id="yes_no_content_modal_return_stock__")
+		
+		div(class="modal-footer")
+			button(type="button", id="cancelar_bbkt", class="btn red waves-effect waves-green btn-flat" style="margin-left: 20px !important") <span >Cancel</span>
+			button#redutorII(type="button",  class="btn green waves-effect waves-green btn-flat hide",  style="margin-left: 20px !important") Next >>
+	
+	div(id="yes_no_modal_return_stock__po", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal_return_stock__po",style="color:#12375c;  font-size:90% !important")
+			p(id="yes_no_content_modal_return_stock__po")
+		
+		div(class="modal-footer")
+			button#redutorIII(type="button",  class="btn green waves-effect waves-green btn-flat",  style="margin-left: 20px !important") Next >>
+	
+	div(id="loading" style="display:none;")
+		.loading1 <br>
+		span.bold(class="hide-on-small-only") processando...
+
+
+	div(id="msg_modal", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="msg_title_modal", style="color:#12375c")
+			p(id="msg_content_modal")
+		
+		div(class="modal-footer")
+			button(type="button", class="btn modal-action modal-close waves-effect waves-green btn-flat btn waves-efect waves-light activarAzul", id="ok_btn_modal") OK
+
+	div(id="msg_modal_2", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			p(id="msg_content_modal_2")
+		
+		div(class="modal-footer")
+			button(type="button", class="btn modal-action modal-close waves-effect waves-green btn-flat", id="ok_btn_modal") OK
+
+	div(id="image_modal", class="modal center")
+		div(id="jobcardphotoinfodetalhes_modal", class="modal center")
+		a(id="jobcardphotoinfodetalhes_cancel" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="jobcardphotoinfodetalhes_title_modal",style="color:#12375c") <span data-i18n="demo.preventative_maint.photo"></span>
+			div(class="row center")
+				form#msform(class="col s12" style="margin:0px; color:#12375c;" method="POST", action="", enctype="multipart/form-data")
+
+	div(id="preloader" )
+
+
+	div(id="jobcardaddticket_modal", class="modal", style="width: 70% !important")
+		a(id="jobcardaddticket_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="jobcardaddticket_modal_title_modal",style="color:#12375c") <span data-i18n="demo.ttnumber_form.adicionarticketnumber"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					.row
+						.input-field.col.s12.m12(style="margin-top:0px")
+							label(for="jobcard_ttnumber") <span data-i18n="demo.ttnumber_form.ttnumber"></span>
+							input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_ttnumber" ,name="jobcard_ttnumber")
+					div(class="modal-footer")
+						button(type="button", id="jobcardaddticket_modal_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	//- escolher formulario de cliente ou de fornecedor
+	div(id="clientesupp_modal", class="modal", style="width: 60% !important")
+		a(id="clientesuppopt_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px; padding:10px !important")
+			h4(id="clientesupp_title_modal",style="color:#12375c") <span data-i18n="demo.cliente_form.clientesupp"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					.row#paragrafoatt.hide
+						p.red <span data-i18n="demo.cliente_form.escolhaop"></span>!
+					.row(style="margin-top:20px; margin-bottom:20px")
+						.col.s2.hide-on-small-only
+							label(for="clientesuppopt") <span data-i18n="demo.cliente_form.escolhaop"></span>:
+						.col.s5
+							input(type="radio" id="formulariocliente" name="clientesuppopt"  value="cliente")
+							label(for="formulariocliente") <span data-i18n=demo.cliente_form.cliente></span>	
+						.col.s5
+							input(type="radio", id="formulariofornecedor", name='clientesuppopt', value="fornecedor")
+							label(for="formulariofornecedor") <span data-i18n=demo.cliente_form.fornecedor></span>
+					div(class="modal-footer")
+						//- button(type="button", id="clientesuppopt_cancel_btn_modal_" class="center btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") <span data-i18n="demo.ttnumber_form.cancelar"></span>
+						button(type="button", id="clientesuppopt_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat") <span data-i18n="demo.ttnumber_form.create"></span>
+	div(id="pettycashreport_modal", class="modal", style="width: 50% !important")
+		a(id="pettycashreport_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px; padding:10px !important")
+			h4(id="pettycashreport_title_modal",style="color:#12375c") <span data-i18n="demo.pettycash_home.pettycashreport"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					.row#paragrafoatt1.hide
+						p(style="color:red") <span data-i18n="demo.pettycash_home.escolhaop"></span>!
+					.row#paragrafoatt3.hide
+						p(style="color:red") <span data-i18n="demo.pettycash_home.escolhaop1"></span>!
+					.row#paragrafoatt4.hide
+						p(style="color:red") <span data-i18n="demo.pettycash_home.escolhaop2"></span>!
+					.row(style="margin-bottom:0px; margin-top:20px;")
+						.col.s12.m6(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.nomecolaborador"></span>
+							select.browser-default(name="pettycashreportcolaborador" id = "pettycashreportcolaborador")
+								option(value="" disabled selected) Choose
+					.row(style="margin-bottom:0px")
+						.col.s12.m2(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.mes"></span>
+							select.browser-default(name="pettycashreportmesfrom" id = "pettycashreportmesfrom")
+								option(value="" disabled selected) Choose
+						.col.s12.m2(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.ano"></span>
+							select.browser-default(name="pettycashreportanofrom" id = "pettycashreportanofrom")
+								option(value="" disabled selected) Choose
+						.col.s12.m1(style="margin-top:26px")
+							i.material-icons.prefix.selmecAzul arrow_forward
+						.col.s12.m2(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.mes"></span>
+							select.browser-default(name="pettycashreportmesto" id = "pettycashreportmesto")
+								option(value="" disabled selected) Choose
+						.col.s12.m2(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.ano"></span>
+							select.browser-default(name="pettycashreportanoto" id = "pettycashreportanoto")
+								option(value="" disabled selected) Choose
+					div(class="modal-footer")
+						//- button(type="button", id="clientesuppopt_cancel_btn_modal_" class="center btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") <span data-i18n="demo.ttnumber_form.cancelar"></span>
+						button(type="button", id="pettycashreport_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat") <span data-i18n="demo.pettycash_home.create"></span>
+	div(id="pettycashreason_modal", class="modal", style="width: 60% !important")
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="pettycashreason_title_modal",style="color:#12375c") <span data-i18n="demo.pettycash_home.reason"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					.row#paragrafoatt2.hide
+						p.red <span data-i18n="demo.pettycash_home.escolhaop"></span>!
+					.row(style="margin-top:20px;")
+						.col.s12.m6.input-field
+							select(name="reasonoptions", id="reasonoptions" multiple)
+								option(value="" disabled selected) Escolha a opção
+								option(value="Documentos em falta") Documentos em falta
+								option(value="Dados da empresa incorrectos") Dados da empresa incorrectos
+								option(value="Outros") Outros
+							label <span data-i18n="demo.pettycash_home.reason1"></span>
+						.col.s12.m6.input-field.hide#mostrarOutros
+							label(for="reasonoutros" style="font-size:15px") <span data-i18n="demo.pettycash_home.outros"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="reasonoutros" ,name="reasonoutros")
+					div(class="modal-footer")
+						button(type="button", id="pettycashreason_cancel_btn_modal_" class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") <span data-i18n="demo.ttnumber_form.cancelar"></span>
+						button(type="button", id="pettycashreason_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	div(id="pettycasheditcredit_modal", class="modal", style="width: 60% !important")
+		a(id="pettycasheditcredit_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="pettycasheditcredit_title_modal",style="color:#12375c") <span data-i18n="demo.pettycash_home.editcredit"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12 center")
+					//- .row#paragrafoatt2.hide
+					//- 	p.red <span data-i18n="demo.pettycash_home.escolhaop"></span>!
+					.row(style="margin-top:20px;")
+						.col.s12.m12.input-field
+							label(for="reasonoutros" style="font-size:15px") <span data-i18n="demo.pettycash_home.credito"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="pettycash_credito1" ,name="pettycash_credito1")
+					div(class="modal-footer")
+						button(type="button", id="pettycasheditcredit_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	div(id="siteinfogeneratorinfo_modal", class="modal", style="width: 70% !important")
+		a.siteinfogeneratorinfo_modal_cancel_btn_modal_(id="siteinfogeneratorinfo_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.detalhesgerador"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.generatortype></span>
+							select.browser-default(name="siteinfo_generatortype", id="siteinfo_generatortype")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Cummins") Cummins
+								option(value="Deutz") Deutz
+								option(value="Mitsubishi") Mitsubishi
+								option(value="Perkins") Perkins
+								option(value="Volvo") Volvo
+								option(value="Yanmar") Yanmar
+								option(value="Perkins AGG") Perkins AGG
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_generatoroutputkw") <span data-i18n="demo.site_info.outputkw"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatoroutputkw" ,name="siteinfo_generatoroutputkw")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_generatormodelno") <span data-i18n="demo.site_info.modelno"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatormodelno" ,name="siteinfo_generatormodelno")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_generatorengineserialnumber") <span data-i18n="demo.site_info.engineserialnumber"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatorengineserialnumber" ,name="siteinfo_generatorengineserialnumber")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.enginecapacity></span>
+							select.browser-default(name="siteinfo_generatorenginecapacity", id="siteinfo_generatorenginecapacity")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="2 Cylinder") 2 Cylinder
+								option(value="4 Cylinder") 4 Cylinder
+								option(value="4 Cylinder Turbo") 4 Cylinder Turbo
+								option(value="6 Cylinder") 6 Cylinder
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.startertype></span>
+							select.browser-default(name="siteinfo_generatorstartertype", id="siteinfo_generatorstartertype", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Bosch") Bosch
+								option(value="Bosch 2 Hole") Bosch 2 Hole
+								option(value="Bosch 3 Hole") Bosch 3 Hole
+								option(value="Cummins") Cummins
+								option(value="Denso") Denso
+								option(value="Perkins") Perkins
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_generatorfuelconsumption") <span data-i18n="demo.site_info.fuelconsumption"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatorfuelconsumption" ,name="siteinfo_generatorfuelconsumption")
+					div(class="modal-footer")
+						button.adicionarGenerator.hide(type="button", id="siteinfogeneratorinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addgenerator"></span>
+						button.hide(type="button", id="siteinfogeneratorinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updategenerator"></span>
+	div(id="resetgeneratorhours_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.resetgenhours"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.resetgenhours></span>
+							select.browser-default(name="reset_reason", id="reset_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="New generator installed") New generator installed
+								option(value="Generator Swopped") Generator Swopped
+								option(value="Controller Replaced") Controller Replaced
+					div(class="modal-footer")
+						button(type="button", id="resetgeneratorhrs_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.reset"></span>
+	div(id="siteinfogsmcabinfo_modal", class="modal", style="width: 70% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.gsmcabdetails"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsmEquipmentType") <span data-i18n="demo.site_info.equipmenttype"></span>
+							select.browser-default(name="siteinfo_gsmEquipmentType", id="siteinfo_gsmEquipmentType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="BS240XL") BS240XL
+								option(value="Node-G Repeater") Node-G Repeater
+								option(value="BS82") BS82
+								option(value="BS82II") BS82II
+								option(value="BS240") BS240
+								option(value="BS241") BS241
+								option(value="Flexi 3G") Flexi 3G
+								option(value="Flexi BTS") Flexi BTS
+								option(value="Multi Radio") Multi Radio
+								option(value="Huawei BTS3900") Huawei BTS3900
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsmSiteConfig") <span data-i18n="demo.site_info.gsmsiteconfig"></span>
+							select.browser-default(name="siteinfo_gsmSiteConfig", id="siteinfo_gsmSiteConfig", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="900") 900
+								option(value="900/1800") 900/1800
+								option(value="3G") 3G
+								option(value="4G") 4G
+								option(value="5G") 5G
+								option(value="Omni") Omni
+								option(value="TMA Unit") TMA Unit
+								option(value="BSC") BSC
+								option(value="TRAU") TRAU
+								option(value="Repeater") Repeater
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsm900AntennaType") <span data-i18n="demo.site_info.gsm900antennatype"></span>
+							select.browser-default(name="siteinfo_gsm900AntennaType", id="siteinfo_gsm900AntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="GSM 900 Omni") GSM 900 Omni
+								option(value="GSM 900 Panel") GSM 900 Panel
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsm900AntennaQty") <span data-i18n="demo.site_info.gsm900qty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsm900AntennaQty" ,name="siteinfo_gsm900AntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:22px")
+							label(for="siteinfo_gsm900TmaInstalled") <span data-i18n="demo.site_info.tma900installed"></span>
+							select.browser-default(name="siteinfo_gsm900TmaInstalled", id="siteinfo_gsm900TmaInstalled", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsm1800AntennaType") <span data-i18n="demo.site_info.gsm1800antennatype"></span>
+							select.browser-default(name="siteinfo_gsm1800AntennaType", id="siteinfo_gsm1800AntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="GSM 1800 Omni") GSM 1800 Omni
+								option(value="GSM 1800 Panel") GSM 1800 Panel
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsm1800AntennaQty") <span data-i18n="demo.site_info.gsm1800qty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsm1800AntennaQty" ,name="siteinfo_gsm1800AntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsm1800TmaInstalled") <span data-i18n="demo.site_info.tma1800installed"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsm1800TmaInstalled" ,name="siteinfo_gsm1800TmaInstalled")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsm3gAntennaType") <span data-i18n="demo.site_info.g3antennatype"></span>
+							select.browser-default(name="siteinfo_gsm3gAntennaType", id="siteinfo_gsm3gAntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Gsm 3G Panel") Gsm 3G Panel
+								option(value="GSM 3G Omni") GSM 3G Omni
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsm3gAntennaQty") <span data-i18n="demo.site_info.g3qty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsm3gAntennaQty" ,name="siteinfo_gsm3gAntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_gsm3gTmaInstalled") <span data-i18n="demo.site_info.g3installed"></span>
+							select.browser-default(name="siteinfo_gsm3gTmaInstalled", id="siteinfo_gsm3gTmaInstalled", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsm4gAntennaType") <span data-i18n="demo.site_info.g4antennatype"></span>
+							select.browser-default(name="siteinfo_gsm4gAntennaType", id="siteinfo_gsm4gAntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Gsm 4G Panel") Gsm 4G Panel
+								option(value="GSM 4G Omni") GSM 4G Omni
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsm4gAntennaQty") <span data-i18n="demo.site_info.g4qty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsm4gAntennaQty" ,name="siteinfo_gsm4gAntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:22px")
+							label(for="siteinfo_gsm4gTmaInstalled") <span data-i18n="demo.site_info.g4installed"></span>
+							select.browser-default(name="siteinfo_gsm4gTmaInstalled", id="siteinfo_gsm4gTmaInstalled", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsm5gAntennaType") <span data-i18n="demo.site_info.g5antennatype"></span>
+							select.browser-default(name="siteinfo_gsm5gAntennaType", id="siteinfo_gsm5gAntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Gsm 5G Panel") Gsm 5G Panel
+								option(value="GSM 5G Omni") GSM 5G Omni
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsm5gAntennaQty") <span data-i18n="demo.site_info.g5qty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsm5gAntennaQty" ,name="siteinfo_gsm5gAntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_gsm5gTmaInstalled") <span data-i18n="demo.site_info.g5installed"></span>
+							select.browser-default(name="siteinfo_gsm5gTmaInstalled", id="siteinfo_gsm5gTmaInstalled", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsmOmniAntennaType") <span data-i18n="demo.site_info.omniantennatype"></span>
+							select.browser-default(name="siteinfo_gsmOmniAntennaType", id="siteinfo_gsmOmniAntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsmOmniAntennaQty") <span data-i18n="demo.site_info.omniqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsmOmniAntennaQty" ,name="siteinfo_gsmOmniAntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsmTmaAntennaType") <span data-i18n="demo.site_info.tmaunit"></span>
+							select.browser-default(name="siteinfo_gsmTmaAntennaType", id="siteinfo_gsmTmaAntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsmTmaAntennaQty") <span data-i18n="demo.site_info.tmaunit"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsmTmaAntennaQty" ,name="siteinfo_gsmTmaAntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsmBscAntennaType") <span data-i18n="demo.site_info.bsc"></span>
+							select.browser-default(name="siteinfo_gsmBscAntennaType", id="siteinfo_gsmBscAntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsmBscAntennaQty") <span data-i18n="demo.site_info.bscqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsmBscAntennaQty" ,name="siteinfo_gsmBscAntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsmTrauAntennaType") TRAU
+							select.browser-default(name="siteinfo_gsmTrauAntennaType", id="siteinfo_gsmTrauAntennaType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsmTrauAntennaQty") <span data-i18n="demo.site_info.trauqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsmTrauAntennaQty" ,name="siteinfo_gsmTrauAntennaQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_gsmRepeater") <span data-i18n="demo.site_info.repeater"></span>
+							select.browser-default(name="siteinfo_gsmRepeater", id="siteinfo_gsmRepeater", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+								option(value="Yes") 1
+								option(value="No") 1
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gsmRepeaterQty") <span data-i18n="demo.site_info.repeaterqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_gsmRepeaterQty" ,name="siteinfo_gsmRepeaterQty")
+					div(class="modal-footer")
+						button.adicionargsmcabinet(type="button", id="siteinfogsmcabinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addrectcab"></span>
+						button.hide(type="button", id="siteinfogsmcabinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updategenerator"></span>
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	div(id="siteinfointernaldbinfo_modal", class="modal", style="width: 70% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.internaldbdetails"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbtype") <span data-i18n="demo.site_info.internaldbtype"></span>
+							select.browser-default(name="siteinfo_internaldbtype", id="siteinfo_internaldbtype", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - Swa Armoured. 16mm 4 Core") Cable - Swa Armoured. 16mm 4 Core
+								option(value="DB - 1Ph M3/P3 Distribution board Vodacom") DB - 1Ph M3/P3 Distribution board Vodacom
+								option(value="DB - 600 x 600 x 260") DB - 600 x 600 x 260
+								option(value="DB - AC DB Vodacom Spec") DB - AC DB Vodacom Spec
+								option(value="DB - Credilect Meter Box(IP65)") DB - Credilect Meter Box(IP65)
+								option(value="DB - DC DB Vodacom Spec") DB - DC DB Vodacom Spec
+								option(value="DB - IP 54 PVC Box") DB - IP 54 PVC Box
+								option(value="DB - Remote change-over 1600 Amps. 40Ka") DB - Remote change-over 1600 Amps. 40Ka
+								option(value="Surge Arrester / Lightning Arrester 3 ph for AVR") Surge Arrester / Lightning Arrester 3 ph for AVR
+								option(value="None") None
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_internaldbPhase") <span data-i18n="demo.site_info.internaldbphase"></span>
+							select.browser-default(name="siteinfo_internaldbphase", id="siteinfo_internaldbphase", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Fase Unica
+								option(value="No") Trifasico
+					.row(style="margin-top:0px")
+						.col.s12.m6(style="margin-top:0px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbmaincircuitbreaker") <span data-i18n="demo.site_info.internaldbmaincircuitbreaker"></span>
+							select.browser-default(name="siteinfo_internaldbmaincircuitbreaker", id="siteinfo_internaldbmaincircuitbreaker", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbsurgeArrestorType") <span data-i18n="demo.site_info.internaldbsurgeArrestorType"></span>
+							select.browser-default(name="siteinfo_internaldbsurgeArrestorType", id="siteinfo_internaldbsurgeArrestorType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit breaker - Schneider 10A 6Ka 3 Pole") Circuit breaker - Schneider 10A 6Ka 3 Pole
+								option(value="Circuit breaker - Schneider 10A 6Ka 4 Pole") Circuit breaker - Schneider 10A 6Ka 4 Pole
+								option(value="Circuit breaker - Schneider 63A 1 Pole 15Ka") Circuit breaker - Schneider 63A 1 Pole 15Ka
+								option(value="Fuse - 10 x 38 32Amp") Fuse - 10 x 38 32Amp
+								option(value="Isolator - Rotary Switch. F400 125A Fire Rated. 2 Aux Contacts 1 No + 1") Isolator - Rotary Switch. F400 125A Fire Rated. 2 Aux Contacts 1 No + 1
+								option(value="Lightning Arrestor - Nts Mer 15") Lightning Arrestor - Nts Mer 15
+								option(value="Power supply Camera 12 VDC 2A") Power supply Camera 12 VDC 2A
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbsurgeArrestorQty") <span data-i18n="demo.site_info.internaldbsurgeArrestorQty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbsurgeArrestorQty" ,name="siteinfo_internaldbsurgeArrestorQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbsurgeArrestorType2") <span data-i18n="demo.site_info.internaldbsurgeArrestorType2"></span>
+							select.browser-default(name="siteinfo_internaldbsurgeArrestorType2", id="siteinfo_internaldbsurgeArrestorType2", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit breaker - Schneider 10A 6Ka 3 Pole") Circuit breaker - Schneider 10A 6Ka 3 Pole
+								option(value="Circuit breaker - Schneider 10A 6Ka 4 Pole") Circuit breaker - Schneider 10A 6Ka 4 Pole
+								option(value="Circuit breaker - Schneider 63A 1 Pole 15Ka") Circuit breaker - Schneider 63A 1 Pole 15Ka
+								option(value="Fuse - 10 x 38 32Amp") Fuse - 10 x 38 32Amp
+								option(value="Isolator - Rotary Switch. F400 125A Fire Rated. 2 Aux Contacts 1 No + 1") Isolator - Rotary Switch. F400 125A Fire Rated. 2 Aux Contacts 1 No + 1
+								option(value="Lightning Arrestor - Nts Mer 15") Lightning Arrestor - Nts Mer 15
+								option(value="Power supply Camera 12 VDC 2A") Power supply Camera 12 VDC 2A
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbsurgeArrestorQty2") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbsurgeArrestorQty2" ,name="siteinfo_internaldbsurgeArrestorQty2")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbcurrentmonitorType") <span data-i18n="demo.site_info.internaldbcurrentmonitorType"></span>
+							select.browser-default(name="siteinfo_internaldbcurrentmonitorType", id="siteinfo_internaldbcurrentmonitorType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - Earth 185mm NU A3") Cable - Earth 185mm NU A3
+								option(value="VCON - Mains & Phase Monitor SEL 03A10 (Normal Site)") VCON - Mains & Phase Monitor SEL 03A10 (Normal Site)
+								option(value="VCON - V2MOZB11 V-Con AC site (Moz spec)(all inclusive plus Air-Con power box ready to install)") VCON - V2MOZB11 V-Con AC site (Moz spec)(all inclusive plus Air-Con power box ready to install)
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbCurrentMonitorQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbCurrentMonitorQty" ,name="siteinfo_internaldbCurrentMonitorQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbEarthLeakageDevice") <span data-i18n="demo.site_info.internaldbEarthLeakageDevice"></span>
+							select.browser-default(name="siteinfo_internaldbEarthLeakageDevice", id="siteinfo_internaldbEarthLeakageDevice", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - Earth 185mm NU A3") Cable - Earth 185mm NU A3
+								option(value="VCON - Mains & Phase Monitor SEL 03A10 (Normal Site)") VCON - Mains & Phase Monitor SEL 03A10 (Normal Site)
+								option(value="VCON - V2MOZB11 V-Con AC site (Moz spec)(all inclusive plus Air-Con power box ready to install)") VCON - V2MOZB11 V-Con AC site (Moz spec)(all inclusive plus Air-Con power box ready to install)
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbEarthLeakageDeviceQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbEarthLeakageDeviceQty" ,name="siteinfo_internaldbEarthLeakageDeviceQty")
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.site_info.circuitbreakerfor"></span>
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbCircuitBreakerforRectifier") <span data-i18n="demo.site_info.internaldbCircuitBreakerforRectifier"></span>
+							select.browser-default(name="siteinfo_internaldbCircuitBreakerforRectifier", id="siteinfo_internaldbCircuitBreakerforRectifier", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbinternaldbCircuitBreakerforRectifierQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbinternaldbCircuitBreakerforRectifierQty" ,name="siteinfo_internaldbinternaldbCircuitBreakerforRectifierQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbCircuitBreakerforAirconditioners") <span data-i18n="demo.site_info.internaldbCircuitBreakerforAirconditioners"></span>
+							select.browser-default(name="siteinfo_internaldbCircuitBreakerforAirconditioners", id="siteinfo_internaldbCircuitBreakerforAirconditioners", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbCircuitBreakerforAirconditionersQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbCircuitBreakerforAirconditionersQty" ,name="siteinfo_internaldbCircuitBreakerforAirconditionersQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbCircuitBreakerforPlugs") <span data-i18n="demo.site_info.internaldbCircuitBreakerforPlugs"></span>
+							select.browser-default(name="siteinfo_internaldbCircuitBreakerforPlugs", id="siteinfo_internaldbCircuitBreakerforPlugs", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbCircuitBreakerforPlugsQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbCircuitBreakerforPlugsQty" ,name="siteinfo_internaldbCircuitBreakerforPlugsQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbMastInternalLight") <span data-i18n="demo.site_info.internaldbMastInternalLight"></span>
+							select.browser-default(name="siteinfo_internaldbMastInternalLight", id="siteinfo_internaldbMastInternalLight", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldb_internaldbMastInternalLightQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldb_internaldbMastInternalLightQty" ,name="siteinfo_internaldb_internaldbMastInternalLightQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbContainerLight") <span data-i18n="demo.site_info.internaldbContainerLight"></span>
+							select.browser-default(name="siteinfo_internaldbContainerLight", id="siteinfo_internaldbContainerLight", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbContainerLightQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbContainerLightQty" ,name="siteinfo_internaldbContainerLightQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbSiteLight") <span data-i18n="demo.site_info.internaldbSiteLight"></span>
+							select.browser-default(name="siteinfo_internaldbSiteLight", id="siteinfo_internaldbSiteLight", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbSiteLightQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbSiteLightQty" ,name="siteinfo_internaldbSiteLightQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbAircraftWarningLight") <span data-i18n="demo.site_info.internaldbAircraftWarningLight"></span>
+							select.browser-default(name="siteinfo_internaldbAircraftWarningLight", id="siteinfo_internaldbAircraftWarningLight", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbAircraftWarningLightQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbAircraftWarningLightQty" ,name="siteinfo_internaldbAircraftWarningLightQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_internaldbCircuitBreakerSpareType") <span data-i18n="demo.site_info.internaldbCircuitBreakerSpareType"></span>
+							select.browser-default(name="siteinfo_internaldbCircuitBreakerSpareType", id="siteinfo_internaldbCircuitBreakerSpareType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_internaldbCircuitBreakerSpareTypeQty") <span data-i18n="demo.site_info.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_internaldbCircuitBreakerSpareTypeQty" ,name="siteinfo_internaldbCircuitBreakerSpareTypeQty")
+					div(class="modal-footer")
+						button.adicionarinternaldb(type="button", id="siteinfointernaldbinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.adddb"></span>
+						button.hide(type="button", id="siteinfointernaldbinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updatedb"></span>
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	div(id="siteinfoexternaldbinfo_modal", class="modal", style="width: 70% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.externaldbdetails"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbtype") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbtype", id="siteinfo_externaldbtype", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - Swa Armoured. 16mm 4 Core") Cable - Swa Armoured. 16mm 4 Core
+								option(value="DB - 1Ph M3/P3 Distribution board Vodacom") DB - 1Ph M3/P3 Distribution board Vodacom
+								option(value="DB - 600 x 600 x 260") DB - 600 x 600 x 260
+								option(value="DB - AC DB Vodacom Spec") DB - AC DB Vodacom Spec
+								option(value="DB - Credilect Meter Box(IP65)") DB - Credilect Meter Box(IP65)
+								option(value="DB - DC DB Vodacom Spec") DB - DC DB Vodacom Spec
+								option(value="DB - IP 54 PVC Box") DB - IP 54 PVC Box
+								option(value="DB - Remote change-over 1600 Amps. 40Ka") DB - Remote change-over 1600 Amps. 40Ka
+								option(value="Surge Arrester / Lightning Arrester 3 ph for AVR") Surge Arrester / Lightning Arrester 3 ph for AVR
+								option(value="None") None
+						.col.s12.m6(style="margin-top:0px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbSharing") <span data-i18n="demo.site_info.externalsharing"></span>
+							select.browser-default(name="siteinfo_externaldbSharing", id="siteinfo_externaldbSharing", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Partilhado") Partilhado
+								option(value="Não Partilhado") Não Partilhado
+					.row(style="margin-top:0px")
+						.col.s12.m6(style="margin-top:0px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbPhase") <span data-i18n="demo.site_info.internaldbphase"></span>
+							select.browser-default(name="siteinfo_externaldbPhase", id="siteinfo_externaldbPhase", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Fase Unica") Fase Unica
+								option(value="Trifasico") Trifasico
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbGeneratorPlug") <span data-i18n="demo.site_info.externalgeneratorpluginstalled"></span>
+							select.browser-default(name="siteinfo_externaldbGeneratorPlug", id="siteinfo_externaldbGeneratorPlug", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbmainIncomingIsolator") <span data-i18n="demo.site_info.mainincomingisolator"></span>
+							select.browser-default(name="siteinfo_externaldbmainIncomingIsolator", id="siteinfo_externaldbmainIncomingIsolator", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbneutralbarsqty") <span data-i18n="demo.site_info.neutralbarsqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbneutralbarsqty" ,name="siteinfo_externaldbneutralbarsqty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externalPowerMonitorRelay") <span data-i18n="demo.site_info.powermonitorrelay"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externalPowerMonitorRelay" ,name="siteinfo_externalPowerMonitorRelay")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externalPowerMonitorRelayType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externalPowerMonitorRelayType", id="siteinfo_externalPowerMonitorRelayType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - Earth 185mm NU A3") Cable - Earth 185mm NU A3
+								option(value="VCON - Mains & Phase Monitor SEL 03A10 (Normal Site)") VCON - Mains & Phase Monitor SEL 03A10 (Normal Site)
+								option(value="VCON - V2MOZB11 V-Con AC site (Moz spec)(all inclusive plus Air-Con power box ready to install)") VCON - V2MOZB11 V-Con AC site (Moz spec)(all inclusive plus Air-Con power box ready to install)
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbSurgeArrestors") <span data-i18n="demo.site_info.externalsurgearrestors"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbSurgeArrestors" ,name="siteinfo_externaldbSurgeArrestors")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbSurgeArrestorsType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbSurgeArrestorsType", id="siteinfo_externaldbSurgeArrestorsType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit breaker - Schneider 10A 6Ka 3 Pole") Circuit breaker - Schneider 10A 6Ka 3 Pole
+								option(value="Circuit breaker - Schneider 10A 6Ka 4 Pole") Circuit breaker - Schneider 10A 6Ka 4 Pole
+								option(value="Circuit breaker - Schneider 63A 1 Pole 15Ka") Circuit breaker - Schneider 63A 1 Pole 15Ka
+								option(value="Fuse - 10 x 38 32Amp") Fuse - 10 x 38 32Amp
+								option(value="Isolator - Rotary Switch. F400 125A Fire Rated. 2 Aux Contacts 1 No + 1") Isolator - Rotary Switch. F400 125A Fire Rated. 2 Aux Contacts 1 No + 1
+								option(value="Lightning Arrestor - Nts Mer 15") Lightning Arrestor - Nts Mer 15
+								option(value="Power supply Camera 12 VDC 2A") Power supply Camera 12 VDC 2A
+								option(value="None") None
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.site_info.circuitbreakerfor"></span>
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbCbForSharingParty") <span data-i18n="demo.site_info.externalforsharingparty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbCbForSharingParty" ,name="siteinfo_externaldbCbForSharingParty")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbCbForSharingPartyType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbCbForSharingPartyType", id="siteinfo_externaldbCbForSharingPartyType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbKwhmeterForSharingParty") <span data-i18n="demo.site_info.externalkwhmeter"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbKwhmeterForSharingParty" ,name="siteinfo_externaldbKwhmeterForSharingParty")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbKwhmeterForSharingPartyType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbKwhmeterForSharingPartyType", id="siteinfo_externaldbKwhmeterForSharingPartyType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForConstructionParty") <span data-i18n="demo.site_info.externalforconstruction"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForConstructionParty" ,name="siteinfo_externaldbForConstructionParty")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForConstructionPartyType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbForConstructionPartyType", id="siteinfo_externaldbForConstructionPartyType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForVdcInternaldb") <span data-i18n="demo.site_info.externalforvdcinternaldb"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForVdcInternaldb" ,name="siteinfo_externaldbForVdcInternaldb")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForVdcInternaldbType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbForVdcInternaldbType", id="siteinfo_externaldbForVdcInternaldbType", style="font-family:")
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForSiteLight") <span data-i18n="demo.site_info.externalforsitelight"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForSiteLight" ,name="siteinfo_externaldbForSiteLight")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForSiteLightType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbForSiteLightType", id="siteinfo_externaldbForSiteLightType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForAwLight") <span data-i18n="demo.site_info.externalforawlight"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForAwLight" ,name="siteinfo_externaldbForAwLight")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForAwLightType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbForAwLightType", id="siteinfo_externaldbForAwLightType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForMobileGen") <span data-i18n="demo.site_info.externalformobilegene"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForMobileGen" ,name="siteinfo_externaldbForMobileGen")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForMobileGenType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbForMobileGenType", id="siteinfo_externaldbForMobileGenType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit Breaker - 125A. 4 Pole 10Ka") Circuit Breaker - 125A. 4 Pole 10Ka
+								option(value="Circuit Breaker - 16A 4 Pole") Circuit Breaker - 16A 4 Pole
+								option(value="Circuit Breaker - 20A 1 Pole 6KA") Circuit Breaker - 20A 1 Pole 6KA
+								option(value="Circuit Breaker - 32A 3 Pole") Circuit Breaker - 32A 3 Pole
+								option(value="Circuit Breaker - 40A 2 Pole 3ka") Circuit Breaker - 40A 2 Pole 3ka
+								option(value="Circuit Breaker - MCB 10A. Single Pole D-Curve") Circuit Breaker - MCB 10A. Single Pole D-Curve
+								option(value="Circuit Breaker - MCB 40A. Single Pole D-Curve") Circuit Breaker - MCB 40A. Single Pole D-Curve
+								option(value="Circuit Breaker - Schneider 100A 10Ka 1P C120N") Circuit Breaker - Schneider 100A 10Ka 1P C120N
+								option(value="Circuit Breaker - Schneider 100A 4P 6Ka") Circuit Breaker - Schneider 100A 4P 6Ka
+								option(value="Circuit Breaker - Schneider 100A 5Ka 2P C120a") Circuit Breaker - Schneider 100A 5Ka 2P C120a
+								option(value="Circuit Breaker - Schneider 10A 10Ka 1P") Circuit Breaker - Schneider 10A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 10A 6Ka") Circuit Breaker - Schneider 10A 6Ka
+								option(value="Circuit Breaker - Schneider 125A 10Ka 3P D curve") Circuit Breaker - Schneider 125A 10Ka 3P D curve
+								option(value="Circuit Breaker - Schneider 160A 4P 4D") Circuit Breaker - Schneider 160A 4P 4D
+								option(value="Circuit Breaker - Schneider 16A 6kA") Circuit Breaker - Schneider 16A 6kA
+								option(value="Circuit Breaker - Schneider 20A 6Ka 1 Pole") Circuit Breaker - Schneider 20A 6Ka 1 Pole
+								option(value="Circuit Breaker - Schneider 32A 10Ka 1P") Circuit Breaker - Schneider 32A 10Ka 1P
+								option(value="Circuit Breaker - Schneider 63A 1P 10Ka") Circuit Breaker - Schneider 63A 1P 10Ka
+								option(value="Circuit Breaker - Schneider 63A 3 Pole 6Ka") Circuit Breaker - Schneider 63A 3 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 63A 4 Pole 6Ka") Circuit Breaker - Schneider 63A 4 Pole 6Ka
+								option(value="Circuit Breaker - Schneider 80A 6Ka 3P C120A") Circuit Breaker - Schneider 80A 6Ka 3P C120A
+								option(value="Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage") Circuit Breaker - Schneider 63A 2P 30MA Earth Leakage
+								option(value="Isolator - 40A 4 Pole INTERRUPTOR") Isolator - 40A 4 Pole INTERRUPTOR
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForGenPhaseMonitor") <span data-i18n="demo.site_info.externalgeneratorphase"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForGenPhaseMonitor" ,name="siteinfo_externaldbForGenPhaseMonitor")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForGenPhaseMonitorType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbForGenPhaseMonitorType", id="siteinfo_externaldbForGenPhaseMonitorType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_externaldbForControlFuseforGen") <span data-i18n="demo.site_info.externalcontrolfuse"></span>
+							select.browser-default(name="siteinfo_externaldbForControlFuseforGen", id="siteinfo_externaldbForControlFuseforGen", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForControlFuseforGenType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbForControlFuseforGenType", id="siteinfo_externaldbForControlFuseforGenType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForControlFuseRating") <span data-i18n="demo.site_info.externalcontrolfuserating"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForControlFuseRating" ,name="siteinfo_externaldbForControlFuseRating")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForFeedCable") <span data-i18n="demo.site_info.externalfeedcablefromsupply"></span>
+							select.browser-default(name="siteinfo_externaldbForFeedCable", id="siteinfo_externaldbForFeedCable", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - 1.5mm 12 Core Pvc Control Cable") Cable - 1.5mm 12 Core Pvc Control Cable
+								option(value="Cable - 3 x 25mm + 16mm VAV/XAV") Cable - 3 x 25mm + 16mm VAV/XAV
+								option(value="Cable - 4mm 5 core VV") Cable - 4mm 5 core VV
+								option(value="Cable - 5 G 2.5 VV/XV CABO(MOZ)") Cable - 5 G 2.5 VV/XV CABO(MOZ)
+								option(value="Cable - Anchoring Clamp (Pinca de amarracao) for Overhead ABC cable 4x16") Cable - Anchoring Clamp (Pinca de amarracao) for Overhead ABC cable 4x16
+								option(value="Cable - Andrew IF. CMT 300") Cable - Andrew IF. CMT 300
+								option(value="Cable - Cabtyre. 1.0mm 3 Core") Cable - Cabtyre. 1.0mm 3 Core
+								option(value="Cable - Cabtyre. 1.0mm 4 Core") Cable - Cabtyre. 1.0mm 4 Core
+								option(value="Cable - Cabtyre. 1.5mm 3 Core White") Cable - Cabtyre. 1.5mm 3 Core White
+								option(value="Cable - Cabtyre. 1.5mm 7 Core") Cable - Cabtyre. 1.5mm 7 Core
+								option(value="Cable - Cabtyre. 2.5mm 3 Core Black") Cable - Cabtyre. 2.5mm 3 Core Black
+								option(value="Cable - Cabtyre. 2.5mm 3 Core White") Cable - Cabtyre. 2.5mm 3 Core White
+								option(value="Cable - Cabtyre. 4mm 3 Core") Cable - Cabtyre. 4mm 3 Core
+								option(value="Cable - Earth 25mm Green/Yellow") Cable - Earth 25mm Green/Yellow
+								option(value="Cable - Earth 35mm Green/Yellow") Cable - Earth 35mm Green/Yellow
+								option(value="Cable - Earth 70mm Bare copper") Cable - Earth 70mm Bare copper
+								option(value="Cable - Earth 70mm Green/Yellow") Cable - Earth 70mm Green/Yellow
+								option(value="Cable - Earth 95mm Bare copper") Cable - Earth 95mm Bare copper
+								option(value="Cable - Earth 10mm2 GP Green/Yellow") Cable - Earth 10mm2 GP Green/Yellow
+								option(value="Cable - Earth 6mm2 GP Green/Yellow") Cable - Earth 6mm2 GP Green/Yellow
+								option(value="Cable - Earth Feeder. Sucofeed 1 5/8") Cable - Earth Feeder. Sucofeed 1 5/8
+								option(value="Cable - GP. 10mm Red") Cable - GP. 10mm Red
+								option(value="Cable - Jumper Wire. Black/White 0.5mm x 200m") Cable - Jumper Wire. Black/White 0.5mm x 200m
+								option(value="Cable - LIYCY 4 X 1.0mm") Cable - LIYCY 4 X 1.0mm
+								option(value="Cable - Panel Wire 2.5mm Black") Cable - Panel Wire 2.5mm Black
+								option(value="Cable - Panel Wire 2.5mm Green/Yellow") Cable - Panel Wire 2.5mm Green/Yellow
+								option(value="Cable - Panel Wire 2.5mm Red") Cable - Panel Wire 2.5mm Red
+								option(value="Cable - Panel Wire 2.5mm Blue") Cable - Panel Wire 2.5mm Blue
+								option(value="Cable - Single Flex. 1.5mm Blue") Cable - Single Flex. 1.5mm Blue
+								option(value="Cable - Sufix 1.5mm 4+E White") Cable - Sufix 1.5mm 4+E White
+								option(value="Cable - Sufix 2.5mm 2+E White") Cable - Sufix 2.5mm 2+E White
+								option(value="Cable - Sufix 2.5mm 3+E") Cable - Sufix 2.5mm 3+E
+								option(value="Cable - Sufix 4mm 2+E White") Cable - Sufix 4mm 2+E White
+								option(value="Cable - Sufix 6mm 4+E White") Cable - Sufix 6mm 4+E White
+								option(value="Cable - Swa Armoured 10mm 4 Core") Cable - Swa Armoured 10mm 4 Core
+								option(value="Cable - Swa Armoured 120mm 4 Core") Cable - Swa Armoured 120mm 4 Core
+								option(value="Cable - Swa Armoured 150mm 4 Core") Cable - Swa Armoured 150mm 4 Core
+								option(value="Cable - Swa Armoured 1.5mm 3 Core") Cable - Swa Armoured 1.5mm 3 Core
+								option(value="Cable - Swa Armoured 1.5mm 3 Core Vodacom") Cable - Swa Armoured 1.5mm 3 Core Vodacom
+								option(value="Cable - Swa Armoured 240mm 4 Core") Cable - Swa Armoured 240mm 4 Core
+								option(value="Cable - Swa Armoured 2.5mm 3 Core") Cable - Swa Armoured 2.5mm 3 Core
+								option(value="Cable - Swa Armoured 4mm 3 Core") Cable - Swa Armoured 4mm 3 Core
+								option(value="Cable - Swa Armoured 70mm 4 Core") Cable - Swa Armoured 70mm 4 Core
+								option(value="TVHV 200 pair x 0.5mm") TVHV 200 pair x 0.5mm
+								option(value="Twin Flex1.5mm BLACK/RED RIPCORD / 100M") Twin Flex1.5mm BLACK/RED RIPCORD / 100M
+								option(value="Cable - UTP 4 Pair Cat 5") Cable - UTP 4 Pair Cat 5
+								option(value="Cable - Welding 120mm") Cable - Welding 120mm
+								option(value="Cable - Welding 16mm Blue") Cable - Welding 16mm Blue
+								option(value="Cable - Welding 16mm Green") Cable - Welding 16mm Green
+								option(value="Cable - Welding 16mm Green/Yellow") Cable - Welding 16mm Green/Yellow
+								option(value="Cable - Welding 16mm Red") Cable - Welding 16mm Red
+								option(value="Cable - Welding 25mm Red") Cable - Welding 25mm Red
+								option(value="Cable - Welding 25mm Blue") Cable - Welding 25mm Blue
+								option(value="Cable - Welding 25mm Green/Yellow") Cable - Welding 25mm Green/Yellow
+								option(value="Cable - Welding 25mm Red") Cable - Welding 25mm Red
+								option(value="Cable - Welding 35mm Blue") Cable - Welding 35mm Blue
+								option(value="Cable - Welding 35mm Grey") Cable - Welding 35mm Grey
+								option(value="Cable - Welding 35mm Red") Cable - Welding 35mm Red
+								option(value="Cable - Welding 70mm") Cable - Welding 70mm
+								option(value="Cable - Welding 95mm Yellow") Cable - Welding 95mm Yellow
+								option(value="Fuse - 1000V DC IR; 10kA") Fuse - 1000V DC IR; 10kA
+								option(value="Isolator - 100A 2 Pole") Isolator - 100A 2 Pole
+								option(value="RF - Flylead 1/2HF 2M* 7/16* Female to N-type Male 2") RF - Flylead 1/2HF 2M* 7/16* Female to N-type Male 2
+								option(value="Suhner Feeder - 7/8'") Suhner Feeder - 7/8'
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForFeedCableLength") <span data-i18n="demo.site_info.length"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForFeedCableLength" ,name="siteinfo_externaldbForFeedCableLength")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbForCableToVm") <span data-i18n="demo.site_info.externalcabletovm"></span>
+							select.browser-default(name="siteinfo_externaldbForCableToVm", id="siteinfo_externaldbForCableToVm", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - 1.5mm 12 Core Pvc Control Cable") Cable - 1.5mm 12 Core Pvc Control Cable
+								option(value="Cable - 3 x 25mm + 16mm VAV/XAV") Cable - 3 x 25mm + 16mm VAV/XAV
+								option(value="Cable - 4mm 5 core VV") Cable - 4mm 5 core VV
+								option(value="Cable - 5 G 2.5 VV/XV CABO(MOZ)") Cable - 5 G 2.5 VV/XV CABO(MOZ)
+								option(value="Cable - Anchoring Clamp (Pinca de amarracao) for Overhead ABC cable 4x16") Cable - Anchoring Clamp (Pinca de amarracao) for Overhead ABC cable 4x16
+								option(value="Cable - Andrew IF. CMT 300") Cable - Andrew IF. CMT 300
+								option(value="Cable - Cabtyre. 1.0mm 3 Core") Cable - Cabtyre. 1.0mm 3 Core
+								option(value="Cable - Cabtyre. 1.0mm 4 Core") Cable - Cabtyre. 1.0mm 4 Core
+								option(value="Cable - Cabtyre. 1.5mm 3 Core White") Cable - Cabtyre. 1.5mm 3 Core White
+								option(value="Cable - Cabtyre. 1.5mm 7 Core") Cable - Cabtyre. 1.5mm 7 Core
+								option(value="Cable - Cabtyre. 2.5mm 3 Core Black") Cable - Cabtyre. 2.5mm 3 Core Black
+								option(value="Cable - Cabtyre. 2.5mm 3 Core White") Cable - Cabtyre. 2.5mm 3 Core White
+								option(value="Cable - Cabtyre. 4mm 3 Core") Cable - Cabtyre. 4mm 3 Core
+								option(value="Cable - Earth 25mm Green/Yellow") Cable - Earth 25mm Green/Yellow
+								option(value="Cable - Earth 35mm Green/Yellow") Cable - Earth 35mm Green/Yellow
+								option(value="Cable - Earth 70mm Bare copper") Cable - Earth 70mm Bare copper
+								option(value="Cable - Earth 70mm Green/Yellow") Cable - Earth 70mm Green/Yellow
+								option(value="Cable - Earth 95mm Bare copper") Cable - Earth 95mm Bare copper
+								option(value="Cable - Earth 10mm2 GP Green/Yellow") Cable - Earth 10mm2 GP Green/Yellow
+								option(value="Cable - Earth 6mm2 GP Green/Yellow") Cable - Earth 6mm2 GP Green/Yellow
+								option(value="Cable - Earth Feeder. Sucofeed 1 5/8") Cable - Earth Feeder. Sucofeed 1 5/8
+								option(value="Cable - GP. 10mm Red") Cable - GP. 10mm Red
+								option(value="Cable - Jumper Wire. Black/White 0.5mm x 200m") Cable - Jumper Wire. Black/White 0.5mm x 200m
+								option(value="Cable - LIYCY 4 X 1.0mm") Cable - LIYCY 4 X 1.0mm
+								option(value="Cable - Panel Wire 2.5mm Black") Cable - Panel Wire 2.5mm Black
+								option(value="Cable - Panel Wire 2.5mm Green/Yellow") Cable - Panel Wire 2.5mm Green/Yellow
+								option(value="Cable - Panel Wire 2.5mm Red") Cable - Panel Wire 2.5mm Red
+								option(value="Cable - Panel Wire 2.5mm Blue") Cable - Panel Wire 2.5mm Blue
+								option(value="Cable - Single Flex. 1.5mm Blue") Cable - Single Flex. 1.5mm Blue
+								option(value="Cable - Sufix 1.5mm 4+E White") Cable - Sufix 1.5mm 4+E White
+								option(value="Cable - Sufix 2.5mm 2+E White") Cable - Sufix 2.5mm 2+E White
+								option(value="Cable - Sufix 2.5mm 3+E") Cable - Sufix 2.5mm 3+E
+								option(value="Cable - Sufix 4mm 2+E White") Cable - Sufix 4mm 2+E White
+								option(value="Cable - Sufix 6mm 4+E White") Cable - Sufix 6mm 4+E White
+								option(value="Cable - Swa Armoured 10mm 4 Core") Cable - Swa Armoured 10mm 4 Core
+								option(value="Cable - Swa Armoured 120mm 4 Core") Cable - Swa Armoured 120mm 4 Core
+								option(value="Cable - Swa Armoured 150mm 4 Core") Cable - Swa Armoured 150mm 4 Core
+								option(value="Cable - Swa Armoured 1.5mm 3 Core") Cable - Swa Armoured 1.5mm 3 Core
+								option(value="Cable - Swa Armoured 1.5mm 3 Core Vodacom") Cable - Swa Armoured 1.5mm 3 Core Vodacom
+								option(value="Cable - Swa Armoured 240mm 4 Core") Cable - Swa Armoured 240mm 4 Core
+								option(value="Cable - Swa Armoured 2.5mm 3 Core") Cable - Swa Armoured 2.5mm 3 Core
+								option(value="Cable - Swa Armoured 4mm 3 Core") Cable - Swa Armoured 4mm 3 Core
+								option(value="Cable - Swa Armoured 70mm 4 Core") Cable - Swa Armoured 70mm 4 Core
+								option(value="TVHV 200 pair x 0.5mm") TVHV 200 pair x 0.5mm
+								option(value="Twin Flex1.5mm BLACK/RED RIPCORD / 100M") Twin Flex1.5mm BLACK/RED RIPCORD / 100M
+								option(value="Cable - UTP 4 Pair Cat 5") Cable - UTP 4 Pair Cat 5
+								option(value="Cable - Welding 120mm") Cable - Welding 120mm
+								option(value="Cable - Welding 16mm Blue") Cable - Welding 16mm Blue
+								option(value="Cable - Welding 16mm Green") Cable - Welding 16mm Green
+								option(value="Cable - Welding 16mm Green/Yellow") Cable - Welding 16mm Green/Yellow
+								option(value="Cable - Welding 16mm Red") Cable - Welding 16mm Red
+								option(value="Cable - Welding 25mm Red") Cable - Welding 25mm Red
+								option(value="Cable - Welding 25mm Blue") Cable - Welding 25mm Blue
+								option(value="Cable - Welding 25mm Green/Yellow") Cable - Welding 25mm Green/Yellow
+								option(value="Cable - Welding 25mm Red") Cable - Welding 25mm Red
+								option(value="Cable - Welding 35mm Blue") Cable - Welding 35mm Blue
+								option(value="Cable - Welding 35mm Grey") Cable - Welding 35mm Grey
+								option(value="Cable - Welding 35mm Red") Cable - Welding 35mm Red
+								option(value="Cable - Welding 70mm") Cable - Welding 70mm
+								option(value="Cable - Welding 95mm Yellow") Cable - Welding 95mm Yellow
+								option(value="Fuse - 1000V DC IR; 10kA") Fuse - 1000V DC IR; 10kA
+								option(value="Isolator - 100A 2 Pole") Isolator - 100A 2 Pole
+								option(value="RF - Flylead 1/2HF 2M* 7/16* Female to N-type Male 2") RF - Flylead 1/2HF 2M* 7/16* Female to N-type Male 2
+								option(value="Suhner Feeder - 7/8'") Suhner Feeder - 7/8'
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbForCableToVmLength") <span data-i18n="demo.site_info.length"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbForCableToVmLength" ,name="siteinfo_externaldbForCableToVmLength")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_externaldbAwlSurgeArrestor") <span data-i18n="demo.site_info.externalawlsurgearr"></span>
+							select.browser-default(name="siteinfo_externaldbAwlSurgeArrestor", id="siteinfo_externaldbAwlSurgeArrestor", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbAwlSurgeArrestorType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbAwlSurgeArrestorType", id="siteinfo_externaldbAwlSurgeArrestorType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Circuit breaker - Schneider 10A 6Ka 3 Pole") Circuit breaker - Schneider 10A 6Ka 3 Pole
+								option(value="Circuit breaker - Schneider 10A 6Ka 4 Pole") Circuit breaker - Schneider 10A 6Ka 4 Pole
+								option(value="Circuit breaker - Schneider 63A 1 Pole 15Ka") Circuit breaker - Schneider 63A 1 Pole 15Ka
+								option(value="Fuse - 10 x 38 32Amp") Fuse - 10 x 38 32Amp
+								option(value="Isolator - Rotary Switch. F400 125A Fire Rated. 2 Aux Contacts 1 No + 1") Isolator - Rotary Switch. F400 125A Fire Rated. 2 Aux Contacts 1 No + 1
+								option(value="Lightning Arrestor - Nts Mer 15") Lightning Arrestor - Nts Mer 15
+								option(value="Power supply Camera 12 VDC 2A") Power supply Camera 12 VDC 2A
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_externaldbAwlSurgeArrestorQty") <span data-i18n="demo.site_info.externalawlsurgearrqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_externaldbAwlSurgeArrestorQty" ,name="siteinfo_externaldbAwlSurgeArrestorQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_externaldbCurrentMonitor") <span data-i18n="demo.site_info.externalcurrentmonitor"></span>
+							select.browser-default(name="siteinfo_externaldbCurrentMonitor", id="siteinfo_externaldbCurrentMonitor", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbCurrentMonitorType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbCurrentMonitorType", id="siteinfo_externaldbCurrentMonitorType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - Earth 185mm NU A3") Cable - Earth 185mm NU A3
+								option(value="VCON - Mains & Phase Monitor SEL 03A10 (Normal Site)") VCON - Mains & Phase Monitor SEL 03A10 (Normal Site)
+								option(value="VCON - V2MOZB11 V-Con AC site (Moz spec)(all inclusive plus Air-Con power box ready to install)") VCON - V2MOZB11 V-Con AC site (Moz spec)(all inclusive plus Air-Con power box ready to install)
+								option(value="None") None
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_externaldbChangeContactors") <span data-i18n="demo.site_info.externalchangeovercont"></span>
+							select.browser-default(name="siteinfo_externaldbChangeContactors", id="siteinfo_externaldbChangeContactors", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_externaldbChangeContactorsType") <span data-i18n="demo.site_info.rectcabtype"></span>
+							select.browser-default(name="siteinfo_externaldbChangeContactorsType", id="siteinfo_externaldbChangeContactorsType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="None") None
+					div(class="modal-footer")
+						button.adicionarexternaldb(type="button", id="siteinfoexternaldbinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.adddb"></span>
+						button.hide(type="button", id="siteinfoexternaldbinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updatedb"></span>
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	div(id="siteinfoadditionaltransformersinfo_modal", class="modal", style="width: 70% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.additionaltransformerdetails"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:0px")
+							label(style="margin-left:0.2rem;" for="siteinfo_additionaltransformersType") <span data-i18n="demo.site_info.transformertype"></span>
+							select.browser-default(name="siteinfo_additionaltransformersType", id="siteinfo_additionaltransformersType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersSerialNo") <span data-i18n="demo.site_info.serialNo"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersSerialNo" ,name="siteinfo_additionaltransformersSerialNo")
+					.row(style="margin-top:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersManufacturedDate") <span data-i18n="demo.site_info.datemanufactured"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersManufacturedDate" ,name="siteinfo_additionaltransformersManufacturedDate")
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.site_info.cablebetween"></span>
+					.row(style="margin-top:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_additionaltransformersCable") <span data-i18n="demo.site_info.size"></span>
+							select.browser-default(name="siteinfo_additionaltransformersCable", id="siteinfo_additionaltransformersCable", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Cable - 1.5mm 12 Core Pvc Control Cable") Cable - 1.5mm 12 Core Pvc Control Cable
+								option(value="Cable - 3 x 25mm + 16mm VAV/XAV") Cable - 3 x 25mm + 16mm VAV/XAV
+								option(value="Cable - 4mm 5 core VV") Cable - 4mm 5 core VV
+								option(value="Cable - 5 G 2.5 VV/XV CABO(MOZ)") Cable - 5 G 2.5 VV/XV CABO(MOZ)
+								option(value="Cable - Anchoring Clamp (Pinca de amarracao) for Overhead ABC cable 4x16") Cable - Anchoring Clamp (Pinca de amarracao) for Overhead ABC cable 4x16
+								option(value="Cable - Andrew IF. CMT 300") Cable - Andrew IF. CMT 300
+								option(value="Cable - Cabtyre. 1.0mm 3 Core") Cable - Cabtyre. 1.0mm 3 Core
+								option(value="Cable - Cabtyre. 1.0mm 4 Core") Cable - Cabtyre. 1.0mm 4 Core
+								option(value="Cable - Cabtyre. 1.5mm 3 Core White") Cable - Cabtyre. 1.5mm 3 Core White
+								option(value="Cable - Cabtyre. 1.5mm 7 Core") Cable - Cabtyre. 1.5mm 7 Core
+								option(value="Cable - Cabtyre. 2.5mm 3 Core Black") Cable - Cabtyre. 2.5mm 3 Core Black
+								option(value="Cable - Cabtyre. 2.5mm 3 Core White") Cable - Cabtyre. 2.5mm 3 Core White
+								option(value="Cable - Cabtyre. 4mm 3 Core") Cable - Cabtyre. 4mm 3 Core
+								option(value="Cable - Earth 25mm Green/Yellow") Cable - Earth 25mm Green/Yellow
+								option(value="Cable - Earth 35mm Green/Yellow") Cable - Earth 35mm Green/Yellow
+								option(value="Cable - Earth 70mm Bare copper") Cable - Earth 70mm Bare copper
+								option(value="Cable - Earth 70mm Green/Yellow") Cable - Earth 70mm Green/Yellow
+								option(value="Cable - Earth 95mm Bare copper") Cable - Earth 95mm Bare copper
+								option(value="Cable - Earth 10mm2 GP Green/Yellow") Cable - Earth 10mm2 GP Green/Yellow
+								option(value="Cable - Earth 6mm2 GP Green/Yellow") Cable - Earth 6mm2 GP Green/Yellow
+								option(value="Cable - Earth Feeder. Sucofeed 1 5/8") Cable - Earth Feeder. Sucofeed 1 5/8
+								option(value="Cable - GP. 10mm Red") Cable - GP. 10mm Red
+								option(value="Cable - Jumper Wire. Black/White 0.5mm x 200m") Cable - Jumper Wire. Black/White 0.5mm x 200m
+								option(value="Cable - LIYCY 4 X 1.0mm") Cable - LIYCY 4 X 1.0mm
+								option(value="Cable - Panel Wire 2.5mm Black") Cable - Panel Wire 2.5mm Black
+								option(value="Cable - Panel Wire 2.5mm Green/Yellow") Cable - Panel Wire 2.5mm Green/Yellow
+								option(value="Cable - Panel Wire 2.5mm Red") Cable - Panel Wire 2.5mm Red
+								option(value="Cable - Panel Wire 2.5mm Blue") Cable - Panel Wire 2.5mm Blue
+								option(value="Cable - Single Flex. 1.5mm Blue") Cable - Single Flex. 1.5mm Blue
+								option(value="Cable - Sufix 1.5mm 4+E White") Cable - Sufix 1.5mm 4+E White
+								option(value="Cable - Sufix 2.5mm 2+E White") Cable - Sufix 2.5mm 2+E White
+								option(value="Cable - Sufix 2.5mm 3+E") Cable - Sufix 2.5mm 3+E
+								option(value="Cable - Sufix 4mm 2+E White") Cable - Sufix 4mm 2+E White
+								option(value="Cable - Sufix 6mm 4+E White") Cable - Sufix 6mm 4+E White
+								option(value="Cable - Swa Armoured 10mm 4 Core") Cable - Swa Armoured 10mm 4 Core
+								option(value="Cable - Swa Armoured 120mm 4 Core") Cable - Swa Armoured 120mm 4 Core
+								option(value="Cable - Swa Armoured 150mm 4 Core") Cable - Swa Armoured 150mm 4 Core
+								option(value="Cable - Swa Armoured 1.5mm 3 Core") Cable - Swa Armoured 1.5mm 3 Core
+								option(value="Cable - Swa Armoured 1.5mm 3 Core Vodacom") Cable - Swa Armoured 1.5mm 3 Core Vodacom
+								option(value="Cable - Swa Armoured 240mm 4 Core") Cable - Swa Armoured 240mm 4 Core
+								option(value="Cable - Swa Armoured 2.5mm 3 Core") Cable - Swa Armoured 2.5mm 3 Core
+								option(value="Cable - Swa Armoured 4mm 3 Core") Cable - Swa Armoured 4mm 3 Core
+								option(value="Cable - Swa Armoured 70mm 4 Core") Cable - Swa Armoured 70mm 4 Core
+								option(value="TVHV 200 pair x 0.5mm") TVHV 200 pair x 0.5mm
+								option(value="Twin Flex1.5mm BLACK/RED RIPCORD / 100M") Twin Flex1.5mm BLACK/RED RIPCORD / 100M
+								option(value="Cable - UTP 4 Pair Cat 5") Cable - UTP 4 Pair Cat 5
+								option(value="Cable - Welding 120mm") Cable - Welding 120mm
+								option(value="Cable - Welding 16mm Blue") Cable - Welding 16mm Blue
+								option(value="Cable - Welding 16mm Green") Cable - Welding 16mm Green
+								option(value="Cable - Welding 16mm Green/Yellow") Cable - Welding 16mm Green/Yellow
+								option(value="Cable - Welding 16mm Red") Cable - Welding 16mm Red
+								option(value="Cable - Welding 25mm Red") Cable - Welding 25mm Red
+								option(value="Cable - Welding 25mm Blue") Cable - Welding 25mm Blue
+								option(value="Cable - Welding 25mm Green/Yellow") Cable - Welding 25mm Green/Yellow
+								option(value="Cable - Welding 25mm Red") Cable - Welding 25mm Red
+								option(value="Cable - Welding 35mm Blue") Cable - Welding 35mm Blue
+								option(value="Cable - Welding 35mm Grey") Cable - Welding 35mm Grey
+								option(value="Cable - Welding 35mm Red") Cable - Welding 35mm Red
+								option(value="Cable - Welding 70mm") Cable - Welding 70mm
+								option(value="Cable - Welding 95mm Yellow") Cable - Welding 95mm Yellow
+								option(value="Fuse - 1000V DC IR; 10kA") Fuse - 1000V DC IR; 10kA
+								option(value="Isolator - 100A 2 Pole") Isolator - 100A 2 Pole
+								option(value="RF - Flylead 1/2HF 2M* 7/16* Female to N-type Male 2") RF - Flylead 1/2HF 2M* 7/16* Female to N-type Male 2
+								option(value="Suhner Feeder - 7/8'") Suhner Feeder - 7/8'
+								option(value="None") None
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersCableLength") <span data-i18n="demo.site_info.length"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersCableLength" ,name="siteinfo_additionaltransformersCableLength")
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.site_info.transformerdata"></span>
+					.row(style="margin-top:22px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataFrequency") <span data-i18n="demo.site_info.frequency"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataFrequency" ,name="siteinfo_additionaltransformersdataFrequency")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataRating") <span data-i18n="demo.site_info.rating"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataRating" ,name="siteinfo_additionaltransformersdataRating")
+					.row(style="margin-top:22px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataPrimaryVoltage") <span data-i18n="demo.site_info.primaryvoltage"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataPrimaryVoltage" ,name="siteinfo_additionaltransformersdataPrimaryVoltage")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataPrimaryAmpere") <span data-i18n="demo.site_info.primaryampere"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataPrimaryAmpere" ,name="siteinfo_additionaltransformersdataPrimaryAmpere")
+					.row(style="margin-top:22px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataSecondaryVoltage") <span data-i18n="demo.site_info.secondaryvoltage"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataSecondaryVoltage" ,name="siteinfo_additionaltransformersdataSecondaryVoltage")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataSecondaryAmpere") <span data-i18n="demo.site_info.secondaryampere"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataSecondaryAmpere" ,name="siteinfo_additionaltransformersdataSecondaryAmpere")
+					.row(style="margin-top:22px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataImpendance") <span data-i18n="demo.site_info.impendance"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataImpendance" ,name="siteinfo_additionaltransformersdataImpendance")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataSymbol") <span data-i18n="demo.site_info.symbol"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataSymbol" ,name="siteinfo_additionaltransformersdataSymbol")
+					.row(style="margin-top:22px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_additionaltransformersdataOtherInfo") <span data-i18n="demo.site_info.otherinformation"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_additionaltransformersdataOtherInfo" ,name="siteinfo_additionaltransformersdataOtherInfo")
+					div(class="modal-footer")
+						button.adicionaradditionaltransformer(type="button", id="siteinfoadditionaltransformersinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addtransformer"></span>
+						button.hide(type="button", id="siteinfoadditionaltransformersinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updatetransformer"></span>
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	div(id="siteinfodistributionrackinfo_modal", class="modal", style="width: 70% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.distributionrackdetails"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_distribuitionRackInverters") <span data-i18n="demo.site_info.inverters"></span>
+							select.browser-default(name="siteinfo_distribuitionRackInverters", id="siteinfo_distribuitionRackInverters", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_distribuitionRackInvertersType") <span data-i18n="demo.site_info.invertertype"></span>
+							select.browser-default(name="siteinfo_distribuitionRackInvertersType", id="siteinfo_distribuitionRackInvertersType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Inverter - 48VDC/220VAC") Inverter - 48VDC/220VAC
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackVaRating") <span data-i18n="demo.site_info.varating"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_distribuitionRackVaRating" ,name="siteinfo_distribuitionRackVaRating")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackInvertQty") <span data-i18n="demo.site_info.inverterqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_distribuitionRackInvertQty" ,name="siteinfo_distribuitionRackInvertQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackDcInput") <span data-i18n="demo.site_info.inputdc"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_distribuitionRackDcInput" ,name="siteinfo_distribuitionRackDcInput")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackACOutput") <span data-i18n="demo.site_info.outputac"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_distribuitionRackACOutput" ,name="siteinfo_distribuitionRackACOutput")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackRedudancyctrller") <span data-i18n="demo.site_info.redcontroller"></span>
+							select.browser-default(name="siteinfo_distribuitionRackRedudancyctrller", id="siteinfo_distribuitionRackRedudancyctrller", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					div(class="modal-footer")
+						button.adicionardistributionrack(type="button", id="siteinfodistributionrackinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.adddistrack"></span>
+						button.hide(type="button", id="siteinfodistributionrackinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updatedistrack"></span>
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	div(id="siteinfotransmissioncabinfo_modal", class="modal", style="width: 70% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.transmissioncabinetdetails"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:22px")
+							label(style="margin-left:0.2rem;" for="siteinfo_transmissioncabInstalled") <span data-i18n="demo.site_info.transmissioncabinst"></span>
+							select.browser-default(name="siteinfo_transmissioncabInstalled", id="siteinfo_transmissioncabInstalled", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:22px")
+							label(style="margin-left:0.2rem;" for="siteinfo_transmissioncabType") <span data-i18n="demo.site_info.transmissioncabtype"></span>
+							select.browser-default(name="siteinfo_transmissioncabType", id="siteinfo_transmissioncabType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="19' in door (47 u inside container) ") 19' in door (47 u inside container) 
+								option(value="Other") Other
+								option(value="Other bts bs82") Other bts bs82
+								option(value="Rectifier cabinet") Rectifier cabinet
+								option(value="Site star cabinet") Site star cabinet
+								option(value="Tctf (huawei)") Tctf (huawei)
+					.row(style="margin-top:22px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_transmissioncabServiceProvider") <span data-i18n="demo.site_info.transmissionprovider"></span>
+							select.browser-default(name="siteinfo_transmissioncabServiceProvider", id="siteinfo_transmissioncabServiceProvider", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Vodacom") Vodacom
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_transmissioncabQty") <span data-i18n="demo.site_info.transmissioncabqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_transmissioncabQty" ,name="siteinfo_transmissioncabQty")
+					div(class="modal-footer")
+						button.adicionartransmissioncabinet(type="button", id="siteinfotransmissioncabinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addrectcab"></span>
+						button.hide(type="button", id="siteinfotransmissioncabinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updaterectcab"></span>
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	div(id="siteinfoacinfo_modal", class="modal", style="width: 70% !important")
+		a.siteinfoacinfo_modal_cancel_btn_modal_(id="siteinfoacinfo_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfoacinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.detalhesac"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:10px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.acmanufacturer></span>
+							select.browser-default(name="siteinfo_acmanufacturer", id="siteinfo_acmanufacturer", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Buham Bush") Buham Bush
+								option(value="Gree") Gree
+								option(value="LG") LG
+								option(value="Samsung") Samsung
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.actype></span>
+							select.browser-default(name="siteinfo_actype", id="siteinfo_actype", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Air Curtain") Air Curtain
+								option(value="Cassette") Cassette
+								option(value="Clip On") Clip On
+								option(value="Split Unit") Split Unit
+								option(value="Under Ceiling") Under Ceiling
+								option(value="Window Wall") Window Wall
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_acmodel") <span data-i18n="demo.site_info.acmodel"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_acmodel" ,name="siteinfo_acmodel")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_acnumber") <span data-i18n="demo.site_info.acnumber"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_acnumber" ,name="siteinfo_acnumber")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_acserialnumber") <span data-i18n="demo.site_info.acserialnumber"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_acserialnumber" ,name="siteinfo_acserialnumber")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_acbtu") BTU
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_acbtu" ,name="siteinfo_acbtu")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.accageinstalled></span>
+							select.browser-default(name="siteinfo_accageinstalled", id="siteinfo_accageinstalled", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.acsleeveinstalled></span>
+							select.browser-default(name="siteinfo_acsleeveinstalled", id="siteinfo_acsleeveinstalled", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.acunitcontrolltype></span>
+							select.browser-default(name="siteinfo_acunitcontrolltype", id="siteinfo_acunitcontrolltype", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Sam") Sam
+								option(value="V-Con") V-Con
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_accontrollermodel") <span data-i18n=demo.site_info.accontrollermodel></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_accontrollermodel" ,name="siteinfo_accontrollermodel")
+					button.adicionarAc.hide(type="button", id="siteinfoacinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addac"></span>
+					button.hide(type="button", id="siteinfoacinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updateac"></span>
+	div(id="siteinforectifierinfo_modal", class="modal", style="width: 70% !important")
+		a.siteinforectifierinfo_modal_cancel_btn_modal_(id="siteinforectifierinfo_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinforectifierinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.detalhesrectifiercabinet"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_rectcabcabinetmodelno") <span data-i18n=demo.site_info.rectcabcabinetmodelno></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_rectcabcabinetmodelno" ,name="siteinfo_rectcabcabinetmodelno")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.rectcabcabinetnumber></span>
+							select.browser-default(name="siteinfo_rectcabcabinetnumber", id="siteinfo_rectcabcabinetnumber", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="1") 1
+								option(value="2") 2
+								option(value="3") 3
+								option(value="4") 4
+								option(value="5") 5
+								option(value="6") 6
+								option(value="7") 7
+								option(value="8") 8
+								option(value="9") 9
+								option(value="10") 10
+					.row(style="margin-bottom:10px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.rectcabtype></span>
+							select.browser-default(name="siteinfo_rectcabtype", id="siteinfo_rectcabtype", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Battery Tech") Battery Tech
+								option(value="Cordex") Cordex
+								option(value="Delta Green") Delta Green
+								option(value="Delta Outdoor") Delta Outdoor
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.rectcabinputtype></span>
+							select.browser-default(name="siteinfo_rectcabinputtype", id="siteinfo_rectcabinputtype", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Single Phase") Single Phase
+								option(value="Three-phase") Three-phase
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_rectcabnobatteries") <span data-i18n=demo.site_info.rectcabnobatteries></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_rectcabnobatteries" ,name="siteinfo_rectcabnobatteries")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_rectcabbatterycapac") <span data-i18n=demo.site_info.rectcabbatterycapac></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_rectcabbatterycapac" ,name="siteinfo_rectcabbatterycapac")
+					button.adicionarRectCab.hide(type="button", id="siteinforectifierinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addrectcab"></span>
+					button.hide(type="button", id="siteinforectifierinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updaterectcab"></span>
+	div(id="siteinfoguardainfo_modal", class="modal", style="width: 70% !important")
+		a.siteinforectifierinfo_modal_cancel_btn_modal_(id="siteinforectifierinfo_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfoguardainfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.detalhessecurity"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_secguardname") <span data-i18n=demo.site_info.secguardname></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_secguardname" ,name="siteinfo_secguardname")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_secbinumber") <span data-i18n=demo.site_info.secbinumber></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_secbinumber" ,name="siteinfo_secbinumber")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_secnib") NIB
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_secnib" ,name="siteinfo_secnib")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_secvalue") <span data-i18n=demo.site_info.secvalue></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_secvalue" ,name="siteinfo_secvalue")
+					button.adicionarSecurity.hide(type="button", id="siteinfoguardainfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addsecurity"></span>
+					button.hide(type="button", id="siteinfoguardainfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updatesecurity"></span>
+	div(id="jobcardactionprioridade_modal", class="modal", style="width: 70% !important")
+		a(id="jobcardactionprioridade_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="jobcardactionprioridade_title_modal",style="color:#12375c") <span data-i18n="demo.ttnumber_form.nivelprioridadeaccao"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					div(class="row" style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.ttnumber_form.nivelprioridadeaccao"></span>
+							select.browser-default(name="jobcard_holdaction", id="jobcard_holdaction", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Em Espera") Em espera
+								option(value="Atribuir a outra pessoa") Atribuir a outra pessoa
+						.col.s12.m6.input-field(style="margin-top:17px")
+							label(for="jobcard_holdreason") <span data-i18n="demo.manutencao_form.holdreason"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_holdreason" ,name="jobcard_holdreason")
+					.row#mostrartecnicosubst.hide(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="jobcard_tecnicoid1") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+							select.browser-default(name="jobcard_tecnicoid1", id="jobcard_tecnicoid1")
+								option(value="" disabled selected) Escolha a opção
+					div(class="modal-footer")
+						button(type="button", id="jobcardactionprioridade_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>

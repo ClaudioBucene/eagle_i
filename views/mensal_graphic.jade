@@ -1,0 +1,69 @@
+extends layout
+block content
+	article#dados(dado="#{CalloutStatsHistory}",  pacote="#{pacote}")
+		canvas#canvas(style=" text-align:center !important; padding-top:1em")		
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		//- script(src="https://canvasjs.com/assets/script/canvasjs.min.js")
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+
+			let dadosmeu=JSON.parse($("#dados").attr("dado"))
+			var nomes=[];
+			
+			//- console.log(dados1)
+			dadosmeu.forEach((obj, position) =>{
+				nomes.push(obj.jobcard_tecniconome);
+			});
+			//console.log(nomes);
+			
+			const nomesUnicos = new Set();
+
+			nomes.forEach((nome) => {
+				nomesUnicos.add(nome);
+			})
+			console.log([...nomesUnicos.values()]);
+
+			var color = [];
+			var dataLabel = [];
+			count=0;
+			for(var i=0; i<[...nomesUnicos.values()].length; i++){
+				for(var j=0; j<nomes.length; j++){
+					if([...nomesUnicos.values()][i]==nomes[j]){
+						count=count+1;
+					}
+				}
+				dataLabel[i]=count;
+				color.push('rgb(157,181,13)');
+			//	console.log('ver'+color)
+				count=0;
+
+			}
+
+			let pacote =JSON.parse($("#dados").attr("pacote"));
+			var mes = pacote.mes
+
+			console.log('ver ver'+color)
+			var begginerchart = document.getElementById("canvas").getContext('2d');
+			var myChart = new Chart(begginerchart, {
+			type: 'horizontalBar',
+			data: {
+			labels:[...nomesUnicos.values()],
+				datasets: [{
+					label: [mes],
+					backgroundColor:color,
+					data: dataLabel,
+					borderWidth:1
+			}]
+			},
+			options: {
+			
+			}
+			});

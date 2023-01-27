@@ -1,0 +1,105 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold PDU for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12.m6
+						label(for="name") PDU
+						select.browser-default(name="name", id="name", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="ADC" selected="#{DC.name}"=='ADC'? true:false) ADC
+							option(value="ADC+" selected="#{DC.name}"=='ADC+'? true:false) ADC+
+							option(value="Core NET" selected="#{DC.name}"=='Core NET'? true:false) Core NET
+							option(value="Enterprise" selected="#{DC.name}"=='Enterprise'? true:false) Enterprise
+							option(value="MPESA" selected="#{DC.name}"=='MPESA'? true:false) MPESA
+							option(value="Satellite" selected="#{DC.name}"=='Satellite'? true:false) Satellite
+							option(value="Radio Transmission" selected="#{DC.name}"=='Radio Transmission'? true:false) Radio Transmission
+							option(value="UPS" selected="#{DC.name}"=='UPS'? true:false) UPS
+							
+					.col.s12.m6
+						label(for="specific") Description
+						select.browser-default(name="specific", id="specific", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="A" selected="#{DC.specific}"=='A'? true:false) A
+							option(value="A1" selected="#{DC.specific}"=='A1'? true:false) A1
+							option(value="A2" selected="#{DC.specific}"=='A2'? true:false) A2
+							option(value="A3" selected="#{DC.specific}"=='A3'? true:false) A3
+							option(value="B" selected="#{DC.specific}"=='B'? true:false) B
+							option(value="B1" selected="#{DC.specific}"=='B1'? true:false) B1
+							option(value="B2" selected="#{DC.specific}"=='B2'? true:false) B2
+							option(value="B3" selected="#{DC.specific}"=='B3'? true:false) B3
+							option(value="A5" selected="#{DC.specific}"=='A5'? true:false) A5
+							option(value="LOAD" selected="#{DC.specific}"=='LOAD'? true:false) LOAD
+							
+				.row
+					.col.s12
+						label(for="voltage") 
+						h6 1.Voltage Readings
+					.col.s6
+						input.bom(type="radio" id="voltage_ok" checked="#{DC.voltage}"=='ok'? true:false name="voltage"  value="ok")
+						label(for="voltage_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="voltage_no",  name='voltage', checked="#{DC.voltage}"=='not ok'?true:false  value="not ok")
+						label(for="voltage_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="voltage_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="voltage_comment",value="#{DC.voltage_comment?DC.voltage_comment:''}",  identifica="#{DC_insp._id}" ,name="voltage_comment")
+				.row
+					.col.s12
+						label(for="current") 
+						h6 Current Readings
+					.col.s6
+						input.bom(type="radio" id="current_ok" checked="#{DC.current}"=='ok'? true:false name="current"  value="ok")
+						label(for="current_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="current_no",  name='current', checked="#{DC.current}"=='not ok'?true:false  value="not ok")
+						label(for="current_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="ampere_comment") Comments
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="ampere_comment",value="#{DC.ampere_comment?DC.ampere_comment:''}",  identifica="#{DC_insp._id}" ,name="ampere_comment")
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.name
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_pdu_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

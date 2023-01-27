@@ -1,0 +1,67 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Details
+				.row
+					.col.s12.input-field
+						label(for="description")  <span data-i18n="demo.po_form.descricao"></span>
+						input(autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="description" ,name="description", readonly value="#{Armazens[0].description}")
+					
+				.row
+					.col.s12.m6.input-field
+						label(for="serial_number") Serial Number
+						input( autocomplete="off", readonly, type="text",  style="font-family:;color:#12375c" ,id="serial_number" ,name="serial_number",  placeholder="Frete...", value="#{Armazens[0].serial_number}")
+					.col.s12.m6.input-field
+						label(for="part_number") Part Number
+						input.preencher( autocomplete="off", readonly, type="text",  style="font-family:;color:#12375c" ,id="part_number" , placeholder="Frete...",name="part_number", value="#{Armazens[0].part_number}")
+				.row
+					.col.s12.m6.input-field
+						label(for="pod") POD
+						input.preencher( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="pod" , name="pod", value="#{Armazens[0].pod}")
+					.col.s12.m6.input-field
+						label(for="quanty") Quantity
+						input.preencher(autocomplete="off",  type="text", readonly, style="font-family:;color:#12375c" ,id="quanty" ,  name="quanty",  value="#{Armazens[0].quanty}")
+				.row
+					.col.s12.m6.input-field
+						label(for="owner") Owner
+						input.preencher( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="owner" ,  placeholder="cod...",name="owner", value="#{Armazens[0].owner}")
+
+			
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.resultados"></span>
+				.row
+					table.responsive-table.bordered.striped(style="height:auto !important")
+						thead
+							tr
+								th Done by
+								th Action
+								th To
+								th Date
+						tbody(style="height:auto !important")
+							-for(var i=0; i<Armazens[0].atribuidores.length; i++)
+								tr
+									td #{Armazens[0].atribuidores[i]}
+									td #{Armazens[0].meio_atribuicao[i]}
+									td #{Armazens[0].local_actual[i]}
+									td #{((Armazens[0].datas_local_actual[i]).getDate()<10? '0'+(Armazens[0].datas_local_actual[i]).getDate():(Armazens[0].datas_local_actual[i]).getDate())+'/'+(((Armazens[0].datas_local_actual[i]).getMonth()+1)<10? ('0'+((Armazens[0].datas_local_actual[i]).getMonth()+1)):((Armazens[0].datas_local_actual[i]).getMonth()+1))+'/'+((Armazens[0].datas_local_actual[i]).getFullYear())+'   '+((Armazens[0].datas_local_actual[i]).getHours()<10? ('0'+(Armazens[0].datas_local_actual[i]).getHours()): (Armazens[0].datas_local_actual[i]).getHours() )+' : '+((Armazens[0].datas_local_actual[i]).getMinutes()<10? ('0'+(Armazens[0].datas_local_actual[i]).getMinutes()):(Armazens[0].datas_local_actual[i]).getMinutes())}
+			fieldset.no-border
+				.row.buttons-container
+					.col.s12.center
+						button#cancelar_Po(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

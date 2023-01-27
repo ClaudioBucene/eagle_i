@@ -1,0 +1,417 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="POST", action="", style="color:#12375c;", enctype="multipart/form-data")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.seguro_form.safety"></span>
+				.row
+					.row(id="veiculo_safe")
+						if Site
+							if Site[0].safetyOb.veiculo_safe=="ok"
+								.col.s12
+									span.
+										<span data-i18n="demo.seguro_form.pergunta1"></span>
+								.col.s4.m3.m3
+									input.bom(type="radio" id="carrocariaok" name="veiculo_safe" checked value="ok")
+									label(for="carrocariaok") Ok
+								.col.s4.m3.m3
+									input.mau(type="radio", id="carrocarianotok", name='veiculo_safe', value="not ok")
+									label(for="carrocarianotok") Not ok
+								.col.s4.m3.m3
+									input.moderado(type="radio", id="carrocariana", name='veiculo_safe', value="na")
+									label(for="carrocariana") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="veiculo_safe_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+									input(id="veiculo_safe_comment", autocomplete="off", type="text", name="veiculo_safe_comment", value="#{Site? Site[0].safetyOb.veiculo_safe_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].safetyOb.veiculo_safe_image.length!=0)
+										-for( let i=0;i<(Site[0].safetyOb.veiculo_safe_image.length); i++)
+											img.verimagem(style="width:100px", src="#{Site[0].safetyOb.veiculo_safe_image[i]}")
+							else
+								if Site[0].safetyOb.veiculo_safe=="not ok"
+									.col.s12
+										span.
+											<span data-i18n="demo.seguro_form.pergunta1"></span>
+									.col.s4.m3.m3
+										input.bom(type="radio" id="carrocariaok" name="veiculo_safe"  value="ok")
+										label(for="carrocariaok") Ok
+									.col.s4.m3.m3
+										input.mau(type="radio", id="carrocarianotok", name='veiculo_safe', checked value="not ok")
+										label(for="carrocarianotok") Not ok
+									.col.s4.m3.m3
+										input.moderado(type="radio", id="carrocariana", name='veiculo_safe', value="na")
+										label(for="carrocariana") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="veiculo_safe_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+										input(id="veiculo_safe_comment", autocomplete="off", type="text", name="veiculo_safe_comment", value="#{Site? Site[0].safetyOb.veiculo_safe_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].safetyOb.veiculo_safe_image.length!=0)
+											-for(let i=0;i<Site[0].safetyOb.veiculo_safe_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].safetyOb.veiculo_safe_image[i]}")
+								else
+									.col.s12
+										span.
+											<span data-i18n="demo.seguro_form.pergunta1"></span>
+									.col.s4.m3.m3
+										input.bom(type="radio" id="carrocariaok" name="veiculo_safe"  value="ok")
+										label(for="carrocariaok") Ok
+									.col.s4.m3.m3
+										input.mau(type="radio", id="carrocarianotok", name='veiculo_safe', value="not ok")
+										label(for="carrocarianotok") Not ok
+									.col.s4.m3.m3
+										input.moderado(type="radio", id="carrocariana", name='veiculo_safe', checked, value="na")
+										label(for="carrocariana") N/A
+						else
+							.col.s12
+								span.
+									<span data-i18n="demo.seguro_form.pergunta1"></span>
+							.col.s4.m3.m3
+								input.bom(type="radio" id="carrocariaok" name="veiculo_safe"  value="ok")
+								label(for="carrocariaok") Ok
+							.col.s4.m3.m3
+								input.mau(type="radio", id="carrocarianotok", name='veiculo_safe', value="not ok")
+								label(for="carrocarianotok") Not ok
+							.col.s4.m3.m3
+								input.moderado(type="radio", id="carrocariana", name='veiculo_safe', value="na")
+								label(for="carrocariana") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="veiculo_safe_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+								input(id="veiculo_safe_comment", autocomplete="off", type="text", name="veiculo_safe_comment", value="#{Site? Site[0].veiculo_safe_comment:''}")
+							.col.s12.m6.input-field.field
+								<span data-i18n="demo.seguro_form.imagem"></span>
+								input.preencher(type="file", id="veiculo_safe_image", multiple, name="veiculo_safe_image",autocomplete="off")
+								table
+									tbody#safety1.safety1
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.seguro_form.safety"></span>
+				.row
+					.row(id="people_safe")
+						if Site
+							if Site[0].safetyOb.people_safe=="ok"
+								.col.s12
+									<span data-i18n="demo.seguro_form.pergunta2"></span>
+								.col.s4.m3
+									input.bom(type="radio" id="personnelsafeok" name="people_safe" checked value="ok")
+									label(for="personnelsafeok") Ok
+								.col.s4.m3
+									input.mau(type="radio", id="personnelsafenotok", name='people_safe', value="not ok")
+									label(for="personnelsafenotok") Not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="personnelsafena", name='people_safe', value="na")
+									label(for="personnelsafena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="people_safe_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+									input(id="people_safe_comment", autocomplete="off", type="text", name="people_safe_comment", value="#{Site? Site[0].safetyOb.people_safe_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].safetyOb.People_safe_image.length!=0)
+										-for( let i=0;i<Site[0].safetyOb.People_safe_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].safetyOb.People_safe_image[i]}")
+							else
+								if Site[0].safetyOb.people_safe=="not ok"
+									.col.s12
+										<span data-i18n="demo.seguro_form.pergunta2"></span>
+									.col.s4.m3
+										input.bom(type="radio" id="personnelsafeok" name="people_safe"  value="ok")
+										label(for="personnelsafeok") Ok
+									.col.s4.m3
+										input.mau(type="radio", id="personnelsafenotok", name='people_safe', checked value="not ok")
+										label(for="personnelsafenotok") Not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="personnelsafena", name='people_safe', value="na")
+										label(for="personnelsafena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="people_safe_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+										input(id="people_safe_comment", autocomplete="off", type="text", name="people_safe_comment", value="#{Site? Site[0].safetyOb.people_safe_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].safetyOb.People_safe_image.length!=0)
+											-for( let i=0;i<Site[0].safetyOb.People_safe_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].safetyOb.People_safe_image[i]}")
+								else
+									.col.s12
+										<span data-i18n="demo.seguro_form.pergunta2"></span>
+									.col.s4.m3
+										input.bom(type="radio" id="personnelsafeok" name="people_safe"  value="ok")
+										label(for="personnelsafeok") Ok
+									.col.s4.m3
+										input.mau(type="radio", id="personnelsafenotok", name='people_safe',value="not ok")
+										label(for="personnelsafenotok") Not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="personnelsafena", name='people_safe', checked, value="na")
+										label(for="personnelsafena") N/A
+						else
+							.col.s12
+								<span data-i18n="demo.seguro_form.pergunta2"></span>
+							.col.s4.m3
+								input.bom(type="radio" id="personnelsafeok" name="people_safe"  value="ok")
+								label(for="personnelsafeok") Ok
+							.col.s4.m3
+								input.mau(type="radio", id="personnelsafenotok", name='people_safe', value="not ok")
+								label(for="personnelsafenotok") Not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="personnelsafena", name='people_safe', value="na")
+								label(for="personnelsafena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="people_safe_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+								input(id="people_safe_comment", autocomplete="off", type="text", name="people_safe_comment", value="#{Site? Site[0].people_safe_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.seguro_form.imagem"></span>
+								input.preencher(type="file", id="People_safe_image", multiple, name="People_safe_image",autocomplete="off")
+								table
+									tbody#safety2.safety2
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.seguro_form.safety"></span>
+				.row
+					.row(id="red_hat")
+						if Site
+							if Site[0].safetyOb.red_hat=="ok"
+								.col.s12
+									<span data-i18n="demo.seguro_form.pergunta3"></span>
+								.col.s4.m3
+									input.bom(type="radio" id="redhatok" name="red_hat" checked value="ok")
+									label(for="redhatok") Ok
+								.col.s4.m3
+									input.mau(type="radio", id="redhatnotok", name='red_hat', value="not ok")
+									label(for="redhatnotok") Not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="redhatna", name='red_hat', value="na")
+									label(for="redhatna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="red_hat_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+									input(id="red_hat_comment", autocomplete="off", type="text", name="red_hat_comment", value="#{Site? Site[0].safetyOb.red_hat_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].safetyOb.red_hat_image.length!=0)
+										-for( let i=0;i<Site[0].safetyOb.red_hat_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].safetyOb.red_hat_image[i]}")
+							else
+								if Site[0].safetyOb.red_hat=="not ok"
+									.col.s12
+										<span data-i18n="demo.seguro_form.pergunta3"></span>
+									.col.s4.m3
+										input.bom(type="radio" id="redhatok" name="red_hat"  value="ok")
+										label(for="redhatok") Ok
+									.col.s4.m3
+										input.mau(type="radio", id="redhatnotok", name='red_hat', checked value="not ok")
+										label(for="redhatnotok") Not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="redhatna", name='red_hat', value="na")
+										label(for="redhatna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="red_hat_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+										input(id="red_hat_comment", autocomplete="off", type="text", name="red_hat_comment", value="#{Site? Site[0].safetyOb.red_hat_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].safetyOb.red_hat_image.length!=0)
+											-for(let i=0;i<Site[0].safetyOb.red_hat_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].safetyOb.red_hat_image[i]}")
+								else
+									.col.s12
+										<span data-i18n="demo.seguro_form.pergunta3"></span>
+									.col.s4.m3
+										input.bom(type="radio" id="redhatok" name="red_hat"  value="ok")
+										label(for="redhatok") Ok
+									.col.s4.m3
+										input.mau(type="radio", id="redhatnotok", name='red_hat', value="not ok")
+										label(for="redhatnotok") Not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="redhatna", name='red_hat', checked, value="na")
+										label(for="redhatna") N/A
+						else
+							.col.s12
+								<span data-i18n="demo.seguro_form.pergunta3"></span>
+							.col.s4.m3
+								input.bom(type="radio" id="redhatok" name="red_hat"  value="ok")
+								label(for="redhatok") Ok
+							.col.s4.m3
+								input.mau(type="radio", id="redhatnotok", name='red_hat', value="not ok")
+								label(for="redhatnotok") Not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="redhatna", name='red_hat', value="na")
+								label(for="redhatna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="red_hat_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+								input(id="red_hat_comment", autocomplete="off", type="text", name="red_hat_comment", value="#{Site? Site[0].red_hat_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.seguro_form.imagem"></span>
+								input.preencher(type="file", id="red_hat_image", multiple, name="red_hat_image",autocomplete="off")
+								table
+									tbody#safety3.safety3
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.seguro_form.safety"></span>
+				.row
+					.row(id="fall_Arrest_devices")
+						if Site
+							if Site[0].safetyOb.fall_Arrest_devices=="ok"
+								.col.s12
+									<span data-i18n="demo.seguro_form.pergunta4"></span>
+								.col.s4.m3
+									input.bom(type="radio" id="fallarrestok" name="fall_Arrest_devices"   checked value="ok")
+									label(for="fallarrestok") Ok
+								.col.s4.m3
+									input.mau(type="radio", id="fallarrestnotok", name='fall_Arrest_devices', value="not ok")
+									label(for="fallarrestnotok") Not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="fallarrestna", name='fall_Arrest_devices', value="na")
+									label(for="fallarrestna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fall_Arrest_devices_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+									input(id="fall_Arrest_devices_comment", autocomplete="off", type="text", name="fall_Arrest_devices_comment", value="#{Site? Site[0].safetyOb.fall_Arrest_devices_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].safetyOb.fall_Arrest_devices_image.length!=0)
+										-for(let i=0;i<Site[0].safetyOb.fall_Arrest_devices_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].safetyOb.fall_Arrest_devices_image[i]}")
+							else
+								if Site[0].safetyOb.fall_Arrest_devices=="not ok"
+									.col.s12
+										<span data-i18n="demo.seguro_form.pergunta4"></span>
+									.col.s4.m3
+										input.bom(type="radio" id="fallarrestok" name="fall_Arrest_devices"  value="ok")
+										label(for="fallarrestok") Ok
+									.col.s4.m3
+										input.mau(type="radio", id="fallarrestnotok", name='fall_Arrest_devices', checked value="not ok")
+										label(for="fallarrestnotok") Not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="fallarrestna", name='fall_Arrest_devices', value="na")
+										label(for="fallarrestna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="fall_Arrest_devices_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+										input(id="fall_Arrest_devices_comment", autocomplete="off", type="text", name="fall_Arrest_devices_comment" , value="#{Site? Site[0].safetyOb.fall_Arrest_devices_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].safetyOb.fall_Arrest_devices_image.length!=0)
+											-for(let i=0;i<Site[0].safetyOb.fall_Arrest_devices_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].safetyOb.fall_Arrest_devices_image[i]}")
+								else
+									.col.s12
+										<span data-i18n="demo.seguro_form.pergunta4"></span>
+									.col.s4.m3
+										input.bom(type="radio" id="fallarrestok" name="fall_Arrest_devices"  value="ok")
+										label(for="fallarrestok") Ok
+									.col.s4.m3
+										input.mau(type="radio", id="fallarrestnotok", name='fall_Arrest_devices', value="not ok")
+										label(for="fallarrestnotok") Not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="fallarrestna", name='fall_Arrest_devices', checked, value="na")
+										label(for="fallarrestna") N/A
+						else
+							.col.s12
+								<span data-i18n="demo.seguro_form.pergunta4"></span>
+							.col.s4.m3
+								input.bom(type="radio" id="fallarrestok" name="fall_Arrest_devices"  value="ok")
+								label(for="fallarrestok") Ok
+							.col.s4.m3
+								input.mau(type="radio", id="fallarrestnotok", name='fall_Arrest_devices', value="not ok")
+								label(for="fallarrestnotok") Not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="fallarrestna", name='fall_Arrest_devices', value="na")
+								label(for="fallarrestna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="fall_Arrest_devices_comment") <span data-i18n="demo.seguro_form.comentarios"></span>
+								input(id="fall_Arrest_devices_comment", autocomplete="off", type="text", name="fall_Arrest_devices_comment", value="#{Site? Site[0].fall_Arrest_devices_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.seguro_form.imagem"></span>
+								input.preencher(type="file", id="fall_Arrest_devices_image", multiple, name="fall_Arrest_devices_image",autocomplete="off")
+								table
+									tbody#safety4.safety4
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Site
+					input#captarSafety(type="submit", dataref="#{referencia._id}", numSite= "#{referencia.siteNumber}", nomesessiondetalhes= "#{DataU.nome}", name="submit", class="submit action-button", value="Save")
+				else
+					if Site[0].EDBoardOb.connections
+						input#captarSafetyDetalhes(type="button", name="next", dataref="#{op}", class="next action-button", value="Next >>")
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

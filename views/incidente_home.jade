@@ -1,0 +1,45 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+				a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Add new inspection ", class="btn-floating btn-large waves-effect waves-light", href="/incidente/novo") <i class="material-icons activarVerde">add</i>
+		-if(!Incidente || Incidente.length==0)
+			p.center-align.selmecAzul.bold  Vazio!
+		-else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Acidentes
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Regiao
+						th registado Por
+						th Data
+						th
+				tbody(id="myTable")
+					-for(var index = (Incidente.length-1), j=0; index>=0 && j<100 ; index--, j++)
+						tr.highlight(data-funcionario="#{Incidente[index]._id}", data-nome="#{Incidente[index].nome}",style="color:#{Incidente[index].observacao}")
+							td #{Incidente[index].regiao}
+							td #{Incidente[index].registado_por}
+							td #{((Incidente[index].data).getDate()<10? '0'+(Incidente[index].data).getDate():(Incidente[index].data).getDate())+'/'+(((Incidente[index].data).getMonth()+1)<10? ('0'+((Incidente[index].data).getMonth()+1)):((Incidente[index].data).getMonth()+1))+'/'+((Incidente[index].data).getFullYear())+'   '+((Incidente[index].data).getHours()<10? ('0'+(Incidente[index].data).getHours()): (Incidente[index].data).getHours() )+' : '+((Incidente[index].data).getMinutes()<10? ('0'+(Incidente[index].data).getMinutes()):(Incidente[index].data).getMinutes())}
+							td
+								
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+
+

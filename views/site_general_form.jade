@@ -1,0 +1,764 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="POST", action="", style="color:#12375c;", enctype="multipart/form-data")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.site_general_form.sitegeral"></span>
+				h2(class="fs-title") <span data-i18n="demo.site_general_form.pergunta1"></span>
+				.row(id="fence_gate_locks_hinges")
+					if Site
+						if Site[0].site_general.fence_gate_locks_hinges=="ok"
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="fence_gate_locks_hingesok" name="fence_gate_locks_hinges" checked value="ok")
+								label(for="fence_gate_locks_hingesok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="fence_gate_locks_hingesnotok", name='fence_gate_locks_hinges', value="not ok")
+								label(for="fence_gate_locks_hingesnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="fence_gate_locks_hingesna", name='fence_gate_locks_hinges', value="na")
+								label(for="fence_gate_locks_hingesna") N/A
+							.input-field.col.s12(style="text-align: left !important")
+								label(for="fence_gate_locks_hinges_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+								input(id="fence_gate_locks_hinges_comment", autocomplete="off", type="text", name="fence_gate_locks_hinges_comment", value="#{Site? Site[0].site_general.fence_gate_locks_hinges_comment:''}")
+							.col.s12.m6.input-field
+								-if(Site[0].site_general.fence_gate_locks_hinges_image.length!=0)
+									-for(let i=0;i<Site[0].site_general.fence_gate_locks_hinges_image.length; i++)
+										img.verimagem(style="width:100px", src="#{Site[0].site_general.fence_gate_locks_hinges_image[i]}")							
+						else
+							if Site[0].site_general.fence_gate_locks_hinges=="not ok"
+								.col.s12
+									span.
+									
+								.col.s4.m3
+									input.bom(type="radio" id="fence_gate_locks_hingesok" name="fence_gate_locks_hinges"  value="ok")
+									label(for="fence_gate_locks_hingesok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="fence_gate_locks_hingesnotok", name='fence_gate_locks_hinges', checked value="not ok")
+									label(for="fence_gate_locks_hingesnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="fence_gate_locks_hingesna", name='fence_gate_locks_hinges', value="na")
+									label(for="fence_gate_locks_hingesna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fence_gate_locks_hinges_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+									input(id="fence_gate_locks_hinges_comment", autocomplete="off", type="text", name="fence_gate_locks_hinges_comment", value="#{Site? Site[0].site_general.fence_gate_locks_hinges_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].site_general.fence_gate_locks_hinges_image.length!=0)
+										-for(let i=0;i<Site[0].site_general.fence_gate_locks_hinges_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].site_general.fence_gate_locks_hinges_image[i]}")
+							else
+								.col.s12
+									span.
+									
+								.col.s4.m3
+									input.bom(type="radio" id="fence_gate_locks_hingesok" name="fence_gate_locks_hinges"  value="ok")
+									label(for="fence_gate_locks_hingesok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="fence_gate_locks_hingesnotok", name='fence_gate_locks_hinges', value="not ok")
+									label(for="fence_gate_locks_hingesnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="fence_gate_locks_hingesna", name='fence_gate_locks_hinges', checked, value="na")
+									label(for="fence_gate_locks_hingesna") N/A			
+					else
+						.col.s12
+							span.
+								
+						.col.s4.m3
+							input.bom(type="radio" id="fence_gate_locks_hingesok" name="fence_gate_locks_hinges"  value="ok")
+							label(for="fence_gate_locks_hingesok") ok					
+						.col.s4.m3
+							input.mau(type="radio", id="fence_gate_locks_hingesnotok", name='fence_gate_locks_hinges', value="not ok")
+							label(for="fence_gate_locks_hingesnotok") not ok
+						.col.s4.m3
+							input.moderado(type="radio", id="fence_gate_locks_hingesna", name='fence_gate_locks_hinges', value="na")
+							label(for="fence_gate_locks_hingesna") N/A
+						.input-field.col.s12.m6(style="text-align: left !important")
+							label(for="fence_gate_locks_hinges_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+							input(id="fence_gate_locks_hinges_comment", autocomplete="off", type="text", name="fence_gate_locks_hinges_comment", value="#{Site? Site[0].fence_gate_locks_hinges_comment:''}")
+						.col.s12.m6.input-field
+							<span data-i18n="demo.site_general_form.imagem"></span>
+							input.preencher(type="file", id="fence_gate_locks_hinges_image", name="fence_gate_locks_hinges_image",autocomplete="off", value="#{Site ? Site[0].fence_gate_locks_hinges_image:''}", multiple)
+							table
+								tbody#site_general1.site_general1
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.site_general_form.sitegeral"></span>
+				h2(class="fs-title") <span data-i18n="demo.site_general_form.pergunta2"></span>
+				.row
+					.row(id="signage")
+						if Site
+							if Site[0].site_general.signage=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="signageok" name="signage" checked value="ok")
+									label(for="signageok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="signagenotok", name='signage', value="not ok")
+									label(for="signagenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="signagena", name='signage', value="na")
+									label(for="signagena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="signage_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+									input(id="signage_comment", autocomplete="off", type="text", name="signage_comment", value="#{Site? Site[0].site_general.signage_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].site_general.signage_image.length!=0)
+										-for(let i=0;i<Site[0].site_general.signage_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].site_general.signage_image[i]}")							
+							else
+								if Site[0].site_general.signage=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="signageok" name="signage"  value="ok")
+										label(for="signageok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="signagenotok", name='signage', checked value="not ok")
+										label(for="signagenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="signagena", name='signage', value="na")
+										label(for="signagena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="signage_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+										input(id="signage_comment", autocomplete="off", type="text", name="signage_comment", value="#{Site? Site[0].site_general.signage_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].site_general.signage_image.length!=0)
+											-for(let i=0;i<Site[0].site_general.signage_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].site_general.signage_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="signageok" name="signage"  value="ok")
+										label(for="signageok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="signagenotok", name='signage', value="not ok")
+										label(for="signagenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="signagena", name='signage', checked, value="na")
+										label(for="signagena") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="signageok" name="signage"  value="ok")
+								label(for="signageok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="signagenotok", name='signage', value="not ok")
+								label(for="signagenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="signagena", name='signage', value="na")
+								label(for="signagena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="signage_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+								input(id="signage_comment", autocomplete="off", type="text", name="signage_comment", value="#{Site? Site[0].signage_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.site_general_form.imagem"></span>
+								input.preencher(type="file", id="signage_image", name="signage_image",autocomplete="off", multiple)
+								table
+									tbody#site_general2.site_general2
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.site_general_form.sitegeral"></span>
+				h2(class="fs-title") <span data-i18n="demo.site_general_form.pergunta3"></span>
+				.row
+					.row(id="water_damage")
+						if Site
+							if Site[0].site_general.water_damage=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="water_damageok" name="water_damage" checked value="ok")
+									label(for="water_damageok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="water_damagenotok", name='water_damage', value="not ok")
+									label(for="water_damagenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="water_damagena", name='water_damage', value="na")
+									label(for="water_damagena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="water_damage_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+									input(id="water_damage_comment", autocomplete="off", type="text", name="water_damage_comment", value="#{Site? Site[0].site_general.water_damage_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].site_general.water_damage_image.length!=0)
+										-for(let i=0;i<Site[0].site_general.water_damage_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].site_general.water_damage_image[i]}")
+							else
+								if Site[0].site_general.water_damage=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="water_damageok" name="water_damage"  value="ok")
+										label(for="water_damageok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="water_damagenotok", name='water_damage', checked value="not ok")
+										label(for="water_damagenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="water_damagena", name='water_damage', value="na")
+										label(for="water_damagena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="water_damage_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+										input(id="water_damage_comment", autocomplete="off", type="text", name="water_damage_comment", value="#{Site? Site[0].site_general.water_damage_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].site_general.water_damage_image.length!=0)
+											-for(let i=0;i<Site[0].site_general.water_damage_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].site_general.water_damage_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="water_damageok" name="water_damage"  value="ok")
+										label(for="water_damageok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="water_damagenotok", name='water_damage', value="not ok")
+										label(for="water_damagenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="water_damagena", name='water_damage', checked, value="na")
+										label(for="water_damagena") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="water_damageok" name="water_damage"  value="ok")
+								label(for="water_damageok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="water_damagenotok", name='water_damage', value="not ok")
+								label(for="water_damagenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="water_damagena", name='water_damage', value="na")
+								label(for="water_damagena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="water_damage_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+								input(id="water_damage_comment", autocomplete="off", type="text", name="water_damage_comment", value="#{Site? Site[0].water_damage_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.site_general_form.imagem"></span>
+								input.preencher(type="file", id="water_damage_image", name="water_damage_image",autocomplete="off", multiple)
+								table
+									tbody#site_general3.site_general3
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.site_general_form.sitegeral"></span>
+				h2(class="fs-title") <span data-i18n="demo.site_general_form.pergunta4"></span>
+				.row
+					.row(id="crushed_stone")
+						if Site
+							if Site[0].site_general.crushed_stone=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="crushed_stoneok" name="crushed_stone" checked value="ok")
+									label(for="crushed_stoneok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="crushed_stonenotok", name='crushed_stone', value="not ok")
+									label(for="crushed_stonenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="crushed_stonena", name='crushed_stone', value="na")
+									label(for="crushed_stonena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="crushed_stone_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+									input(id="crushed_stone_comment", autocomplete="off", type="text", name="crushed_stone_comment", value="#{Site? Site[0].site_general.crushed_stone_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].site_general.crushed_stone_image.length!=0)
+										-for(let i=0;i<Site[0].site_general.crushed_stone_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].site_general.crushed_stone_image[i]}")
+							else
+								if Site[0].site_general.crushed_stone=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="crushed_stoneok" name="crushed_stone"  value="ok")
+										label(for="crushed_stoneok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="crushed_stonenotok", name='crushed_stone', checked value="not ok")
+										label(for="crushed_stonenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="crushed_stonena", name='crushed_stone', value="na")
+										label(for="crushed_stonena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="crushed_stone_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+										input(id="crushed_stone_comment", autocomplete="off", type="text", name="crushed_stone_comment", value="#{Site? Site[0].site_general.crushed_stone_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].site_general.crushed_stone_image.length!=0)
+											-for(let i=0;i<Site[0].site_general.crushed_stone_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].site_general.crushed_stone_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="crushed_stoneok" name="crushed_stone"  value="ok")
+										label(for="crushed_stoneok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="crushed_stonenotok", name='crushed_stone', value="not ok")
+										label(for="crushed_stonenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="crushed_stonena", name='crushed_stone', checked, value="na")
+										label(for="crushed_stonena") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="crushed_stoneok" name="crushed_stone"  value="ok")
+								label(for="crushed_stoneok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="crushed_stonenotok", name='crushed_stone', value="not ok")
+								label(for="crushed_stonenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="crushed_stonena", name='crushed_stone', value="na")
+								label(for="crushed_stonena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="crushed_stone_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+								input(id="crushed_stone_comment", autocomplete="off", type="text", name="crushed_stone_comment", value="#{Site? Site[0].crushed_stone_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.site_general_form.imagem"></span>
+								input.preencher(type="file", id="crushed_stone_image", name="crushed_stone_image",autocomplete="off", multiple)
+								table
+									tbody#site_general4.site_general4
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.site_general_form.sitegeral"></span>
+				h2(class="fs-title") <span data-i18n="demo.site_general_form.pergunta5"></span>
+				.row
+					.row(id="site_clean")
+						if Site
+							if Site[0].site_general.site_clean=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="site_cleanok" name="site_clean" checked value="ok")
+									label(for="site_cleanok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="site_cleannotok", name='site_clean', value="not ok")
+									label(for="site_cleannotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="site_cleanna", name='site_clean', value="na")
+									label(for="site_cleanna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="site_clean_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+									input(id="site_clean_comment", autocomplete="off", type="text", name="site_clean_comment", value="#{Site? Site[0].site_general.site_clean_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].site_general.site_clean_image.length!=0)
+										-for(let i=0;i<Site[0].site_general.site_clean_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].site_general.site_clean_image[i]}")
+							else
+								if Site[0].site_general.site_clean=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="site_cleanok" name="site_clean"  value="ok")
+										label(for="site_cleanok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="site_cleannotok", name='site_clean', checked value="not ok")
+										label(for="site_cleannotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="site_cleanna", name='site_clean', value="na")
+										label(for="site_cleanna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="site_clean_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+										input(id="site_clean_comment", autocomplete="off", type="text", name="site_clean_comment", value="#{Site? Site[0].site_general.site_clean_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].site_general.site_clean_image.length!=0)
+											-for(let i=0;i<Site[0].site_general.site_clean_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].site_general.site_clean_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="site_cleanok" name="site_clean"  value="ok")
+										label(for="site_cleanok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="site_cleannotok", name='site_clean', value="not ok")
+										label(for="site_cleannotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="site_cleanna", name='site_clean', checked, value="na")
+										label(for="site_cleanna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="site_cleanok" name="site_clean"  value="ok")
+								label(for="site_cleanok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="site_cleannotok", name='site_clean', value="not ok")
+								label(for="site_cleannotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="site_cleanna", name='site_clean', value="na")
+								label(for="site_cleanna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="site_clean_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+								input(id="site_clean_comment", autocomplete="off", type="text", name="site_clean_comment", value="#{Site? Site[0].site_clean_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.site_general_form.imagem"></span>
+								input.preencher(type="file", id="site_clean_image", name="site_clean_image",autocomplete="off", multiple)
+								table
+									tbody#site_general5.site_general5
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.site_general_form.sitegeral"></span>
+				h2(class="fs-title") <span data-i18n="demo.site_general_form.pergunta6"></span>
+				.row
+					.row(id="weeds_grass")
+						if Site
+							if Site[0].site_general.weeds_grass=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="weeds_grassok" name="weeds_grass" checked value="ok")
+									label(for="weeds_grassok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="weeds_grassnotok", name='weeds_grass', value="not ok")
+									label(for="weeds_grassnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="weeds_grassna", name='weeds_grass', value="na")
+									label(for="weeds_grassna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="weeds_grass_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+									input(id="weeds_grass_comment", autocomplete="off", type="text", name="weeds_grass_comment", value="#{Site? Site[0].site_general.weeds_grass_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].site_general.weeds_grass_image.length!=0)
+										-for(let i=0;i<Site[0].site_general.weeds_grass_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].site_general.weeds_grass_image[i]}")
+							else
+								if Site[0].site_general.weeds_grass=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="weeds_grassok" name="weeds_grass"  value="ok")
+										label(for="weeds_grassok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="weeds_grassnotok", name='weeds_grass', checked value="not ok")
+										label(for="weeds_grassnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="weeds_grassna", name='weeds_grass', value="na")
+										label(for="weeds_grassna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="weeds_grass_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+										input(id="weeds_grass_comment", autocomplete="off", type="text", name="weeds_grass_comment", value="#{Site? Site[0].site_general.weeds_grass_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].site_general.weeds_grass_image.length!=0)
+											-for(let i=0;i<Site[0].site_general.weeds_grass_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].site_general.weeds_grass_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="weeds_grassok" name="weeds_grass"  value="ok")
+										label(for="weeds_grassok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="weeds_grassnotok", name='weeds_grass', value="not ok")
+										label(for="weeds_grassnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="weeds_grassna", name='weeds_grass', checked, value="na")
+										label(for="weeds_grassna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="weeds_grassok" name="weeds_grass"  value="ok")
+								label(for="weeds_grassok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="weeds_grassnotok", name='weeds_grass', value="not ok")
+								label(for="weeds_grassnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="weeds_grassna", name='weeds_grass', value="na")
+								label(for="weeds_grassna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="weeds_grass_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+								input(id="weeds_grass_comment", autocomplete="off", type="text", name="weeds_grass_comment", value="#{Site? Site[0].weeds_grass_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.site_general_form.imagem"></span>
+								input.preencher(type="file", id="weeds_grass_image", name="weeds_grass_image",autocomplete="off", multiple)
+								table
+									tbody#site_general6.site_general6
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.site_general_form.sitegeral"></span>
+				h2(class="fs-title") <span data-i18n="demo.site_general_form.pergunta7"></span>
+				.row
+					.row(id="defect_access_road")
+						if Site
+							if Site[0].site_general.defect_access_road=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="defect_access_roadok" name="defect_access_road" checked value="ok")
+									label(for="defect_access_roadok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="defect_access_roadnotok", name='defect_access_road', value="not ok")
+									label(for="defect_access_roadnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="defect_access_roadna", name='defect_access_road', value="na")
+									label(for="defect_access_roadna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="defect_access_road_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+									input(id="defect_access_road_comment", autocomplete="off", type="text", name="defect_access_road_comment", value="#{Site? Site[0].site_general.defect_access_road_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].site_general.defect_access_road_image.length!=0)
+										-for(let i=0;i<Site[0].site_general.defect_access_road_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].site_general.defect_access_road_image[i]}")
+							else
+								if Site[0].site_general.defect_access_road=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="defect_access_roadok" name="defect_access_road"  value="ok")
+										label(for="defect_access_roadok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="defect_access_roadnotok", name='defect_access_road', checked value="not ok")
+										label(for="defect_access_roadnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="defect_access_roadna", name='defect_access_road', value="na")
+										label(for="defect_access_roadna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="defect_access_road_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+										input(id="defect_access_road_comment", autocomplete="off", type="text", name="defect_access_road_comment", value="#{Site? Site[0].site_general.defect_access_road_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].site_general.defect_access_road_image.length!=0)
+											-for(let i=0;i<Site[0].site_general.defect_access_road_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].site_general.defect_access_road_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="defect_access_roadok" name="defect_access_road"  value="ok")
+										label(for="defect_access_roadok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="defect_access_roadnotok", name='defect_access_road', value="not ok")
+										label(for="defect_access_roadnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="defect_access_roadna", name='defect_access_road', checked, value="na")
+										label(for="defect_access_roadna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="defect_access_roadok" name="defect_access_road"  value="ok")
+								label(for="defect_access_roadok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="defect_access_roadnotok", name='defect_access_road', value="not ok")
+								label(for="defect_access_roadnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="defect_access_roadna", name='defect_access_road', value="na")
+								label(for="defect_access_roadna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="defect_access_road_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+								input(id="defect_access_road_comment", autocomplete="off", type="text", name="defect_access_road_comment", value="#{Site? Site[0].defect_access_road_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.site_general_form.imagem"></span>
+								input.preencher(type="file", id="defect_access_road_image", name="defect_access_road_image",autocomplete="off", multiple)
+								table
+									tbody#site_general7.site_general7
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.site_general_form.sitegeral"></span>
+				h2(class="fs-title") <span data-i18n="demo.site_general_form.pergunta8"></span>
+				.row(id="rubish")
+					if Site
+						if Site[0].site_general.rubish=="ok"
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="rubishok" name="rubish"   checked value="ok")
+								label(for="rubishok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="rubishnotok", name='rubish', value="not ok")
+								label(for="rubishnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="rubishna", name='rubish', value="na")
+								label(for="rubishna") N/A
+							.input-field.col.s12(style="text-align: left !important")
+								label(for="rubish_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+								input(id="rubish_comment", autocomplete="off", type="text", name="rubish_comment", value="#{Site? Site[0].site_general.rubish_comment:''}")
+							.col.s12.m6.input-field
+								-if(Site[0].site_general.rubish_image.length!=0)
+									-for(let i=0;i<Site[0].site_general.rubish_image.length; i++)
+										img.verimagem(style="width:100px", src="#{Site[0].site_general.rubish_image[i]}")
+						else
+							if Site[0].site_general.rubish=="not ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="rubishok" name="rubish"  value="ok")
+									label(for="rubishok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="rubishnotok", name='rubish', checked value="not ok")
+									label(for="rubishnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="rubishna", name='rubish', value="na")
+									label(for="rubishna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rubish_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+									input(id="rubish_comment", autocomplete="off", type="text", name="rubish_comment",  value="#{Site? Site[0].site_general.rubish_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].site_general.rubish_image.length!=0)
+										-for(let i=0;i<Site[0].site_general.rubish_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].site_general.rubish_image[i]}")
+							else
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="rubishok" name="rubish"  value="ok")
+									label(for="rubishok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="rubishnotok", name='rubish', value="not ok")
+									label(for="rubishnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="rubishna", name='rubish', checked, value="na")
+									label(for="rubishna") N/A
+					else
+						.col.s12
+							span.
+								
+						.col.s4.m3
+							input.bom(type="radio" id="rubishok" name="rubish"  value="ok")
+							label(for="rubishok") ok					
+						.col.s4.m3
+							input.mau(type="radio", id="rubishnotok", name='rubish', value="not ok")
+							label(for="rubishnotok") not ok
+						.col.s4.m3
+							input.moderado(type="radio", id="rubishna", name='rubish', value="na")
+							label(for="rubishna") N/A
+						.input-field.col.s12.m6(style="text-align: left !important")
+							label(for="rubish_comment") <span data-i18n="demo.site_general_form.comentarios"></span>
+							input(id="rubish_comment", autocomplete="off", type="text", name="rubish_comment", value="#{Site? Site[0].rubish_comment:''}")
+						.col.s12.m6.input-field
+							<span data-i18n="demo.site_general_form.imagem"></span>
+							input.preencher(type="file", id="rubish_image", name="rubish_image",autocomplete="off", multiple)
+							table
+								tbody#site_general8.site_general8
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Site
+					input#captarSiteGeneral(type="submit", dataref="#{referencia._id}", numSite= "#{referencia.siteNumber}", nomesessiondetalhes= "#{DataU.nome}",name="submit", class="submit action-button", value="Save")
+				else
+					if Site[0].alarms.intruder
+						input#captarSiteGeneralDetalhes(type="button", name="next", dataref="#{op}", class="next action-button", value="Next >>")
+		
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,96 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Retifier for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12.m6
+						label(for="name") Retifier
+						select.browser-default(name="name", id="name", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="ADC" selected="#{DC.name}"=='ADC'? true:false) ADC							
+							option(value="Enterprise" selected="#{DC.name}"=='Enterprise'? true:false) Enterprise
+							option(value="MPESA" selected="#{DC.name}"=='MPESA'? true:false) MPESA
+							option(value="POWER" selected="#{DC.name}"=='POWER'? true:false) POWER
+							option(value="ROOM" selected="#{DC.name}"=='ROOM'? true:false) ROOM
+							option(value="Satellite" selected="#{DC.name}"=='Satellite'? true:false) Satellite	
+					.col.s12.m6
+						label(for="specific") Description
+						select.browser-default(name="specific", id="specific", identifica="#{DC_insp._id}", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="A" selected="#{DC.specific}"=='A'? true:false) A
+							option(value="B" selected="#{DC.specific}"=='B'? true:false) B
+							option(value="1" selected="#{DC.specific}"=='1'? true:false) 1
+							option(value="2" selected="#{DC.specific}"=='2'? true:false) 2
+							
+				.row
+					.col.s12
+						label(for="voltage") 
+						h6 1.Voltage Readings
+					.col.s6
+						input.bom(type="radio" id="voltage_OK" checked="#{DC.voltage}"=='ok'? true:false name="voltage"  value="ok")
+						label(for="voltage_OK") OK					
+					.col.s6
+						input.mau(type="radio", id="voltage_no",  name='voltage', checked="#{DC.voltage}"=='not ok'?true:false  value="not ok")
+						label(for="voltage_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="ampere_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="ampere_comment",value="#{DC.ampere_comment?DC.ampere_comment:''}",  identifica="#{DC_insp._id}" ,name="ampere_comment")
+				.row
+					.col.s12
+						label(for="ampere") 
+						h6 Current Readings
+					.col.s6
+						input.bom(type="radio" id="ampere_OK" checked="#{DC.ampere}"=='ok'? true:false name="ampere"  value="ok")
+						label(for="ampere_OK") OK					
+					.col.s6
+						input.mau(type="radio", id="ampere_NO",  name='ampere', checked="#{DC.ampere}"=='not ok'?true:false  value="not ok")
+						label(for="ampere_NO") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="voltage_comment") Comments
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="voltage_comment",value="#{DC.voltage_comment?DC.voltage_comment:''}",  identifica="#{DC_insp._id}" ,name="voltage_comment")
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.name
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_retifier_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

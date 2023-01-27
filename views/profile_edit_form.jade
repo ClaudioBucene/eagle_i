@@ -1,0 +1,51 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.dados_basicos"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="nome") <span data-i18n="demo.utilizador_form.nome"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome" ,name="nome", disabled, value="#{Usuarios[0].nome}")
+					.col.s12.m6
+						label(for="idioma") Idioma
+						select.browser-default.browser-default(id="idioma", name="idioma", style="font-family:")
+							option(value="pt") Portugues
+							option(value="en") Ingles
+				.row
+					.col.s12.m6.input-field
+						label(for="username_actual") Username actual
+						input( type="text", id="username_actual", autocomplete="off", name="username_actual")
+					.col.s12.m6.input-field
+						label(for="password_actual") Password actual
+						input.preencher( autocomplete="off", type="password", style="font-family:;color:#12375c" ,id="password_actual" ,name="password_actual")
+				.row
+					.col.s12.m6.input-field
+						label(for="novo_username") Novo username
+						input( type="text", id="novo_username", autocomplete="off",name="novo_username")
+					.col.s12.m6.input-field
+						label(for="novo_password") Novo Password
+						input.preencher( autocomplete="off", type="password", style="font-family:;color:#12375c" ,id="novo_password" ,name="novo_password")		
+			fieldset.no-border
+				.row.buttons-container
+						.col.s12.m6.left-button
+							button(type="submit", class="btn") <span data-i18n="demo.utilizador_form.gravar"></span>
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_util") <span data-i18n="demo.utilizador_form.cancelar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setInterval(function(){document.getElementById("utilizadorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+

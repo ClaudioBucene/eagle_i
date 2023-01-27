@@ -1,0 +1,458 @@
+extends layout
+block content
+	nav(style="height: 50px;")
+		div(class="nav-wrapper" style="background-color:#fff")
+			div(class="col s12")
+				a(href="/site_estatistica/" class="breadcrumb") <span data-i18n="demo.estatistica.inspanual"></span>
+				a(href="#" class="breadcrumb") <span data-i18n="demo.estatistica.inspmensal"></span>
+	.container.seccao1.white
+		.row.portug.hide
+			.col.s12#container.chartjs-stacked-bar(dataa="#{Site}" ano = "#{ano}" style="position: relative; height:70vh; width:75vw !important")
+				canvas#canvas(style="position: relative; height:70vh; width:75vw !important") 
+		.row.ingls.hide
+			.col.s12.chartjs-stacked-bar(style="position: relative; height:70vh; width:75vw !important")
+				canvas#canvas1(style="position: relative; height:70vh; width:75vw !important") 
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		script.
+			let dados=JSON.parse($("#container").attr("dataa"));
+			for(let i=0; i< dados.length; i++){
+				dados[i].lista=dados[i].lista.sort((a, b) => (a.status >b.status)? 1 : -1)
+				console.log(dados[i].lista);
+			}
+			var meses=['Jan','Fev', 'Mar','Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+			var months=['Jan','Feb', 'Mar','Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			var etiqueta=[];
+			var etiqueta1=[];
+			var valoresaw=[];
+			var valoresdw=[];
+			var valoresde=[];
+			var valoresdot=[];
+			var valoresdl=[];
+
+			for(var i=0; i<dados.length; i++){
+
+				var temp=parseInt(dados[i]._id)
+				etiqueta.push(meses[temp]);
+				etiqueta1.push(months[temp]);
+
+				for(var j=0; j<dados[i].lista.length; j++){
+
+					if(dados[i].lista.length==5){
+
+						if(j==0){
+							valoresaw.push(dados[i].lista[j].soma);
+							continue;
+						}
+						if(j==1){
+							valoresdw.push(dados[i].lista[j].soma);
+							continue;
+						}
+						if(j==2){
+							valoresde.push(dados[i].lista[j].soma);
+							continue;
+						}
+						if(j==3){
+							valoresdl.push(dados[i].lista[j].soma);
+							continue;
+						}
+						if(j==4){
+							valoresdot.push(dados[i].lista[j].soma);
+							continue;
+						}
+					}
+					else{
+						if(dados[i].lista.length==4){
+							if((j==0) && (dados[i].lista[j].status == "Awaiting Inspection")){
+								valoresaw.push(dados[i].lista[j].soma);
+								if(dados[i].lista[j+1].status == "Delayed Inspection"){
+									valoresdw.push(dados[i].lista[j+1].soma);
+									continue;
+								}
+								if(dados[i].lista[j+1].status == "Done early"){
+									valoresdw.push(0);
+									valoresde.push(dados[i].lista[j+1].soma);
+									continue;
+								}
+								
+							}
+							if((j==0) && (dados[i].lista[j].status == "Delayed Inspection")){
+								valoresaw.push(0);
+								valoresdw.push(dados[i].lista[j].soma);
+								aloresde.push(dados[i].lista[j+1].soma);
+								continue;
+							}
+							if((j==1) && (dados[i].lista[j].status == "Delayed Inspection")){
+								if(dados[i].lista[j+1].status == "Done early"){
+									valoresde.push(dados[i].lista[j+1].soma);
+									if(dados[i].lista[j+2].status == "Done later"){
+										valoresdl.push(dados[i].lista[j+2].soma);
+										valoresdot.push(0);
+										continue;
+									}
+									if(dados[i].lista[j+2].status == "Done on time"){
+										valoresdl.push(0);
+										valoresdot.push(dados[i].lista[j+2].soma);
+										
+										continue;
+									}
+								}
+								if(dados[i].lista[j+1].status == "Done later"){
+									valoresde.push(0);
+									valoresdl.push(dados[i].lista[j+1].soma);
+									valoresdot.push(dados[i].lista[j+2].soma);
+									continue;
+								}
+								
+							}
+							if((j==1) && (dados[i].lista[j].status == "Done early")){
+								valoresdl.push(dados[i].lista[j+1].soma);
+								valoresdot.push(dados[i].lista[j+2].soma);
+								continue;
+							}
+						}
+						else{
+							if(dados[i].lista.length==3){
+								if((j==0) && (dados[i].lista[j].status == "Awaiting Inspection")){
+									valoresaw.push(dados[i].lista[j].soma);
+									if(dados[i].lista[j+1].status == "Delayed Inspection"){
+										valoresdw.push(dados[i].lista[j+1].soma);
+										continue;
+									}
+									if(dados[i].lista[j+1].status == "Done early"){
+										valoresdw.push(0);
+										continue;
+									}
+								}
+
+								if((j==0) && (dados[i].lista[j].status == "Delayed Inspection")){
+									valoresaw.push(0);
+									valoresdw.push(dados[i].lista[j].soma);
+									continue;
+								}
+								if((j==0) && (dados[i].lista[j].status == "Done early")){
+									valoresaw.push(0);
+									valoresdw.push(0);
+									valoresde.push(dados[i].lista[j].soma);
+									valoresdl.push(dados[i].lista[j+1].soma);
+									valoresdot.push(dados[i].lista[j+2].soma);
+									continue;
+								}
+
+								if((j==1) && (dados[i].lista[j].status == "Delayed Inspection")){
+									if(dados[i].lista[j+1].status == "Done early"){
+										valoresde.push(dados[i].lista[j+1].soma);
+										valoresdl.push(0);
+										valoresdot.push(0);
+										continue;
+									}
+									if(dados[i].lista[j+1].status == "Done later"){
+										valoresde.push(0);
+										valoresdl.push(dados[i].lista[j+1].soma);
+										valoresdot.push(0);
+										continue;
+									}
+									if(dados[i].lista[j+1].status == "Done on time"){
+										valoresdl.push(0);
+										valoresde.push(0);
+										valoresdot.push(dados[i].lista[j+1].soma);
+										continue;
+									}
+								}
+								if((j==1) && (dados[i].lista[j].status == "Done early")){
+									valoresde.push(dados[i].lista[j+1].soma);
+									if(dados[i].lista[j+1].status == "Done later"){
+										valoresdl.push(dados[i].lista[j+1].soma);
+										valoresdot.push(0);
+										continue;
+									}
+									if(dados[i].lista[j+1].status == "Done on time"){
+										valoresdl.push(0);
+										valoresdot.push(dados[i].lista[j+1].soma);
+										continue;
+									}
+								}
+								if((j==1) && (dados[i].lista[j].status == "Done later") && (dados[i].lista[j-1].status != "Done early")){
+									//- valoresdw.push(0);
+									valoresde.push(0);
+									valoresdl.push(dados[i].lista[j].soma);
+									valoresdot.push(dados[i].lista[j+1].soma);
+								}
+
+							}
+							else{
+								if(dados[i].lista.length==2){
+									if((j==0) && (dados[i].lista[j].status == "Awaiting Inspection")){
+										valoresaw.push(dados[i].lista[j].soma);
+										if(dados[i].lista[j+1].status == "Delayed Inspection"){
+											valoresdw.push(dados[i].lista[j+1].soma)
+											valoresde.push(0);
+											valoresdl.push(0);
+											valoresdot.push(0);
+											continue;
+										}
+										if(dados[i].lista[j+1].status == "Done early"){
+											valoresdw.push(0)
+											valoresde.push(dados[i].lista[j+1].soma);
+											valoresdl.push(0);
+											valoresdot.push(0);
+											continue;
+										}
+										if(dados[i].lista[j+1].status == "Done later"){
+											valoresdw.push(0)
+											valoresde.push(0);
+											valoresdl.push(dados[i].lista[j+1].soma);
+											valoresdot.push(0);
+											continue;
+										}
+										if(dados[i].lista[j+1].status == "Done on time"){
+											valoresdw.push(0)
+											valoresde.push(0);
+											valoresdl.push(0);
+											valoresdot.push(dados[i].lista[j+1].soma);
+											continue;
+										}	
+									}
+
+									if((j==0) && (dados[i].lista[j].status == "Delayed Inspection")){
+										valoresdw.push(dados[i].lista[j].soma);
+										if(dados[i].lista[j+1].status == "Done early"){
+											valoresaw.push(0)
+											valoresde.push(dados[i].lista[j+1].soma);
+											valoresdl.push(0);
+											valoresdot.push(0);
+											continue;
+										}
+										if(dados[i].lista[j+1].status == "Done later"){
+											valoresaw.push(0)
+											valoresde.push(0);
+											valoresdl.push(dados[i].lista[j+1].soma);
+											valoresdot.push(0);
+											continue;
+										}
+										if(dados[i].lista[j+1].status == "Done on time"){
+											valoresaw.push(0)
+											valoresde.push(0);
+											valoresdl.push(0);
+											valoresdot.push(dados[i].lista[j+1].soma);
+											continue;
+										}	
+									}
+									if((j==0) && (dados[i].lista[j].status == "Done early")){
+										valoresaw.push(0);
+										valoresdw.push(0);
+										valoresde.push(dados[i].lista[j].soma);
+										if(dados[i].lista[j+1].status == "Done later"){
+											valoresdl.push(dados[i].lista[j+1].soma);
+											valoresdot.push(0);
+											continue;
+										}
+										if(dados[i].lista[j+1].status == "Done on time"){
+											valoresdl.push(0);
+											valoresdot.push(dados[i].lista[j+1].soma);
+											continue;
+										}	
+									}
+									if((j==0) && (dados[i].lista[j].status == "Done later")){
+										valoresaw.push(0);
+										valoresdw.push(0);
+										valoresde.push(0);
+										valoresdl.push(dados[i].lista[j].soma);
+										valoresdot.push(dados[i].lista[j+1].soma);	
+									}
+									
+								}
+								if(dados[i].lista.length==1){
+									if((j==0) && (dados[i].lista[j].status == "Awaiting Inspection")){
+										valoresaw.push(dados[i].lista[j].soma);
+										valoresdw.push(0);
+										valoresde.push(0);
+										valoresdl.push(0);
+										valoresdot.push(0);
+										continue;
+									}
+									if((j==0) && (dados[i].lista[j].status == "Delayed Inspection")){
+										valoresaw.push(0);
+										valoresdw.push(dados[i].lista[j].soma);
+										valoresde.push(0);
+										valoresdl.push(0);
+										valoresdot.push(0);
+										continue;
+									}
+									if((j==0) && (dados[i].lista[j].status == "Done early")){
+										valoresaw.push(0);
+										valoresdw.push(0);
+										valoresde.push(dados[i].lista[j].soma);
+										valoresdl.push(0);
+										valoresdot.push(0);
+										continue;
+									}
+									if((j==0) && (dados[i].lista[j].status == "Done later")){
+										valoresaw.push(0);
+										valoresdw.push(0);
+										valoresde.push(0);
+										valoresdl.push(dados[i].lista[j].soma);
+										valoresdot.push(0);
+										continue;
+									}
+									if((j==0) && (dados[i].lista[j].status == "Done on time")){
+										valoresaw.push(0);
+										valoresdw.push(0);
+										valoresde.push(0);
+										valoresdl.push(0);
+										valoresdot.push(dados[i].lista[j].soma);
+										continue;
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+
+			console.log(valoresaw, valoresdw, valoresde, valoresdl, valoresdot);
+
+			var ctx = document.getElementById('canvas');
+			var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+			labels: etiqueta,
+			datasets: [
+			{
+			label: 'Inspecção em espera',
+			stack: 'Stack 0',
+			data: valoresaw,
+			backgroundColor: '#12375c',
+			},
+			{
+			label: 'Inspecção atrasada',
+			stack: 'Stack 0',
+			data: valoresdw,
+			backgroundColor: 'orange',
+			},
+			{
+			label: 'Concluída cedo',
+			stack: 'Stack 1',
+			data: valoresde,
+			backgroundColor: '#ffea00',
+			},
+			{
+			label: 'Concluída tarde',
+			stack: 'Stack 1',
+			data: valoresdl,
+			backgroundColor: 'red',
+			},
+			{
+			label: 'Concluída dentro do tempo',
+			stack: 'Stack 1',
+			data: valoresdot,
+			backgroundColor: '#a1cf67',
+			}
+			]
+			},
+			options: {
+			title: {
+			display: true,
+			text: "Inspecção Mensal"
+			},
+			scales: {
+			xAxes: [{ stacked: true }],
+			yAxes: [{ stacked: true }]
+			}
+			}
+			});
+
+			var ctx1 = document.getElementById('canvas1');
+			var myChart1 = new Chart(ctx1, {
+			type: 'bar',
+			data: {
+			labels: etiqueta1,
+			datasets: [
+			{
+			label: 'Awaiting Inspection',
+			stack: 'Stack 0',
+			data: valoresaw,
+			backgroundColor: '#12375c',
+			},
+			{
+			label: 'Delayed Inspection',
+			stack: 'Stack 0',
+			data: valoresdw,
+			backgroundColor: 'orange',
+			},
+			{
+			label: 'Early',
+			stack: 'Stack 1',
+			data: valoresde,
+			backgroundColor: '#ffea00',
+			},
+			{
+			label: 'Later',
+			stack: 'Stack 1',
+			data: valoresdl,
+			backgroundColor: 'red',
+			},
+			{
+			label: 'On time',
+			stack: 'Stack 1',
+			data: valoresdot,
+			backgroundColor: '#a1cf67',
+			}
+			]
+			},
+			options: {
+			title: {
+			display: true,
+			text: "Monthly Inspection"
+			},
+			scales: {
+			xAxes: [{ stacked: true }],
+			yAxes: [{ stacked: true }]
+			}
+			}
+			});
+
+			var canvas1 = document.getElementById('canvas');
+			canvas1.onclick = function(evt) {
+			var activePoint = myChart.getElementAtEvent(evt)[0];
+			var data = activePoint._chart.data;
+			var datasetIndex = activePoint._datasetIndex;
+			var label = data.datasets[datasetIndex].label;
+			var value = data.datasets[datasetIndex].data[activePoint._index];
+			var regiao= data.labels[activePoint._index]
+			//- label=label.replace("Estado", '').trim()
+			//- if(regiao!="Maputo Cidade")
+			//- regiao=regiao.replace("Região", '').toLowerCase().trim()
+
+			//- var rule = label+'1'+regiao
+			console.log(regiao);
+			window.location.href="/site_estatistica/regiao/"+$("#container").attr("ano")+"/"+ regiao;
+			};
+
+			var canvas2 = document.getElementById('canvas1');
+			canvas2.onclick = function(evt) {
+				var activePoint = myChart.getElementAtEvent(evt)[0];
+				var data = activePoint._chart.data;
+				var datasetIndex = activePoint._datasetIndex;
+				var label = data.datasets[datasetIndex].label;
+				var value = data.datasets[datasetIndex].data[activePoint._index];
+				var regiao= data.labels[activePoint._index]
+				//- label=label.replace("Estado", '').trim()
+				//- if(regiao!="Maputo Cidade")
+				//- regiao=regiao.replace("Região", '').toLowerCase().trim()
+
+				//- var rule = label+'1'+regiao
+				console.log(regiao);
+				window.location.href="/site_estatistica/regiao/"+$("#container").attr("ano")+"/"+ regiao;
+			};
+
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);

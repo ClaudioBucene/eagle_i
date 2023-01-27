@@ -1,0 +1,60 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+				a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+				ul(id="extrair", dados=stockData2)
+					-if(DataU.nivel_acesso=="admin" || DataU.nome=="David Nhantumbo")
+						li
+							a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="cambio", class="btn-floating btn-large waves-effect waves-light", href="/armazem/carregmento_huawei") <i class="material-icons activarVerde">publish</i>
+					-if(DataU.nivel_acesso=="admin" )
+						li
+							a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Registar nova transferencia ", class="btn-floating btn-large waves-effect waves-light",  href="/armazem/novo") <i class="material-icons activarVerde">add</i>
+		if !Armazens || !Armazens.length
+			p.center-align.selmecAzul.bold Sem Armazem!
+		else
+			.row
+				-if(DataU.nome=="administrador")
+					.col.s6.file-field.input-field
+						.btn-floating.tooltipped.white.pointer#exportar(style="box-shadow:none !important;" data-position="left", data-delay="10", data-tooltip="Exportar Kilometragem", class="btn-floating btn-large waves-effect waves-light")
+						input(type="file", id="upexcelUtilizador",  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+						i.material-icons.activarVerde.small file_upload 
+						<span class="hide-on-small-only"> Carregar</span>
+				.col.s6.m6.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Armazens
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped.icn1
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.Armazem_home.armazem"></span>
+						th Responsavel
+						th <span data-i18n="demo.Armazem_home.provincia"></span>
+						th <span data-i18n="demo.Armazem_home.regiao"></span>
+						th
+				tbody(id="myTable")
+					-for(var index =0; index<Armazens.length ; index++)
+						tr.highlight(data-funcionario="#{Armazens[index]._id}", data-nome="#{Armazens[index].nome}",style="color:#{Armazens[index].observacao}")
+							td #{Armazens[index].nome}
+							td #{Armazens[index].responsavel[0]}
+							td #{Armazens[index].provincia}
+							td #{Armazens[index].regiao}
+							td.center-align
+								a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Detalhes do #{Armazens[index].nome}", href="/armazem/detalhes/#{Armazens[index]._id}") <i class="material-icons activarVerde">info</i>
+								if(DataU.nivel_acesso=="admin")
+									a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Editar  #{Armazens[index].nome}", href="/armazem/editar_armazem/#{Armazens[index]._id}") <i class="material-icons selmecAzul">edit</i>
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Detalhes do #{Armazens[index].nome}", href="/armazem/regional/#{Armazens[index]._id}") <i class="material-icons selmecAzul">remove_red_eye</i>
+								
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

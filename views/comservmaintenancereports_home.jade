@@ -1,0 +1,64 @@
+extends layout
+block content
+	.row(style="margin-top:15px;margin-bottom: 0px !important;")
+		-if(PlannedMaintenanceHistory.length>0)
+			.row
+				.fixed-action-btn.top.fixed-add-bottom
+					a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+					ul(id="extraircomservmaintenancereport")
+						li
+							a.btn-floating.pointer.activarAzul#extraircomservmaintenancereport(data-position="left", data-delay="10", data-tooltip="Export Planned Maintenance Stats", class="btn-floating btn-large waves-effect waves-light") <i class="material-icons activarVerde">file_download</i>
+		.row
+			if(PlannedMaintenanceHistory.length == 0)
+				p.center-align.selmecAzul.bold <span data-i18n="demo.ttnumber_form.seminfo"></span>
+			else
+				.row
+					.col.s12.m6
+					.col.s12.m6.right.input-field
+						i.material-icons.prefix search
+						label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+						input(type="text", id="pesquisador", name="pesquisador", valor="#{Pacote}", style="border-bottom:none !important;")
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.maintplannew"></span>
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold
+				table.responsive-table.bordered.striped#myTable
+					thead
+						tr.selmecAzul
+							th Site
+							th <span data-i18n="demo.manutencao_form.sitename"></span>
+							th <span data-i18n="demo.manutencao_form.planneddate"></span>
+							th <span data-i18n="demo.manutencao_form.generatorinstalled"></span>
+							th <span data-i18n="demo.manutencao_form.electricityprovider"></span>
+							th <span data-i18n="demo.manutencao_form.technician"></span>
+							th <span data-i18n="demo.manutencao_form.department"></span>
+							th <span data-i18n="demo.manutencao_form.region"></span>
+							th <span data-i18n="demo.manutencao_form.estadotrabalho"></span>
+							th
+					tbody(id="myTableUser1")
+						-for(var index = 0; index < PlannedMaintenanceHistory.length; index++)
+							tr.highlight(style="font-family:;color:#12375c")
+								td #{PlannedMaintenanceHistory[index].jobcard_site}
+								td #{SiteData[index].nome_site}
+								td #{PlannedMaintenanceHistory[index].jobcard_planneddate}
+								td #{SiteData[index].tem_gerador}
+								td #{SiteData[index].elec_provider}
+								td #{PlannedMaintenanceHistory[index].jobcard_tecniconome}
+								td #{PlannedMaintenanceHistory[index].jobcard_departamento}
+								td #{PlannedMaintenanceHistory[index].jobcard_regiao}
+								td #{PlannedMaintenanceHistory[index].jobcard_estadoactual}
+								td
+									a.tooltipped.pointer.info(style="margin-left: 25px", data-position="top", data-delay="10", href="/manutencao/detalhesJobcardCallOut/#{PlannedMaintenanceHistory[index]._id}", data-tooltip="Details of planned maintenance") <i class="material-icons activarVerde">info</i>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

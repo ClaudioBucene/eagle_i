@@ -1,0 +1,350 @@
+extends layout
+block content
+	if(Jobcards[0].jobcardedBoardinfo != undefined)
+		form(id="msform", method="post", style="color:#12375c;")
+			h3(class="fs-title" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.preventative_maint.edBoard"></span>
+			.row(style="margin-bottom:18px;")
+				h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.preventative_maint.tightenconnect"></span>
+				.col.s3.m3(style="margin-left:37px;")
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_tightenconnect=="ok")
+						input.bom(type="radio" id="jobcard_tightenconnectok" name="jobcard_tightenconnect"  value="ok" checked)
+					-else
+						input.bom(type="radio" id="jobcard_tightenconnectok" name="jobcard_tightenconnect"  value="ok")
+					label(for="jobcard_tightenconnectok") Ok	
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_tightenconnect=="not ok")
+						input.mau(type="radio", id="jobcard_tightenconnectnotok", name='jobcard_tightenconnect', value="not ok" checked)
+					-else
+						input.mau(type="radio", id="jobcard_tightenconnectnotok", name='jobcard_tightenconnect', value="not ok")
+					label(for="jobcard_tightenconnectnotok") Not Ok
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_tightenconnect=="na")
+						input.moderado(type="radio", id="jobcard_tightenconnectna", name='jobcard_tightenconnect', value="na"  checked)
+					-else
+						input.moderado(type="radio", id="jobcard_tightenconnectna", name='jobcard_tightenconnect', value="na")
+					label(for="jobcard_tightenconnectna") N/A
+			.row(style="margin-bottom:18px;")
+				h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.preventative_maint.energymeters"></span>
+				.col.s3.m3(style="margin-left:37px;")
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_energymeters=="ok")
+						input.bom(type="radio" id="jobcard_energymetersok" name="jobcard_energymeters"  value="ok" checked)
+					-else
+						input.bom(type="radio" id="jobcard_energymetersok" name="jobcard_energymeters"  value="ok")
+					label(for="jobcard_energymetersok") Ok	
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_energymeters=="not ok")
+						input.mau(type="radio", id="jobcard_energymetersnotok", name='jobcard_energymeters', value="not ok" checked)
+					-else
+						input.mau(type="radio", id="jobcard_energymetersnotok", name='jobcard_energymeters', value="not ok")
+					label(for="jobcard_energymetersnotok") Not Ok
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_energymeters=="na")
+						input.moderado(type="radio", id="jobcard_energymetersna", name='jobcard_energymeters', value="na" checked)
+					-else
+						input.moderado(type="radio", id="jobcard_energymetersna", name='jobcard_energymeters', value="na")
+					label(for="jobcard_energymetersna") N/A
+			.row(style="margin-bottom:18px;")
+				h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.preventative_maint.unauthorizedconnect"></span>
+				.col.s3.m3(style="margin-left:37px;")
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_unauthorizedconnect=="ok")
+						input.bom(type="radio" id="jobcard_unauthorizedconnectok" name="jobcard_unauthorizedconnect"  value="ok" checked)
+					-else
+						input.bom(type="radio" id="jobcard_unauthorizedconnectok" name="jobcard_unauthorizedconnect"  value="ok")
+					label(for="jobcard_unauthorizedconnectok") Ok	
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_unauthorizedconnect=="not ok")
+						input.mau(type="radio", id="jobcard_unauthorizedconnectnotok", name='jobcard_unauthorizedconnect', value="not ok" checked)
+					-else
+						input.mau(type="radio", id="jobcard_unauthorizedconnectnotok", name='jobcard_unauthorizedconnect', value="not ok")
+					label(for="jobcard_unauthorizedconnectnotok") Not Ok
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_unauthorizedconnect=="na")
+						input.moderado(type="radio", id="jobcard_unauthorizedconnectna", name='jobcard_unauthorizedconnect', value="na" checked)
+					-else
+						input.moderado(type="radio", id="jobcard_unauthorizedconnectna", name='jobcard_unauthorizedconnect', value="na")
+					label(for="jobcard_unauthorizedconnectna") N/A
+			.row(style="margin-bottom:18px;")
+				h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.preventative_maint.holessealed"></span>
+				.col.s3.m3(style="margin-left:37px;")
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_holessealed=="ok")
+						input.bom(type="radio" id="jobcard_holessealedok" name="jobcard_holessealed"  value="ok" checked)
+					-else
+						input.bom(type="radio" id="jobcard_holessealedok" name="jobcard_holessealed"  value="ok")
+					label(for="jobcard_holessealedok") Ok	
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_holessealed=="not ok")
+						input.mau(type="radio", id="jobcard_holessealednotok", name='jobcard_holessealed', value="not ok" checked)
+					-else
+						input.mau(type="radio", id="jobcard_holessealednotok", name='jobcard_holessealed', value="not ok")
+					label(for="jobcard_holessealednotok") Not Ok
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_holessealed=="na")
+						input.moderado(type="radio", id="jobcard_holessealedna", name='jobcard_holessealed', value="na" checked)
+					-else
+						input.moderado(type="radio", id="jobcard_holessealedna", name='jobcard_holessealed', value="na")
+					label(for="jobcard_holessealedna") N/A
+			.row(style="margin-bottom:18px;")
+				h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.preventative_maint.sitelight"></span>
+				.col.s3.m3(style="margin-left:37px;")
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_sitelight=="ok")
+						input.bom(type="radio" id="jobcard_sitelightok" name="jobcard_sitelight"  value="ok" checked)
+					-else
+						input.bom(type="radio" id="jobcard_sitelightok" name="jobcard_sitelight"  value="ok")
+					label(for="jobcard_sitelightok") Ok	
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_sitelight=="not ok")
+						input.mau(type="radio", id="jobcard_sitelightnotok", name='jobcard_sitelight', value="not ok" checked)
+					-else
+						input.mau(type="radio", id="jobcard_sitelightnotok", name='jobcard_sitelight', value="not ok")
+					label(for="jobcard_sitelightnotok") Not Ok
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_sitelight=="na")
+						input.moderado(type="radio", id="jobcard_sitelightna", name='jobcard_sitelight', value="na" checked)
+					-else
+						input.moderado(type="radio", id="jobcard_sitelightna", name='jobcard_sitelight', value="na")
+					label(for="jobcard_sitelightna") N/A
+			.row(style="margin-bottom:18px;")
+				h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.preventative_maint.meterbox"></span>
+				.col.s3.m3(style="margin-left:37px;")
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_meterbox=="ok")
+						input.bom(type="radio" id="jobcard_meterboxok" name="jobcard_meterbox"  value="ok" checked)
+					-else
+						input.bom(type="radio" id="jobcard_meterboxok" name="jobcard_meterbox"  value="ok")
+					label(for="jobcard_meterboxok") Ok	
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_meterbox=="not ok")
+						input.mau(type="radio", id="jobcard_meterboxnotok", name='jobcard_meterbox', value="not ok" checked)
+					-else
+						input.mau(type="radio", id="jobcard_meterboxnotok", name='jobcard_meterbox', value="not ok")
+					label(for="jobcard_meterboxnotok") Not Ok
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_meterbox=="na")
+						input.moderado(type="radio", id="jobcard_meterboxna", name='jobcard_meterbox', value="na" checked)
+					-else
+						input.moderado(type="radio", id="jobcard_meterboxna", name='jobcard_meterbox', value="na")
+					label(for="jobcard_meterboxna") N/A
+			.row(style="margin-bottom:18px;")
+				h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.preventative_maint.autorearm"></span>
+				.col.s3.m3(style="margin-left:37px;")
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_autorearm=="ok")
+						input.bom(type="radio" id="jobcard_autorearmok" name="jobcard_autorearm" value="ok" checked)
+					-else
+						input.bom(type="radio" id="jobcard_autorearmok" name="jobcard_autorearm" value="ok")
+					label(for="jobcard_autorearmok") Ok	
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_autorearm=="not ok")
+						input.mau(type="radio", id="jobcard_autorearmnotok", name='jobcard_autorearm', value="not ok" checked)
+					-else
+						input.mau(type="radio", id="jobcard_autorearmnotok", name='jobcard_autorearm', value="not ok")
+					label(for="jobcard_autorearmnotok") Not Ok
+				.col.s3.m3
+					-if(Jobcards[0].jobcardedBoardinfo.jobcard_autorearm=="na")
+						input.moderado(type="radio", id="jobcard_autorearmna", name='jobcard_autorearm', value="na" checked)
+					-else
+						input.moderado(type="radio", id="jobcard_autorearmna", name='jobcard_autorearm', value="na")
+					label(for="jobcard_autorearmna") N/A
+			.row(style="margin-bottom:18px;")
+				.col.s12.m6.input-field
+					label(for="jobcard_edBoardcomments") <span data-i18n="demo.preventative_maint.comentarios"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_edBoardcomments" ,name="jobcard_edBoardcomments" value="#{Jobcards[0].jobcardedBoardinfo.jobcard_edBoardcomments}")
+			a(class="waves-effect waves-light action-button" style="width:100px; font-size:15px" href="/manutencao/detalhesJobcardPlanned/#{Jobcards[0]._id}") << Back
+	else
+		h3(class="fs-title selmecAzul center" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.preventative_maint.edBoard"></span>
+		form#formulario2(style="margin:0px; color:#12375c;" dataref="#{Jobcards[0]._id}")
+			fieldset(style="padding:0px")
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.tightenconnect"></span>
+				.row(style="margin-bottom:20px")
+					.col.s5.m3
+						input.bom(type="radio" id="jobcard_tightenconnectok" name="jobcard_tightenconnect"  value="ok")
+						label(for="jobcard_tightenconnectok") Ok					
+					.col.s5.m3
+						input.mau(type="radio", id="jobcard_tightenconnectnotok", name='jobcard_tightenconnect', value="not ok")
+						label(for="jobcard_tightenconnectnotok") Not Ok
+					.col.s5.m3
+						input.moderado(type="radio", id="jobcard_tightenconnectna", name='jobcard_tightenconnect', value="na")
+						label(for="jobcard_tightenconnectna") N/A
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:0px")
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.energymeters"></span>
+				.row(style="margin-bottom:20px")
+					.col.s5.m3
+						input.bom(type="radio" id="jobcard_energymetersok" name="jobcard_energymeters"  value="ok")
+						label(for="jobcard_energymetersok") Ok					
+					.col.s5.m3
+						input.mau(type="radio", id="jobcard_energymetersnotok", name='jobcard_energymeters', value="not ok")
+						label(for="jobcard_energymetersnotok") Not Ok
+					.col.s5.m3
+						input.moderado(type="radio", id="jobcard_energymetersna", name='jobcard_energymeters', value="na")
+						label(for="jobcard_energymetersna") N/A
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:0px")
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.unauthorizedconnect"></span>
+				.row(style="margin-bottom:20px")
+					.col.s5.m3
+						input.bom(type="radio" id="jobcard_unauthorizedconnectok" name="jobcard_unauthorizedconnect"  value="ok")
+						label(for="jobcard_unauthorizedconnectok") Ok					
+					.col.s5.m3
+						input.mau(type="radio", id="jobcard_unauthorizedconnectnotok", name='jobcard_unauthorizedconnect', value="not ok")
+						label(for="jobcard_unauthorizedconnectnotok") Not Ok
+					.col.s5.m3
+						input.moderado(type="radio", id="jobcard_unauthorizedconnectna", name='jobcard_unauthorizedconnect', value="na")
+						label(for="jobcard_unauthorizedconnectna") N/A
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:0px")
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.holessealed"></span>
+				.row(style="margin-bottom:20px")
+					.col.s5.m3
+						input.bom(type="radio" id="jobcard_holessealedok" name="jobcard_holessealed"  value="ok")
+						label(for="jobcard_holessealedok") Ok					
+					.col.s5.m3
+						input.mau(type="radio", id="jobcard_holessealednotok", name='jobcard_holessealed', value="not ok")
+						label(for="jobcard_holessealednotok") Not Ok
+					.col.s5.m3
+						input.moderado(type="radio", id="jobcard_holessealedna", name='jobcard_holessealed', value="na")
+						label(for="jobcard_holessealedna") N/A
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:0px")
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.sitelight"></span>
+				.row(style="margin-bottom:20px")
+					.col.s5.m3
+						input.bom(type="radio" id="jobcard_sitelightok" name="jobcard_sitelight"  value="ok")
+						label(for="jobcard_sitelightok") Ok					
+					.col.s5.m3
+						input.mau(type="radio", id="jobcard_sitelightnotok", name='jobcard_sitelight', value="not ok")
+						label(for="jobcard_sitelightnotok") Not Ok
+					.col.s5.m3
+						input.moderado(type="radio", id="jobcard_sitelightna", name='jobcard_sitelight', value="na")
+						label(for="jobcard_sitelightna") N/A
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:0px")
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.meterbox"></span>
+				.row(style="margin-bottom:20px")
+					.col.s5.m3
+						input.bom(type="radio" id="jobcard_meterboxok" name="jobcard_meterbox"  value="ok")
+						label(for="jobcard_meterboxok") Ok					
+					.col.s5.m3
+						input.mau(type="radio", id="jobcard_meterboxnotok", name='jobcard_meterbox', value="not ok")
+						label(for="jobcard_meterboxnotok") Not Ok
+					.col.s5.m3
+						input.moderado(type="radio", id="jobcard_meterboxna", name='jobcard_meterbox', value="na")
+						label(for="jobcard_meterboxna") N/A
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:0px")
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.autorearm"></span>
+				.row(style="margin-bottom:20px")
+					.col.s5.m3
+						input.bom(type="radio" id="jobcard_autorearmok" name="jobcard_autorearm"  value="ok")
+						label(for="jobcard_autorearmok") Ok					
+					.col.s5.m3
+						input.mau(type="radio", id="jobcard_autorearmnotok", name='jobcard_autorearm', value="not ok")
+						label(for="jobcard_autorearmnotok") Not Ok
+					.col.s5.m3
+						input.moderado(type="radio", id="jobcard_autorearmna", name='jobcard_autorearm', value="na")
+						label(for="jobcard_autorearmna") N/A
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:0px")
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.comentarios"></span>
+				.row(style="margin-bottom:20px")
+					.col.s12.m12.input-field
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_edBoardcomments" ,name="jobcard_edBoardcomments")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", id="jobcardedBoard_yes_btn", class="action-button" value="Save")
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

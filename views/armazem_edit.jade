@@ -1,0 +1,136 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.Armazem_form.titulo1"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="nome") <span data-i18n="demo.Armazem_form.nome"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome" ,name="nome", value="#{Armazem? Armazem[0].nome : ''}")
+					.col.s12.m6
+						label(for="provincia") <span data-i18n="demo.Armazem_form.Provincia"></span>
+						select.browser-default.browser-default(name="provincia", id="provincia", style="font-family:")
+							if Armazem
+								-for(var i = 0; i < provincias.length; i++)
+									if Armazem[0].provincia == provincias[i]
+										option(value="#{provincias[i]}", selected="selected") #{provincias[i]}
+									else
+										option(value="#{provincias[i]}") #{provincias[i]}
+							else
+								-for(var i = 0; i < provincias.length; i++)
+									option(value="#{provincias[i]}") #{provincias[i]}
+				.row
+					.col.s12.m6
+							label(for="regiao") <span data-i18n="demo.Armazem_form.regiao"></span>
+							select.browser-default(name="regiao", id="regiao", style="font-family:")
+								if Armazem
+									if Armazem[0].regiao == 'sul'
+										option(value="sul", selected="selected") Sul
+										option(value="centro") Centro
+										option(value="norte") Norte
+										option(value="maputo") Maputo
+									else
+										if Armazem[0].regiao == 'centro' 
+											option(value="sul") Sul
+											option(value="centro" , selected="selected") Centro
+											option(value="norte") Norte
+											option(value="maputo") Maputo
+										else
+											if Armazem[0].regiao == 'norte'
+												option(value="sul") Sul
+												option(value="centro") Centro
+												option(value="norte", selected="selected") Norte
+												option(value="maputo") Maputo
+											else
+												if Armazem[0].regiao == 'maputo'
+													option(value="sul") Sul
+													option(value="centro") Centro
+													option(value="norte") Norte
+													option(value="maputo", selected="selected") Maputo
+								else
+									option(value="" disabled selected selmecVerde) choose Option
+									option(value="sul") Sul
+									option(value="centro") Centro
+									option(value="norte") Norte
+									option(value="maputo") Maputo
+					.col.s12.m6.input-field
+						label(for="endereco") <span data-i18n="demo.Armazem_form.endereco"></span>
+						input.preencher(autocomplete="off", type="text",  style="font-family:;color:#12375c" ,id="endereco" ,name="endereco", value="#{Armazem? Armazem[0].endereco : ''}")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.Armazem_form.responsaveis"></span>
+				.row.multi-field-wrapper.col.s12(style="height:auto !important")
+					.multi-fields.col.s12
+						.multi-field.col.s12.m6
+							.col.s10
+								label(for="responsavel[]") <span data-i18n="demo.Armazem_form.responsaveis"></span>
+								select.browser-default.responsavel(name="responsavel[]",  style="font-family:")
+									option(value="" disabled selected selmecVerde) choose Option
+									-for(let i=0; i<Escolher.length; i++)
+										option(value="#{Escolher[i].nome}") #{Escolher[i].nome}
+					a(class="btn-floating btn-large waves-effect waves-light add-field1 right") +
+				.row
+					.col.s12
+						table.responsive-table.bordered.striped(style="height:auto !important")
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.stock_tecnicos.nome"></span>
+									th
+							tbody(id="myTable_responsaveis" style="height:auto !important")
+								-for(let i=0; i<Armazem[0].responsavel.length; i++)
+									tr
+										td.item_nome #{Armazem[0].responsavel[i]}
+										td  <i class="material-icons pointer  delete_responsavel">delete_forever</i>
+
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.Armazem_form.tecnicos_locados"></span>
+				.row.multi-field-wrapper.col.s12
+					.multi-fields.col.s12
+						.multi-field.col.s12.m6
+							.col.s10
+								label(for="pessoas_permitidas[]") <span data-i18n="demo.Armazem_form.tecnicos_locados"></span>
+								select.browser-default.pessoas_permitidas(name="pessoas_permitidas[]",  style="font-family:")
+									option(value="" disabled selected selmecVerde) choose Option
+									-for(let i=0; i<Escolher.length; i++)
+										option(value="#{Escolher[i].nome}") #{Escolher[i].nome}
+					a(class="btn-floating btn-large waves-effect waves-light add-field2 right") +
+				.row
+					.col.s12
+						table.responsive-table.bordered.striped(style="height:auto !important")
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.Armazem_form.tecnicos_locados"></span>
+									th
+							tbody(id="myTable_tecnicos_permitidos" style="height:auto !important")
+								-for(let i=0; i<Armazem[0].pessoas_permitidas.length; i++)
+									tr
+										td.item_nome #{Armazem[0].pessoas_permitidas[i]}
+										td  <i class="material-icons pointer delete_tecnico_permitido">delete_forever</i>
+			fieldset.no-border
+				.row.buttons-container
+					if !Stock_item
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="editar_armazem" valor="#{Armazem[0]._id}") <span data-i18n="demo.utilizador_form.gravar"></span>
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_armazem") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+
+

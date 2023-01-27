@@ -1,0 +1,171 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.dados_basicos"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="user_code") <span data-i18n="demo.utilizador_form.code"></span>
+						input.preencher( autocomplete="off", type="password", style="font-family:;color:#12375c" ,id="user_code" , readonly, name="user_code", value="#{Usuarios[0]._id}")
+				.row
+					.col.s12.m6.input-field
+						label(for="nome") <span data-i18n="demo.utilizador_form.nome"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome" ,name="nome", value="#{Usuarios[0].nome}")
+
+					.col.s12.m6.input-field
+						label(for="carta_conducao") <span data-i18n="demo.utilizador_form.carta_conducao"></span>
+						input.preencher( autocomplete="off", type="text",  style="font-family:;color:#12375c" ,id="carta_conducao" ,name="carta_conducao", value="#{Usuarios[0].carta_conducao}")
+				.row
+					.col.s12.m6.input-field
+						label(for="data_nascimento") <span data-i18n="demo.utilizador_form.data_nasc"></span>
+						input( type="text", data-mask="00/00/0000", id="data_nascimento", name="data_nascimento", value="#{Usuarios[0].data_nascimento}")
+					.col.s12.m6.input-field
+						label(for="Validade_carta") <span data-i18n="demo.utilizador_form.validade_carta"></span>
+						input.preencher( autocomplete="off", type="text", data-mask="00/00/0000", style="font-family:;color:#12375c" ,id="Validade_carta" ,name="Validade_carta", value="#{Usuarios[0].Validade_carta}")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.area"></span>
+				.row
+					.col.s12.m6
+							label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+							select.browser-default(name="regiao", id="regiao", style="font-family:")
+								option(value="" disabled selected selmecVerde) choose option
+								option(value="sul" selected= "#{Usuarios[0].regiao}"=="sul"? true:false) Sul
+								option(value="centro" selected= "#{Usuarios[0].regiao}"=="centro"? true:false) Centro
+								option(value="norte" selected= "#{Usuarios[0].regiao}"=="norte"? true:false) Norte
+								option(value="maputo" selected= "#{Usuarios[0].regiao}"=="maputo"? true:false) Maputo
+					.col.s12.m6
+						label(for="departamento") <span data-i18n="demo.utilizador_form.departamento"></span>
+						select.browser-default.browser-default(id="departamento", name="departamento")
+							option(value="" disabled selected) choose option
+							option(value="Administration" selected="#{Usuarios[0].departamento}"=="Administration"? true:false) Administration
+							option(value="Call Center" selected="#{Usuarios[0].departamento}"=="Call Center"? true:false) Call Center
+							option(value="Data Center" selected="#{Usuarios[0].departamento}"=="Data Center"? true:false) Data Center
+							option(value="Finance" selected="#{Usuarios[0].departamento}"=="Finance"? true:false) Finance
+							option(value="Fleet" selected="#{Usuarios[0].departamento}"=="Fleet"? true:false) Fleet
+							option(value="HVAC" selected="#{Usuarios[0].departamento}"=="HVAC"? true:false) HVAC
+							option(value="Health & Safety" selected="#{Usuarios[0].departamento}"=="Health & Safety"? true:false) Health & Safety
+							option(value="Information Technology" selected="#{Usuarios[0].departamento}"=="Information Technology"? true:false) Information Technology
+							option(value="Logistics" selected="#{Usuarios[0].departamento}"=="Logistics"? true:false) Logistics
+							option(value="Power" selected="#{Usuarios[0].departamento}"=="Power"? true:false) Power
+							option(value="Procurement" selected="#{Usuarios[0].departamento}"=="Procurement"? true:false) Procurement
+							option(value="Telco" selected="#{Usuarios[0].departamento}"=="Telco"? true:false) Telco
+							
+					.col.s12.m6
+						label(for="provincia_trabalho") <span data-i18n="demo.utilizador_form.provincia"></span>
+						select.browser-default.browser-default(name="provincia_trabalho", id="provincia_trabalho", style="font-family:")
+							if Usuarios
+								-for(var i = 0; i < provincias.length; i++)
+									if Usuarios[0].provincia_trabalho == provincias[i]
+										option(value="#{provincias[i]}", selected="selected") #{provincias[i]}
+									else
+										option(value="#{provincias[i]}") #{provincias[i]}
+							else
+								-for(var i = 0; i < provincias.length; i++)
+									option(value="#{provincias[i]}") #{provincias[i]}
+					.col.s12.m6.input-field
+						label(for="profissao") <span data-i18n="demo.utilizador_form.supervisor"></span>
+						input.preencher( autocomplete="off", type="text" id="nome_supervisor" name="nome_supervisor" value="#{Usuarios[0].nome_supervisor}", style="font-family:")
+				.row
+					.col.s12.m6.input-field
+						label(for="telefone_supervisor") <span data-i18n="demo.utilizador_form.telefone_super"></span>
+						input.preencher( autocomplete="off", type="text", id="telefone_supervisor", name="telefone_supervisor", value="#{Usuarios[0].telefone_supervisor}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="funcao") <span data-i18n="demo.utilizador_form.funcao"></span>
+						input.preencher( autocomplete="off", type="text", name="funcao", id="funcao", value="#{Usuarios[0].funcao}", style="font-family:")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.veiculo"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="matricula") <span data-i18n="demo.utilizador_form.matricula"></span>
+						input.preencher( autocomplete="off", type="text", name="matricula", id="matricula",value="#{Usuarios[0].matricula}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="marca") <span data-i18n="demo.utilizador_form.marca"></span>
+						input.preencher( autocomplete="off", type="text", name="marca", id="marca", value="#{Usuarios[0].marca}", style="font-family:")
+				.row
+					.col.s12.m6.input-field
+						label(for="modelo") <span data-i18n="demo.utilizador_form.modelo"></span>
+						input.preencher(autocomplete="off", type="text", name="modelo", id="modelo", value="#{Usuarios[0].modelo}", style="font-family:")		
+					.col.s12.m6.input-field
+						label(for="ano_aquisicao") <span data-i18n="demo.utilizador_form.ano"></span>
+						input.preencher( autocomplete="off", type="text", name="ano_aquisicao", id="ano_aquisicao", data-mask="0000",value="#{Usuarios[0].ano_aquisicao}", style="font-family:")
+				.row
+					.col.s12.m6.input-field
+						label(for="kilometragem") <span data-i18n="demo.utilizador_form.kilometros"></span>
+						input.preencher(autocomplete="off", type="text", name="kilometragem", id="kilometragem", value="#{Usuarios[0].kilometragem }", style="font-family:")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.contacto"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="telefone_1") <span data-i18n="demo.utilizador_form.telefone"></span>
+						input.preencher( autocomplete="off", type="text", id="telefone_1", name="telefone_1", value="#{Usuarios[0].telefone_1}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="email") Email
+						input.preencher( autocomplete="off", type="email", name="email", id="email", value="#{Usuarios[0].email}", style="font-family:")
+				.row
+					.col.s12.m6.input-field
+						label(for="user_pettycash") <span data-i18n="demo.utilizador_form.pettycashamount"></span>
+						input.preencher( autocomplete="off", type="number", id="user_pettycash", readonly, name="user_pettycash", value="#{Usuarios[0].user_pettycash? Usuarios[0].user_pettycash: '0'}", style="font-family:")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.credenciais"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="username") <span data-i18n="demo.utilizador_form.username"></span>
+						input.preencher( autocomplete="off", type="text", name="username", id="username", value="#{Usuarios[0].username }", style="font-family:")
+					.col.s12.m6
+						label(for="nivel_acesso") <span data-i18n="demo.utilizador_form.nivel_acesso"></span>
+						select.browser-default.browser-default(id="nivel_acesso", name="nivel_acesso", style="font-family:")
+							option(value="normal" selected="#{Usuarios[0].nivel_acesso}"=='normal'? true:false) Normal
+							option(value="gestor" selected="#{Usuarios[0].nivel_acesso}"=='gestor'? true:false) Gestor
+							option(value="admin" selected="#{Usuarios[0].nivel_acesso}"=='admin'? true:false) Administrador
+
+				.row
+					.col.s12.m6.input-field
+						label(for="senha") <span data-i18n="demo.utilizador_form.password"></span>
+						input.preencher( autocomplete="off", type="password", id="senha", name="senha", value="#{Usuarios[0].senha}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="confirmacao_senha") <span data-i18n="demo.utilizador_form.confirmacao"></span>
+						input.preencher( autocomplete="off", type="password", id="confirmacao_senha", value="#{Usuarios[0].senha}", style="font-family:")
+			fieldset.no-border
+				.row.buttons-container
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_editacao" detalhesusuario="#{ReferenciaUser}") <span data-i18n="demo.utilizador_form.gravar"></span>
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_util") <span data-i18n="demo.utilizador_form.cancelar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			//- setInterval(function(){document.getElementById("utilizadorId").className="activarAzul"}, 50);
+			//- setTimeout(function(){
+			//- if(window.innerWidth<600){
+			//- document.getElementById("mySidebar").style.width = "0";
+			//- document.getElementById("main").style.marginLeft= "0";
+			//- document.getElementById("main").style.width="100%";
+			//- document.getElementById("main").style.marginBottom="0";}
+			//- }, 50);
+
+			//- document.ready(function(){function mes(){
+			//- var novoo;
+			//- var ms= new Date()
+			//- if((ms.getMonth()+1)<10)
+				//- novoo='0'+ms
+				//- return novoo;}
+			//- else{
+			//- novoo=''+(ms.getMonth()+1);
+			//- return novoo;
+			//- }
+			//- }})
+
+			setInterval(function(){document.getElementById("utilizadorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+

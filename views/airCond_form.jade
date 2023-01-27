@@ -1,0 +1,517 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="POST", action="", style="color:#12375c;", enctype="multipart/form-data")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.airCond_form.arcond"></span> 
+				h2(class="fs-title") <span data-i18n="demo.airCond_form.pergunta1"></span> 
+				.row
+					.row(id="fan_blade")
+						if Site
+							if Site[0].airCond.fan_blade=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="fan_bladeok" name="fan_blade" checked value="ok")
+									label(for="fan_bladeok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="fan_bladenotok", name='fan_blade', value="not ok")
+									label(for="fan_bladenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="fan_bladena", name='fan_blade', value="na")
+									label(for="fan_bladena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fan_blade_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+									input(id="fan_blade_comment", autocomplete="off", type="text", name="fan_blade_comment", value="#{Site? Site[0].airCond.fan_blade_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].airCond.fan_blade_image.length!=0)
+										-for(let i=0;i<Site[0].airCond.fan_blade_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].airCond.fan_blade_image[i]}")
+							else
+								if Site[0].airCond.fan_blade=="not ok"
+									.col.s12
+										span.
+										
+									.col.s4.m3
+										input.bom(type="radio" id="fan_bladeok" name="fan_blade"  value="ok")
+										label(for="fan_bladeok") ok					
+									.col.s4.m3
+										input.mau(type="radio", id="fan_bladenotok", name='fan_blade', checked value="not ok")
+										label(for="fan_bladenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="fan_bladena", name='fan_blade', value="na")
+										label(for="fan_bladena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="fan_blade_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+										input(id="fan_blade_comment", autocomplete="off", type="text", name="fan_blade_comment", value="#{Site? Site[0].airCond.fan_blade_comment:''}")
+									.col.s12.m6.input-field
+										.col.s12.m6.input-field
+										-if(Site[0].airCond.fan_blade_image.length!=0)
+											-for(let i=0;i<Site[0].airCond.fan_blade_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].airCond.fan_blade_image[i]}")
+								else
+									.col.s12
+										span.
+										
+									.col.s4.m3
+										input.bom(type="radio" id="fan_bladeok" name="fan_blade"  value="ok")
+										label(for="fan_bladeok") ok					
+									.col.s4.m3
+										input.mau(type="radio", id="fan_bladenotok", name='fan_blade', value="not ok")
+										label(for="fan_bladenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="fan_bladena", name='fan_blade', checked, value="na")
+										label(for="fan_bladena") N/A					
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="fan_bladeok" name="fan_blade"  value="ok")
+								label(for="fan_bladeok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="fan_bladenotok", name='fan_blade', value="not ok")
+								label(for="fan_bladenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="fan_bladena", name='fan_blade', value="na")
+								label(for="fan_bladena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="fan_blade_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+								input(id="fan_blade_comment", autocomplete="off", type="text", name="fan_blade_comment", value="#{Site? Site[0].fan_blade_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.airCond_form.imagem"></span>
+								input.preencher(type="file", id="fan_blade_image", name="fan_blade_image",autocomplete="off", value="#{Site ? Site[0].fan_blade_image:''}", multiple)
+								table
+									tbody#airCond1.airCond1
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.airCond_form.arcond"></span> 
+				h2(class="fs-title") <span data-i18n="demo.airCond_form.pergunta2"></span> 
+				.row
+					.row(id="noise_vibration")
+						if Site
+							if Site[0].airCond.noise_vibration=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="noise_vibrationok" name="noise_vibration" checked value="ok")
+									label(for="noise_vibrationok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="noise_vibrationnotok", name='noise_vibration', value="not ok")
+									label(for="noise_vibrationnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="noise_vibrationna", name='noise_vibration', value="na")
+									label(for="noise_vibrationna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="noise_vibration_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+									input(id="noise_vibration_comment", autocomplete="off", type="text", name="noise_vibration_comment", value="#{Site? Site[0].airCond.noise_vibration_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].airCond.noise_vibration_image.length!=0)
+										-for(let i=0;i<Site[0].airCond.noise_vibration_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].airCond.noise_vibration_image[i]}")
+							else
+								if Site[0].airCond.noise_vibration=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="noise_vibrationok" name="noise_vibration"  value="ok")
+										label(for="noise_vibrationok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="noise_vibrationnotok", name='noise_vibration', checked value="not ok")
+										label(for="noise_vibrationnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="noise_vibrationna", name='noise_vibration', value="na")
+										label(for="noise_vibrationna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="noise_vibration_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+										input(id="noise_vibration_comment", autocomplete="off", type="text", name="noise_vibration_comment", value="#{Site? Site[0].airCond.noise_vibration_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].airCond.noise_vibration_image.length!=0)
+											-for(let i=0;i<Site[0].airCond.noise_vibration_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].airCond.noise_vibration_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="noise_vibrationok" name="noise_vibration"  value="ok")
+										label(for="noise_vibrationok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="noise_vibrationnotok", name='noise_vibration', value="not ok")
+										label(for="noise_vibrationnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="noise_vibrationna", name='noise_vibration', checked, value="na")
+										label(for="noise_vibrationna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="noise_vibrationok" name="noise_vibration"  value="ok")
+								label(for="noise_vibrationok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="noise_vibrationnotok", name='noise_vibration', value="not ok")
+								label(for="noise_vibrationnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="noise_vibrationna", name='noise_vibration', value="na")
+								label(for="noise_vibrationna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="noise_vibration_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+								input(id="noise_vibration_comment", autocomplete="off", type="text", name="noise_vibration_comment", value="#{Site? Site[0].noise_vibration_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.airCond_form.imagem"></span>
+								input.preencher(type="file", id="noise_vibration_image", name="noise_vibration_image",autocomplete="off", multiple)
+								table
+									tbody#airCond2.airCond2
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.airCond_form.arcond"></span>  
+				h2(class="fs-title") <span data-i18n="demo.airCond_form.pergunta3"></span> 
+				.row
+					.row(id="refrigerant_line")
+						if Site
+							if Site[0].airCond.refrigerant_line=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="refrigerant_lineok" name="refrigerant_line" checked value="ok")
+									label(for="refrigerant_lineok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="refrigerant_linenotok", name='refrigerant_line', value="not ok")
+									label(for="refrigerant_linenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="refrigerant_linena", name='refrigerant_line', value="na")
+									label(for="refrigerant_linena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="refrigerant_line_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+									input(id="refrigerant_line_comment", autocomplete="off", type="text", name="refrigerant_line_comment", value="#{Site? Site[0].airCond.refrigerant_line_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].airCond.refrigerant_line_image.length!=0)
+										-for(let i=0;i<Site[0].airCond.refrigerant_line_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].airCond.refrigerant_line_image[i]}")
+							else
+								if Site[0].airCond.refrigerant_line=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="refrigerant_lineok" name="refrigerant_line"  value="ok")
+										label(for="refrigerant_lineok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="refrigerant_linenotok", name='refrigerant_line', checked value="not ok")
+										label(for="refrigerant_linenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="refrigerant_linena", name='refrigerant_line', value="na")
+										label(for="refrigerant_linena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="refrigerant_line_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+										input(id="refrigerant_line_comment", autocomplete="off", type="text", name="refrigerant_line_comment", value="#{Site? Site[0].airCond.refrigerant_line_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].airCond.refrigerant_line_image.length!=0)
+											-for(let i=0;i<Site[0].airCond.refrigerant_line_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].airCond.refrigerant_line_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="refrigerant_lineok" name="refrigerant_line"  value="ok")
+										label(for="refrigerant_lineok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="refrigerant_linenotok", name='refrigerant_line', value="not ok")
+										label(for="refrigerant_linenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="refrigerant_linena", name='refrigerant_line', checked, value="na")
+										label(for="refrigerant_linena") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="refrigerant_lineok" name="refrigerant_line"  value="ok")
+								label(for="refrigerant_lineok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="refrigerant_linenotok", name='refrigerant_line', value="not ok")
+								label(for="refrigerant_linenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="refrigerant_linena", name='refrigerant_line', value="na")
+								label(for="refrigerant_linena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="refrigerant_line_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+								input(id="refrigerant_line_comment", autocomplete="off", type="text", name="refrigerant_line_comment", value="#{Site? Site[0].refrigerant_line_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.airCond_form.imagem"></span>
+								input.preencher(type="file", id="refrigerant_line_image", name="refrigerant_line_image",autocomplete="off", multiple)
+								table
+									tbody#airCond3.airCond3
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.airCond_form.arcond"></span> 
+				h2(class="fs-title") <span data-i18n="demo.airCond_form.pergunta4"></span> 
+				.row
+					.row(id="casing_sealed")
+						if Site
+							if Site[0].airCond.casing_sealed=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="casing_sealedok" name="casing_sealed" checked value="ok")
+									label(for="casing_sealedok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="casing_sealednotok", name='casing_sealed', value="not ok")
+									label(for="casing_sealednotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="casing_sealedna", name='casing_sealed', value="na")
+									label(for="casing_sealedna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="casing_sealed_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+									input(id="casing_sealed_comment", autocomplete="off", type="text", name="casing_sealed_comment", value="#{Site? Site[0].airCond.casing_sealed_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].airCond.casing_sealed_image.length!=0)
+										-for(let i=0;i<Site[0].airCond.casing_sealed_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].airCond.casing_sealed_image[i]}")
+							else
+								if Site[0].airCond.casing_sealed=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="casing_sealedok" name="casing_sealed"  value="ok")
+										label(for="casing_sealedok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="casing_sealednotok", name='casing_sealed', checked value="not ok")
+										label(for="casing_sealednotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="casing_sealedna", name='casing_sealed', value="na")
+										label(for="casing_sealedna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="casing_sealed_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+										input(id="casing_sealed_comment", autocomplete="off", type="text", name="casing_sealed_comment", value="#{Site? Site[0].airCond.casing_sealed_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].airCond.casing_sealed_image.length!=0)
+											-for(let i=0;i<Site[0].airCond.casing_sealed_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].airCond.casing_sealed_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="casing_sealedok" name="casing_sealed"  value="ok")
+										label(for="casing_sealedok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="casing_sealednotok", name='casing_sealed', value="not ok")
+										label(for="casing_sealednotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="casing_sealedna", name='casing_sealed', checked, value="na")
+										label(for="casing_sealedna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="casing_sealedok" name="casing_sealed"  value="ok")
+								label(for="casing_sealedok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="casing_sealednotok", name='casing_sealed', value="not ok")
+								label(for="casing_sealednotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="casing_sealedna", name='casing_sealed', value="na")
+								label(for="casing_sealedna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="casing_sealed_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+								input(id="casing_sealed_comment", autocomplete="off", type="text", name="casing_sealed_comment", value="#{Site? Site[0].casing_sealed_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.airCond_form.imagem"></span>
+								input.preencher(type="file", id="casing_sealed_image", name="casing_sealed_image",autocomplete="off", multiple)
+								table
+									tbody#airCond4.airCond4
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.airCond_form.arcond"></span> 
+				h2(class="fs-title") <span data-i18n="demo.airCond_form.pergunta5"></span> 
+				.row(id="rust")
+					if Site
+						if Site[0].airCond.rust=="ok"
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="rustok" name="rust"   checked value="ok")
+								label(for="rustok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="rustnotok", name='rust', value="not ok")
+								label(for="rustnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="rustna", name='rust', value="na")
+								label(for="rustna") N/A
+							.input-field.col.s12(style="text-align: left !important")
+								label(for="rust_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+								input(id="rust_comment", autocomplete="off", type="text", name="rust_comment", value="#{Site? Site[0].airCond.rust_comment:''}")
+							.col.s12.m6.input-field
+								-if(Site[0].airCond.rust_image.length!=0)
+									-for(let i=0;i<Site[0].airCond.rust_image.length; i++)
+										img.verimagem(style="width:100px", src="#{Site[0].airCond.rust_image[i]}")
+						else
+							if Site[0].airCond.rust=="not ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="rustok" name="rust"  value="ok")
+									label(for="rustok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="rustnotok", name='rust', checked value="not ok")
+									label(for="rustnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="rustna", name='rust', value="na")
+									label(for="rustna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rust_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+									input(id="rust_comment", autocomplete="off", type="text", name="rust_comment",  value="#{Site? Site[0].airCond.rust_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].airCond.rust_image.length!=0)
+										-for(let i=0;i<Site[0].airCond.rust_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].airCond.rust_image[i]}")
+							else
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="rustok" name="rust"  value="ok")
+									label(for="rustok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="rustnotok", name='rust', value="not ok")
+									label(for="rustnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="rustna", name='rust', checked, value="na")
+									label(for="rustna") N/A
+					else
+						.col.s12
+							span.
+								
+						.col.s4.m3
+							input.bom(type="radio" id="rustok" name="rust"  value="ok")
+							label(for="rustok") ok					
+						.col.s4.m3
+							input.mau(type="radio", id="rustnotok", name='rust', value="not ok")
+							label(for="rustnotok") not ok
+						.col.s4.m3
+							input.moderado(type="radio", id="rustna", name='rust', value="na")
+							label(for="rustna") N/A
+						.input-field.col.s12.m6(style="text-align: left !important")
+							label(for="rust_comment") <span data-i18n="demo.airCond_form.comentarios"></span>
+							input(id="rust_comment", autocomplete="off", type="text", name="rust_comment", value="#{Site? Site[0].rust_comment:''}")
+						.col.s12.m6.input-field
+							<span data-i18n="demo.airCond_form.imagem"></span>
+							input.preencher(type="file", id="rust_imageACF", name="rust_imageACF",autocomplete="off", multiple)
+							table
+								tbody#airCond5.airCond5
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Site
+					input#captarArCond(type="submit", dataref="#{referencia._id}", numSite= "#{referencia.siteNumber}", nomesessiondetalhes= "#{DataU.nome}",name="submit", class="submit action-button", value="Save")
+				else
+					if Site[0].site_general.fence_gate_locks_hinges
+						input#captarArCondDetalhes(type="button", name="next", dataref="#{op}", class="next action-button", value="Next >>")
+		
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

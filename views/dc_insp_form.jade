@@ -1,0 +1,69 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Centro de dados
+				.row
+					.col.s12.m6
+						label(for="dc_site_num") Site
+						select.browser-default(name="dc_site_num", id="dc_site_num", style="font-family:")
+							option(value='', selected, disabled) Escolha opcao
+							-for(let i=0; i<DC_insp.length; i++)
+								option(value="#{DC_insp[i].siteinfo_sitenum}", data-nome="#{DC_insp[i].siteinfo_sitename}" , data-cont="#{DC_insp[i]._id}") #{DC_insp[i].siteinfo_sitenum}
+					.col.s12.m6.input-field
+						label(for="dc_site_name") <span data-i18n="demo.stock_item_form.descricao_item"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="dc_site_name" ,name="dc_site_name", value="")
+					.input-field.col.s12.m6(style="margin-top:20px")
+						label(for="inicio_data") <span data-i18n="demo.ttnumber_form.fromdate"></span>
+						input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="inicio_data" ,name="inicio_data")
+					.input-field.col.s12.m6(style="margin-top:20px")
+						label(for="data_final") <span data-i18n="demo.ttnumber_form.todate"></span>
+						input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="data_final" ,name="data_final")
+					
+
+
+			fieldset.no-border
+				.row.buttons-container
+					if !Stock_item
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

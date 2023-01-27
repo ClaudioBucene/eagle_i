@@ -1,0 +1,161 @@
+extends layout
+block content
+	.row(style="margin-top:15px;margin-bottom: 0px !important;")
+		.row#recolherdados(detalhesjobcards="#{DadosJobcards}" detalhessession="#{DataU.nome}" detalhesprojectos="#{DadosProjects}")
+			if(DataU.funcao == "Call Center")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul.novocallout(data-position="left", data-delay="10", data-tooltip="add new ttnumber", class="btn-floating btn-large waves-effect waves-light") <i class=" activarAzul material-icons">add</i>
+		.row
+			if(Jobcards.length == 0)
+				p.center-align.selmecAzul.bold <span data-i18n="demo.ttnumber_form.seminfo"></span>
+			else
+				form#tthomecompletepesquisa(class="col s12"  method="POST" onsubmit="return validateFormTThomecomplete()" name="tthomecompletepesquisa")
+					.row
+						.col.s12.m6
+						.col.s12.m6.right.input-field
+							i.material-icons.prefix search
+							label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+							input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.ttnumberhomecomplete"></span>
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold
+				table.responsive-table.bordered.striped#myTable
+					thead
+						tr.selmecAzul
+							th TT Number
+							th <span data-i18n="demo.manutencao_form.localizacao"></span>
+							th <span data-i18n="demo.ttnumber_form.cliente"></span>
+							th Call
+							th <span data-i18n="demo.manutencao_form.tecnico"></span>
+							th <span data-i18n="demo.manutencao_form.dataregistro"></span>
+							th <span data-i18n="demo.manutencao_form.remedialaction"></span>
+							th <span data-i18n="demo.manutencao_form.conclusiondate"></span>
+							th <span data-i18n="demo.manutencao_form.responsetime"></span>
+							th <span data-i18n="demo.manutencao_form.spareused"></span>
+							th <span data-i18n="demo.manutencao_form.dieselrefuel"></span>
+							th <span data-i18n="demo.manutencao_form.credelecadd"></span>
+							th
+					tbody(id="myTableUser1")
+						-for(var index = 0; index < Jobcards.length; index++)
+							-if(Jobcards[index].jobcard_departamento == "Telco" || Jobcards[index].jobcard_departamento == "Data Center")
+								tr.highlight(style="font-family:;color:#12375c")
+									td #{Jobcards[index].jobcard_ttnumber}
+									td #{Jobcards[index].jobcard_site}
+									td #{Jobcards[index].jobcard_clientenome}
+									td #{Jobcards[index].jobcard_call}
+									td #{Jobcards[index].jobcard_tecniconome}
+									if (Jobcards[index].data_registojobcard.getHours() < 10)
+										-var hours = "0"+Jobcards[index].data_registojobcard.getHours()
+									else
+										-var hours = Jobcards[index].data_registojobcard.getHours()
+									if (Jobcards[index].data_registojobcard.getMinutes() < 10)
+										-var minutes = "0"+Jobcards[index].data_registojobcard.getMinutes()
+									else
+										-var minutes = Jobcards[index].data_registojobcard.getMinutes()
+									td #{Jobcards[index].data_registojobcard1}, #{hours}:#{minutes}
+									td #{Jobcards[index].jobcard_remedialaction}
+									td #{Jobcards[index].jobcard_sitedeparturedate}, #{Jobcards[index].jobcard_sitedeparturetime}
+									if ((Jobcards[index].jobcard_responsetime) == null)
+										td ----
+									else
+										if((Jobcards[index].jobcard_responsedays) > 1)
+											td #{Jobcards[index].jobcard_responsedays} dias e #{Jobcards[index].jobcard_responsetime} hrs
+										else if((Jobcards[index].jobcard_responsedays) == 1)
+											td #{Jobcards[index].jobcard_responsedays} dia e #{Jobcards[index].jobcard_responsetime} hrs
+										else
+											td #{Jobcards[index].jobcard_responsetime} hrs
+									td
+										-if(Jobcards[index].sparesArrayJobcard.length != 0)
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Use") <i class="material-icons selmecAzul">check</i>
+										-else
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Don't use") <i class="material-icons selmecAzul">clear</i>
+									td
+										-if((Jobcards[index].generatorArrayJobcard.length != 0) && (Jobcards[index].generatorArrayJobcard.findIndex(x => x.jobcard_generatorrefuel == "0") == -1))
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Added") <i class="material-icons selmecAzul">check</i>
+										-else
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Didn't add") <i class="material-icons selmecAzul">clear</i>
+									td
+										-if(Jobcards[index].jobcard_credelecinfo.length != 0)
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Added") <i class="material-icons selmecAzul">check</i>
+										-else
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Didn't add") <i class="material-icons selmecAzul">clear</i>
+									td.center-align
+										a.tooltipped.pointer.detalhesJobcardCallOut.info(style="margin-left: 5px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Details of job card") <i class="material-icons activarVerde">info</i>
+							-else
+								tr.highlight(data-funcionario="#{Jobcards[index]._id}", data-nome="#{Jobcards[index].nome}")
+									td #{Jobcards[index].jobcard_cod ? Jobcards[index].jobcard_cod: Jobcards[index].jobcard_loggedby}
+									td #{Jobcards[index].local? Jobcards[index].local: Jobcards[index].jobcard_clientenome}
+									td #{Jobcards[index].cliente ? Jobcards[index].cliente: Jobcards[index].jobcard_loggedby}
+									td #{Jobcards[index].criado_por? Jobcards[index].criado_por: Jobcards[index].criado_por}
+									td #{Jobcards[index].tecnico? Jobcards[index].tecnico: Jobcards[index].jobcard_tecniconome}
+									td #{Jobcards[index].data_inicio? Jobcards[index].data_inicio: Jobcards[index].jobcard_datareporte} 
+									td #{Jobcards[index].razao? Jobcards[index].razao: Jobcards[index].razao}
+									td #{Jobcards[index].data_criacao? ((Jobcards[index].data_criacao).getDate()<10? '0'+(Jobcards[index].data_criacao).getDate():(Jobcards[index].data_criacao).getDate())+'/'+(((Jobcards[index].data_criacao).getMonth()+1)<10? ('0'+((Jobcards[index].data_criacao).getMonth()+1)):((Jobcards[index].data_criacao).getMonth()+1))+'/'+((Jobcards[index].data_criacao).getFullYear())+'   '+((Jobcards[index].data_criacao).getHours()<10? ('0'+(Jobcards[index].data_criacao).getHours()): (Jobcards[index].data_criacao).getHours() )+' : '+((Jobcards[index].data_criacao).getMinutes()<10? ('0'+(Jobcards[index].data_criacao).getMinutes()):(Jobcards[index].data_criacao).getMinutes()) : ((Jobcards[index].data_registojobcard).getDate()<10? '0'+(Jobcards[index].data_registojobcard).getDate():(Jobcards[index].data_registojobcard).getDate())+'/'+(((Jobcards[index].data_registojobcard).getMonth()+1)<10? ('0'+((Jobcards[index].data_registojobcard).getMonth()+1)):((Jobcards[index].data_registojobcard).getMonth()+1))+'/'+((Jobcards[index].data_registojobcard).getFullYear())+'   '+((Jobcards[index].data_registojobcard).getHours()<10? ('0'+(Jobcards[index].data_registojobcard).getHours()): (Jobcards[index].data_registojobcard).getHours() )+' : '+((Jobcards[index].data_registojobcard).getMinutes()<10? ('0'+(Jobcards[index].data_registojobcard).getMinutes()):(Jobcards[index].data_registojobcard).getMinutes())  }
+									if ((Jobcards[index].jobcard_responsetime) == null)
+										td ----
+									else
+										if((Jobcards[index].jobcard_responsedays) > 1)
+											td #{Jobcards[index].jobcard_responsedays} dias e #{Jobcards[index].jobcard_responsetime} hrs
+										else if((Jobcards[index].jobcard_responsedays) == 1)
+											td #{Jobcards[index].jobcard_responsedays} dia e #{Jobcards[index].jobcard_responsetime} hrs
+										else
+											td #{Jobcards[index].jobcard_responsetime} hrs
+									td
+										-if(Jobcards[index].sparesArrayJobcard != undefined)
+											-if(Jobcards[index].sparesArrayJobcard.length != 0)
+												a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Use") <i class="material-icons selmecAzul">check</i>
+										-else
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Don't use") <i class="material-icons selmecAzul">clear</i>	
+									td
+										-if(Jobcards[index].generatorArrayJobcard != undefined)
+											-if((Jobcards[index].generatorArrayJobcard.length != 0) && (Jobcards[index].generatorArrayJobcard.findIndex(x => x.jobcard_generatorrefuel == "0") == -1))
+												a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Added") <i class="material-icons selmecAzul">check</i>
+										-else
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Didn't add") <i class="material-icons selmecAzul">clear</i>
+									td
+										-if(Jobcards[index].jobcard_credelecinfo != undefined)
+											-if(Jobcards[index].jobcard_credelecinfo.length != 0)
+												a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Added") <i class="material-icons selmecAzul">check</i>
+										-else
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Didn't add") <i class="material-icons selmecAzul">clear</i>
+									td.center-align
+										//- a.tooltipped.pointer.detalhesJobcardCallOut.info(style="margin-left: 5px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Details of job card") <i class="material-icons activarVerde">info</i>
+										a.pointer.detalhescsss(style="margin-left: 10px", labell="#{Jobcards[index]._id}", labesl="#{Jobcards[index].viatura}" ) <i class="material-icons activarVerde">info</i>
+						if !Dadospesquisa
+							if(dadostotalnr > 1)
+								tr.highlight(style="font-family:;color:#12375c")
+									td.center-align
+										if(dadoscontroladordecr != 0)
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/manutencao/ttnumberhome/complete/previouspage/#{dadoscontroladordecr}/#{dadostotalnr}") <i class="material-icons selmecAzul">fast_rewind</i>
+									td
+									td
+									td
+									td
+									td
+									td
+									td
+									td.center-align
+										if(dadoscontroladorincr < dadostotalnr)
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/manutencao/ttnumberhome/complete/nextpage/#{dadoscontroladorincr}/#{dadostotalnr}") <i class="material-icons selmecAzul">fast_forward</i>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			function validateFormTThomecomplete() {
+				var pesquisador = document.forms["tthomecompletepesquisa"]["pesquisador"].value;
+				if(pesquisador != ""){
+					document.getElementById("tthomecompletepesquisa").action = "/manutencao/tthomecompletepesquisa";
+				}
+			}
+
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

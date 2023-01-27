@@ -1,0 +1,45 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+			a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+			ul
+				if (DataU.nivel_acesso=="admin")
+					li
+						a.btn-floating.tooltipped.pointer.activarAzul#exportar(data-position="left", data-delay="10", data-tooltip="Exportar lista", class="btn-floating btn-large waves-effect waves-light", href="/tanque/exportartocsvTanque") <i class="material-icons activarVerde">publish</i>
+				li
+					a.btn-floating.tooltipped.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Registar nova Inspencao ", class="btn-floating btn-large waves-effect waves-light", href="/tanque/novo") <i class="material-icons activarVerde">add</i>
+		if !Tanque|| ! Tanque.length
+			p.center-align.selmecAzul.bold( style="font-family:") Sem informação da inspecção da pre-utilização do Tanque !
+
+		else
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Lista de Inspecção  pre-utilização do Tanque
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Motorista
+						th Matricula
+						th Data
+						th
+				tbody
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					-for(var index = 0; index < Tanque.length; index++)
+						tr.highlight(data-funcionario="#{Tanque[index]._id}", style="font-family:;color:#12375c")
+							td #{Tanque[index].motorista}
+							td #{Tanque[index].chapa_matricula}
+							td #{Tanque[index].data.getDate()+'/'+(Tanque[index].data.getMonth()+1)+'/'+Tanque[index].data.getFullYear()}
+							td.center-align
+								if (DataU.nivel_acesso=="admin")
+									a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Detalhes pre-utilização do tanque de  #{Tanque[index].motorista}", href="/tanque/detalhes/#{Tanque[index]._id}") <i class="material-icons activarVerde">info</i>
+									a.delete-veiculo1.tooltipped.pointer.apagar_tanque(style="margin-left: 30px; color:red",data-position="top", data-delay="10", data-tooltip="Remover a pre-utilização de #{Tanque[index].motorista}", data-user-id="#{Tanque[index].motorista}", data-user-new="#{Tanque[index]._id}") <i class="material-icons bold">close</i>
+		block js
+		script.
+			setInterval(function(){document.getElementById("tanqueId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);

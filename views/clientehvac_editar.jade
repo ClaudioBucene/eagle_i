@@ -1,0 +1,117 @@
+extends layout
+block content
+	form
+		fieldset.no-border.legend-border(style="padding:25px")
+			legend.selmecAzul.bold Detalhes de Cliente
+			.row
+				.input-field.col.s12.m6
+					label(for="nome_cliente") Nome do Cliente
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome_cliente", name="nome_cliente", value="#{Cliente[0].nome_cliente}")
+				.input-field.col.s12.m6
+					label(for="numero_primavera") Referencia(Primavera)
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="numero_primavera", name="numero_primavera", value="#{Cliente[0].numero_primavera}")
+			.row
+				.col.s12.m6
+					label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+					select.browser-default(name="regiao", id="regiao", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(var index = 0; index < AdMagen[0].regiao.length; index++)
+							-if(AdMagen[0].regiao[index].nome == Cliente[0].regiao)
+								option(value="#{Cliente[0].regiao}" selected) #{Cliente[0].regiao}
+							-else
+								option(value="#{AdMagen[0].regiao[index].nome}") #{AdMagen[0].regiao[index].nome}
+				.col.s12.m6
+					label <span data-i18n="demo.utilizador_form.provincia"></span>
+					select.browser-default.browser-default(name="provincia", id="provincia", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(var index = 0; index < AdMagen[0].provincia.length; index++)
+							-if(AdMagen[0].provincia[index].nome == Cliente[0].provincia)
+								option(value="#{Cliente[0].provincia}" selected) #{Cliente[0].provincia}
+							-else
+								option(value="#{AdMagen[0].provincia[index].nome}") #{AdMagen[0].provincia[index].nome}
+			.row
+				.input-field.col.s12.m6
+					label(for="rua") Rua/Avenida
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="rua", name="rua", value="#{Cliente[0].rua}")
+				//- .input-field.col.s12.m6
+				//- 	label(for="numero_cliente") Numero
+				//- 	input(autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="numero_cliente", name="numero_cliente")
+			//- .row.mostrartabelaFiliais
+			//- 	table#tabfilial.responsive-table.bordered.striped(style="margin-left:-46px")
+			//- 		thead
+			//- 			tr.selmecAzul
+			//- 				th <span class="hide-on-small-only"> Nome
+			//- 				th <span class="hide-on-small-only"> Provincia
+			//- 				th <span class="hide-on-small-only"> Bairro
+			//- 				th
+			//- 		tbody#mostrarTabelaFilial.mostrarTabelaFilial
+			//- 			-if(Cliente[0].filial.length != 0)
+			//- 				-for(var index = 0; index < Cliente[0].filial.length; index++)
+			//- 					tr.highlight(style="font-family:;color:#12375c")
+			//- 						td #{Cliente[0].filial[index].nome}
+			//- 						td #{Cliente[0].filial[index].provincia}
+			//- 						td #{Cliente[0].filial[index].bairro}
+			//- 						td
+			//- 							a(class="pointer info eliminar") <i class="material-icons left selmecAzul">delete_forever</i>
+			//- 							a(class="pointer info editar") <i class="material-icons left selmecAzul">edit</i>
+		//- -for(var index = 0; index < Cliente[0].filial.length; index++)
+		//- 	fieldset.no-border.legend-border
+		//- 		-if(Cliente[0].filial.length !=0 )
+		//- 			legend.selmecAzul.bold Detalhes da Filial  #{Cliente[0].filial[index].nome}
+		//- 			.row
+		//- 				.input-field.col.s12.m6
+		//- 					label(for="nome_clientefilial") Nome do Cliente
+		//- 					input.preencher(autocomplete="off", type="text", idioty="#{Cliente[0]._id}", style="font-family:;color:#12375c" ,id="nome_clientefilial", value="#{Cliente[0].nome_cliente}", class ="nome_clientefilial" ,name="nome_clientefilial")
+		//- 				.input-field.col.s12.m6
+		//- 					label(for="nome") Filial
+		//- 					input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome_filial", name="nome_filial", class ="nome_filial", value="#{Cliente[0].filial[index].nome}")
+		//- 			.row
+		//- 				.col.s12.m6
+		//- 					label(for="regiao_filial") <span data-i18n="demo.utilizador_form.regiao"></span>
+		//- 					select.browser-default(name="regiao_filial", id="regiao_filial", class ="regiao_filial", style="font-family:")
+		//- 						option(value="" disabled selected) Escolha a opção
+		//- 						-for(var i = 0; i < AdMagen[0].regiao.length; i++)
+		//- 							-if(AdMagen[0].regiao[i].nome == Cliente[0].filial[index].regiao)
+		//- 								option(value="#{Cliente[0].filial[index].regiao}" selected) #{Cliente[0].filial[index].regiao}
+		//- 							-else
+		//- 								option(value="#{AdMagen[0].regiao[i].nome}") #{AdMagen[0].regiao[i].nome}
+		//- 				.col.s12.m6
+		//- 					label <span data-i18n="demo.utilizador_form.provincia"></span>
+		//- 					select.browser-default.browser-default(name="provincia_filial", id="provincia_filial", class ="provincia_filial", style="font-family:")
+		//- 						option(value="" disabled selected) Escolha a opção
+		//- 						-for(var i = 0; i < AdMagen[0].provincia.length; i++)
+		//- 							-if(AdMagen[0].provincia[i].nome == Cliente[0].filial[index].provincia)
+		//- 								option(value="#{Cliente[0].filial[index].provincia}" selected) #{Cliente[0].filial[index].provincia}
+		//- 							-else
+		//- 								option(value="#{AdMagen[0].provincia[i].nome}") #{AdMagen[0].provincia[i].nome}
+		//- 			.row
+		//- 				.input-field.col.s12.m6
+		//- 					label(for="rua_filial") Rua/Avenida
+		//- 					input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="rua_filial", name="rua_filial", class ="rua_filial", value="#{Cliente[0].filial[index].rua}")
+		//- 				.input-field.col.s12.m6
+		//- 					label(for="bairro_filial") Bairro
+		//- 					input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="bairro_filial", name="bairro_filial", class ="bairro_filial", value="#{Cliente[0].filial[index].bairro}")
+		//- 			.row
+		//- 				.input-field.col.s12.m6
+		//- 					label(for="lat_filial") Latitude
+		//- 					input.preencher(autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="lat_filial", name="lat_filial", class ="lat_filial", value= "#{Cliente[0].filial[index].lat}")
+		//- 				.input-field.col.s12.m6
+		//- 					label(for="long_filial") Longitude
+		//- 					input.preencher(autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="long_filial", name="long_filial", class ="long_filial", value= "#{Cliente[0].filial[index].long}")
+		fieldset.no-border.legend-border(style="padding:25px")
+			.row.buttons-container
+				.col.s12.center
+					input#criarFilialHvac(type="button", name="submit", class="submit action-button submit action-button", value="Ad. Filial", detalhessession="#{DataU.nome}", signal = "#{Signal}" ,detalhesCliente = "#{Cliente[0]._id}", numerofiliais = "#{Cliente[0].filial.length}")
+					input#updateClienteHvac(type="button", name="submit", class="submit action-button submit action-button", value="Actualizar", detalhessession="#{DataU.nome}", detalhesCliente = "#{Cliente[0]._id}", numerofiliais = "#{Cliente[0].filial.length}")
+	block js
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

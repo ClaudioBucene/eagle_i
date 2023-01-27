@@ -1,0 +1,47 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+				a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Add new inspection ", class="btn-floating btn-large waves-effect waves-light", href="/dc_insp/bms/#{DC_insp._id}/novo") <i class="material-icons activarVerde">add</i>
+		if !DC_insp.bms || ! DC_insp.bms.length
+			p.center-align.selmecAzul.bold Vazio!
+		else
+			form(class="col s12"  method="POST" action="/dc_insp/buscar"  name="alljobcardspesquisaform")
+				.row
+					.col.s12.m6
+					.col.s12.m6.right.input-field
+						i.material-icons.prefix search
+						label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+						input(type="text", id="pesquisador", autocomplete="off" name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5rem") Access Control of #{DC_insp.site_number} - #{DC_insp.site_name}
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped.icn1
+				thead
+					tr.selmecAzul
+						th BMS tablet alarm logs
+						th Site
+						th data
+						th Done By
+						th
+				tbody(id="myTable")
+					-for(var index =0 ; index<DC_insp.bms.length ; index++)
+						tr.highlight(data-funcionario="#{DC_insp.bms[index]._id}", data-nome="#{DC_insp.bms[index].nome}",style="color:#{DC_insp.bms[index].observacao}")
+							td #{DC_insp.bms[index].bms_tablet_alarm}
+							td #{DC_insp.site_number}
+							td #{DC_insp.bms[index].done_on}
+							td #{DC_insp.bms[index].done_by}
+							td
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{DC_insp.bms[index].marca_modelo} transference", href="/dc_insp/bms/detalhes/#{DC_insp._id}/#{DC_insp.bms[index]._id}") <i class="material-icons activarVerde">info</i>
+								a.pointer.info.hide(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit  #{DC_insp.bms[index].nome}", href="/dc_insp/editar/#{DC_insp._id}/#{DC_insp.bms[index]._id}") <i class="material-icons selmecAzul">edit</i>
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

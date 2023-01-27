@@ -1,0 +1,80 @@
+extends layout
+block content
+	.row
+		div(class="fixed-action-btn horizontal fixed-add-bottom")
+			a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/jobcardprojectshome/inprogress") <i class=" activarAzul material-icons">reply</i>
+	div(class="modal-content" style="padding-top:20px")
+		h4(id="siteinfoacinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.detalhesac"></span>
+		div(class="row center")
+			form.jobcardtecnicoform(class="col s12")
+				.row(style="margin-bottom:10px")
+					.col.s12.m6(style="margin-top:2px")
+						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.acmanufacturer></span>
+						select.browser-default(name="siteinfo_acmanufacturer", id="siteinfo_acmanufacturer", style="font-family:")
+							option(value="" disabled selected selmecVerde) Escolha uma opção
+							option(value="Buham Bush") Buham Bush
+							option(value="Gree") Gree
+							option(value="LG") LG
+							option(value="Samsung") Samsung
+					.col.s12.m6(style="margin-top:2px")
+						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.actype></span>
+						select.browser-default(name="siteinfo_actype", id="siteinfo_actype", style="font-family:")
+							option(value="" disabled selected selmecVerde) Escolha uma opção
+							option(value="Air Curtain") Air Curtain
+							option(value="Cassette") Cassette
+							option(value="Clip On") Clip On
+							option(value="Split Unit") Split Unit
+							option(value="Under Ceiling") Under Ceiling
+							option(value="Window Wall") Window Wall
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="siteinfo_acmodel") <span data-i18n="demo.site_info.acmodel"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_acmodel" ,name="siteinfo_acmodel")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="siteinfo_acnumber") <span data-i18n="demo.site_info.acnumber"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_acnumber" ,name="siteinfo_acnumber")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="siteinfo_acserialnumber") <span data-i18n="demo.site_info.acserialnumber"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_acserialnumber" ,name="siteinfo_acserialnumber")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="siteinfo_acbtu") BTU
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_acbtu" ,name="siteinfo_acbtu")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6(style="margin-top:2px")
+						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.accageinstalled></span>
+						select.browser-default(name="siteinfo_accageinstalled", id="siteinfo_accageinstalled", style="font-family:")
+							option(value="" disabled selected selmecVerde) Escolha uma opção
+							option(value="Yes") Yes
+							option(value="No") No
+					.col.s12.m6(style="margin-top:2px")
+						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.acsleeveinstalled></span>
+						select.browser-default(name="siteinfo_acsleeveinstalled", id="siteinfo_acsleeveinstalled", style="font-family:")
+							option(value="" disabled selected selmecVerde) Escolha uma opção
+							option(value="Yes") Yes
+							option(value="No") No
+				.row
+					.col.s12.m6(style="margin-top:2px")
+						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.acunitcontrolltype></span>
+						select.browser-default(name="siteinfo_acunitcontrolltype", id="siteinfo_acunitcontrolltype", style="font-family:")
+							option(value="" disabled selected selmecVerde) Escolha uma opção
+							option(value="Sam") Sam
+							option(value="V-Con") V-Con
+					.col.s12.m6.input-field(style="margin-top:22px")
+						label(for="siteinfo_accontrollermodel") <span data-i18n=demo.site_info.accontrollermodel></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_accontrollermodel" ,name="siteinfo_accontrollermodel")
+				button(type="button", id="jobcardequipmentproject_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

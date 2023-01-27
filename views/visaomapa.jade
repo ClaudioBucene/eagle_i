@@ -1,0 +1,67 @@
+extends layout
+block content
+	.row#detalhesJobcardMapa(dataa = "#{DadosJobcards}")
+	form#ttnumberform(class="col s12")
+		.fixed-action-btn.top.fixed-add-bottom
+			a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Add new inspection ", class="btn-floating btn-large waves-effect waves-light", href="/climatizacao/prevent/inprogress") <i class="material-icons activarVerde">fast_forward</i>
+	div#map(style="margin-top:150px")
+	block js
+		script(src="https://polyfill.io/v3/polyfill.min.js?features=default")
+		script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGI4PphO0TcAodia57tSsJXRSVlTAwNaU&callback=initMap&libraries=&v=weekly")
+		script.
+			var dadosjbc = JSON.parse($("#detalhesJobcardMapa").attr("dataa"));
+
+			var latitudesite = parseFloat(dadosjbc[0].geolocalizacao[0].latitude);
+			var longitudesite = parseFloat(dadosjbc[0].geolocalizacao[0].longitude);
+			var latitudesite1 = parseFloat(dadosjbc[0].origem.latitude);
+			var longitudesite1 = parseFloat(dadosjbc[0].origem.longitude);
+
+			function initMap() {
+			var dadosjbc = JSON.parse($("#detalhesJobcardMapa").attr("dataa"));
+
+			var latitudesite = parseFloat(dadosjbc[0].geolocalizacao[0].latitude);
+			var longitudesite = parseFloat(dadosjbc[0].geolocalizacao[0].longitude);
+			const directionsRenderer = new google.maps.DirectionsRenderer();
+			const directionsService = new google.maps.DirectionsService();
+			const map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 14,
+			center: { lat: -25.971571, lng: 32.579574 },
+			});
+
+			directionsRenderer.setMap(map);
+			calculateAndDisplayRoute(directionsService, directionsRenderer);
+			document.getElementById("mode").addEventListener("change", () => {
+			calculateAndDisplayRoute(directionsService, directionsRenderer);
+			});
+			}
+
+			function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+			const selectedMode = "DRIVING";
+
+			directionsService
+			.route({
+			origin: { lat: -25.971571, lng: 32.579574 },
+			destination: { lat: latitudesite, lng: longitudesite },
+			// Note that Javascript allows us to access the constant
+			// using square brackets and a string value as its
+			// "property."
+			travelMode: google.maps.TravelMode[selectedMode],
+			})
+			.then((response) => {
+			directionsRenderer.setDirections(response);
+			})
+			.catch((e) => console.log("makhapana:"));
+			}
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<800){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 150);
+

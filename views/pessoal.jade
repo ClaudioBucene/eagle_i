@@ -1,0 +1,265 @@
+extends layout
+block content
+	.container.seccao.white
+		.row
+			.col.s12#container.chartjs-stacked-bar(dataa="#{Mensagem}" style="position: relative; height:70vh; width:75vw !important")
+				canvas#chart(style="position: relative; height:70vh; width:75vw !important") 
+				
+
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		//- script(src="https://canvasjs.com/assets/script/canvasjs.min.js")
+		script.
+			let dados=JSON.parse($("#container").attr("dataa"))
+			for(let i=0; i< dados.length; i++){
+			dados[i].lista=dados[i].lista.sort((a, b) => (a.observacao >b.observacao)? 1 : -1)
+			console.log(dados[i].lista);
+			}
+			var meses=['Jan','Fev', 'Mar','Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+			var etiquetas=[];
+			var valores1=[];
+			var valores2=[];
+			var valores3=[];
+			for(var i=0; i<dados.length;i++){
+			var temp=parseInt(dados[i]._id)
+			etiquetas.push(meses[temp-1]);
+				for(var j=0; j<dados[i].lista.length; j++){
+			if(dados[i].lista.length==3){
+			if(dados[i].lista[j].observacao=="green"){
+			valores1.push(dados[i].lista[j].soma);
+			continue;
+			}
+			if(dados[i].lista[j].observacao=="orange"){
+			valores2.push(dados[i].lista[j].soma);
+			continue;
+			}
+			if(dados[i].lista[j].observacao=="red"){
+			valores3.push(dados[i].lista[j].soma);
+			continue;
+			}
+			}
+
+
+
+			if(dados[i].lista.length==2){
+			if((j==0) && (dados[i].lista[j].observacao=="green")){
+			valores1.push(dados[i].lista[j].soma);
+			continue;
+			}
+			if((j==0) && (dados[i].lista[j].observacao=="orange")){
+			valores1.push(0);
+			valores2.push(dados[i].lista[j].soma);
+			continue;
+			}
+
+			if((j==1) && (dados[i].lista[j].observacao=="orange")){
+			valores2.push(dados[i].lista[j].soma);
+			valores3.push(0);
+			continue;
+			}
+			if((j==1)&&(dados[i].lista[j].observacao=="red")){
+			valores3.push(dados[i].lista[j].soma);
+			if((dados[i].lista[j-1].observacao=="green"))
+				valores2.push(0);
+			continue;
+			}
+
+			}
+
+
+			if(dados[i].lista.length==1){
+			if(dados[i].lista[j].observacao=="green"){
+			valores1.push(dados[i].lista[j].soma);
+			valores2.push(0);
+			valores3.push(0);
+			continue;
+			}
+			if(dados[i].lista[j].observacao=="orange"){
+			valores2.push(dados[i].lista[j].soma);
+			valores1.push(0);
+			valores3.push(0);
+			continue;
+			}
+			if(dados[i].lista[j].observacao=="red"){
+			valores3.push(dados[i].lista[j].soma);
+			valores1.push(0);
+			valores2.push(0);
+			continue;
+			}
+			}
+			}
+
+
+			}
+			console.log(etiquetas)
+
+			var ctx = document.getElementById('chart');
+
+			var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+			labels: etiquetas,
+			datasets: [
+			{
+			label: 'Bom Estado',
+			data: valores1,
+			backgroundColor: 'green',
+			},
+			{
+			label: 'Estado Razoável',
+			data: valores2,
+			backgroundColor: 'orange',
+			},
+			{
+			label: 'Mau estado',
+			data: valores3,
+			backgroundColor: 'red',
+			}
+			]
+			},
+			options: {
+			title: {
+				display: true,
+				text: "Numero de inspçoes feitas em 2020"
+				},
+			scales: {
+			xAxes: [{ stacked: true }],
+			yAxes: [{ stacked: true }]
+			}
+			}
+			});
+
+			var canvas1 = document.getElementById('chart');
+			canvas1.onclick = function(evt) {
+			var activePoint = myChart.getElementAtEvent(evt)[0];
+			var data = activePoint._chart.data;
+			var datasetIndex = activePoint._datasetIndex;
+			var label = data.datasets[datasetIndex].label;
+			var value = data.datasets[datasetIndex].data[activePoint._index];
+			var regiao= data.labels[activePoint._index]
+			//- label=label.replace("Estado", '').trim()
+			//- if(regiao!="Maputo Cidade")
+			//- regiao=regiao.replace("Região", '').toLowerCase().trim()
+
+			//- var rule = label+'1'+regiao
+			//- console.log(regiao);
+			//- window.location.href="/mensagem/detalhes_s/"+regiao
+			};
+
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+
+			//- let dados=JSON.parse($("#container").attr("dataa"))
+			//- for(let i=0; i< dados.length; i++){
+			//- dados[i].lista=dados[i].lista.sort((a, b) => (a.observacao >b.observacao)? 1 : -1)
+			//- console.log(dados[i].lista);
+			//- }
+			//- 	var barChartData = {
+			//- 	labels: [
+			//- 	"Maputo Cidade"
+			//- 	,
+				
+			//- 	"Região Centro",
+			//- 	"Região Norte",
+			//- 	"Região Sul"
+
+			//- 	],
+			//- 	datasets: [
+			//- 	{
+			//- 	label: "Bom Estado",
+			//- 	backgroundColor: "green",
+			//- 	borderColor: "green",
+			//- 	borderWidth: 1,
+			//- 	data: [dados[0].lista[0].soma, dados[1].lista[0].soma, dados[2].lista[0].soma, dados[3].lista[0].soma]
+			//- 	},
+			//- 	{
+			//- 	label: "Estado Razoável",
+			//- 	backgroundColor:"orange",
+			//- 	borderColor: "orange",
+			//- 	borderWidth: 1,
+			//- 	data: [dados[0].lista[1].soma, dados[1].lista[1].soma, dados[2].lista[1].soma, dados[3].lista[1].soma],
+			//- 	},
+			//- 	{
+			//- 	label: "Mau Estado",
+			//- 	backgroundColor: "red",
+			//- 	borderColor:"red",
+			//- 	borderWidth: 1,
+			//- 	data: [dados[0].lista[2].soma, dados[1].lista[2].soma, dados[2].lista[2].soma, dados[3].lista[2].soma]
+			//- 	}
+			//- 	,
+			//- 	//- {
+			//- 	//- label: "infratores",
+			//- 	//- backgroundColor: "lightblue",
+			//- 	//- borderColor: "blue",
+			//- 	//- borderWidth: 1,
+			//- 	//- data: [4, 7, 3, 6]
+			//- 	//- }
+			//- 	]
+			//- 	};
+
+			//- 	var chartOptions = {
+			//- 	responsive: true,
+				
+			//- 	maintainAspectRatio:false,
+			//- 	legend: {
+			//- 	position: "top"
+			//- 	},
+
+
+			//- 	//- onClick:function(e){
+			//- 	//- //- console.log(this.getElementAtEvent(e))
+			//- 	//- 	var firstPoint = this.getElementAtEvent(e)[0];
+
+			//- 	//- 	if (firstPoint) {
+			//- 	//- 	var label = this.data.labels[firstPoint._index];
+			//- 	//- 	var value = this.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+			//- 	//- 	console.log(this.getDatasetMeta(0).data[0]._model, value)
+			//- 	//- 	}
+			//- 	//- 	},
+			//- 	title: {
+			//- 	display: true,
+			//- 	text: "Estatisticas"
+			//- 	},
+			//- 	scales: {
+			//- 	yAxes: [{
+			//- 	ticks: {
+			//- 	beginAtZero: true
+			//- 	}
+			//- 	}]
+			//- 	}
+			//- 	}
+
+			//- 	window.onload = function() {
+			//- 	var ctx = document.getElementById("canvas").getContext("2d");
+			//- 	window.myBar = new Chart(ctx, {
+			//- 	type: "bar",
+			//- 	event:function(e){console.log(this.getElementAtEvent(e))},
+			//- 	data: barChartData,
+			//- 	options: chartOptions
+			//- 	});
+			//- 	};
+
+			//- 	var canvas1 = document.getElementById('canvas');
+			//- 	//- var myChart = new Chart(canvas1, chartData);
+
+			//- 	canvas1.onclick = function(evt) {
+			//- 	var activePoint = myBar.getElementAtEvent(evt)[0];
+			//- 	var data = activePoint._chart.data;
+			//- 	var datasetIndex = activePoint._datasetIndex;
+			//- 	var label = data.datasets[datasetIndex].label;
+			//- 	var value = data.datasets[datasetIndex].data[activePoint._index];
+			//- 	var regiao= data.labels[activePoint._index]
+			//- 	label=label.replace("Estado", '').trim()
+			//- 	if(regiao!="Maputo Cidade")
+			//- 	regiao=regiao.replace("Região", '').toLowerCase().trim()
+				
+			//- 	var rule = label+'1'+regiao
+			//- 	console.log(rule);
+			//- 	window.location.href="/inspmensal/detalhes/"+rule
+			//- 	};

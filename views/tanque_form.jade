@@ -1,0 +1,233 @@
+extends layout
+block content
+	.container.white(style="font-family:; ")
+		form(id="inspeccaoVeiculo", method="post", style="color:#12375c")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold  Formulario de Inspecção da pre-utilização
+				.row
+					.input-field.col.s12.m4
+						i.material-icons.prefix person
+						label(for="motorista") Motorista<span class="red-text">*</span>
+						input(id="motorista", autocomplete="off",style="font-family:; ", type="text", name="motorista", value="#{Tanque? Tanque[0].motorista:DataU.nome}")
+					.input-field.col.s12.m4
+						i.material-icons.prefix note
+						label(for="chapa_matricula") Numero de Chassi<span class="red-text">*</span>
+						input.preencher(type="text", id="chapa_matricula",style="font-family:; ", name="chapa_matricula", value="#{Tanque ? Tanque[0].chapa_matricula:''}")
+					.input-field.col.s12.m4
+						i.material-icons.prefix.left today
+						label(for="dataNasc") Data<span class="red-text bold">*</span>
+						if Tanque
+							input(type="text", value="#{(Tanque[0].data.getDate()+'/'+(Tanque[0].data.getMonth()+1)+'/'+Tanque[0].data.getFullYear())}", readonly,style="font-family:; color:#12375c")
+						else
+							input.preencher(type="date", class="datepicker", onclick="inicializacao();", id="data", name="Data", value= "#{Tanque? (Tanque[0].data.getDate()+'/'+(Tanque[0].data.getMonth()+1)+'/'+Tanque[0].data.getFullYear()):' '}")
+				.row
+					.col.s12.m4
+							label(for="estado_geral") estado gera pintura, etc<span class="red-text">*</span>
+							select.browser-default(name="estado_geral", id="estado_geral_", style="font-family:")
+								if Tanque
+									if Tanque[0].estado_geral == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].estado_geral == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="freio_manual") Freio Manual
+							select.browser-default(name="freio_manual", id="freio_manual", style="font-family:")
+								if Tanque
+									if Tanque[0].freio_manual == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].freio_manual == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="paneus") Pneus
+							select.browser-default(name="pneus", id="pneus", style="font-family:")
+								if Tanque
+									if Tanque[0].pneus == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].pneus == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+				.row
+					.col.s12.m4
+							label(for="tampa_combustivel") tampa de tanque de combustivel
+							select.browser-default(name="tampa_combustivel", id="tampa_combustivel", style="font-family:")
+								if Tanque
+									if Tanque[0].tampa_combustivel == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].tampa_combustivel == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="chapa_matricula") Chapa de Matricula
+							select.browser-default(name="chapa_matricula", id="chapa_matricula", style="font-family:")
+								if Tanque
+									if Tanque[0].chapa_matricula == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].chapa_matricula == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="cabo_polia_peca") cabos, polias e peças
+							select.browser-default(name="cabo_polia_peca", id="cabo_polia_peca", style="font-family:")
+								if Tanque
+									if Tanque[0].cabo_polia_peca == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].cabo_polia_peca == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+				.row
+					.col.s12.m4
+							label(for="trailer_licenciado") Documentação do Tanque
+							select.browser-default(name="trailer_licenciado", id="trailer_licenciado", style="font-family:")
+								if Tanque
+									if Tanque[0].trailer_licenciado == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].trailer_licenciado == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="tanque_abordo") Tanque a Bordo
+							select.browser-default(name="tanque_abordo", id="tanque_abordo", style="font-family:")
+								if Tanque
+									if Tanque[0].tanque_abordo == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].tanque_abordo == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="luzes") Sistema de Travão
+							select.browser-default(name="luzes", id="luzes", style="font-family:")
+								if Tanque
+									if Tanque[0].luzes == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].luzes == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+				.row
+					.col.s12.m4
+							label(for="acoplamento") Segurança do Acoplamento
+							select.browser-default(name="acoplamento", id="acoplamento", style="font-family:")
+								if Tanque
+									if Tanque[0].acoplamento == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].acoplamento == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="parafusos_hook") Parafusos de Aperto de Hook
+							select.browser-default(name="parafusos_hook", id="parafusos_hook", style="font-family:")
+								if Tanque
+									if Tanque[0].parafusos_hook == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].parafusos_hook == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="rodas") Rodas
+							select.browser-default(name="rodas", id="rodas", style="font-family:")
+								if Tanque
+									if Tanque[0].rodas == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Tanque[0].rodas == 'defeituoso' 
+											option(value="defeituosespelhoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+				.row
+					.input-field.col.s12
+						.material-icons.prefix mode_edit
+						textarea#observacao.materialize-textarea(style="font-family:; color:#12375c" ) #{Tanque? Tanque[0].observacao: ''}
+						if Tanque
+							label(for="icon_prefix2") Observação
+						else
+							label(for="icon_prefix2") Escreva sua Observação
+				.row(style="margin-top:7px !important")
+						if !Tanque
+							.col.s12.m6.center(style="margin-bottom: 10px;")
+								button#captarTanque(type="button", class="btn center waves-efect waves-light") registar
+							.col.s12.m6.center
+								button#cancelarTanque(type="button", class="btn waves-efect waves-light red") cancelar
+						else
+							.col.s12.center
+								butoon#voltarTanque(type="button", class="btn waves-efect waves-light activarAzul") << Voltar
+		block js
+		script.
+			setInterval(function(){document.getElementById("tanqueId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);

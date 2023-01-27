@@ -1,0 +1,328 @@
+extends layout
+block content
+	.row
+		form(id="formulario1", method="POST")
+			ul(id="progressbar1" style="margin-bottom:0px")
+				li(class="active" style="width:24.8%") <span class="hide-on-small-only"><span data-i18n="demo.cliente_form.basicos"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/basicinfo.png" style="width:20px">
+				li(style="width:24.8%") <span class="hide-on-small-only"><span data-i18n="demo.cliente_form.endfisico"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/endfisico.png" style="width:25px">
+				li(style="width:24.8%") <span class="hide-on-small-only"><span data-i18n="demo.cliente_form.endpostal"></span></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/endpostal.png" style="width:20px">
+				li(style="width:24.8%") <span class="hide-on-small-only"><span data-i18n="demo.cliente_form.contact"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/contacto.png" style="width:20px">
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:25px") <span data-i18n="demo.cliente_form.basicos"></span>
+				if Cliente
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_cod") <span data-i18n="demo.cliente_form.codigo"></span>
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_cod" ,name="cliente_cod", value="#{Cliente[0].cliente_cod}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_nome") <span data-i18n="demo.cliente_form.nome"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_nome" ,name="cliente_nome", value="#{Cliente[0].cliente_nome}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_nuit") NUIT
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_nuit" ,name="cliente_nuit", value="#{Cliente[0].cliente_nuit}", )
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_filial") <span data-i18n="demo.cliente_form.filial"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_filial" ,name="cliente_filial", value="#{Cliente[0].cliente_filial}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_telefone") <span data-i18n="demo.cliente_form.telefone"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_telefone" ,name="cliente_telefone", value="#{Cliente[0].cliente_telefone}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_web") <span data-i18n="demo.cliente_form.web"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_web" ,name="cliente_web", value="#{Cliente[0].cliente_web}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_outros") <span data-i18n="demo.cliente_form.outros"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_outros" ,name="cliente_outros", value="#{Cliente[0].cliente_outros}")
+				else
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_cod") <span data-i18n="demo.cliente_form.codigo"></span>
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_cod" ,name="cliente_cod")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_nome") <span data-i18n="demo.cliente_form.nome"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_nome" ,name="cliente_nome")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_nuit") NUIT
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_nuit" ,name="cliente_nuit")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_filial") <span data-i18n="demo.cliente_form.filial"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_filial" ,name="cliente_filial")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_telefone") <span data-i18n="demo.cliente_form.telefone"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_telefone" ,name="cliente_telefone")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_web") <span data-i18n="demo.cliente_form.web"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_web" ,name="cliente_web")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_outros") <span data-i18n="demo.cliente_form.outros"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_outros" ,name="cliente_outros")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.cliente_form.endfisico"></span>
+				if Cliente
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_endfisico") <span data-i18n="demo.cliente_form.endereco"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_endfisico" ,name="endcliente_fisico", value="#{Cliente[0].cliente_endfisico}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_bairrofisico") <span data-i18n="demo.cliente_form.bairro"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_bairrofisico" ,name="cliente_bairrofisico", value="#{Cliente[0].cliente_bairrofisico}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_cidadefisico") <span data-i18n="demo.cliente_form.cidade"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_cidadefisico" ,name="cliente_cidadefisico", value="#{Cliente[0].cliente_cidadefisico}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_provinciafisico") <span data-i18n="demo.cliente_form.provincia"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_provinciafisico" ,name="cliente_provinciafisico", value="#{Cliente[0].cliente_provinciafisico}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_codpostalfisico") <span data-i18n="demo.cliente_form.codpostal"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_codpostalfisico" ,name="cliente_codpostalfisico", value="#{Cliente[0].cliente_codpostalfisico}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_paisfisico") <span data-i18n="demo.cliente_form.pais"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_paisfisico" ,name="cliente_paisfisico", value="#{Cliente[0].cliente_paisfisico}")
+				else
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_endfisico") <span data-i18n="demo.cliente_form.endereco"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_endfisico" ,name="endcliente_fisico")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_bairrofisico") <span data-i18n="demo.cliente_form.bairro"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_bairrofisico" ,name="cliente_bairrofisico")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_cidadefisico") <span data-i18n="demo.cliente_form.cidade"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_cidadefisico" ,name="cliente_cidadefisico")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_provinciafisico") <span data-i18n="demo.cliente_form.provincia"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_provinciafisico" ,name="cliente_provinciafisico")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_codpostalfisico") <span data-i18n="demo.cliente_form.codpostal"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_codpostalfisico" ,name="cliente_codpostalfisico")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_paisfisico") <span data-i18n="demo.cliente_form.pais"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_paisfisico" ,name="cliente_paisfisico")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.cliente_form.endpostal"></span>
+				if Cliente
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_endpostal") <span data-i18n="demo.cliente_form.endereco"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_endpostal" ,name="cliente_endpostal", value="#{Cliente[0].cliente_endpostal}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_bairropostal") <span data-i18n="demo.cliente_form.bairro"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_bairropostal" ,name="cliente_bairropostal", value="#{Cliente[0].cliente_bairropostal}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_cidadepostal") <span data-i18n="demo.cliente_form.cidade"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_cidadepostal" ,name="cliente_cidadepostal", value="#{Cliente[0].cliente_cidadepostal}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_provinciapostal") <span data-i18n="demo.cliente_form.provincia"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_provinciapostal" ,name="cliente_provinciapostal", value="#{Cliente[0].cliente_provinciapostal}", )
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_codpostalpostal") <span data-i18n="demo.cliente_form.codpostal"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_codpostalpostal" ,name="cliente_codpostalpostal", value="#{Cliente[0].cliente_codpostalpostal}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_paispostal") <span data-i18n="demo.cliente_form.pais"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_paispostal" ,name="cliente_paispostal", value="#{Cliente[0].cliente_paispostal}")
+				else
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_endpostal") <span data-i18n="demo.cliente_form.endereco"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_endpostal" ,name="cliente_endpostal")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_bairropostal") <span data-i18n="demo.cliente_form.bairro"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_bairropostal" ,name="cliente_bairropostal")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_cidadepostal") <span data-i18n="demo.cliente_form.cidade"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_cidadepostal" ,name="cliente_cidadepostal")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_provinciapostal") <span data-i18n="demo.cliente_form.provincia"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_provinciapostal" ,name="cliente_provinciapostal")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_codpostalpostal") <span data-i18n="demo.cliente_form.codpostal"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_codpostalpostal" ,name="cliente_codpostalpostal")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="cliente_paispostal") <span data-i18n="demo.cliente_form.pais"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="cliente_paispostal" ,name="cliente_paispostal")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input#carregarContacto(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.cliente_form.contact"></span>
+				if Cliente
+					if referenciaCliente
+						.row#referenciarCliente(style="margin-bottom:0px", data="#{referenciaCliente}")
+							.col.s12.m6.input-field(style="margin-top:2px")
+								label <span data-i18n="demo.cliente_form.nome"></span>
+								input.contacto_nome( autocomplete="off", type="text", style="font-family:;color:#12375c",name="contacto_nome", id="contacto_nome")
+							.col.s12.m6.input-field(style="margin-top:2px")
+								label <span data-i18n="demo.cliente_form.cargo"></span>
+								input.contacto_cargo( autocomplete="off", type="text", style="font-family:;color:#12375c",name="contacto_cargo", id="contacto_cargo")
+						.row(style="margin-bottom:0px")
+							.col.s12.m6.input-field(style="margin-top:2px")
+								label Email
+								input.contacto_email( autocomplete="off", type="text", style="font-family:;color:#12375c",name="contacto_email", id="contacto_email")
+							.col.s12.m6.input-field(style="margin-top:2px")
+								label <span data-i18n="demo.cliente_form.telefone"></span>
+								input.contacto_telefone( autocomplete="off", type="text", style="font-family:;color:#12375c",name="contacto_telefone", id="contacto_telefone")
+							a#adicionarmaiscontacto1(class="waves-effect waves-light action-button") Add
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.cliente_form.nome"></span>
+									th <span data-i18n="demo.cliente_form.cargo"></span>
+									th Email
+									th <span data-i18n="demo.cliente_form.telefone"></span>
+									if referenciaCliente
+										th
+							tbody#tabelaContactoCliente.mostrarTabela1
+								-for(var index = 0; index < Cliente[0].contactosArrayCliente.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Cliente[0].contactosArrayCliente[index].contacto_nome}
+										td #{Cliente[0].contactosArrayCliente[index].contacto_cargo}
+										td #{Cliente[0].contactosArrayCliente[index].contacto_email}
+										td #{Cliente[0].contactosArrayCliente[index].contacto_telefone}
+										if referenciaCliente
+											td
+												a(class="pointer info eliminar") <i class="material-icons left activarVerde">clear</i></a>
+												a(class="pointer info editar") <i class="material-icons left activarVerde">edit</i></a>
+				else
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label <span data-i18n="demo.cliente_form.nome"></span>
+							input.contacto_nome( autocomplete="off", type="text", style="font-family:;color:#12375c",name="contacto_nome", id="contacto_nome")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label <span data-i18n="demo.cliente_form.cargo"></span>
+							input.contacto_cargo( autocomplete="off", type="text", style="font-family:;color:#12375c",name="contacto_cargo", id="contacto_cargo")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label Email
+							input.contacto_email( autocomplete="off", type="text", style="font-family:;color:#12375c",name="contacto_email", id="contacto_email")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label <span data-i18n="demo.cliente_form.telefone"></span>
+							input.contacto_telefone( autocomplete="off", type="text", style="font-family:;color:#12375c",name="contacto_telefone", id="contacto_telefone")
+						a.adicionarmaiscontacto(class="waves-effect waves-light action-button") Add
+					.row
+						table.responsive-table.bordered.striped.hide#tabelaAddContact
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.cliente_form.nome"></span>
+									th <span data-i18n="demo.cliente_form.cargo"></span>
+									th Email
+									th <span data-i18n="demo.cliente_form.telefone"></span>
+									th
+							tbody#mostrarTabela.mostrarTabela
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if(!Cliente)
+					input#captarCliente(type="button", name="submit", class="submit action-button", value="Save", recolhadados="#{DadosSupCl}")
+				else
+					if referenciaCliente
+						input#editarCliente(type="button", name="submit", class="submit action-button", value="Update", dadosclientes="#{DadosClientes}")
+		block js
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar1 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar1 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setTimeout(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,41 @@
+extends layout
+block content
+	.container.seccao.white
+		div(class="fixed-action-btn top fixed-add-bottom")
+			a.btn-floating.pointer.activarAzul#criarFilialaHvac(data-position="left", data-delay="10" detalhesCliente="#{Cliente[0]._id}" href="/cliente/novafilial/#{Cliente[0]._id}" data-tooltip="Adicionar novo cliente", class="btn-floating btn-large waves-effect waves-light") <i class=" activarAzul material-icons">add</i>
+		if(Cliente.length == 0)
+			p.center-align.selmecAzul.bold Empty!
+		else
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.cliente_form.filial"></span> de #{Cliente[0].nome_cliente}
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.cliente_form.nome"></span>
+						th <span data-i18n="demo.cliente_form.provincia"></span>
+						th <span data-i18n="demo.cliente_form.street"></span>
+						th 
+				tbody(id="myTable")
+					-for(var index = 0; index < Cliente[0].filial.length; index++)
+						tr.highlight(style="font-family:;color:#12375c")
+							td #{Cliente[0].filial[index].nome}
+							td #{Cliente[0].filial[index].provincia}
+							td #{Cliente[0].filial[index].rua}
+							td.center-align
+								if (DataU.nivel_acesso=="admin" || DataU.funcao_id == "611e6bd559c6e30a006ede59" || DataU.funcao_id == "611e2b8cf9b1b31cd868a30c")
+									a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Cliente[0].filial[index].nome}", href="/cliente/detalhesFilialhvac/#{Cliente[0]._id}/#{index}") <i class="material-icons activarVerde">info</i>
+									a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit  #{Cliente[0].filial[index].nome}", href="/cliente/editarFilialhvac/#{Cliente[0]._id}/#{index}") <i class="material-icons selmecAzul">edit</i>
+block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,60 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+			a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+			ul(id="extrairpettycash")
+				li
+					a.btn-floating.tooltipped.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Add new record", class="btn-floating btn-large waves-effect waves-light", href="/pettycash/novoregistro") <i class="material-icons activarVerde">add</i>
+				if( Pettycash.length != 0)
+					li
+						a#escolherreport.btn-floating.pointer.tooltipped.activarAzul(data-position="left", data-delay="10", data-tooltip="Print report", class="btn-floating btn-large waves-effect waves-light", detalhesanosmeses="#{AnosMeses}", detalhescolaboradoresmes="#{ColaboradoresMes}", detalhesmeses="#{Meses}", detalhesnomesanosmeses="#{NomesAnosMeses}", detalheusuario="#{DataU.nome}") <i class="material-icons activarVerde">print</i>
+		if( Pettycash.length == 0)
+			p.center-align.selmecAzul.bold <span data-i18n="demo.inspdiaria_home.lista_vazia"></span>
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.pettycash_home.lista"></span>
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.pettycash_home.nome"></span>
+						th <span data-i18n="demo.pettycash_home.supplier"></span>
+						th <span class="hide-on-small-only"><span data-i18n="demo.pettycash_home.purchase_date"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.purchase_date1></span></span>
+						th <span class="hide-on-small-only"><span data-i18n="demo.pettycash_home.purchase_amount"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.purchase_amount1></span></span>
+						th <span class="hide-on-small-only"><span data-i18n="demo.pettycash_home.invoice_number1"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.invoice_number1></span></span>
+						th
+				tbody(id="myTable")
+					-for(var index = 0; index< Pettycash.length; index++)
+						tr.highlight(style="font-family:;color:#12375c")
+							td #{Pettycash[index].pettycashuser_nome}
+							td #{Pettycash[index].pettycash_purchase[0].purchase_supplier}
+							td #{Pettycash[index].pettycash_purchase[0].purchase_date}
+							td #{Pettycash[index].pettycash_purchase[0].purchase_value}
+							td #{Pettycash[index].pettycash_purchase[0].purchase_docno}
+							td
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="/pettycash/detalhesRegistros/#{Pettycash[index]._id}") <i class="material-icons activarVerde">info</i>
+								-var nome_apelidosplit = Pettycash[index].pettycashuser_nome.split(" ");
+								-var nome_apelido_range = nome_apelidosplit[0] + "_" +nome_apelidosplit[1] + "/range";
+								if(Pettycash[index].pettycash_verify.length == 1)
+									if((DataU.nome == "Amancio Mazivila") || (DataU.nome == "Luis Brazuna") || (DataU.nivel_acesso == "admin"))
+										a.pointer.info.refusepettycash(style="margin-left: 15px", data-position="top", data-delay="10", dataref="#{Pettycash[index]._id}" detalhescaminho="#{nome_apelido_range}" debitovalue="#{Pettycash[index].pettycash_debito}") <i class="material-icons" style="color:#f44336">highlight_off</i>
+								else
+									a.pointer.info.tooltipped(style="margin-left: 15px", data-position="top", data-delay="10", dataref="#{Pettycash[index]._id}", data-tooltip="Razões:  #{Pettycash[index].pettycash_verifyReason}") <i class="material-icons" style="color:#ffa500">warning</i>
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("financasId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

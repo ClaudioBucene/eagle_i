@@ -1,0 +1,294 @@
+extends layout
+block content
+	if JobcardDetalhes
+		.row
+			if(JobcardDetalhes.jobcard_jobtype == "Callout")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/energia/jobcardprojectshome/inprogress") <i class=" activarAzul material-icons">reply</i>
+			else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/energia/jobcardprojectshome/inprogress") <i class=" activarAzul material-icons">reply</i>
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") Spares Used
+			.row#recolherdados(style="margin-bottom:0px" dadosreferenciajobcard="#{JobcardDetalhes._id}" dadosjobtype="#{JobcardDetalhes.jobcard_jobtype}" dadosstockpessoal="#{DadosStockPessoal}" detalhescall="#{JSON.stringify(JobcardDetalhes.jobcard_call)}" dadosspareusedinfo="#{DadosSpareusedInfo}" dadosusedSpareJobcard="#{usedSpareJobcard}" posicaosparesite="#{posicaosparesite}")
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_itemid") <span data-i18n="demo.manutencao_form.item"></span>
+					select.browser-default(name="jobcard_itemid1", id="jobcard_itemid1")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<StockPessoal[0].disponibilidade.length; i++)
+							-if(JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemid == StockPessoal[0].disponibilidade[i].referencia)
+								option(value="#{StockPessoal[0].disponibilidade[i].referencia}" selected) #{StockPessoal[0].disponibilidade[i].description_item}
+							-else
+								-if(StockPessoal[0].disponibilidade[i].disponivel > 0)
+									option(value="#{StockPessoal[0].disponibilidade[i].referencia}") #{StockPessoal[0].disponibilidade[i].description_item}
+				.col.s12.m6.input-field(style="margin-top:22px")
+					label(for="jobcard_quantityhave") <span data-i18n="demo.manutencao_form.quantityhave"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_quantityhave" ,name="jobcard_quantityhave", value="#{StockPessoal[0].disponibilidade[posicaospare].disponivel}", readonly)
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:0px")
+					label(for="jobcard_itemowner") Spare Owner
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_itemowner" ,name="jobcard_itemowner", readonly, value="#{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemowner}")
+				-if((JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemserialized == "nao") || (JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemnrserie == null) || (JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemnrserie == undefined))
+					.col.s12.m6.input-field#jobcard_quantityusefield(style="margin-top:0px")
+						label(for="jobcard_quantityuse") <span data-i18n="demo.manutencao_form.quantityuse"></span>
+						input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_quantityuse" ,name="jobcard_quantityuse",  min="0", class="quantyy" value="#{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_quantityuse}")
+					.col.s12.m6#jobcard_itemnrseriefield.hide(style="margin-top:-10px")
+						label(for="jobcard_itemnrserie") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+						select.browser-default(name="jobcard_itemnrserie", id="jobcard_itemnrserie")
+							option(value="" disabled selected) Escolha a opção
+				-else
+					.col.s12.m6.input-field#jobcard_quantityusefield.hide(style="margin-top:0px")
+						label(for="jobcard_quantityuse") <span data-i18n="demo.manutencao_form.quantityuse"></span>
+						input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_quantityuse" ,name="jobcard_quantityuse",  min="0", class="quantyy")
+					.col.s12.m6#jobcard_itemnrseriefield(style="margin-top:-10px")
+						label(for="jobcard_itemnrserie") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+						select.browser-default(name="jobcard_itemnrserie", id="jobcard_itemnrserie")
+							option(value="" disabled) Escolha a opção
+							option(value="#{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemnrserie}" selected) #{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemnrserie}
+							-if(StockPessoal[0].disponibilidade[posicaospare].num_serie.length != 0)
+								-for(var i=0; i<StockPessoal[0].disponibilidade[posicaospare].num_serie.length; i++)
+									option(value="#{StockPessoal[0].disponibilidade[posicaospare].num_serie[i]}") #{StockPessoal[0].disponibilidade[posicaospare].num_serie[i]}
+			.row(style="margin-bottom:0px")
+				-if((JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemphoto != "") && (JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemphoto != null) && (JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemphoto != undefined))
+					.col.s12.m6.input-field.esconderfotoitem
+						table(style="margin-top: -28px;")
+							thead
+								th <span data-i18n="demo.manutencao_form.imagemspare"></span>
+								th
+							tbody(style="height: 100px!important;")
+								tr
+									td
+										img.verimagem(style="width:100px", src="#{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemphoto}")
+									td
+										a.tooltipped.pointer.info#eliminarJobcard_itemphoto(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="ALterar") <i class="material-icons selmecAzul">clear</i>
+					.col.s12.m6.input-field.mostrarfotoitem.hide(style="margin-top:-6px")
+						<span data-i18n="demo.manutencao_form.imagemspare"></span>
+						input.preencher(type="file", id="jobcard_itemphoto", name="jobcard_itemphoto",autocomplete="off" style="padding:5px")
+				-else
+					.col.s12.m6.jobcard_itemphotofield(style="margin-top:-6px")
+						label <span data-i18n="demo.manutencao_form.imagemspare"></span>
+						input.preencher(type="file", id="jobcard_itemphoto", name="jobcard_itemphoto",autocomplete="off" style="padding:5px")
+				-if(JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemserialized == "sim")
+					.col.s12.m6#jobcard_itemreplacefield(style="margin-top:-7px")
+						label(for="jobcard_itemreplace1") <span data-i18n="demo.manutencao_form.itemreplace"></span>
+						select.browser-default(name="jobcard_itemreplace1", id="jobcard_itemreplace1")
+							option#jobcard_itemreplaceop11(value="" disabled selected) Escolha a opção
+							-if(JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemreplace == "Sim")
+								option#jobcard_itemreplaceopsim1(value="Sim" selected) Sim
+								option#jobcard_itemreplaceopnao1(value="Nao") Não
+							-else
+								-if(JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemreplace == "Nao")
+									option#jobcard_itemreplaceopsim1(value="Sim") Sim
+									option#jobcard_itemreplaceopnao1(value="Nao" selected) Não
+								-else
+									option#jobcard_itemreplaceopsim1(value="Sim") Sim
+									option#jobcard_itemreplaceopnao1(value="Nao") Não
+				-else
+					.col.s12.m6#jobcard_itemreplacefield.hide(style="margin-top:-7px")
+						label(for="jobcard_itemreplace1") <span data-i18n="demo.manutencao_form.itemreplace"></span>
+						select.browser-default(name="jobcard_itemreplace1", id="jobcard_itemreplace1")
+							option#jobcard_itemreplaceop11(value="" disabled selected) Escolha a opção
+							option#jobcard_itemreplaceopsim1(value="Sim") Sim
+							option#jobcard_itemreplaceopnao1(value="Nao") Não
+			-if(JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemreplace == "Sim")
+				.row(style="margin-bottom:0px")
+					-if(SpareSite[0].spareusedinfo_item[posicaosparesite].num_serie.length == 1)
+						.col.s12.m6.input-field#mostrarReplaceSpareNrSerieInput(style="margin-top:14px")
+							label(for="jobcard_nomeitemreplaceinput") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_nomeitemreplaceinput" ,name="jobcard_nomeitemreplaceinput", value="#{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_nomeitemreplace}")
+						.col.s12.m6#mostrarReplaceSpareNrSerieSelect.hide(style="margin-top:2px")
+							label(for="jobcard_nomeitemreplaceselect") <span data-i18n="demo.manutencao_form.serialized"></span>
+							select.browser-default(name="jobcard_nomeitemreplaceselect", id="jobcard_nomeitemreplaceselect")
+								option(value="" disabled selected) Escolha a opção
+					-else
+						.col.s12.m6.input-field#mostrarReplaceSpareNrSerieInput.hide(style="margin-top:14px")
+							label(for="jobcard_nomeitemreplaceinput") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_nomeitemreplaceinput" ,name="jobcard_nomeitemreplaceinput")
+						.col.s12.m6#mostrarReplaceSpareNrSerieSelect(style="margin-top:2px")
+							label(for="jobcard_nomeitemreplaceselect") <span data-i18n="demo.manutencao_form.serialized"></span>
+							select.browser-default(name="jobcard_nomeitemreplaceselect", id="jobcard_nomeitemreplaceselect")
+								option(value="" disabled selected) Escolha a opção
+								option(value="#{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_nomeitemreplace}" selected) #{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_nomeitemreplace}
+								-if(SpareSite.length != 0)
+									-for(var i=0; i<SpareSite[0].spareusedinfo_item[posicaosparesite].num_serie.length; i++)
+										-if(JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemnrserie != SpareSite[0].spareusedinfo_item[posicaosparesite].num_serie[i])
+											option(value="#{SpareSite[0].spareusedinfo_item[posicaosparesite].num_serie[i]}" selected) #{SpareSite[0].spareusedinfo_item[posicaosparesite].num_serie[i]}
+					.col.s12.m6.input-field.mostrarRazaoReplaceSpareReason(style="margin-top:14px")
+						label(for="jobcard_itemreplacereason") <span data-i18n="demo.manutencao_form.itemreplacereason"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_itemreplacereason" ,name="jobcard_itemreplacereason" value="#{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemreplacereason}")
+				.row(style="margin-bottom:0px")
+					-if((JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemreplacephoto != "") && (JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemreplacephoto != null) && (JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemreplacephoto != undefined))
+						.col.s12.m6.input-field.esconderfotoitemreplace
+							table(style="margin-top: -28px;")
+								thead
+									th <span data-i18n="demo.manutencao_form.imagemsparereplace"></span>
+									th
+								tbody(style="height: 100px!important;")
+									tr
+										td
+											img.verimagem(style="width:100px", src="#{JobcardDetalhes.sparesArrayJobcard[posicao].jobcard_itemreplacephoto}")
+										td
+											a.tooltipped.pointer.info#eliminarJobcard_itemreplacephoto(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Alterar") <i class="material-icons selmecAzul">clear</i>
+						.col.s12.m6.input-field.mostrarfotoitemreplace.hide(style="margin-top:-6px")
+							<span data-i18n="demo.manutencao_form.imagemspare"></span>
+							input.preencher(type="file", id="jobcard_itemreplacephoto", name="jobcard_itemreplacephoto",autocomplete="off" style="padding:5px")
+					-else
+						.col.s12.m6.input-field.mostrarRazaoReplaceSpareReason(style="margin-top:-6px" dataresp = "trocada")
+							<span data-i18n="demo.manutencao_form.imagemsparereplace"></span>
+							input.preencher(type="file", id="jobcard_itemreplacephoto", name="jobcard_itemreplacephoto",autocomplete="off" style="padding:5px")
+			-else
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field#mostrarReplaceSpareNrSerieInput.hide(style="margin-top:14px")
+						label(for="jobcard_nomeitemreplaceinput") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_nomeitemreplaceinput" ,name="jobcard_nomeitemreplaceinput")
+					.col.s12.m6#mostrarReplaceSpareNrSerieSelect.hide(style="margin-top:2px")
+						label(for="jobcard_nomeitemreplaceselect") <span data-i18n="demo.manutencao_form.serialized"></span>
+						select.browser-default(name="jobcard_nomeitemreplaceselect", id="jobcard_nomeitemreplaceselect")
+							option(value="" disabled selected) Escolha a opção
+					.col.s12.m6.input-field.mostrarRazaoReplaceSpareReason.hide(style="margin-top:14px")
+						label(for="jobcard_itemreplacereason") <span data-i18n="demo.manutencao_form.itemreplacereason"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_itemreplacereason" ,name="jobcard_itemreplacereason")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field.mostrarRazaoReplaceSpareReason.hide(style="margin-top:-6px")
+						<span data-i18n="demo.manutencao_form.imagemsparereplace"></span>
+						input.preencher(type="file", id="jobcard_itemreplacephoto", name="jobcard_itemreplacephoto",autocomplete="off" style="padding:5px")
+			-if((DataU.funcao == "Call Center") || (JobcardDetalhes.jobcard_controladorintervenientes[2] == DataU.nome))
+				button(type="button", id="jobcardspares_update", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	if Jobcard
+		.row
+			if(Jobcard.jobcard_jobtype == "Callout")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/energia/jobcardprojectshome/inprogress") <i class=" activarAzul material-icons">reply</i>
+			else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/energia/jobcardprojectshome/inprogress") <i class=" activarAzul material-icons">reply</i>
+		if(StockPessoal.length == 0)
+			p.center-align.selmecAzul.bold <span data-i18n="demo.manutencao_form.seminfostockpessoal"></span>
+		else
+			if(posicaoitemdisponivel == -1)
+				p.center-align.selmecAzul.bold <span data-i18n="demo.manutencao_form.seminfostockpessoalquantidadedisponivel"></span>
+			else
+				form#ttnumberform(class="col s12")
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") Spares Used
+					.row#recolherdados(style="margin-bottom:0px" dadosreferenciajobcard="#{Jobcard._id}" dadosjobtype="#{Jobcard.jobcard_jobtype}" dadosstockpessoal="#{DadosStockPessoal}" detalhescall="#{JSON.stringify(Jobcard.jobcard_call)}" dadosspareusedinfo="#{DadosSpareusedInfo}")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="jobcard_itemid") <span data-i18n="demo.manutencao_form.item"></span>
+							select.browser-default(name="jobcard_itemid", id="jobcard_itemid")
+								option(value="" disabled selected) Escolha a opção
+								-for(var i=0; i<StockPessoal[0].disponibilidade.length; i++)
+									-if(StockPessoal[0].disponibilidade[i].disponivel > 0)
+										option(value="#{StockPessoal[0].disponibilidade[i].referencia}") #{StockPessoal[0].disponibilidade[i].description_item}
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="jobcard_quantityhave") <span data-i18n="demo.manutencao_form.quantityhave"></span>
+							input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_quantityhave" ,name="jobcard_quantityhave", readonly)
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:0px")
+							label(for="jobcard_itemowner") Spare Owner
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_itemowner" ,name="jobcard_itemowner", readonly)
+						.col.s12.m6.input-field#jobcard_quantityusefield.hide(style="margin-top:0px")
+							label(for="jobcard_quantityuse") <span data-i18n="demo.manutencao_form.quantityuse"></span>
+							input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_quantityuse" ,name="jobcard_quantityuse",  min="0", class="quantyy")
+						.col.s12.m6#jobcard_itemnrseriefield.hide(style="margin-top:-10px")
+							label(for="jobcard_itemnrserie") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+							select.browser-default(name="jobcard_itemnrserie", id="jobcard_itemnrserie")
+								option(value="" disabled selected) Escolha a opção
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field.jobcard_itemphotofield.hide(style="margin-top:-6px")
+							<span data-i18n="demo.manutencao_form.imagemspare"></span>
+							input.preencher(type="file", id="jobcard_itemphoto", name="jobcard_itemphoto",autocomplete="off" style="padding:5px")
+						.col.s12.m6#jobcard_itemreplacefield.hide(style="margin-top:-7px")
+							label(for="jobcard_itemreplace") <span data-i18n="demo.manutencao_form.itemreplace"></span>
+							select.browser-default(name="jobcard_itemreplace", id="jobcard_itemreplace")
+								option#jobcard_itemreplaceop1(value="" disabled selected) Escolha a opção
+								option#jobcard_itemreplaceopsim(value="Sim") Sim
+								option#jobcard_itemreplaceopnao(value="Nao") Não
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field#mostrarReplaceSpareNrSerieInput.hide(style="margin-top:14px")
+							label(for="jobcard_nomeitemreplaceinput") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_nomeitemreplaceinput" ,name="jobcard_nomeitemreplaceinput")
+						.col.s12.m6#mostrarReplaceSpareNrSerieSelect.hide(style="margin-top:2px")
+							label(for="jobcard_nomeitemreplaceselect") <span data-i18n="demo.manutencao_form.serialized"></span>
+							select.browser-default(name="jobcard_nomeitemreplaceselect", id="jobcard_nomeitemreplaceselect")
+								option(value="" disabled selected) Escolha a opção
+						.col.s12.m6.input-field.mostrarRazaoReplaceSpareReason.hide(style="margin-top:14px")
+							label(for="jobcard_itemreplacereason") <span data-i18n="demo.manutencao_form.itemreplacereason"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_itemreplacereason" ,name="jobcard_itemreplacereason")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field.mostrarRazaoReplaceSpareReason.hide(style="margin-top:-6px")
+							<span data-i18n="demo.manutencao_form.imagemsparereplace"></span>
+							input.preencher(type="file", id="jobcard_itemreplacephoto", name="jobcard_itemreplacephoto",autocomplete="off" style="padding:5px")
+					button(type="button", id="jobcardspares_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	if Projects
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") Spares Used
+			.row#recolherdados(style="margin-bottom:0px" dadosreferenciaproject="#{Projects._id}" dadosstockpessoal="#{DadosStockPessoal}" dadosspareusedinfo="#{DadosSpareusedInfo}" dadosprojecto="#{DadosProjectos}")
+				if(Projects.jobcard_site.length > 1)
+					.col.s12.m6(style="margin-top:2px")
+						label(for="jobcard_sitecontrolador") Site
+						select.browser-default(name="jobcard_sitecontrolador", id="jobcard_sitecontrolador")
+							option(value="" disabled selected) Escolha a opção
+							-for(var i=0; i<Projects.jobcard_site.length; i++)
+								-if(Projects.jobcard_site.length > 0)
+									option(value="#{Projects.jobcard_site[i]}") #{Projects.jobcard_site[i]}
+				else
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_sitecontrolador1") Site
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" , id="jobcard_sitecontrolador1",name="jobcard_sitecontrolador1", value="#{Projects.jobcard_site[0]}" readonly)
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_itemid") <span data-i18n="demo.manutencao_form.item"></span>
+					select.browser-default(name="jobcard_itemid", id="jobcard_itemid")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<StockPessoal.disponibilidade.length; i++)
+							-if(StockPessoal.disponibilidade[i].disponivel > 0)
+								option(value="#{StockPessoal.disponibilidade[i].referencia}") #{StockPessoal.disponibilidade[i].description_item}
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:22px")
+					label(for="jobcard_quantityhave") <span data-i18n="demo.manutencao_form.quantityhave"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_quantityhave" ,name="jobcard_quantityhave", readonly)
+				.col.s12.m6.input-field#jobcard_quantityusefield.hide(style="margin-top:22px")
+					label(for="jobcard_quantityuse") <span data-i18n="demo.manutencao_form.quantityuse"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_quantityuse" ,name="jobcard_quantityuse",  min="0", class="quantyy")
+				.col.s12.m6#jobcard_itemnrseriefield.hide(style="margin-top:7px")
+					label(for="jobcard_itemnrserie") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+					select.browser-default(name="jobcard_itemnrserie", id="jobcard_itemnrserie")
+						option(value="" disabled selected) Escolha a opção
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field.jobcard_itemphotofield.hide(style="margin-top:3px")
+					<span data-i18n="demo.manutencao_form.imagemspare"></span>
+					input.preencher(type="file", id="jobcard_itemphoto", name="jobcard_itemphoto",autocomplete="off" style="padding:5px")
+				.col.s12.m6#jobcard_itemreplacefield.hide(style="margin-top:3px")
+					label(for="jobcard_itemreplaceproject") <span data-i18n="demo.manutencao_form.itemreplace"></span>
+					select.browser-default(name="jobcard_itemreplaceproject", id="jobcard_itemreplaceproject")
+						option#jobcard_itemreplaceop1(value="" disabled selected) Escolha a opção
+						option#jobcard_itemreplaceopsim(value="Sim") Sim
+						option#jobcard_itemreplaceopnao(value="Nao") Não
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field#mostrarReplaceSpareNrSerieInput.hide(style="margin-top:14px")
+					label(for="jobcard_nomeitemreplaceinput") <span data-i18n="demo.manutencao_form.itemnrserie"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_nomeitemreplaceinput" ,name="jobcard_nomeitemreplaceinput")
+				.col.s12.m6#mostrarReplaceSpareNrSerieSelect.hide(style="margin-top:2px")
+					label(for="jobcard_nomeitemreplaceselect") <span data-i18n="demo.manutencao_form.serialized"></span>
+					select.browser-default(name="jobcard_nomeitemreplaceselect", id="jobcard_nomeitemreplaceselect")
+						option(value="" disabled selected) Escolha a opção
+				.col.s12.m6.input-field.mostrarRazaoReplaceSpareReason.hide(style="margin-top:14px")
+					label(for="jobcard_itemreplacereason") <span data-i18n="demo.manutencao_form.itemreplacereason"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_itemreplacereason" ,name="jobcard_itemreplacereason")
+			.row.mostrarRazaoReplaceSpareReason.hide(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:-3px")
+					<span data-i18n="demo.manutencao_form.imagemsparereplace"></span>
+					input.preencher(type="file", id="jobcard_itemreplacephoto", name="jobcard_itemreplacephoto",autocomplete="off" style="padding:5px")
+			button(type="button", id="jobcardsparesproject_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

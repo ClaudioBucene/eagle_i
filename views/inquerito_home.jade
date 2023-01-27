@@ -1,0 +1,39 @@
+extends layout
+block content
+	.row(style="margin-top:15px;margin-bottom: 0px !important;")
+		.row
+			div(class="fixed-action-btn horizontal fixed-add-bottom")
+				a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="add new ttnumber", class="btn-floating btn-large waves-effect waves-light", href="/inquerito/novo") <i class=" activarAzul material-icons">add</i>
+			if Respostas.length == 0
+				p.center-align.selmecAzul.bold Empty!
+			else
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.inquerito_form.listarespostas"></span>
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold
+				table.responsive-table.bordered.striped
+					thead
+						tr.selmecAzul
+							th <span data-i18n="demo.inquerito_form.nome"></span>
+							th <span data-i18n="demo.inquerito_form.data"></span>
+							th
+					tbody(id="myTableUser1")
+						-for(var index = 0; index < Respostas.length; index++)
+							tr.highlight(style="font-family:;color:#12375c")
+								td #{Respostas[index].signature}
+								td #{Respostas[index].data}
+								td
+									a.tooltipped.pointer.imprimirform(href="/inquerito/imprimirFormulario/#{Respostas[index]._id}", style="margin-left: 30px; color:green",data-position="top", data-delay="10", data-tooltip="Print", data-user-new="#{Respostas[index]._id}") <i class="material-icons selmecAzul">print</i>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setInterval(function(){document.getElementById("inqueritoId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

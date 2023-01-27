@@ -1,0 +1,75 @@
+extends layout
+block content
+	.container.seccao.white
+		-if(Po_data.length>0)
+			.fixed-action-btn.top.fixed-add-bottom
+					a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+					ul(id="extrair", dados=stockData2)
+						li
+							a.btn-floating.pointer.activarAzul#xtrair_relatorio(data-position="left", data-delay="10", data-tooltip="Registar nova transferencia ", class="btn-floating btn-large waves-effect waves-light", valor="#{pacote}") <i class="material-icons activarVerde">file_download</i>
+		if !Po_data || ! Po_data.length
+			p.center-align.selmecAzul.bold Vazio!
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Lista de P.O
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.Po_home.numero_po"></span>
+						th <span data-i18n="demo.Po_home.requisitado_por"></span>
+						th Total
+						th <span data-i18n="demo.Po_home.Data_registo"></span>
+						th Status
+						th
+				tbody(id="myTable")
+					-for(var index = (Po_data.length-1), j=0; index>=0 && j<100 ; index--, j++)
+						tr.highlight(data-funcionario="#{Po_data[index]._id}", data-nome="#{Po_data[index].nome}",style="color:#{Po_data[index].observacao}")
+							td #{Po_data[index].po_number? Po_data[index].po_number: "   ****"}
+							td #{Po_data[index].requested_by}
+							td MZN #{Po_data[index].valor_em_metical}
+							td #{((Po_data[index].data_po).getDate()<10? '0'+(Po_data[index].data_po).getDate():(Po_data[index].data_po).getDate())+'/'+(((Po_data[index].data_po).getMonth()+1)<10? ('0'+((Po_data[index].data_po).getMonth()+1)):((Po_data[index].data_po).getMonth()+1))+'/'+((Po_data[index].data_po).getFullYear())+'   '+((Po_data[index].data_po).getHours()<10? ('0'+(Po_data[index].data_po).getHours()): (Po_data[index].data_po).getHours() )+' : '+((Po_data[index].data_po).getMinutes()<10? ('0'+(Po_data[index].data_po).getMinutes()):(Po_data[index].data_po).getMinutes())}							
+							td 
+								-if (Po_data[index].estagio.length <2)
+									img(style='width:25px;' src='/img/glasshour.png')
+								-else
+									-if(Po_data[index].estagio[1]==1 && Po_data[index].estagio[Po_data[index].estagio.length-1]!=0)
+										img(style='width:30px;' src='/img/checked2.png')
+									-else
+										img(style='width:30px;' src='/img/dinied.png')
+							td
+								a.pointer.info.tooltipped(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Detalhes da P.O", href="/purchase_order/detalhes/#{Po_data[index]._id}") <i class="material-icons activarVerde">info</i>
+								-var temp = Po_data[index].estagio.length
+								-if ((DataU.nome==Po_data[index].intervenientes[temp])&&(Po_data[index].estagio.length<2)&&(!Po_data[index].returned))
+									a.tooltipped.pointer.aprovar_po(style="margin-left: 30px; color:green",data-position="top", data-delay="10", data-tooltip="Aprovar P.O", data-user-id="#{Po_data[index].marca_modelo}", data-user-new="#{Po_data[index]._id}") <i class="material-icons bold">thumb_up</i>
+									a.tooltipped.pointer.reprovar_po(style="margin-left: 20px; color:red",data-position="top", data-delay="10", data-tooltip="Reprovar P.O", data-user-id="#{Po_data[index].marca_modelo}", data-user-new="#{Po_data[index]._id}") <i class="material-icons bold">thumb_down</i>
+									a.pointer.returnPoo(style="margin-left: 20px; color:blue",data-position="top", data-delay="10", data-tooltip="", data-user-id="#{Po_data[index].marca_modelo}", data-user-new="#{Po_data[index]._id}") <i class="material-icons bold">replay</i>
+								-if ((Po_data[index].actual_situation!="reprovado")&&(Po_data[index].estagio.length <3)&&(DataU.nome==Po_data[index].requested_by) )
+									a.tooltipped.pointer.cancelarr_po(style="margin-left: 20px; color:orange",data-position="top", data-delay="10", data-tooltip="Cancelar P.O", data-user-id="#{Po_data[index].marca_modelo}", data-user-new="#{Po_data[index]._id}") <i class="material-icons bold">delete_forever</i>
+
+								-if ((DataU.nome==Po_data[index].intervenientes[temp])&&(Po_data[index].estagio.length<3)&&(Po_data[index].actual_situation=="aprovado"))
+									a.tooltipped.pointer(style="margin-left: 20px; color:green",data-position="top",href="/purchase_order/receiving/#{Po_data[index]._id}", data-delay="10", data-tooltip="Receber mercadoria", data-user-new="#{Po_data[index]._id}") <img src="/img/recebergods.png" style="width:25px"></img>
+									
+								-if ((DataU.nome==Po_data[index].intervenientes[0])&&(Po_data[index].estagio.length==1)&&(Po_data[index].returned_reason))
+									a.pointer.editar_purchase_order(style="margin-left: 20px; color:green",data-position="top", data-delay="10", data-tooltip="editar a P.O", data-user-id="", data-user-new="#{Po_data[index]._id}") <i class="material-icons bold">edit</i>
+								-if (Po_data[index].po_number)
+									a.tooltipped.pointer#reporters_Po(style="margin-left: 20px; color:green",data-position="top", valor="#{Po_data[index]._id}", data-delay="10", data-tooltip="Receber mercadoria", data-user-new="#{Po_data[index]._id}") <i class="material-icons bold">assignment</i>
+									
+								
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

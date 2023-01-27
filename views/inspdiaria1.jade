@@ -1,0 +1,254 @@
+extends layout
+block content
+	.container.white
+		form(id="regForm", method="post", style="color:#12375c")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Formulário de Inpsecção diária
+				.row.tab
+					.input-field.col.s12(oninput="this.className = ''")
+						i.material-icons.prefix person
+						label(for="motorista") Motorista<span class="red-text">*</span>
+						input(id="motorista", autocomplete="off",style="font-family:arial; ",readonly, type="text", name="motorista", value="#{veiculos? veiculos[0].motorista:DataU.nome}")
+					.input-field.col.s12(oninput="this.className = ''")
+						i.material-icons.prefix note
+						label(for="Matricula") matricula<span class="red-text">*</span>
+						input.preencher(type="text", id="matricula",style="font-family:arial; ", readonly,name="Matricula", value="#{veiculos ? veiculos[0].matricula:DataU.matricula}")
+					.input-field.col.s12(oninput="this.className = ''")
+						i.material-icons.prefix.left today
+						label(for="dataNasc") Data<span class="red-text bold">*</span>
+						if veiculos
+							input(type="text", class="datepicker", value="#{(veiculos[0].data.getDate()+'/'+(veiculos[0].data.getMonth()+1)+'/'+veiculos[0].data.getFullYear())}", readonly,style="font-family:arial; color:#12375c")
+						else
+							input.preencher(type="text", class="datepicker",  id="data", name="Data", value= "#{veiculos? (veiculos[0].data.getDate()+'/'+(veiculos[0].data.getMonth()+1)+'/'+veiculos[0].data.getFullYear()):' '}")
+				.row.tab
+					.col.s12
+							label(for="parabrisas") Pára-brisa<span class="red-text">*</span>
+							select.browser-default(name="parabrisas", id="parabrisas", style="font-family:arial", oninput="this.className = ''")
+								if veiculos
+									if veiculos[0].parabrisas == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].parabrisas == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12
+							label(for="porcas") Porcas
+							select.browser-default(name="porcas", id="porcas", style="font-family:arial")
+								if veiculos
+									if veiculos[0].porcas == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].porcas == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12
+							label(for="paneus") Pneus
+							select.browser-default(name="pneus", id="pneus", style="font-family:arial")
+								if veiculos
+									if veiculos[0].pneus == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].pneus == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+				.row.tab
+					.col.s12
+							label(for="parafusos") Parafusos
+							select.browser-default(name="parafusos", id="parafusos", style="font-family:arial")
+								if veiculos
+									if veiculos[0].parafusos == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].parafusos == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12
+							label(for="sinalizacao") Sinalização
+							select.browser-default(name="sinalizacao", id="sinalizacao", style="font-family:arial")
+								if veiculos
+									if veiculos[0].sinalizacao == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].sinalizacao == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12
+							label(for="buzina") Buzina (Normal e Marcha Atrás)
+							select.browser-default(name="buzina", id="buzina", style="font-family:arial")
+								if veiculos
+									if veiculos[0].buzina == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].buzina == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+				.row.tab
+					.col.s12
+							label(for="liquido") Liquido
+							select.browser-default(name="liquido", id="liquido", style="font-family:arial")
+								if veiculos
+									if veiculos[0].liquido == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].liquido == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12
+							label(for="kit_maos") bluetooth
+							select.browser-default(name="kit_maos", id="kit_maos", style="font-family:arial")
+								if veiculos
+									if veiculos[0].kit_maos == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].kit_maos == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12
+							label(for="camera") camera
+							select.browser-default(name="camera", id="camera", style="font-family:arial")
+								if veiculos
+									if veiculos[0].camera == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if veiculos[0].camera == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+				.row.tab
+					.input-field.col.s12
+						.material-icons.prefix mode_edit
+						textarea#observacao.materialize-textarea(style="font-family:arial; color:#12375c" ) #{veiculos? veiculos[0].observacao: ''}
+						if veiculos
+							label(for="icon_prefix2") Observação
+						else
+							label(for="icon_prefix2") Escreva sua Observação
+				.row.tab(style="margin-top:7px !important")
+						if !veiculos
+							.col.s12.m6.center(style="margin-bottom: 10px;")
+								button#captar(type="button", class="btn center waves-efect waves-light") registar
+							.col.s12.m6.center
+								button#cancelar1(type="button", class="btn waves-efect waves-light red") cancelar
+						else
+							.col.s12.center
+								butoon#voltarDiario(type="button", class="btn waves-efect waves-light activarAzul") << Voltar
+				.row(style="overflow:none;margin-top:20px")
+					.row()
+						.col.s6.center(style="margin-bottom: 10px;")
+							button#prevBtn(type="button", class="btn center waves-efect waves-light activarAzul", onclick="nextPrev(-1)") <i class="material-icons activarVerde">fast_rewind</i>
+						.col.s6.center
+							button#nextBtn(type="button", class="btn waves-efect waves-light activarAzul", onclick="nextPrev(1)")
+				.row(style="text-align:center;margin-top:40px;")
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+
+		block js
+		script.
+			var current_fs, next_fs, previous_fs;
+			var left, opacity, scale;
+			var animating;
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+			next_fs.show(); 
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			scale = 1 - (1 - now) * 0.2;
+			left = (now * 50)+"%";
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'absolute'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 	easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx)
+			scale = 0.8 + (1 - now) * 0.2;
+			left = ((1-now) * 50)+"%";
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})

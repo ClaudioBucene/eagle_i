@@ -1,0 +1,2738 @@
+extends layout
+block content
+	.row
+		form(id="msform", style="color:#12375c;")
+			fieldset
+				h2(class="fs-title selmecAzul") <span data-i18n="demo.inspdiaria_form.dados_gerais"></span>
+					.row
+						.input-field.col.s12.m6
+							i.material-icons.prefix.selmecAzul person
+							label(for="operator") checked by
+							input(id="operator", autocomplete="off",readonly, type="text", name="operator", value="#{Site? Site[0].operator:DataU.nome}")
+						.input-field.col.s12.m6
+							i.material-icons.prefix.selmecAzul note
+							label(for="company") Company
+							input.preencher(type="text", id="company", readonly,name="company", value="COMSERV")
+						.input-field.col.s12.m6
+							i.material-icons.prefix.selmecAzul date_range
+							label(for="dateChecked") <span data-i18n="demo.inspdiaria_form.data_hora"></span>
+							input.preencher(type="text", id="dateChecked", readonly,name="dateChecked", value="#{Site? Site[0].dateChecked : ((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours()<10? ('0'+(new Date()).getHours()): (new Date()).getHours() )+' : '+((new Date()).getMinutes()<10? ('0'+(new Date()).getMinutes()):(new Date()).getMinutes())}")
+						.input-field.col.s12.m6
+							i.material-icons.prefix.selmecAzul edit
+							label(for="checkedBy") ckecked by
+							input.preencher(type="text", id="checkedBy",  name="checkedBy", value="#{Site ? Site[0].checkedBy:''}")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title selmecAzul") Location site
+					.row
+						.input-field.col.s12.m6
+							label(for="siteNumber") Site Number
+							input.preencher(id="siteNumber", autocomplete="off", type="text", name="siteNumber", value="#{Site? Site[0].siteNumber:''}")
+						.input-field.col.s12.m6
+							label(for="siteName") Site Name
+							input.preencher(type="text", id="siteName", name="siteName",autocomplete="off", value="#{Site ? Site[0].siteName:''}")
+						.input-field.col.s12.m6
+							label(for="siteType") Site Type
+							input.preencher(type="text", id="siteType",  name="siteType", autocomplete="off", value="#{Site ? Site[0].siteType: ''}")
+						//- .col.s12.m6
+						//- 	label(for="nome_pai") Nome do Pai
+						//- 	input(type="file" id="nome_pai" multiple name="nome_pai")
+						.input-field.col.s12.m6
+							label(for="ticketNumber") TT Number
+							input.preencher(type="text", id="ticketNumber", name="ticketNumber", autocomplete="off", value="#{Site? Site[0].ticketNumber : ''}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") vehicle is safe 
+				.row
+					.row(id="veiculo_safe")
+						if Site
+							if Site[0].safetyOb.veiculo_safe=="ok"
+								.col.s12
+									span.
+										1.Ensure that the vehicle is safe and secure before commencing with work.<br>
+								.col.s6
+									input.bom(type="radio" id="carrocariaok" name="veiculo_safe" checked value="ok")
+									label(for="carrocariaok") ok					
+								.col.s6
+									input.mau(type="radio", id="carrocarianotok", name='veiculo_safe', value="not ok")
+									label(for="carrocarianotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="veiculo_safe_comment") Comments
+									input(id="veiculo_safe_comment", autocomplete="off", type="text", name="veiculo_safe_comment", value="#{Site? Site[0].safetyOb.veiculo_safe_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].safetyOb.veiculo_safe_image}")
+							else
+								.col.s12
+									span.
+										1.Ensure that the vehicle is safe and secure before commencing with work.<br>
+								.col.s6
+									input.bom(type="radio" id="carrocariaok" name="veiculo_safe"  value="ok")
+									label(for="carrocariaok") ok					
+								.col.s6
+									input.mau(type="radio", id="carrocarianotok", name='veiculo_safe', checked value="not ok")
+									label(for="carrocarianotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="veiculo_safe_comment") Comments
+									input(id="veiculo_safe_comment", autocomplete="off", type="text", name="veiculo_safe_comment", value="#{Site? Site[0].safetyOb.veiculo_safe_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].safetyOb.veiculo_safe_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") personnel are safe 
+				.row
+					.row(id="people_safe")
+						if Site
+							if Site[0].safetyOb.people_safe=="ok"
+								.col.s12
+									span.
+										2. Ensure that all personnel are safe before commencing with work.<br>
+								.col.s6
+									input.bom(type="radio" id="personnelsafeok" name="people_safe" checked value="ok")
+									label(for="personnelsafeok") ok					
+								.col.s6
+									input.mau(type="radio", id="personnelsafenotok", name='people_safe', value="not ok")
+									label(for="personnelsafenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="people_safe_comment") Comments
+									input(id="people_safe_comment", autocomplete="off", type="text", name="people_safe_comment", value="#{Site? Site[0].safetyOb.people_safe_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].safetyOb.People_safe_image}")
+							else
+								.col.s12
+									span.
+										2. Ensure that all personnel are safe before commencing with work.<br>
+								.col.s6
+									input.bom(type="radio" id="personnelsafeok" name="people_safe"  value="ok")
+									label(for="personnelsafeok") ok
+								.col.s6
+									input.mau(type="radio", id="personnelsafenotok", name='people_safe', checked value="not ok")
+									label(for="personnelsafenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="people_safe_comment") Comments
+									input(id="people_safe_comment", autocomplete="off", type="text", name="people_safe_comment", value="#{Site? Site[0].safetyOb.people_safe_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].safetyOb.People_safe_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") Wear hard hat on site.
+				.row
+					.row(id="red_hat")
+						if Site
+							if Site[0].safetyOb.red_hat=="ok"
+								.col.s12
+									span.
+										3. Wear hard hat on site.
+								.col.s6
+									input.bom(type="radio" id="redhatok" name="red_hat" checked value="ok")
+									label(for="redhatok") ok					
+								.col.s6
+									input.mau(type="radio", id="redhatnotok", name='red_hat', value="not ok")
+									label(for="redhatnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="red_hat_comment") Comments
+									input(id="red_hat_comment", autocomplete="off", type="text", name="red_hat_comment", value="#{Site? Site[0].safetyOb.red_hat_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].safetyOb.red_hat_image}")
+							else
+								.col.s12
+									span.
+										3. Wear hard hat on site.
+								.col.s6
+									input.bom(type="radio" id="redhatok" name="red_hat"  value="ok")
+									label(for="redhatok") ok
+								.col.s6
+									input.mau(type="radio", id="redhatnotok", name='red_hat', checked value="not ok")
+									label(for="redhatnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="red_hat_comment") Comments
+									input(id="red_hat_comment", autocomplete="off", type="text", name="red_hat_comment", value="#{Site? Site[0].safetyOb.red_hat_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].safetyOb.red_hat_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") Fall-Arrest devices 
+				.row
+					.row(id="fall_Arrest_devices")
+						if Site
+							if Site[0].safetyOb.fall_Arrest_devices=="ok"
+								.col.s12
+									span.
+										4. Inspect all Fall-Arrest devices for safeness before using it.<br>
+								.col.s6
+									input.bom(type="radio" id="fallarrestok" name="fall_Arrest_devices"   checked value="ok")
+									label(for="fallarrestok") ok					
+								.col.s6
+									input.mau(type="radio", id="fallarrestnotok", name='fall_Arrest_devices', value="not ok")
+									label(for="fallarrestnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fall_Arrest_devices_comment") Comments
+									input(id="fall_Arrest_devices_comment", autocomplete="off", type="text", name="fall_Arrest_devices_comment", value="#{Site? Site[0].safetyOb.fall_Arrest_devices_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].safetyOb.fall_Arrest_devices_image}")
+							else
+								.col.s12
+									span.
+										4. Inspect all Fall-Arrest devices for safeness before using it.<br>
+								.col.s6
+									input.bom(type="radio" id="fallarrestok" name="fall_Arrest_devices"  value="ok")
+									label(for="fallarrestok") ok
+								.col.s6
+									input.mau(type="radio", id="fallarrestnotok", name='fall_Arrest_devices', checked value="not ok")
+									label(for="fallarrestnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fall_Arrest_devices_comment") Comments
+									input(id="fall_Arrest_devices_comment", autocomplete="off", type="text", name="fall_Arrest_devices_comment")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].safetyOb.fall_Arrest_devices_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 1. Check all connections.
+				.row
+					.row(id="connections")
+						if Site
+							if Site[0].EDBoardOb.connections=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="connectionsok" name="connections" checked value="ok")
+									label(for="connectionsok") ok					
+								.col.s6
+									input.mau(type="radio", id="connectionsnotok", name='connections', value="not ok")
+									label(for="connectionsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="connections_comment") Comments
+									input(id="connections_comment", autocomplete="off", type="text", name="connections_comment", value="#{Site? Site[0].EDBoardOb.connections_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.Connection_image}")
+							else
+								.col.s12
+									span.
+									
+								.col.s6
+									input.bom(type="radio" id="connectionsok" name="connections"  value="ok")
+									label(for="connectionsok") ok					
+								.col.s6
+									input.mau(type="radio", id="connectionsnotok", name='connections', checked value="not ok")
+									label(for="connectionsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="connections_comment") Comments
+									input(id="connections_comment", autocomplete="off", type="text", name="connections_comment", value="#{Site? Site[0].EDBoardOb.connections_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.Connection_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 2.Check funtioning of energy meters.
+				.row
+					.row(id="energy_meter")
+						if Site
+							if Site[0].EDBoardOb.energy_meter=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="energy_meterok" name="energy_meter" checked value="ok")
+									label(for="energy_meterok") ok					
+								.col.s6
+									input.mau(type="radio", id="energy_meternotok", name='energy_meter', value="not ok")
+									label(for="energy_meternotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="energy_meter_comment") Comments
+									input(id="energy_meter_comment", autocomplete="off", type="text", name="energy_meter_comment", value="#{Site? Site[0].EDBoardOb.energy_meter_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.energy_meter_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="energy_meterok" name="energy_meter"  value="ok")
+									label(for="energy_meterok") ok
+								.col.s6
+									input.mau(type="radio", id="energy_meternotok", name='energy_meter', checked value="not ok")
+									label(for="energy_meternotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="energy_meter_comment") Comments
+									input(id="energy_meter_comment", autocomplete="off", type="text", name="energy_meter_comment", value="#{Site? Site[0].EDBoardOb.energy_meter_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.energy_meter_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 3. Check operation of all switching mechanisms.
+				.row
+					.row(id="switching_mec")
+						if Site
+							if Site[0].EDBoardOb.switching_mec=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="switching_mecok" name="switching_mec" checked value="ok")
+									label(for="switching_mecok") ok					
+								.col.s6
+									input.mau(type="radio", id="switching_mecnotok", name='switching_mec', value="not ok")
+									label(for="switching_mecnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="switching_mec_comment") Comments
+									input(id="switching_mec_comment", autocomplete="off", type="text", name="switching_mec_comment", value="#{Site? Site[0].EDBoardOb.switching_mec_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.switching_mec_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="switching_mecok" name="switching_mec"  value="ok")
+									label(for="switching_mecok") ok
+								.col.s6
+									input.mau(type="radio", id="switching_mecnotok", name='switching_mec', checked value="not ok")
+									label(for="switching_mecnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="switching_mec_comment") Comments
+									input(id="switching_mec_comment", autocomplete="off", type="text", name="switching_mec_comment", value="#{Site? Site[0].EDBoardOb.switching_mec_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.switching_mec_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 4.Check all holes on distribution board and sleeves.
+				.row
+					.row(id="d_board_sleeves")
+						if Site
+							if Site[0].EDBoardOb.d_board_sleeves=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="d_board_sleevesok" name="d_board_sleeves" checked value="ok")
+									label(for="d_board_sleevesok") ok					
+								.col.s6
+									input.mau(type="radio", id="d_board_sleevesnotok", name='d_board_sleeves', value="not ok")
+									label(for="d_board_sleevesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="d_board_sleeves_comment") Comments
+									input(id="d_board_sleeves_comment", autocomplete="off", type="text", name="d_board_sleeves_comment", value="#{Site? Site[0].EDBoardOb.d_board_sleeves_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.d_board_sleeves_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="d_board_sleevesok" name="d_board_sleeves"  value="ok")
+									label(for="d_board_sleevesok") ok
+								.col.s6
+									input.mau(type="radio", id="d_board_sleevesnotok", name='d_board_sleeves', checked value="not ok")
+									label(for="d_board_sleevesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="d_board_sleeves_comment") Comments
+									input(id="d_board_sleeves_comment", autocomplete="off", type="text", name="d_board_sleeves_comment", value="#{Site? Site[0].EDBoardOb.d_board_sleeves_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.d_board_sleeves_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 5.Check site light and switch operation.
+				.row
+					.row(id="light_switch")
+						if Site
+							if Site[0].EDBoardOb.light_switch=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="light_switchok" name="light_switch" checked value="ok")
+									label(for="light_switchok") ok					
+								.col.s6
+									input.mau(type="radio", id="light_switchnotok", name='light_switch', value="not ok")
+									label(for="light_switchnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="light_switch_comment") Comments
+									input(id="light_switch_comment", autocomplete="off", type="text", name="light_switch_comment", value="#{Site? Site[0].EDBoardOb.light_switch_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.light_switch_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="light_switchok" name="light_switch"  value="ok")
+									label(for="light_switchok") ok
+								.col.s6
+									input.mau(type="radio", id="light_switchnotok", name='light_switch', checked value="not ok")
+									label(for="light_switchnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="light_switch_comment") Comments
+									input(id="light_switch_comment", autocomplete="off", type="text", name="light_switch_comment", value="#{Site? Site[0].EDBoardOb.light_switch_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.light_switch_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 7. Inspect paintwork on DB and sitelight pole.
+				.row
+					.row(id="paintwork_sitelight")
+						if Site
+							if Site[0].EDBoardOb.paintwork_sitelight=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="paintwork_sitelightok" name="paintwork_sitelight" checked value="ok")
+									label(for="paintwork_sitelightok") ok					
+								.col.s6
+									input.mau(type="radio", id="paintwork_sitelightnotok", name='paintwork_sitelight', value="not ok")
+									label(for="paintwork_sitelightnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="paintwork_sitelight_comment") Comments
+									input(id="paintwork_sitelight_comment", autocomplete="off", type="text", name="paintwork_sitelight_comment", value="#{Site? Site[0].EDBoardOb.paintwork_sitelight_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.paintwork_sitelight_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="paintwork_sitelightok" name="paintwork_sitelight"  value="ok")
+									label(for="paintwork_sitelightok") ok
+								.col.s6
+									input.mau(type="radio", id="paintwork_sitelightnotok", name='paintwork_sitelight', checked value="not ok")
+									label(for="paintwork_sitelightnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="paintwork_sitelight_comment") Comments
+									input(id="paintwork_sitelight_comment", autocomplete="off", type="text", name="paintwork_sitelight_comment", value="#{Site? Site[0].EDBoardOb.paintwork_sitelight_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.paintwork_sitelight_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 7.Inspect AC Supplier meter box and report any defects.
+					.row(id="ac_supplier_defects")
+						if Site
+							if Site[0].EDBoardOb.ac_supplier_defects=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="ac_supplier_defectsok" name="ac_supplier_defects"   checked value="ok")
+									label(for="ac_supplier_defectsok") ok					
+								.col.s6
+									input.mau(type="radio", id="ac_supplier_defectsnotok", name='ac_supplier_defects', value="not ok")
+									label(for="ac_supplier_defectsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="ac_supplier_defects_comment") Comments
+									input(id="ac_supplier_defects_comment", autocomplete="off", type="text", name="ac_supplier_defects_comment", value="#{Site? Site[0].EDBoardOb.ac_supplier_defects_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.ac_supplier_defects_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="ac_supplier_defectsok" name="ac_supplier_defects"  value="ok")
+									label(for="ac_supplier_defectsok") ok
+								.col.s6
+									input.mau(type="radio", id="ac_supplier_defectsnotok", name='ac_supplier_defects', checked value="not ok")
+									label(for="ac_supplier_defectsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="ac_supplier_defects_comment") Comments
+									input(id="ac_supplier_defects_comment", autocomplete="off", type="text", name="ac_supplier_defects_comment",  value="#{Site? Site[0].EDBoardOb.ac_supplier_defects_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].EDBoardOb.ac_supplier_defects_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 1. Check container light.
+				.row
+					.row(id="container_light")
+						if Site
+							if Site[0].container.container_light=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="container_lightok" name="container_light" checked value="ok")
+									label(for="container_lightok") ok					
+								.col.s6
+									input.mau(type="radio", id="container_lightnotok", name='container_light', value="not ok")
+									label(for="container_lightnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="container_light_comment") Comments
+									input(id="container_light_comment", autocomplete="off", type="text", name="container_light_comment", value="#{Site? Site[0].container.container_light_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.container_light_image}")
+							else
+								.col.s12
+									span.
+									
+								.col.s6
+									input.bom(type="radio" id="container_lightok" name="container_light"  value="ok")
+									label(for="container_lightok") ok					
+								.col.s6
+									input.mau(type="radio", id="container_lightnotok", name='container_light', checked value="not ok")
+									label(for="container_lightnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="container_light_comment") Comments
+									input(id="container_light_comment", autocomplete="off", type="text", name="container_light_comment", value="#{Site? Site[0].container.container_light_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.container_light_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 2.Check all circuit breakers on internal DB if faulty.
+				.row
+					.row(id="circuit_breaker")
+						if Site
+							if Site[0].container.circuit_breaker=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="circuit_breakerok" name="circuit_breaker" checked value="ok")
+									label(for="circuit_breakerok") ok					
+								.col.s6
+									input.mau(type="radio", id="circuit_breakernotok", name='circuit_breaker', value="not ok")
+									label(for="circuit_breakernotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="circuit_breaker_comment") Comments
+									input(id="circuit_breaker_comment", autocomplete="off", type="text", name="circuit_breaker_comment", value="#{Site? Site[0].container.circuit_breaker_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.circuit_breaker_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="circuit_breakerok" name="circuit_breaker"  value="ok")
+									label(for="circuit_breakerok") ok
+								.col.s6
+									input.mau(type="radio", id="circuit_breakernotok", name='circuit_breaker', checked value="not ok")
+									label(for="circuit_breakernotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="circuit_breaker_comment") Comments
+									input(id="circuit_breaker_comment", autocomplete="off", type="text", name="circuit_breaker_comment", value="#{Site? Site[0].container.circuit_breaker_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.circuit_breaker_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 3.Check if all earth connections with anti-corrosion paste..
+				.row
+					.row(id="earth_connections")
+						if Site
+							if Site[0].container.earth_connections=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="earth_connectionsok" name="earth_connections" checked value="ok")
+									label(for="earth_connectionsok") ok					
+								.col.s6
+									input.mau(type="radio", id="earth_connectionsnotok", name='earth_connections', value="not ok")
+									label(for="earth_connectionsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="earth_connections_comment") Comments
+									input(id="earth_connections_comment", autocomplete="off", type="text", name="earth_connections_comment", value="#{Site? Site[0].container.earth_connections_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.earth_connections_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="earth_connectionsok" name="earth_connections"  value="ok")
+									label(for="earth_connectionsok") ok
+								.col.s6
+									input.mau(type="radio", id="earth_connectionsnotok", name='earth_connections', checked value="not ok")
+									label(for="earth_connectionsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="earth_connections_comment") Comments
+									input(id="earth_connections_comment", autocomplete="off", type="text", name="earth_connections_comment", value="#{Site? Site[0].container.earth_connections_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.earth_connections_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 4.Check roof for water ingress.
+				.row
+					.row(id="roof_water")
+						if Site
+							if Site[0].container.roof_water=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="roof_waterok" name="roof_water" checked value="ok")
+									label(for="roof_waterok") ok					
+								.col.s6
+									input.mau(type="radio", id="roof_waternotok", name='roof_water', value="not ok")
+									label(for="roof_waternotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="roof_water_comment") Comments
+									input(id="roof_water_comment", autocomplete="off", type="text", name="roof_water_comment", value="#{Site? Site[0].container.roof_water_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.roof_water_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="roof_waterok" name="roof_water"  value="ok")
+									label(for="roof_waterok") ok
+								.col.s6
+									input.mau(type="radio", id="roof_waternotok", name='roof_water', checked value="not ok")
+									label(for="roof_waternotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="roof_water_comment") Comments
+									input(id="roof_water_comment", autocomplete="off", type="text", name="roof_water_comment", value="#{Site? Site[0].container.roof_water_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.roof_water_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 5.Check paintwork.
+				.row
+					.row(id="paintwork")
+						if Site
+							if Site[0].container.paintwork=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="paintworkok" name="paintwork" checked value="ok")
+									label(for="paintworkok") ok					
+								.col.s6
+									input.mau(type="radio", id="paintworknotok", name='paintwork', value="not ok")
+									label(for="paintworknotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="paintwork_comment") Comments
+									input(id="paintwork_comment", autocomplete="off", type="text", name="paintwork_comment", value="#{Site? Site[0].container.paintwork_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.paintwork_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="paintworkok" name="paintwork"  value="ok")
+									label(for="paintworkok") ok
+								.col.s6
+									input.mau(type="radio", id="paintworknotok", name='paintwork', checked value="not ok")
+									label(for="paintworknotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="paintwork_comment") Comments
+									input(id="paintwork_comment", autocomplete="off", type="text", name="paintwork_comment", value="#{Site? Site[0].container.paintwork_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.paintwork_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 6.Check all joints,holes and cable entries
+				.row
+					.row(id="joints_cables_holes")
+						if Site
+							if Site[0].container.joints_cables_holes=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="joints_cables_holesok" name="joints_cables_holes" checked value="ok")
+									label(for="joints_cables_holesok") ok					
+								.col.s6
+									input.mau(type="radio", id="joints_cables_holesnotok", name='joints_cables_holes', value="not ok")
+									label(for="joints_cables_holesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="joints_cables_holes_comment") Comments
+									input(id="joints_cables_holes_comment", autocomplete="off", type="text", name="joints_cables_holes_comment", value="#{Site? Site[0].container.joints_cables_holes_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.joints_cables_holes_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="joints_cables_holesok" name="joints_cables_holes"  value="ok")
+									label(for="joints_cables_holesok") ok
+								.col.s6
+									input.mau(type="radio", id="joints_cables_holesnotok", name='joints_cables_holes', checked value="not ok")
+									label(for="joints_cables_holesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="joints_cables_holes_comment") Comments
+									input(id="joints_cables_holes_comment", autocomplete="off", type="text", name="joints_cables_holes_comment", value="#{Site? Site[0].container.joints_cables_holes_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.joints_cables_holes_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 7.Check transmission and radio equipment instalation
+					.row(id="transmission_radio")
+						if Site
+							if Site[0].container.transmission_radio=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="transmission_radiook" name="transmission_radio"   checked value="ok")
+									label(for="transmission_radiook") ok					
+								.col.s6
+									input.mau(type="radio", id="transmission_radionotok", name='transmission_radio', value="not ok")
+									label(for="transmission_radionotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="transmission_radio_comment") Comments
+									input(id="transmission_radio_comment", autocomplete="off", type="text", name="transmission_radio_comment", value="#{Site? Site[0].container.transmission_radio_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.transmission_radio_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="transmission_radiook" name="transmission_radio"  value="ok")
+									label(for="transmission_radiook") ok
+								.col.s6
+									input.mau(type="radio", id="transmission_radionotok", name='transmission_radio', checked value="not ok")
+									label(for="transmission_radionotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="transmission_radio_comment") Comments
+									input(id="transmission_radio_comment", autocomplete="off", type="text", name="transmission_radio_comment")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].container.transmission_radio_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 1.Check fan blades.
+				.row
+					.row(id="fan_blade")
+						if Site
+							if Site[0].airCond.fan_blade=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="fan_bladeok" name="fan_blade" checked value="ok")
+									label(for="fan_bladeok") ok					
+								.col.s6
+									input.mau(type="radio", id="fan_bladenotok", name='fan_blade', value="not ok")
+									label(for="fan_bladenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fan_blade_comment") Comments
+									input(id="fan_blade_comment", autocomplete="off", type="text", name="fan_blade_comment", value="#{Site? Site[0].airCond.fan_blade_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.fan_blade_image}")
+							else
+								.col.s12
+									span.
+									
+								.col.s6
+									input.bom(type="radio" id="fan_bladeok" name="fan_blade"  value="ok")
+									label(for="fan_bladeok") ok					
+								.col.s6
+									input.mau(type="radio", id="fan_bladenotok", name='fan_blade', checked value="not ok")
+									label(for="fan_bladenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fan_blade_comment") Comments
+									input(id="fan_blade_comment", autocomplete="off", type="text", name="fan_blade_comment", value="#{Site? Site[0].airCond.fan_blade_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.fan_blade_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 2.Check for any abnormal noise or vibration.
+				.row
+					.row(id="noise_vibration")
+						if Site
+							if Site[0].airCond.noise_vibration=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="noise_vibrationok" name="noise_vibration" checked value="ok")
+									label(for="noise_vibrationok") ok					
+								.col.s6
+									input.mau(type="radio", id="noise_vibrationnotok", name='noise_vibration', value="not ok")
+									label(for="noise_vibrationnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="noise_vibration_comment") Comments
+									input(id="noise_vibration_comment", autocomplete="off", type="text", name="noise_vibration_comment", value="#{Site? Site[0].airCond.noise_vibration_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.noise_vibration_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="noise_vibrationok" name="noise_vibration"  value="ok")
+									label(for="noise_vibrationok") ok
+								.col.s6
+									input.mau(type="radio", id="noise_vibrationnotok", name='noise_vibration', checked value="not ok")
+									label(for="noise_vibrationnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="noise_vibration_comment") Comments
+									input(id="noise_vibration_comment", autocomplete="off", type="text", name="noise_vibration_comment", value="#{Site? Site[0].airCond.noise_vibration_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.noise_vibration_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 3. Check all refrigerant lines.
+				.row
+					.row(id="refrigerant_line")
+						if Site
+							if Site[0].airCond.refrigerant_line=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="refrigerant_lineok" name="refrigerant_line" checked value="ok")
+									label(for="refrigerant_lineok") ok					
+								.col.s6
+									input.mau(type="radio", id="refrigerant_linenotok", name='refrigerant_line', value="not ok")
+									label(for="refrigerant_linenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="refrigerant_line_comment") Comments
+									input(id="refrigerant_line_comment", autocomplete="off", type="text", name="refrigerant_line_comment", value="#{Site? Site[0].airCond.refrigerant_line_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.refrigerant_line_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="refrigerant_lineok" name="refrigerant_line"  value="ok")
+									label(for="refrigerant_lineok") ok
+								.col.s6
+									input.mau(type="radio", id="refrigerant_linenotok", name='refrigerant_line', checked value="not ok")
+									label(for="refrigerant_linenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="refrigerant_line_comment") Comments
+									input(id="refrigerant_line_comment", autocomplete="off", type="text", name="refrigerant_line_comment", value="#{Site? Site[0].airCond.refrigerant_line_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.refrigerant_line_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 4.Ensure casing is properly sealed.
+				.row
+					.row(id="casing_sealed")
+						if Site
+							if Site[0].airCond.casing_sealed=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="casing_sealedok" name="casing_sealed" checked value="ok")
+									label(for="casing_sealedok") ok					
+								.col.s6
+									input.mau(type="radio", id="casing_sealednotok", name='casing_sealed', value="not ok")
+									label(for="casing_sealednotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="casing_sealed_comment") Comments
+									input(id="casing_sealed_comment", autocomplete="off", type="text", name="casing_sealed_comment", value="#{Site? Site[0].airCond.casing_sealed_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.casing_sealed_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="casing_sealedok" name="casing_sealed"  value="ok")
+									label(for="casing_sealedok") ok
+								.col.s6
+									input.mau(type="radio", id="casing_sealednotok", name='casing_sealed', checked value="not ok")
+									label(for="casing_sealednotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="casing_sealed_comment") Comments
+									input(id="casing_sealed_comment", autocomplete="off", type="text", name="casing_sealed_comment", value="#{Site? Site[0].airCond.casing_sealed_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.casing_sealed_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 5.Check for any rust on air conditioner.
+					.row(id="rust")
+						if Site
+							if Site[0].airCond.rust=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rustok" name="rust"   checked value="ok")
+									label(for="rustok") ok					
+								.col.s6
+									input.mau(type="radio", id="rustnotok", name='rust', value="not ok")
+									label(for="rustnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rust_comment") Comments
+									input(id="rust_comment", autocomplete="off", type="text", name="rust_comment", value="#{Site? Site[0].airCond.rust_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.rust_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rustok" name="rust"  value="ok")
+									label(for="rustok") ok
+								.col.s6
+									input.mau(type="radio", id="rustnotok", name='rust', checked value="not ok")
+									label(for="rustnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rust_comment") Comments
+									input(id="rust_comment", autocomplete="off", type="text", name="rust_comment",  value="#{Site? Site[0].airCond.rust_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].airCond.rust_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 1.Check A/W light functioning.
+				.row
+					.row(id="aw_light")
+						if Site
+							if Site[0].mast.aw_light=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aw_lightok" name="aw_light" checked value="ok")
+									label(for="aw_lightok") ok					
+								.col.s6
+									input.mau(type="radio", id="aw_lightnotok", name='aw_light', value="not ok")
+									label(for="aw_lightnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aw_light_comment") Comments
+									input(id="aw_light_comment", autocomplete="off", type="text", name="aw_light_comment", value="#{Site? Site[0].mast.aw_light_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.aw_light_image}")
+							else
+								.col.s12
+									span.
+									
+								.col.s6
+									input.bom(type="radio" id="aw_lightok" name="aw_light"  value="ok")
+									label(for="aw_lightok") ok					
+								.col.s6
+									input.mau(type="radio", id="aw_lightnotok", name='aw_light', checked value="not ok")
+									label(for="aw_lightnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aw_light_comment") Comments
+									input(id="aw_light_comment", autocomplete="off", type="text", name="aw_light_comment", value="#{Site? Site[0].mast.aw_light_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.aw_light_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 2.Ensure A/W light DB and fitting is secure on mast.
+				.row
+					.row(id="aw_light_db_fitting")
+						if Site
+							if Site[0].mast.aw_light_db_fitting=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aw_light_db_fittingok" name="aw_light_db_fitting" checked value="ok")
+									label(for="aw_light_db_fittingok") ok					
+								.col.s6
+									input.mau(type="radio", id="aw_light_db_fittingnotok", name='aw_light_db_fitting', value="not ok")
+									label(for="aw_light_db_fittingnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aw_light_db_fitting_comment") Comments
+									input(id="aw_light_db_fitting_comment", autocomplete="off", type="text", name="aw_light_db_fitting_comment", value="#{Site? Site[0].mast.aw_light_db_fitting_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.aw_light_db_fitting_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aw_light_db_fittingok" name="aw_light_db_fitting"  value="ok")
+									label(for="aw_light_db_fittingok") ok
+								.col.s6
+									input.mau(type="radio", id="aw_light_db_fittingnotok", name='aw_light_db_fitting', checked value="not ok")
+									label(for="aw_light_db_fittingnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aw_light_db_fitting_comment") Comments
+									input(id="aw_light_db_fitting_comment", autocomplete="off", type="text", name="aw_light_db_fitting_comment", value="#{Site? Site[0].mast.aw_light_db_fitting_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.aw_light_db_fitting_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 3.Check and inspect tower
+				.row
+					.row(id="tower_inspection")
+						if Site
+							if Site[0].mast.tower_inspection=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="tower_inspectionok" name="tower_inspection" checked value="ok")
+									label(for="tower_inspectionok") ok					
+								.col.s6
+									input.mau(type="radio", id="tower_inspectionnotok", name='tower_inspection', value="not ok")
+									label(for="tower_inspectionnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="tower_inspection_comment") Comments
+									input(id="tower_inspection_comment", autocomplete="off", type="text", name="tower_inspection_comment", value="#{Site? Site[0].mast.tower_inspection_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.tower_inspection_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="tower_inspectionok" name="tower_inspection"  value="ok")
+									label(for="tower_inspectionok") ok
+								.col.s6
+									input.mau(type="radio", id="tower_inspectionnotok", name='tower_inspection', checked value="not ok")
+									label(for="tower_inspectionnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="tower_inspection_comment") Comments
+									input(id="tower_inspection_comment", autocomplete="off", type="text", name="tower_inspection_comment", value="#{Site? Site[0].mast.tower_inspection_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.tower_inspection_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 4.Check the paint on the tower
+				.row
+					.row(id="paint_tower")
+						if Site
+							if Site[0].mast.paint_tower=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="paint_towerok" name="paint_tower" checked value="ok")
+									label(for="paint_towerok") ok					
+								.col.s6
+									input.mau(type="radio", id="paint_towernotok", name='paint_tower', value="not ok")
+									label(for="paint_towernotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="paint_tower_comment") Comments
+									input(id="paint_tower_comment", autocomplete="off", type="text", name="paint_tower_comment", value="#{Site? Site[0].mast.paint_tower_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.paint_tower_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="paint_towerok" name="paint_tower"  value="ok")
+									label(for="paint_towerok") ok
+								.col.s6
+									input.mau(type="radio", id="paint_towernotok", name='paint_tower', checked value="not ok")
+									label(for="paint_towernotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="paint_tower_comment") Comments
+									input(id="paint_tower_comment", autocomplete="off", type="text", name="paint_tower_comment", value="#{Site? Site[0].mast.paint_tower_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.paint_tower_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 5.Visual inspection of transmission and radio installation
+				.row
+					.row(id="visual_inpection_trans_radio")
+						if Site
+							if Site[0].mast.visual_inpection_trans_radio=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="visual_inpection_trans_radiook" name="visual_inpection_trans_radio" checked value="ok")
+									label(for="visual_inpection_trans_radiook") ok					
+								.col.s6
+									input.mau(type="radio", id="visual_inpection_trans_radionotok", name='visual_inpection_trans_radio', value="not ok")
+									label(for="visual_inpection_trans_radionotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="visual_inpection_trans_radio_comment") Comments
+									input(id="visual_inpection_trans_radio_comment", autocomplete="off", type="text", name="visual_inpection_trans_radio_comment", value="#{Site? Site[0].mast.visual_inpection_trans_radio_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.visual_inpection_trans_radio_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="visual_inpection_trans_radiook" name="visual_inpection_trans_radio"  value="ok")
+									label(for="visual_inpection_trans_radiook") ok
+								.col.s6
+									input.mau(type="radio", id="visual_inpection_trans_radionotok", name='visual_inpection_trans_radio', checked value="not ok")
+									label(for="visual_inpection_trans_radionotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="visual_inpection_trans_radio_comment") Comments
+									input(id="visual_inpection_trans_radio_comment", autocomplete="off", type="text", name="visual_inpection_trans_radio_comment", value="#{Site? Site[0].mast.visual_inpection_trans_radio_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.visual_inpection_trans_radio_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 6.Tower Specification
+					.row(id="tower_specification")
+						if Site
+							if Site[0].mast.tower_specification=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="tower_specificationok" name="tower_specification"   checked value="ok")
+									label(for="tower_specificationok") ok					
+								.col.s6
+									input.mau(type="radio", id="tower_specificationnotok", name='tower_specification', value="not ok")
+									label(for="tower_specificationnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="tower_specification_comment") Comments
+									input(id="tower_specification_comment", autocomplete="off", type="text", name="tower_specification_comment", value="#{Site? Site[0].mast.tower_specification_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.tower_specification_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="tower_specificationok" name="tower_specification"  value="ok")
+									label(for="tower_specificationok") ok
+								.col.s6
+									input.mau(type="radio", id="tower_specificationnotok", name='tower_specification', checked value="not ok")
+									label(for="tower_specificationnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="tower_specification_comment") Comments
+									input(id="tower_specification_comment", autocomplete="off", type="text", name="tower_specification_comment", value="#{Site[0].mast.tower_specification_comment}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].mast.tower_specification_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 1. Intruder alarm
+				.row
+					.row(id="intruder")
+						if Site
+							if Site[0].alarms.intruder=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="intruderok" name="intruder" checked value="ok")
+									label(for="intruderok") ok					
+								.col.s6
+									input.mau(type="radio", id="intrudernotok", name='intruder', value="not ok")
+									label(for="intrudernotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="intruder_comment") Comments
+									input(id="intruder_comment", autocomplete="off", type="text", name="intruder_comment", value="#{Site? Site[0].alarms.intruder_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.intruder_image}")
+							else
+								.col.s12
+									span.
+									
+								.col.s6
+									input.bom(type="radio" id="intruderok" name="intruder"  value="ok")
+									label(for="intruderok") ok					
+								.col.s6
+									input.mau(type="radio", id="intrudernotok", name='intruder', checked value="not ok")
+									label(for="intrudernotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="intruder_comment") Comments
+									input(id="intruder_comment", autocomplete="off", type="text", name="intruder_comment", value="#{Site? Site[0].alarms.intruder_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.intruder_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 2.Movement alarm
+				.row
+					.row(id="movement")
+						if Site
+							if Site[0].alarms.movement=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="movementok" name="movement" checked value="ok")
+									label(for="movementok") ok					
+								.col.s6
+									input.mau(type="radio", id="movementnotok", name='movement', value="not ok")
+									label(for="movementnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="movement_comment") Comments
+									input(id="movement_comment", autocomplete="off", type="text", name="movement_comment", value="#{Site? Site[0].alarms.movement_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.movement_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="movementok" name="movement"  value="ok")
+									label(for="movementok") ok
+								.col.s6
+									input.mau(type="radio", id="movementnotok", name='movement', checked value="not ok")
+									label(for="movementnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="movement_comment") Comments
+									input(id="movement_comment", autocomplete="off", type="text", name="movement_comment", value="#{Site? Site[0].alarms.movement_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.movement_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 3.High temp alarm
+				.row
+					.row(id="high_temp")
+						if Site
+							if Site[0].alarms.high_temp=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="high_tempok" name="high_temp" checked value="ok")
+									label(for="high_tempok") ok					
+								.col.s6
+									input.mau(type="radio", id="high_tempnotok", name='high_temp', value="not ok")
+									label(for="high_tempnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="high_temp_comment") Comments
+									input(id="high_temp_comment", autocomplete="off", type="text", name="high_temp_comment", value="#{Site? Site[0].alarms.high_temp_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.high_temp_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="high_tempok" name="high_temp"  value="ok")
+									label(for="high_tempok") ok
+								.col.s6
+									input.mau(type="radio", id="high_tempnotok", name='high_temp', checked value="not ok")
+									label(for="high_tempnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="high_temp_comment") Comments
+									input(id="high_temp_comment", autocomplete="off", type="text", name="high_temp_comment", value="#{Site? Site[0].alarms.high_temp_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.high_temp_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 4.Rectifier system alarm
+				.row
+					.row(id="rectifier_system")
+						if Site
+							if Site[0].alarms.rectifier_system=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rectifier_systemok" name="rectifier_system" checked value="ok")
+									label(for="rectifier_systemok") ok					
+								.col.s6
+									input.mau(type="radio", id="rectifier_systemnotok", name='rectifier_system', value="not ok")
+									label(for="rectifier_systemnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rectifier_system_comment") Comments
+									input(id="rectifier_system_comment", autocomplete="off", type="text", name="rectifier_system_comment", value="#{Site? Site[0].alarms.rectifier_system_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.rectifier_system_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rectifier_systemok" name="rectifier_system"  value="ok")
+									label(for="rectifier_systemok") ok
+								.col.s6
+									input.mau(type="radio", id="rectifier_systemnotok", name='rectifier_system', checked value="not ok")
+									label(for="rectifier_systemnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rectifier_system_comment") Comments
+									input(id="rectifier_system_comment", autocomplete="off", type="text", name="rectifier_system_comment", value="#{Site? Site[0].alarms.rectifier_system_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.rectifier_system_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 5.Rectifier module alarm
+				.row
+					.row(id="rectifier_module")
+						if Site
+							if Site[0].alarms.rectifier_module=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rectifier_moduleok" name="rectifier_module" checked value="ok")
+									label(for="rectifier_moduleok") ok					
+								.col.s6
+									input.mau(type="radio", id="rectifier_modulenotok", name='rectifier_module', value="not ok")
+									label(for="rectifier_modulenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rectifier_module_comment") Comments
+									input(id="rectifier_module_comment", autocomplete="off", type="text", name="rectifier_module_comment", value="#{Site? Site[0].alarms.rectifier_module_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.rectifier_module_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rectifier_moduleok" name="rectifier_module"  value="ok")
+									label(for="rectifier_moduleok") ok
+								.col.s6
+									input.mau(type="radio", id="rectifier_modulenotok", name='rectifier_module', checked value="not ok")
+									label(for="rectifier_modulenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rectifier_module_comment") Comments
+									input(id="rectifier_module_comment", autocomplete="off", type="text", name="rectifier_module_comment", value="#{Site? Site[0].alarms.rectifier_module_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.rectifier_module_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 6.Aircon 1 alarm
+				.row
+					.row(id="aircon1")
+						if Site
+							if Site[0].alarms.aircon1=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aircon1ok" name="aircon1" checked value="ok")
+									label(for="aircon1ok") ok					
+								.col.s6
+									input.mau(type="radio", id="aircon1notok", name='aircon1', value="not ok")
+									label(for="aircon1notok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircon1_comment") Comments
+									input(id="aircon1_comment", autocomplete="off", type="text", name="aircon1_comment", value="#{Site? Site[0].alarms.aircon1_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.aircon1_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aircon1ok" name="aircon1"  value="ok")
+									label(for="aircon1ok") ok
+								.col.s6
+									input.mau(type="radio", id="aircon1notok", name='aircon1', checked value="not ok")
+									label(for="aircon1notok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircon1_comment") Comments
+									input(id="aircon1_comment", autocomplete="off", type="text", name="aircon1_comment", value="#{Site? Site[0].alarms.aircon1_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.aircon1_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 7.Aircon 2 alarm
+				.row
+					.row(id="aircon2")
+						if Site
+							if Site[0].alarms.aircon2=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aircon2ok" name="aircon2" checked value="ok")
+									label(for="aircon2ok") ok					
+								.col.s6
+									input.mau(type="radio", id="aircon2notok", name='aircon2', value="not ok")
+									label(for="aircon2notok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircon2_comment") Comments
+									input(id="aircon2_comment", autocomplete="off", type="text", name="aircon2_comment", value="#{Site? Site[0].alarms.aircon2_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.aircon2_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aircon2ok" name="aircon2"  value="ok")
+									label(for="aircon2ok") ok
+								.col.s6
+									input.mau(type="radio", id="aircon2notok", name='aircon2', checked value="not ok")
+									label(for="aircon2notok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircon2_comment") Comments
+									input(id="aircon2_comment", autocomplete="off", type="text", name="aircon2_comment", value="#{Site? Site[0].alarms.aircon2_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.aircon2_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 8.Generator low fuel alarm
+				.row
+					.row(id="generator_fuel")
+						if Site
+							if Site[0].alarms.generator_fuel=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="generator_fuelok" name="generator_fuel" checked value="ok")
+									label(for="generator_fuelok") ok					
+								.col.s6
+									input.mau(type="radio", id="generator_fuelnotok", name='generator_fuel', value="not ok")
+									label(for="generator_fuelnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_fuel_comment") Comments
+									input(id="generator_fuel_comment", autocomplete="off", type="text", name="generator_fuel_comment", value="#{Site? Site[0].alarms.generator_fuel_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_fuel_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="generator_fuelok" name="generator_fuel"  value="ok")
+									label(for="generator_fuelok") ok
+								.col.s6
+									input.mau(type="radio", id="generator_fuelnotok", name='generator_fuel', checked value="not ok")
+									label(for="generator_fuelnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_fuel_comment") Comments
+									input(id="generator_fuel_comment", autocomplete="off", type="text", name="generator_fuel_comment", value="#{Site? Site[0].alarms.generator_fuel_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_fuel_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 9.Generator abnornal alarm
+				.row
+					.row(id="generator_abnormal")
+						if Site
+							if Site[0].alarms.generator_abnormal=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="generator_abnormalok" name="generator_abnormal" checked value="ok")
+									label(for="generator_abnormalok") ok					
+								.col.s6
+									input.mau(type="radio", id="generator_abnormalnotok", name='generator_abnormal', value="not ok")
+									label(for="generator_abnormalnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_abnormal_comment") Comments
+									input(id="generator_abnormal_comment", autocomplete="off", type="text", name="generator_abnormal_comment", value="#{Site? Site[0].alarms.generator_abnormal_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_abnormal_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="generator_abnormalok" name="generator_abnormal"  value="ok")
+									label(for="generator_abnormalok") ok
+								.col.s6
+									input.mau(type="radio", id="generator_abnormalnotok", name='generator_abnormal', checked value="not ok")
+									label(for="generator_abnormalnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_abnormal_comment") Comments
+									input(id="generator_abnormal_comment", autocomplete="off", type="text", name="generator_abnormal_comment", value="#{Site? Site[0].alarms.generator_abnormal_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_abnormal_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 10 .Aircraft warning alarm
+					.row(id="aircraft_warning")
+						if Site
+							if Site[0].alarms.aircraft_warning=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aircraft_warningok" name="aircraft_warning" checked value="ok")
+									label(for="aircraft_warningok") ok					
+								.col.s6
+									input.mau(type="radio", id="aircraft_warningnotok", name='aircraft_warning', value="not ok")
+									label(for="aircraft_warningnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircraft_warning_comment") Comments
+									input(id="aircraft_warning_comment", autocomplete="off", type="text", name="aircraft_warning_comment", value="#{Site? Site[0].alarms.aircraft_warning_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.aircraft_warning_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="aircraft_warningok" name="aircraft_warning"  value="ok")
+									label(for="aircraft_warningok") ok
+								.col.s6
+									input.mau(type="radio", id="aircraft_warningnotok", name='aircraft_warning', checked value="not ok")
+									label(for="aircraft_warningnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircraft_warning_comment") Comments
+									input(id="aircraft_warning_comment", autocomplete="off", type="text", name="aircraft_warning_comment", value="#{Site? Site[0].alarms.aircraft_warning_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.aircraft_warning_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 11. Smoke alarm
+				.row
+					.row(id="smoke")
+						if Site
+							if Site[0].alarms.smoke=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="smokeok" name="smoke" checked value="ok")
+									label(for="smokeok") ok					
+								.col.s6
+									input.mau(type="radio", id="smokenotok", name='smoke', value="not ok")
+									label(for="smokenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="smoke_comment") Comments
+									input(id="smoke_comment", autocomplete="off", type="text", name="smoke_comment", value="#{Site? Site[0].alarms.smoke_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.smoke_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="smokeok" name="smoke"  value="ok")
+									label(for="smokeok") ok
+								.col.s6
+									input.mau(type="radio", id="smokenotok", name='smoke', checked value="not ok")
+									label(for="smokenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="smoke_comment") Comments
+									input(id="smoke_comment", autocomplete="off", type="text", name="smoke_comment", value="#{Site? Site[0].alarms.smoke_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.smoke_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 12. AC mains failure alarm
+				.row
+					.row(id="ac_mains_failure")
+						if Site
+							if Site[0].alarms.ac_mains_failure=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="ac_mains_failureok" name="ac_mains_failure" checked value="ok")
+									label(for="ac_mains_failureok") ok					
+								.col.s6
+									input.mau(type="radio", id="ac_mains_failurenotok", name='ac_mains_failure', value="not ok")
+									label(for="ac_mains_failurenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="ac_mains_failure_comment") Comments
+									input(id="ac_mains_failure_comment", autocomplete="off", type="text", name="ac_mains_failure_comment", value="#{Site? Site[0].alarms.ac_mains_failure_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.ac_mains_failure_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="ac_mains_failureok" name="ac_mains_failure"  value="ok")
+									label(for="ac_mains_failureok") ok
+								.col.s6
+									input.mau(type="radio", id="ac_mains_failurenotok", name='ac_mains_failure', checked value="not ok")
+									label(for="ac_mains_failurenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="ac_mains_failure_comment") Comments
+									input(id="ac_mains_failure_comment", autocomplete="off", type="text", name="ac_mains_failure_comment", value="#{Site? Site[0].alarms.ac_mains_failure_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.ac_mains_failure_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 13. Battery low alarm
+				.row
+					.row(id="battery_low")
+						if Site
+							if Site[0].alarms.battery_low=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="battery_lowok" name="battery_low" checked value="ok")
+									label(for="battery_lowok") ok					
+								.col.s6
+									input.mau(type="radio", id="battery_lownotok", name='battery_low', value="not ok")
+									label(for="battery_lownotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="battery_low_comment") Comments
+									input(id="battery_low_comment", autocomplete="off", type="text", name="battery_low_comment", value="#{Site? Site[0].alarms.battery_low_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.battery_low_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="battery_lowok" name="battery_low"  value="ok")
+									label(for="battery_lowok") ok
+								.col.s6
+									input.mau(type="radio", id="battery_lownotok", name='battery_low', checked value="not ok")
+									label(for="battery_lownotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="battery_low_comment") Comments
+									input(id="battery_low_comment", autocomplete="off", type="text", name="battery_low_comment", value="#{Site? Site[0].alarms.battery_low_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.battery_low_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 14. Generator running alarm
+					.row(id="generator_running")
+						if Site
+							if Site[0].alarms.generator_running=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="generator_runningok" name="generator_running"   checked value="ok")
+									label(for="generator_runningok") ok					
+								.col.s6
+									input.mau(type="radio", id="generator_runningnotok", name='generator_running', value="not ok")
+									label(for="generator_runningnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_running_comment") Comments
+									input(id="generator_running_comment", autocomplete="off", type="text", name="generator_running_comment", value="#{Site? Site[0].alarms.generator_running_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_running_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="generator_runningok" name="generator_running"  value="ok")
+									label(for="generator_runningok") ok
+								.col.s6
+									input.mau(type="radio", id="generator_runningnotok", name='generator_running', checked value="not ok")
+									label(for="generator_runningnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_running_comment") Comments
+									input(id="generator_running_comment", autocomplete="off", type="text", name="generator_running_comment",  value="#{Site? Site[0].alarms.generator_running_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_running_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 1. Engine oil level
+				.row
+					.row(id="generator_fuel_level")
+						if Site
+							if Site[0].generator.generator_fuel_level=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="generator_fuel_levelok" name="generator_fuel_level" checked value="ok")
+									label(for="generator_fuel_levelok") ok					
+								.col.s6
+									input.mau(type="radio", id="generator_fuel_levelnotok", name='generator_fuel_level', value="not ok")
+									label(for="generator_fuel_levelnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_fuel_level_comment") Comments
+									input(id="generator_fuel_level_comment", autocomplete="off", type="text", name="generator_fuel_level_comment", value="#{Site? Site[0].generator.generator_fuel_level_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.generator_fuel_image}")
+							else
+								.col.s12
+									span.
+									
+								.col.s6
+									input.bom(type="radio" id="generator_fuel_levelok" name="generator_fuel_level"  value="ok")
+									label(for="generator_fuel_levelok") ok					
+								.col.s6
+									input.mau(type="radio", id="generator_fuel_levelnotok", name='generator_fuel_level', checked value="not ok")
+									label(for="generator_fuel_levelnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_fuel_level_comment") Comments
+									input(id="generator_fuel_level_comment", autocomplete="off", type="text", name="generator_fuel_level_comment", value="#{Site? Site[0].generator.generator_fuel_level_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.generator_fuel_image}")
+						else
+							.col.s12
+								span.
+									
+							.col.s6
+								input.bom(type="radio" id="generator_fuel_levelok" name="generator_fuel_level"  value="ok")
+								label(for="generator_fuel_levelok") ok					
+							.col.s6
+								input.mau(type="radio", id="generator_fuel_levelnotok", name='generator_fuel_level', value="not ok")
+								label(for="generator_fuel_levelnotok") not ok
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="intruder_comment") Comments
+								input(id="generator_fuel_level_comment", autocomplete="off", type="text", name="generator_fuel_level_comment", value="#{Site? Site[0].generator_fuel_level_comment:''}")
+							.col.s12.m6.input-field
+								span load picture
+								input.preencher(type="file", multiple, id="generator_fuel_image", name="generator_fuel_image",autocomplete="off", value="#{Site ? Site[0].generator_fuel_image:''}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 2.Oil leaks
+				.row
+					.row(id="engine_oil")
+						if Site
+							if Site[0].generator.engine_oil=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="engine_oilok" name="engine_oil" checked value="ok")
+									label(for="engine_oilok") ok					
+								.col.s6
+									input.mau(type="radio", id="engine_oilnotok", name='engine_oil', value="not ok")
+									label(for="engine_oilnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="engine_oil_comment") Comments
+									input(id="engine_oil_comment", autocomplete="off", type="text", name="engine_oil_comment", value="#{Site? Site[0].generator.engine_oil_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.engine_oil_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="engine_oilok" name="engine_oil"  value="ok")
+									label(for="engine_oilok") ok
+								.col.s6
+									input.mau(type="radio", id="engine_oilnotok", name='engine_oil', checked value="not ok")
+									label(for="engine_oilnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="engine_oil_comment") Comments
+									input(id="engine_oil_comment", autocomplete="off", type="text", name="engine_oil_comment", value="#{Site? Site[0].generator.engine_oil_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.engine_oil_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 3. Radiator hoses (flexible, leak- free)
+				.row
+					.row(id="oil_leak")
+						if Site
+							if Site[0].generator.oil_leak=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="oil_leakok" name="oil_leak" checked value="ok")
+									label(for="oil_leakok") ok					
+								.col.s6
+									input.mau(type="radio", id="oil_leaknotok", name='oil_leak', value="not ok")
+									label(for="oil_leaknotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="oil_leak_comment") Comments
+									input(id="oil_leak_comment", autocomplete="off", type="text", name="oil_leak_comment", value="#{Site? Site[0].generator.oil_leak_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.oil_leak_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="oil_leakok" name="oil_leak"  value="ok")
+									label(for="oil_leakok") ok
+								.col.s6
+									input.mau(type="radio", id="oil_leaknotok", name='oil_leak', checked value="not ok")
+									label(for="oil_leaknotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="oil_leak_comment") Comments
+									input(id="oil_leak_comment", autocomplete="off", type="text", name="oil_leak_comment", value="#{Site? Site[0].generator.oil_leak_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.oil_leak_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 4.Check air filter
+				.row
+					.row(id="air_filter")
+						if Site
+							if Site[0].generator.air_filter=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="air_filterok" name="air_filter" checked value="ok")
+									label(for="air_filterok") ok					
+								.col.s6
+									input.mau(type="radio", id="air_filternotok", name='air_filter', value="not ok")
+									label(for="air_filternotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="air_filter_comment") Comments
+									input(id="air_filter_comment", autocomplete="off", type="text", name="air_filter_comment", value="#{Site? Site[0].generator.air_filter_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.air_filter_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="air_filterok" name="air_filter"  value="ok")
+									label(for="air_filterok") ok
+								.col.s6
+									input.mau(type="radio", id="air_filternotok", name='air_filter', checked value="not ok")
+									label(for="air_filternotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="air_filter_comment") Comments
+									input(id="air_filter_comment", autocomplete="off", type="text", name="air_filter_comment", value="#{Site? Site[0].generator.air_filter_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.air_filter_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 5.Coolant leaks
+				.row
+					.row(id="coolant_leaks")
+						if Site
+							if Site[0].generator.coolant_leaks=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="coolant_leaksok" name="coolant_leaks" checked value="ok")
+									label(for="coolant_leaksok") ok					
+								.col.s6
+									input.mau(type="radio", id="coolant_leaksnotok", name='coolant_leaks', value="not ok")
+									label(for="coolant_leaksnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="coolant_leaks_comment") Comments
+									input(id="coolant_leaks_comment", autocomplete="off", type="text", name="coolant_leaks_comment", value="#{Site? Site[0].generator.coolant_leaks_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.coolant_leaks_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="coolant_leaksok" name="coolant_leaks"  value="ok")
+									label(for="coolant_leaksok") ok
+								.col.s6
+									input.mau(type="radio", id="coolant_leaksnotok", name='coolant_leaks', checked value="not ok")
+									label(for="coolant_leaksnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="coolant_leaks_comment") Comments
+									input(id="coolant_leaks_comment", autocomplete="off", type="text", name="coolant_leaks_comment", value="#{Site? Site[0].generator.coolant_leaks_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.coolant_leaks_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 6.Visually inspect V-belt condition
+				.row
+					.row(id="v_belt")
+						if Site
+							if Site[0].generator.v_belt=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="v_beltok" name="v_belt" checked value="ok")
+									label(for="v_beltok") ok					
+								.col.s6
+									input.mau(type="radio", id="v_beltnotok", name='v_belt', value="not ok")
+									label(for="v_beltnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="v_belt_comment") Comments
+									input(id="v_belt_comment", autocomplete="off", type="text", name="v_belt_comment", value="#{Site? Site[0].generator.v_belt_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.v_belt_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="v_beltok" name="v_belt"  value="ok")
+									label(for="v_beltok") ok
+								.col.s6
+									input.mau(type="radio", id="v_beltnotok", name='v_belt', checked value="not ok")
+									label(for="v_beltnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="v_belt_comment") Comments
+									input(id="v_belt_comment", autocomplete="off", type="text", name="v_belt_comment", value="#{Site? Site[0].generator.v_belt_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.v_belt_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 7.Fuel leaks
+				.row
+					.row(id="fuel_leaks")
+						if Site
+							if Site[0].generator.fuel_leaks=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="fuel_leaksok" name="fuel_leaks" checked value="ok")
+									label(for="fuel_leaksok") ok					
+								.col.s6
+									input.mau(type="radio", id="fuel_leaksnotok", name='fuel_leaks', value="not ok")
+									label(for="fuel_leaksnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fuel_leaks_comment") Comments
+									input(id="fuel_leaks_comment", autocomplete="off", type="text", name="fuel_leaks_comment", value="#{Site? Site[0].generator.fuel_leaks_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.fuel_leaks_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="fuel_leaksok" name="fuel_leaks"  value="ok")
+									label(for="fuel_leaksok") ok
+								.col.s6
+									input.mau(type="radio", id="fuel_leaksnotok", name='fuel_leaks', checked value="not ok")
+									label(for="fuel_leaksnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fuel_leaks_comment") Comments
+									input(id="fuel_leaks_comment", autocomplete="off", type="text", name="fuel_leaks_comment", value="#{Site? Site[0].generator.fuel_leaks_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.fuel_leaks_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 8. Visually check battery electrolyte level, connections and physical condition
+				.row
+					.row(id="electrolyte_connection_cond")
+						if Site
+							if Site[0].generator.electrolyte_connection_cond=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="electrolyte_connection_condok" name="electrolyte_connection_cond" checked value="ok")
+									label(for="electrolyte_connection_condok") ok					
+								.col.s6
+									input.mau(type="radio", id="electrolyte_connection_condnotok", name='electrolyte_connection_cond', value="not ok")
+									label(for="electrolyte_connection_condnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="electrolyte_connection_cond_comment") Comments
+									input(id="electrolyte_connection_cond_comment", autocomplete="off", type="text", name="electrolyte_connection_cond_comment", value="#{Site? Site[0].generator.electrolyte_connection_cond_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.electrolyte_connection_cond_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="electrolyte_connection_condok" name="electrolyte_connection_cond"  value="ok")
+									label(for="electrolyte_connection_condok") ok
+								.col.s6
+									input.mau(type="radio", id="electrolyte_connection_condnotok", name='electrolyte_connection_cond', checked value="not ok")
+									label(for="electrolyte_connection_condnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="electrolyte_connection_cond_comment") Comments
+									input(id="electrolyte_connection_cond_comment", autocomplete="off", type="text", name="electrolyte_connection_cond_comment", value="#{Site? Site[0].generator.electrolyte_connection_cond_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.electrolyte_connection_cond_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 9.Check Selector switches and breaker status correct 
+				.row
+					.row(id="switcher_breaker")
+						if Site
+							if Site[0].generator.switcher_breaker=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="switcher_breakerok" name="switcher_breaker" checked value="ok")
+									label(for="switcher_breakerok") ok					
+								.col.s6
+									input.mau(type="radio", id="switcher_breakernotok", name='switcher_breaker', value="not ok")
+									label(for="switcher_breakernotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="switcher_breaker_comment") Comments
+									input(id="switcher_breaker_comment", autocomplete="off", type="text", name="switcher_breaker_comment", value="#{Site? Site[0].generator.switcher_breaker_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.switcher_breaker_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="switcher_breakerok" name="switcher_breaker"  value="ok")
+									label(for="switcher_breakerok") ok
+								.col.s6
+									input.mau(type="radio", id="switcher_breakernotok", name='switcher_breaker', checked value="not ok")
+									label(for="switcher_breakernotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="switcher_breaker_comment") Comments
+									input(id="switcher_breaker_comment", autocomplete="off", type="text", name="switcher_breaker_comment", value="#{Site? Site[0].generator.switcher_breaker_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.switcher_breaker_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 10. Check status of control panel and record active alarms
+					.row(id="control_panel_record_level")
+						if Site
+							if Site[0].generator.control_panel_record_level=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="control_panel_record_levelok" name="control_panel_record_level" checked value="ok")
+									label(for="control_panel_record_levelok") ok					
+								.col.s6
+									input.mau(type="radio", id="control_panel_record_levelnotok", name='control_panel_record_level', value="not ok")
+									label(for="control_panel_record_levelnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="control_panel_record_level_comment") Comments
+									input(id="control_panel_record_level_comment", autocomplete="off", type="text", name="control_panel_record_level_comment", value="#{Site? Site[0].generator.control_panel_record_level_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.control_panel_record_level_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="control_panel_record_levelok" name="control_panel_record_level"  value="ok")
+									label(for="control_panel_record_levelok") ok
+								.col.s6
+									input.mau(type="radio", id="control_panel_record_levelnotok", name='control_panel_record_level', checked value="not ok")
+									label(for="control_panel_record_levelnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="control_panel_record_level_comment") Comments
+									input(id="control_panel_record_level_comment", autocomplete="off", type="text", name="control_panel_record_level_comment", value="#{Site? Site[0].generator.control_panel_record_level_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.control_panel_record_level_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 11. Check for rust
+				.row
+					.row(id="rust")
+						if Site
+							if Site[0].generator.rust=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rustok" name="rust" checked value="ok")
+									label(for="rustok") ok					
+								.col.s6
+									input.mau(type="radio", id="rustnotok", name='rust', value="not ok")
+									label(for="rustnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rust_comment") Comments
+									input(id="rust_comment", autocomplete="off", type="text", name="rust_comment", value="#{Site? Site[0].generator.rust_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.rust_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rustok" name="rust"  value="ok")
+									label(for="rustok") ok
+								.col.s6
+									input.mau(type="radio", id="rustnotok", name='rust', checked value="not ok")
+									label(for="rustnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rust_comment") Comments
+									input(id="rust_comment", autocomplete="off", type="text", name="rust_comment", value="#{Site? Site[0].generator.rust_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.rust_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 12. Check all mountings and generator brackets
+				.row
+					.row(id="moutings_brackets")
+						if Site
+							if Site[0].generator.moutings_brackets=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="moutings_bracketsok" name="moutings_brackets" checked value="ok")
+									label(for="moutings_bracketsok") ok					
+								.col.s6
+									input.mau(type="radio", id="moutings_bracketsnotok", name='moutings_brackets', value="not ok")
+									label(for="moutings_bracketsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="moutings_brackets_comment") Comments
+									input(id="moutings_brackets_comment", autocomplete="off", type="text", name="moutings_brackets_comment", value="#{Site? Site[0].generator.moutings_brackets_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.moutings_brackets_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="moutings_bracketsok" name="moutings_brackets"  value="ok")
+									label(for="moutings_bracketsok") ok
+								.col.s6
+									input.mau(type="radio", id="moutings_bracketsnotok", name='moutings_brackets', checked value="not ok")
+									label(for="moutings_bracketsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="moutings_brackets_comment") Comments
+									input(id="moutings_brackets_comment", autocomplete="off", type="text", name="moutings_brackets_comment", value="#{Site? Site[0].generator.moutings_brackets_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.moutings_brackets_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 13. Check all mountings and generator brackets
+				.row
+					.row(id="radiator_hoses")
+						if Site
+							if Site[0].generator.radiator_hoses=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="radiator_hosesok" name="radiator_hoses" checked value="ok")
+									label(for="radiator_hosesok") ok					
+								.col.s6
+									input.mau(type="radio", id="radiator_hosesnotok", name='radiator_hoses', value="not ok")
+									label(for="radiator_hosesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="radiator_hoses_comment") Comments
+									input(id="radiator_hoses_comment", autocomplete="off", type="text", name="radiator_hoses_comment", value="#{Site? Site[0].generator.radiator_hoses_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.radiator_hoses_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="radiator_hosesok" name="radiator_hoses"  value="ok")
+									label(for="radiator_hosesok") ok
+								.col.s6
+									input.mau(type="radio", id="radiator_hosesnotok", name='radiator_hoses', checked value="not ok")
+									label(for="radiator_hosesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="radiator_hoses_comment") Comments
+									input(id="radiator_hoses_comment", autocomplete="off", type="text", name="radiator_hoses_comment", value="#{Site? Site[0].generator.radiator_hoses_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.radiator_hoses_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 14. Check overall condition / Canopy condition
+				.row
+					.row(id="overal_cond")
+						if Site
+							if Site[0].generator.overal_cond=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="overal_condok" name="overal_cond" checked value="ok")
+									label(for="overal_condok") ok					
+								.col.s6
+									input.mau(type="radio", id="overal_condnotok", name='overal_cond', value="not ok")
+									label(for="overal_condnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="overal_cond_comment") Comments
+									input(id="overal_cond_comment", autocomplete="off", type="text", name="overal_cond_comment", value="#{Site? Site[0].generator.overal_cond_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.overal_cond_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="overal_condok" name="overal_cond"  value="ok")
+									label(for="overal_condok") ok
+								.col.s6
+									input.mau(type="radio", id="overal_condnotok", name='overal_cond', checked value="not ok")
+									label(for="overal_condnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="overal_cond_comment") Comments
+									input(id="overal_cond_comment", autocomplete="off", type="text", name="overal_cond_comment", value="#{Site? Site[0].generator.overal_cond_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].generator.overal_cond_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 1. Check the mounting poles if properly installed
+				.row
+					.row(id="mounting_poles")
+						if Site
+							if Site[0].roofTop.mounting_poles=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="mounting_polesok" name="mounting_poles" checked value="ok")
+									label(for="mounting_polesok") ok					
+								.col.s6
+									input.mau(type="radio", id="mounting_polesnotok", name='mounting_poles', value="not ok")
+									label(for="mounting_polesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="mounting_poles_comment") Comments
+									input(id="mounting_poles_comment", autocomplete="off", type="text", name="mounting_poles_comment", value="#{Site? Site[0].roofTop.mounting_poles_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.mounting_poles_image}")
+							else
+								.col.s12
+									span.
+									
+								.col.s6
+									input.bom(type="radio" id="mounting_polesok" name="mounting_poles"  value="ok")
+									label(for="mounting_polesok") ok					
+								.col.s6
+									input.mau(type="radio", id="mounting_polesnotok", name='mounting_poles', checked value="not ok")
+									label(for="mounting_polesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="mounting_poles_comment") Comments
+									input(id="mounting_poles_comment", autocomplete="off", type="text", name="mounting_poles_comment", value="#{Site? Site[0].roofTop.mounting_poles_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.mounting_poles_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 2.Check the poles if no corrosions 
+				.row
+					.row(id="poles_corrosions")
+						if Site
+							if Site[0].roofTop.poles_corrosions=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="poles_corrosionsok" name="poles_corrosions" checked value="ok")
+									label(for="poles_corrosionsok") ok					
+								.col.s6
+									input.mau(type="radio", id="poles_corrosionsnotok", name='poles_corrosions', value="not ok")
+									label(for="poles_corrosionsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="poles_corrosions_comment") Comments
+									input(id="poles_corrosions_comment", autocomplete="off", type="text", name="poles_corrosions_comment", value="#{Site? Site[0].roofTop.poles_corrosions_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.poles_corrosions_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="poles_corrosionsok" name="poles_corrosions"  value="ok")
+									label(for="poles_corrosionsok") ok
+								.col.s6
+									input.mau(type="radio", id="poles_corrosionsnotok", name='poles_corrosions', checked value="not ok")
+									label(for="poles_corrosionsnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="poles_corrosions_comment") Comments
+									input(id="poles_corrosions_comment", autocomplete="off", type="text", name="poles_corrosions_comment", value="#{Site? Site[0].roofTop.poles_corrosions_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.poles_corrosions_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 3. Check the poles if earthed
+				.row
+					.row(id="poles_earthed")
+						if Site
+							if Site[0].roofTop.poles_earthed=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="poles_earthedok" name="poles_earthed" checked value="ok")
+									label(for="poles_earthedok") ok					
+								.col.s6
+									input.mau(type="radio", id="poles_earthednotok", name='poles_earthed', value="not ok")
+									label(for="poles_earthednotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="poles_earthed_comment") Comments
+									input(id="poles_earthed_comment", autocomplete="off", type="text", name="poles_earthed_comment", value="#{Site? Site[0].roofTop.poles_earthed_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.poles_earthed_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="poles_earthedok" name="poles_earthed"  value="ok")
+									label(for="poles_earthedok") ok
+								.col.s6
+									input.mau(type="radio", id="poles_earthednotok", name='poles_earthed', checked value="not ok")
+									label(for="poles_earthednotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="poles_earthed_comment") Comments
+									input(id="poles_earthed_comment", autocomplete="off", type="text", name="poles_earthed_comment", value="#{Site? Site[0].roofTop.poles_earthed_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.poles_earthed_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 4.Check the cabinets ( of TX and baterries ) for any damage or corosion
+				.row
+					.row(id="cabinet_damage")
+						if Site
+							if Site[0].roofTop.cabinet_damage=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="cabinet_damageok" name="cabinet_damage" checked value="ok")
+									label(for="cabinet_damageok") ok					
+								.col.s6
+									input.mau(type="radio", id="cabinet_damagenotok", name='cabinet_damage', value="not ok")
+									label(for="cabinet_damagenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="cabinet_damage_comment") Comments
+									input(id="cabinet_damage_comment", autocomplete="off", type="text", name="cabinet_damage_comment", value="#{Site? Site[0].roofTop.cabinet_damage_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.cabinet_damage_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="cabinet_damageok" name="cabinet_damage"  value="ok")
+									label(for="cabinet_damageok") ok
+								.col.s6
+									input.mau(type="radio", id="cabinet_damagenotok", name='cabinet_damage', checked value="not ok")
+									label(for="cabinet_damagenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="cabinet_damage_comment") Comments
+									input(id="cabinet_damage_comment", autocomplete="off", type="text", name="cabinet_damage_comment", value="#{Site? Site[0].roofTop.cabinet_damage_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.cabinet_damage_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 5.Check transmission and radio equipment instalation
+					.row(id="transmission_radio")
+						if Site
+							if Site[0].roofTop.transmission_radio=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="transmission_radiook" name="transmission_radio"   checked value="ok")
+									label(for="transmission_radiook") ok					
+								.col.s6
+									input.mau(type="radio", id="transmission_radionotok", name='transmission_radio', value="not ok")
+									label(for="transmission_radionotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="transmission_radio_comment") Comments
+									input(id="transmission_radio_comment", autocomplete="off", type="text", name="transmission_radio_comment", value="#{Site? Site[0].roofTop.transmission_radio_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.transmission_radio_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="transmission_radiook" name="transmission_radio"  value="ok")
+									label(for="transmission_radiook") ok
+								.col.s6
+									input.mau(type="radio", id="transmission_radionotok", name='transmission_radio', checked value="not ok")
+									label(for="transmission_radionotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="transmission_radio_comment") Comments
+									input(id="transmission_radio_comment", autocomplete="off", type="text", name="transmission_radio_comment",  value="#{Site? Site[0].roofTop.transmission_radio_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].roofTop.transmission_radio_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 1. Check the fence, gates, locks and hinges.
+				.row
+					.row(id="fence_gate_locks_hinges")
+						if Site
+							if Site[0].site_general.fence_gate_locks_hinges=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="fence_gate_locks_hingesok" name="fence_gate_locks_hinges" checked value="ok")
+									label(for="fence_gate_locks_hingesok") ok					
+								.col.s6
+									input.mau(type="radio", id="fence_gate_locks_hingesnotok", name='fence_gate_locks_hinges', value="not ok")
+									label(for="fence_gate_locks_hingesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fence_gate_locks_hinges_comment") Comments
+									input(id="fence_gate_locks_hinges_comment", autocomplete="off", type="text", name="fence_gate_locks_hinges_comment", value="#{Site? Site[0].site_general.fence_gate_locks_hinges_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.fence_gate_locks_hinges_image}")				
+							else
+								.col.s12
+									span.
+									
+								.col.s6
+									input.bom(type="radio" id="fence_gate_locks_hingesok" name="fence_gate_locks_hinges"  value="ok")
+									label(for="fence_gate_locks_hingesok") ok					
+								.col.s6
+									input.mau(type="radio", id="fence_gate_locks_hingesnotok", name='fence_gate_locks_hinges', checked value="not ok")
+									label(for="fence_gate_locks_hingesnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="fence_gate_locks_hinges_comment") Comments
+									input(id="fence_gate_locks_hinges_comment", autocomplete="off", type="text", name="fence_gate_locks_hinges_comment", value="#{Site? Site[0].site_general.fence_gate_locks_hinges_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.fence_gate_locks_hinges_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 2.Ensure all signage is in order.
+				.row
+					.row(id="signage")
+						if Site
+							if Site[0].site_general.signage=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="signageok" name="signage" checked value="ok")
+									label(for="signageok") ok					
+								.col.s6
+									input.mau(type="radio", id="signagenotok", name='signage', value="not ok")
+									label(for="signagenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="signage_comment") Comments
+									input(id="signage_comment", autocomplete="off", type="text", name="signage_comment", value="#{Site? Site[0].site_general.signage_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.signage_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="signageok" name="signage"  value="ok")
+									label(for="signageok") ok
+								.col.s6
+									input.mau(type="radio", id="signagenotok", name='signage', checked value="not ok")
+									label(for="signagenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="signage_comment") Comments
+									input(id="signage_comment", autocomplete="off", type="text", name="signage_comment", value="#{Site? Site[0].site_general.signage_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.signage_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 3. Check all water damage to terrain.
+				.row
+					.row(id="water_damage")
+						if Site
+							if Site[0].site_general.water_damage=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="water_damageok" name="water_damage" checked value="ok")
+									label(for="water_damageok") ok					
+								.col.s6
+									input.mau(type="radio", id="water_damagenotok", name='water_damage', value="not ok")
+									label(for="water_damagenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="water_damage_comment") Comments
+									input(id="water_damage_comment", autocomplete="off", type="text", name="water_damage_comment", value="#{Site? Site[0].site_general.water_damage_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.water_damage_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="water_damageok" name="water_damage"  value="ok")
+									label(for="water_damageok") ok
+								.col.s6
+									input.mau(type="radio", id="water_damagenotok", name='water_damage', checked value="not ok")
+									label(for="water_damagenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="water_damage_comment") Comments
+									input(id="water_damage_comment", autocomplete="off", type="text", name="water_damage_comment", value="#{Site? Site[0].site_general.water_damage_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.water_damage_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 4.Level crushed stone inside site.
+				.row
+					.row(id="crushed_stone")
+						if Site
+							if Site[0].site_general.crushed_stone=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="crushed_stoneok" name="crushed_stone" checked value="ok")
+									label(for="crushed_stoneok") ok					
+								.col.s6
+									input.mau(type="radio", id="crushed_stonenotok", name='crushed_stone', value="not ok")
+									label(for="crushed_stonenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="crushed_stone_comment") Comments
+									input(id="crushed_stone_comment", autocomplete="off", type="text", name="crushed_stone_comment", value="#{Site? Site[0].site_general.crushed_stone_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.crushed_stone_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="crushed_stoneok" name="crushed_stone"  value="ok")
+									label(for="crushed_stoneok") ok
+								.col.s6
+									input.mau(type="radio", id="crushed_stonenotok", name='crushed_stone', checked value="not ok")
+									label(for="crushed_stonenotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="crushed_stone_comment") Comments
+									input(id="crushed_stone_comment", autocomplete="off", type="text", name="crushed_stone_comment", value="#{Site? Site[0].site_general.crushed_stone_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.crushed_stone_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 5. Ensure the site area is clean.
+				.row
+					.row(id="site_clean")
+						if Site
+							if Site[0].site_general.site_clean=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="site_cleanok" name="site_clean" checked value="ok")
+									label(for="site_cleanok") ok					
+								.col.s6
+									input.mau(type="radio", id="site_cleannotok", name='site_clean', value="not ok")
+									label(for="site_cleannotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="site_clean_comment") Comments
+									input(id="site_clean_comment", autocomplete="off", type="text", name="site_clean_comment", value="#{Site? Site[0].site_general.site_clean_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.site_clean_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="site_cleanok" name="site_clean"  value="ok")
+									label(for="site_cleanok") ok
+								.col.s6
+									input.mau(type="radio", id="site_cleannotok", name='site_clean', checked value="not ok")
+									label(for="site_cleannotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="site_clean_comment") Comments
+									input(id="site_clean_comment", autocomplete="off", type="text", name="site_clean_comment", value="#{Site? Site[0].site_general.site_clean_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.site_clean_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 6.Check all weeds and grass 2.5m arount site fence.
+				.row
+					.row(id="weeds_grass")
+						if Site
+							if Site[0].site_general.weeds_grass=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="weeds_grassok" name="weeds_grass" checked value="ok")
+									label(for="weeds_grassok") ok					
+								.col.s6
+									input.mau(type="radio", id="weeds_grassnotok", name='weeds_grass', value="not ok")
+									label(for="weeds_grassnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="weeds_grass_comment") Comments
+									input(id="weeds_grass_comment", autocomplete="off", type="text", name="weeds_grass_comment", value="#{Site? Site[0].site_general.weeds_grass_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.weeds_grass_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="weeds_grassok" name="weeds_grass"  value="ok")
+									label(for="weeds_grassok") ok
+								.col.s6
+									input.mau(type="radio", id="weeds_grassnotok", name='weeds_grass', checked value="not ok")
+									label(for="weeds_grassnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="weeds_grass_comment") Comments
+									input(id="weeds_grass_comment", autocomplete="off", type="text", name="weeds_grass_comment", value="#{Site? Site[0].site_general.weeds_grass_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.weeds_grass_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 7. Check and report any defects on access road.
+				.row
+					.row(id="defect_access_road")
+						if Site
+							if Site[0].site_general.defect_access_road=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="defect_access_roadok" name="defect_access_road" checked value="ok")
+									label(for="defect_access_roadok") ok					
+								.col.s6
+									input.mau(type="radio", id="defect_access_roadnotok", name='defect_access_road', value="not ok")
+									label(for="defect_access_roadnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="defect_access_road_comment") Comments
+									input(id="defect_access_road_comment", autocomplete="off", type="text", name="defect_access_road_comment", value="#{Site? Site[0].site_general.defect_access_road_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.defect_access_road_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="defect_access_roadok" name="defect_access_road"  value="ok")
+									label(for="defect_access_roadok") ok
+								.col.s6
+									input.mau(type="radio", id="defect_access_roadnotok", name='defect_access_road', checked value="not ok")
+									label(for="defect_access_roadnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="defect_access_road_comment") Comments
+									input(id="defect_access_road_comment", autocomplete="off", type="text", name="defect_access_road_comment", value="#{Site? Site[0].site_general.defect_access_road_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.defect_access_road_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") 8.Check for rubish from razor wire.
+					.row(id="rubish")
+						if Site
+							if Site[0].site_general.rubish=="ok"
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rubishok" name="rubish"   checked value="ok")
+									label(for="rubishok") ok					
+								.col.s6
+									input.mau(type="radio", id="rubishnotok", name='rubish', value="not ok")
+									label(for="rubishnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rubish_comment") Comments
+									input(id="rubish_comment", autocomplete="off", type="text", name="rubish_comment", value="#{Site? Site[0].site_general.rubish_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.rubish_image}")
+							else
+								.col.s12
+									span.
+										
+								.col.s6
+									input.bom(type="radio" id="rubishok" name="rubish"  value="ok")
+									label(for="rubishok") ok
+								.col.s6
+									input.mau(type="radio", id="rubishnotok", name='rubish', checked value="not ok")
+									label(for="rubishnotok") not ok
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rubish_comment") Comments
+									input(id="rubish_comment", autocomplete="off", type="text", name="rubish_comment",  value="#{Site? Site[0].site_general.rubish_comment:''}")
+								.col.s12.m6.input-field
+									img.verimagem(style="width:100px", src="#{Site[0].site_general.rubish_image}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Site
+					input#captar(type="submit", name="submit", class="submit action-button", value="Save")
+							
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,662 @@
+extends layout
+block content
+	.row
+		form(id="formulario2", method="POST")
+			ul(id="progressbar2" style="margin-bottom:0px")
+				li(class="active") <span data-i18n="demo.manutencao_form.basicinfo">
+				li <span data-i18n="demo.manutencao_form.cliente"></span>
+				li <span data-i18n="demo.manutencao_form.travel"></span>
+				li <span data-i18n="demo.manutencao_form.gerador"></span>
+				li <span data-i18n="demo.manutencao_form.repair"></span>
+				li <span data-i18n="demo.manutencao_form.spare"></span>
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.manutencao_form.basicinfo"></span>
+				if Jobcards
+					.row(style="margin-bottom:7px; margin-top:25px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_cod" style="font-size:15px") <span data-i18n="demo.manutencao_form.codigo"></span>
+							input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_cod" ,name="jobcard_cod", readonly, value="#{Jobcards[0].jobcard_cod}")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_call", id="jobcard_call" multiple)
+								//- option(value="" disabled selected) Call
+								-for(var i=0; i<Jobcards[0].jobcard_call.length; i++)
+									option(value="#{Jobcards[0].jobcard_call[i]}" selected) #{Jobcards[0].jobcard_call[i]}
+							label(style="font-size:15px") Call
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_departamento", id="jobcard_departamento" multiple)
+								option(value="#{Jobcards[0].jobcard_departamento}" selected) #{Jobcards[0].jobcard_departamento}
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.departamento"></span>
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							select(id="jobcard_regiao" ,name="jobcard_regiao") 
+								option(value="#{Jobcards[0].jobcard_regiao}" selected) #{Jobcards[0].jobcard_regiao}
+							label(for="jobcard_regiao" style="font-size:15px") <span data-i18n="demo.manutencao_form.regiao"></span>
+					.row(style="margin-bottom:17px; margin-top: 12px;")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_jobtype", id="jobcard_jobtype")
+								option(value="#{Jobcards[0].jobcard_jobtype}" selected) #{Jobcards[0].jobcard_jobtype}
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.jobtype"></span>
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_jobinfo" style="font-size:15px") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfo" ,name="jobcard_jobinfo", readonly, value="#{Jobcards[0].jobcard_jobinfo}")
+					h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.tecnico"></span>
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_tecniconome", id="jobcard_tecniconome")
+								option(value="#{Jobcards[0].jobcard_tecniconome}" selected) #{Jobcards[0].jobcard_tecniconome}
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.tecniconome"></span>
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_cell" style="font-size:15px") Cell
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_cell" ,name="jobcard_cell", readonly, value="#{Jobcards[0].jobcard_cell}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_linemanager" style="font-size:15px") Line Manager
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_linemanager" ,name="jobcard_linemanager", readonly, value="#{Jobcards[0].jobcard_linemanager}")
+					h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.reporte"></span>
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_loggedby" style="font-size:15px") <span data-i18n="demo.manutencao_form.loggedby"></span>
+							input( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="jobcard_loggedby" ,name="jobcard_loggedby", value="#{Jobcards[0].jobcard_loggedby}")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_loggedon" style="font-size:15px") <span data-i18n="demo.manutencao_form.loggedon"></span>
+							input( autocomplete="off", readonly, type="text", style="font-family:;color:#12375c" ,id="jobcard_loggedon" ,name="jobcard_loggedon", value="#{Jobcards[0].jobcard_loggedon}")
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_datareporte" style="font-size:15px") <span data-i18n="demo.manutencao_form.datareporte"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_datareporte" ,name="jobcard_datareporte", readonly, value="#{Jobcards[0].jobcard_datareporte}")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_horareporte" style="font-size:15px") <span data-i18n="demo.manutencao_form.horareporte"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_horareporte" ,name="jobcard_horareporte", readonly, value="#{Jobcards[0].jobcard_horareporte}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_quotacao" style="font-size:15px") <span data-i18n="demo.manutencao_form.quotacao"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_quotacao" ,name="jobcard_quotacao", readonly, value="#{Jobcards[0].jobcard_quotacao}")
+				else
+					.row(style="margin-bottom:7px; margin-top:25px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_cod" style="font-size:15px") <span data-i18n="demo.manutencao_form.codigo"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_cod" ,name="jobcard_cod")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_call", id="jobcard_call" multiple)
+								option(value="" disabled selected) Select the option
+								option(value="civil and electrical") Civil & Electrical
+								option(value="diesel refuel") Diesel Refuel
+								option(value="radio and transmission") Radio & Transmission
+								option(value="project") Project
+							label(style="font-size:15px") Call
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_departamento", id="jobcard_departamento")
+								option(value="" disabled selected) Escolha a opção
+								option(value="facilities") Facilities
+								option(value="power") Power
+								option(value="telco") Telco
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.departamento"></span>
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							select(id="jobcard_regiao" ,name="jobcard_regiao")
+								option(value="" disabled selected) Escolha a opção
+								option(value="sul") Sul
+								option(value="centro") Centro
+								option(value="norte") Norte
+								option(value="maputo") Maputo
+							label(for="jobcard_regiao" style="font-size:15px") <span data-i18n="demo.manutencao_form.regiao"></span>	
+					.row(style="margin-bottom:17px; margin-top: 12px;")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_jobtype", id="jobcard_jobtype")
+								option(value="" disabled selected) Escolha a opção
+								option(value="callout") Callout 
+								option(value="planned maintenance") Planned Maintenance 
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.jobtype"></span>
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_jobinfo" style="font-size:15px") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfo" ,name="jobcard_jobinfo")
+					h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.tecnico"></span>
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field#contain(style="margin-bottom:0px; margin-top:-7px;font-size:15px", detalhestecnico="#{Usuarios1}")
+							select(name="jobcard_tecniconome", id="jobcard_tecniconome")
+								option(value="" disabled selected) Escolha a opção
+								-for(var i=0; i<Usuarios.length; i++)
+									-if(Usuarios[i].nome != "administrador")
+										option(value="#{Usuarios[i].nome}") #{Usuarios[i].nome}
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.tecniconome"></span>
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_cell" style="font-size:15px") Cell
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_cell" ,name="jobcard_cell" value=" ")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_linemanager" style="font-size:15px") Line Manager
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_linemanager" ,name="jobcard_linemanager" value=" ")
+					h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.reporte"></span>
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_loggedby" style="font-size:15px") <span data-i18n="demo.manutencao_form.loggedby"></span>
+							input( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="jobcard_loggedby" ,name="jobcard_loggedby", value="#{DataU.nome}")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_loggedon" style="font-size:15px") <span data-i18n="demo.manutencao_form.loggedon"></span>
+							input( autocomplete="off", readonly, type="text", style="font-family:;color:#12375c" ,id="jobcard_loggedon" ,name="jobcard_loggedon", value="#{(new Date()).getDate()+'/'+((new Date()).getMonth()+1)+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours())+' : '+((new Date()).getMinutes())}")
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_datareporte" style="font-size:15px") <span data-i18n="demo.manutencao_form.datareporte"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_datareporte" ,name="jobcard_datareporte")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_horareporte" style="font-size:15px") <span data-i18n="demo.manutencao_form.horareporte"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_horareporte" ,name="jobcard_horareporte")
+					.row.hide#campoquotation.hide(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_quotacao" style="font-size:15px") <span data-i18n="demo.manutencao_form.quotacao"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_quotacao" ,name="jobcard_quotacao")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.cliente"></span>
+				if Jobcards
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_clientenome", id="jobcard_clientenome")
+								option(value="#{Jobcards[0].jobcard_clientenome}" selected) #{Jobcards[0].jobcard_clientenome}
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.clientenome"></span>
+						.col.s12.m6.input-field(style="margin-top:-7px;")
+							label(for="jobcard_site" style="font-size:15px") Site
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_site" ,name="jobcard_site", readonly, value="#{Jobcards[0].jobcard_site}")
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_clientebranch" style="font-size:15px") <span data-i18n="demo.manutencao_form.clientebranch"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_clientebranch" ,name="jobcard_clientebranch", readonly, value="#{Jobcards[0].jobcard_clientebranch}")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_clientetelefone" style="font-size:15px") <span data-i18n="demo.manutencao_form.clientetelefone"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_clientetelefone" ,name="jobcard_clientetelefone", readonly, value="#{Jobcards[0].jobcard_clientetelefone}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_contactperson" style="font-size:15px") <span data-i18n="demo.manutencao_form.contactperson"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_contactperson" ,name="jobcard_contactperson", readonly, value="#{Jobcards[0].jobcard_contactperson}")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_contactphone" style="font-size:15px") <span data-i18n="demo.manutencao_form.contactphone"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_contactphone" ,name="jobcard_contactphone", readonly ,value="#{Jobcards[0].jobcard_contactphone}")
+				else
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+							select(name="jobcard_clientenome", id="jobcard_clientenome")
+								option(value="" disabled selected) Escolha a opção
+								option(value="Vodacom") Vodacom
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.clientenome"></span>
+						.col.s12.m6.input-field(style="margin-top:-7px;")
+							label(for="jobcard_site" style="font-size:15px") Site
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_site" ,name="jobcard_site")
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_clientebranch" style="font-size:15px") <span data-i18n="demo.manutencao_form.clientebranch"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_clientebranch" ,name="jobcard_clientebranch")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_clientetelefone" style="font-size:15px") <span data-i18n="demo.manutencao_form.clientetelefone"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_clientetelefone" ,name="jobcard_clientetelefone")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_contactperson" style="font-size:15px") <span data-i18n="demo.manutencao_form.contactperson"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_contactperson" ,name="jobcard_contactperson")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_contactphone" style="font-size:15px") <span data-i18n="demo.manutencao_form.contactphone"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_contactphone" ,name="jobcard_contactphone")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px; margin-top:10px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.travel"></span>
+				if Jobcards
+					if(Jobcards[0].jobcard_travelinfo_proposito == "viagem")
+						.row.mostrartabela1
+							table.responsive-table.bordered.striped
+								thead
+									tr.selmecAzul
+										th <span data-i18n="demo.manutencao_form.fromto"></span>
+										th <span data-i18n="demo.manutencao_form.data"></span>
+										th <span data-i18n="demo.manutencao_form.time"></span>
+										th <span data-i18n="demo.manutencao_form.remedialaction"></span>
+								tbody
+									-for(var index = 0; index < Jobcards[0].travelinfoArrayJobcard.length; index++)
+										tr.highlight(style="font-family:;color:#12375c")
+											td #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_departureplace} <i class="material-icons prefix center" style="display: inline-flex; vertical-align: top;">trending_flat</i> #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_destinationplace}
+											-if(Jobcards[0].travelinfoArrayJobcard[index].jobcard_departuredate == Jobcards[0].travelinfoArrayJobcard[index].jobcard_destinationdate)
+												td #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_departuredate}
+											-else
+												td #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_departuredate} - #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_destinationdate}
+											td #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_departuretime} - #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_destinationtime}
+											td -
+					else
+						.row.mostrartabela1
+							table.responsive-table.bordered.striped
+								thead
+									tr.selmecAzul
+										th <span data-i18n="demo.manutencao_form.fromto"></span>
+										th <span data-i18n="demo.manutencao_form.data"></span>
+										th <span data-i18n="demo.manutencao_form.time"></span>
+										th <span data-i18n="demo.manutencao_form.remedialaction"></span>
+								tbody
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_departureplace} <i class="material-icons prefix center" style="display: inline-flex; vertical-align: top;">trending_flat</i> #{Jobcards[0].jobcard_site}
+										-if(Jobcards[0].travelinfoArrayJobcard[0].jobcard_departuredate == Jobcards[0].travelinfoArrayJobcard[0].jobcard_sitearrivaldate)
+											td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_departuredate}
+										-else
+											td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_departuredate} - #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_sitearrivaldate}
+										td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_departuretime} - #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_sitearrivaltime}
+										td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_remedialaction}
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].jobcard_site} <i class="material-icons prefix center" style="display: inline-flex; vertical-align: top;">trending_flat</i> #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_destinationplace}
+										-if(Jobcards[0].travelinfoArrayJobcard[0].jobcard_sitedeparturedate == Jobcards[0].travelinfoArrayJobcard[0].jobcard_destinationdate)
+											td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_sitedeparturedate}
+										-else
+											td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_sitedeparturedate} - #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_destinationdate}
+										td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_sitedeparturetime} - #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_destinationtime}
+										td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_remedialaction}
+				else
+					.row(style="margin-bottom:15px")
+						.col.s5.m3
+							input.bom.preencher(type="radio" id="travelinfo_viagem" name="travelinfo_proposito" value="viagem")
+							label(for="travelinfo_viagem" style="font-size:15px") <span data-i18n=demo.manutencao_form.viagem></span>
+						.col.s5.m3
+							input.bom.preencher(type="radio" id="travelinfo_visitsite" name="travelinfo_proposito" value="visit site")
+							label(for="travelinfo_visitsite" style="font-size:15px") <span data-i18n=demo.manutencao_form.visitsite></span>
+					.row.mostrarPartida.hide
+						h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.departure"></span>
+						.row(style="margin-bottom:10px")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_departureplace" style="font-size:15px") <span data-i18n="demo.manutencao_form.departureplace"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_departureplace" ,name="jobcard_departureplace")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_kmreading" style="font-size:15px") <span data-i18n="demo.manutencao_form.kmreading"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_kmreading" ,name="jobcard_kmreading")
+						.row(style="margin-bottom:0px")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_departuredate" style="font-size:15px") <span data-i18n="demo.manutencao_form.departuredate"></span>
+								input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_departuredate" ,name="jobcard_departuredate")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_departuretime" style="font-size:15px") <span data-i18n="demo.manutencao_form.departuretime"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_departuretime" ,name="jobcard_departuretime")
+					.row.mostrarChegadaSite.hide
+						h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.sitearrival"></span>
+						.row(style="margin-bottom:0px")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_sitearrivaldate" style="font-size:15px") <span data-i18n="demo.manutencao_form.sitearrivaldate"></span>
+								input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_sitearrivaldate" ,name="jobcard_sitearrivaldate")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_sitearrivaltime" style="font-size:15px") <span data-i18n="demo.manutencao_form.sitearrivaltime"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_sitearrivaltime" ,name="jobcard_sitearrivaltime")
+					.row.mostrarTrabalhoFeito.hide
+						h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.workdone"></span>
+						.row(style="margin-bottom:0px")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_remedialaction" style="font-size:15px") <span data-i18n="demo.manutencao_form.remedialaction"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_remedialaction" ,name="jobcard_remedialaction")
+							.col.s12.m6.input-field(style="margin-bottom:0px; margin-top:-7px;font-size:15px")
+								select(name="jobcard_healthsafety", id="jobcard_healthsafety")
+									option(value="" disabled selected) Escolha a opção
+									option(value="yes") Yes
+									option(value="no") No
+								label(style="font-size:15px") <span data-i18n="demo.manutencao_form.healthsafety"></span>
+					.row.mostrarPartidaSite.hide
+						h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.sitedeparture"></span>
+						.row(style="margin-bottom:23px")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_sitedeparturedate" style="font-size:15px") <span data-i18n="demo.manutencao_form.sitedeparturedate"></span>
+								input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_sitedeparturedate" ,name="jobcard_sitedeparturedate")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_sitedeparturetime" style="font-size:15px") <span data-i18n="demo.manutencao_form.sitedeparturetime"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_sitedeparturetime" ,name="jobcard_sitedeparturetime")
+						//- .row(style="margin-bottom:10px")
+						//- 	.col.s12.m6.input-field(style="margin-top:0px;margin-bottom: 15px;")
+						//- 		select(name="jobcard_sleeping", id="jobcard_sleeping")
+						//- 			option(value="" disabled selected) Escolha a opção
+						//- 			option(value="yes") Yes
+						//- 			option(value="no") No
+						//- 		label(style="font-size:15px") <span data-i18n="demo.manutencao_form.sleeping"></span>
+						//- 	.col.s12.m6.input-field(style="margin-top:0px;margin-bottom: 15px;")
+						//- 		label(for="jobcard_totalsleep" style="font-size:15px") <span data-i18n="demo.manutencao_form.totalsleep"></span>
+						//- 		input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_totalsleep" ,name="jobcard_totalsleep")
+						.row(style="margin-bottom:0px")
+							.col.s12.m6.input-field(style="margin-top:-21px")
+								label(for="jobcard_kmsite" style="font-size:15px") <span data-i18n="demo.manutencao_form.kmreading"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_kmsite" ,name="jobcard_kmsite")
+					.row.mostrarProximoDestino.hide
+						h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.nextdestination"></span>
+						.row(style="margin-bottom:10px")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_destinationdate" style="font-size:15px") <span data-i18n="demo.manutencao_form.destinationdate"></span>
+								input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_destinationdate" ,name="jobcard_destinationdate")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_destinationtime" style="font-size:15px") <span data-i18n="demo.manutencao_form.destinationtime"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_destinationtime" ,name="jobcard_destinationtime")
+						.row(style="margin-bottom:0px")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_destinationplace" style="font-size:15px") <span data-i18n="demo.manutencao_form.destinationplace"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_destinationplace" ,name="jobcard_destinationplace")
+							.col.s12.m6.input-field(style="margin-top:-7px")
+								label(for="jobcard_kmdestination" style="font-size:15px") <span data-i18n="demo.manutencao_form.kmreading"></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_kmdestination" ,name="jobcard_kmdestination")
+						a.adicionarTravel#addtravel(class="waves-effect waves-light action-button" style="width:142px") Add Travel Info
+						a.adicionarTravel#updatetravel.hide(class="waves-effect waves-light action-button" style="width:162px") Update Travel Info
+					.row.mostrartabela1.hide
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.manutencao_form.fromto"></span>
+									th <span data-i18n="demo.manutencao_form.data"></span>
+									th <span data-i18n="demo.manutencao_form.time"></span>
+									th <span data-i18n="demo.manutencao_form.remedialaction"></span>
+									th
+							tbody#mostrarTabelaTravel.mostrarTabelaTravel
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.gerador"></span>
+				if Jobcards
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_previousgeneratorhours" style="font-size:15px") <span data-i18n="demo.manutencao_form.previousgeneratorhours"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_previousgeneratorhours" ,name="jobcard_previousgeneratorhours", readonly, value="#{Jobcards[0].jobcard_previousgeneratorhours}")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_currentgeneratorhours" style="font-size:15px") <span data-i18n="demo.manutencao_form.currentgeneratorhours"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_currentgeneratorhours" ,name="jobcard_currentgeneratorhours", readonly, value="#{Jobcards[0].jobcard_currentgeneratorhours}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_previousrefuelhrs" style="font-size:15px") <span data-i18n="demo.manutencao_form.previousrefuelhrs"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_previousrefuelhrs" ,name="jobcard_previousrefuelhrs", readonly, value="#{Jobcards[0].jobcard_previousrefuelhrs}")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_generatorrefuel" style="font-size:15px") <span data-i18n="demo.manutencao_form.generatorrefuel"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_generatorrefuel" ,name="jobcard_generatorrefuel", readonly, value="#{Jobcards[0].jobcard_generatorrefuel}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_litersoil" style="font-size:15px") <span data-i18n="demo.manutencao_form.litersoil"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_litersoil" ,name="jobcard_litersoil", readonly, value="#{Jobcards[0].jobcard_litersoil}")
+						.col.s12.m6.input-field(style="margin-top:0px;margin-bottom: 15px;")
+							select(name="jobcard_dsc", id="jobcard_dsc")
+								option(value="#{Jobcards[0].jobcard_dsc}" selected) #{Jobcards[0].jobcard_dsc}
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.dsc"></span>
+					-if(Jobcards[0].jobcard_refuelreason == "normal")
+						.row(style="margin-bottom:45px")
+							.col.s3
+								label(for="jobcard_refuelreason") <span data-i18n="demo.manutencao_form.refuelreason"></span>
+							.col.s4
+								input.bom(type="radio" id="refuelnormal"  name="jobcard_refuelreason" value="normal" checked)
+								label(for="refuelnormal") Normal					
+							.col.s4
+								input(type="radio" id="refuelstolen" name='jobcard_refuelreason' value="diesel stolen" disabled="disabled")
+								label(for="refuelstolen") <span data-i18n="demo.manutencao_form.refuelstolen"></span>
+					-else
+						.col.s3
+								label(for="jobcard_refuelreason") <span data-i18n="demo.manutencao_form.refuelreason"></span>
+							.col.s4
+								input.bom(type="radio" id="refuelnormal"  name="jobcard_refuelreason" value="normal" disabled="disabled")
+								label(for="refuelnormal") Normal					
+							.col.s4
+								input(type="radio" id="refuelstolen" name='jobcard_refuelreason' value="diesel stolen" checked)
+								label(for="refuelstolen") <span data-i18n="demo.manutencao_form.refuelstolen"></span>
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_lastrefueldate" style="font-size:15px") <span data-i18n="demo.manutencao_form.lastrefueldate"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_lastrefueldate" ,name="jobcard_lastrefueldate", readonly, value="#{Jobcards[0].jobcard_lastrefueldate}")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_generatorbeenserviced" style="font-size:15px") <span data-i18n="demo.manutencao_form.generatorbeenserviced"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_generatorbeenserviced" ,name="jobcard_generatorbeenserviced", readonly, value="#{Jobcards[0].jobcard_generatorbeenserviced}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_hourslastservice" style="font-size:15px") <span data-i18n="demo.manutencao_form.hourslastservice"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_hourslastservice" ,name="jobcard_hourslastservice", readonly, value="#{Jobcards[0].jobcard_hourslastservice}")
+				else
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_previousgeneratorhours" style="font-size:15px") <span data-i18n="demo.manutencao_form.previousgeneratorhours"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_previousgeneratorhours" ,name="jobcard_previousgeneratorhours")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_currentgeneratorhours" style="font-size:15px") <span data-i18n="demo.manutencao_form.currentgeneratorhours"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_currentgeneratorhours" ,name="jobcard_currentgeneratorhours")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_previousrefuelhrs" style="font-size:15px") <span data-i18n="demo.manutencao_form.previousrefuelhrs"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_previousrefuelhrs" ,name="jobcard_previousrefuelhrs")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_generatorrefuel" style="font-size:15px") <span data-i18n="demo.manutencao_form.generatorrefuel"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_generatorrefuel" ,name="jobcard_generatorrefuel")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_litersoil" style="font-size:15px") <span data-i18n="demo.manutencao_form.litersoil"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_litersoil" ,name="jobcard_litersoil")
+						.col.s12.m6.input-field(style="margin-top:0px;margin-bottom: 15px;")
+							select(name="jobcard_dsc", id="jobcard_dsc")
+								option(value="" disabled selected) Escolha a opção
+								option(value="yes") Yes
+								option(value="no") No
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.dsc"></span>
+					.row
+						.col.s3
+							label(for="jobcard_refuelreason") <span data-i18n="demo.manutencao_form.refuelreason"></span>
+						.col.s4
+							input.bom(type="radio" id="refuelnormal"  name="jobcard_refuelreason" value="normal")
+							label(for="refuelnormal") Normal					
+						.col.s4
+							input(type="radio" id="refuelstolen" name='jobcard_refuelreason' value="diesel stolen")
+							label(for="refuelstolen") <span data-i18n="demo.manutencao_form.refuelstolen"></span>
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_lastrefueldate" style="font-size:15px") <span data-i18n="demo.manutencao_form.lastrefueldate"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_lastrefueldate" ,name="jobcard_lastrefueldate")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_generatorbeenserviced" style="font-size:15px") <span data-i18n="demo.manutencao_form.generatorbeenserviced"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_generatorbeenserviced" ,name="jobcard_generatorbeenserviced")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px;margin-bottom: 15px;")
+							label(for="jobcard_hourslastservice" style="font-size:15px") <span data-i18n="demo.manutencao_form.hourslastservice"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_hourslastservice" ,name="jobcard_hourslastservice")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px;")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.repair"></span>
+				if Jobcards
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.manutencao_form.equiptype"></span>
+									th <span data-i18n="demo.manutencao_form.manufacturer"></span>
+									th <span data-i18n="demo.manutencao_form.model"></span>
+									th <span data-i18n="demo.manutencao_form.serialnumber"></span>
+							tbody
+								-for(var index = 0; index < Jobcards[0].equipamentoArrayJobcard.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_equiptype}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_manufacturer}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_model}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_serialnumber}
+				else
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_equiptype" style="font-size:15px") <span data-i18n="demo.manutencao_form.equiptype"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_equiptype" ,name="jobcard_equiptype")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_manufacturer" style="font-size:15px") <span data-i18n="demo.manutencao_form.manufacturer"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_manufacturer" ,name="jobcard_manufacturer")
+					.row(style="margin-bottom:10px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_model" style="font-size:15px") <span data-i18n="demo.manutencao_form.model"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_model" ,name="jobcard_model")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_serialnumber" style="font-size:15px") <span data-i18n="demo.manutencao_form.serialnumber"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_serialnumber" ,name="jobcard_serialnumber")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_capcity" style="font-size:15px") <span data-i18n="demo.manutencao_form.capacity"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_capcity" ,name="jobcard_capcity")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_type" style="font-size:15px") <span data-i18n="demo.manutencao_form.type"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_type" ,name="jobcard_type")
+					.row.mostrartabela2.hide
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.manutencao_form.equiptype"></span>
+									th <span data-i18n="demo.manutencao_form.manufacturer"></span>
+									th <span data-i18n="demo.manutencao_form.model"></span>
+									th <span data-i18n="demo.manutencao_form.serialnumber"></span>
+									th
+							tbody#mostrarTabelaEquipamento.mostrarTabelaEquipamento
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Jobcards
+					a#adicionarEquipamento(class="waves-effect waves-light action-button" style="width:142px") Add Equipment
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px;")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.spare"></span>
+				//- .row(style="margin-bottom:0px")
+				//- 	.col.s12.m6.input-field(style="margin-top:0px;margin-bottom: 15px;")
+				//- 		select(name="jobcard_fromstore", id="jobcard_fromstore")
+				//- 			option(value="" disabled selected) Escolha a opção
+				//- 			option(value="Gina") Gina
+				//- 		label(style="font-size:15px") <span data-i18n="demo.manutencao_form.fromstore"></span>
+				//- 	.col.s12.m6.input-field(style="margin-top:0px;margin-bottom: 15px;")
+				//- 		select(name="jobcard_maintenanceofficer", id="jobcard_maintenanceofficer")
+				//- 			option(value="" disabled selected) Escolha a opção
+				//- 			option(value="Carol") Carol
+				//- 		label(style="font-size:15px") <span data-i18n="demo.manutencao_form.maintenanceofficer"></span>
+				if Jobcards
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									//- th <span data-i18n="demo.manutencao_form.fromstore"></span>
+									th <span data-i18n="demo.manutencao_form.item"></span>
+									th <span data-i18n="demo.manutencao_form.quantity"></span>
+									th <span data-i18n="demo.manutencao_form.remaining"></span>
+									th <span data-i18n="demo.manutencao_form.datauso"></span>
+							tbody
+								-for(var index = 0; index < Jobcards[0].sparesArrayJobcard.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_item}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_quantity}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_remaining}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_datauso}
+				else
+					.row(style="margin-bottom:0px")
+						//- .col.s12.m6.input-field(style="margin-top:-12px")
+						//- 	label(for="jobcard_item" style="font-size:15px") <span data-i18n="demo.manutencao_form.item"></span>
+						//- 	input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_item" ,name="jobcard_item")
+						.col.s12.m6.input-field(style="margin-top:0px;margin-bottom: 15px;")
+							select(name="jobcard_item", id="jobcard_item")
+								option(value="" disabled selected) Escolha a opção
+								option(value="ac") Ar condiconado
+							label(style="font-size:15px") <span data-i18n="demo.manutencao_form.item"></span>
+						.col.s12.m6.input-field(style="margin-top:0px")
+							label(for="jobcard_quantity" style="font-size:15px") <span data-i18n="demo.manutencao_form.quantity"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_quantity" ,name="jobcard_quantity")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:0px")
+							label(for="jobcard_remaining" style="font-size:15px") <span data-i18n="demo.manutencao_form.remaining"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_remaining" ,name="jobcard_remaining")
+						.col.s12.m6.input-field(style="margin-top:-7px")
+							label(for="jobcard_datauso" style="font-size:15px") <span data-i18n="demo.manutencao_form.datauso"></span>
+							input( autocomplete="off", readonly ,type="text", style="font-family:;color:#12375c" ,id="jobcard_datauso" ,name="jobcard_datauso", value="#{(new Date()).getDate()+'/'+((new Date()).getMonth()+1)+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours())+' : '+((new Date()).getMinutes())}")
+					.row.mostrartabela3.hide
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									//- th <span data-i18n="demo.manutencao_form.fromstore"></span>
+									th <span data-i18n="demo.manutencao_form.item"></span>
+									th <span data-i18n="demo.manutencao_form.quantity"></span>
+									th <span data-i18n="demo.manutencao_form.remaining"></span>
+									th <span data-i18n="demo.manutencao_form.datauso"></span>
+									th
+							tbody#mostrarTabelaSpares.mostrarTabelaSpares
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Jobcards
+					a#adicionarSpares(class="waves-effect waves-light action-button" style="width:142px") Add Spares
+					input#captarJobcard(type="button", name="submit", class="submit action-button", value="Save")
+	block js
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

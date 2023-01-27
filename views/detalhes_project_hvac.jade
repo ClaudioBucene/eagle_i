@@ -1,0 +1,319 @@
+extends layout
+block content
+	.row
+		-if(DataU.departamento == "Centro de Suporte de Operações")
+			-if(Carregado[0].ttnumber_status == "new")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/new") <i class=" activarAzul material-icons">reply</i>
+			-else if(Carregado[0].ttnumber_status == "In Progress")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/inprogress") <i class=" activarAzul material-icons">reply</i>
+		-else if(DataU.departamento == "Climatização e Electricidade")
+			-if(Carregado[0].ttnumber_status == "new")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/climatizacao/correctivanew") <i class=" activarAzul material-icons">reply</i>
+			-else if(Carregado[0].ttnumber_status == "In Progress")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/climatizacao/correctivainprogress") <i class=" activarAzul material-icons">reply</i>
+		form(id="formulario2", method="POST" enctype="multipart/form-data")
+			ul(id="progressbar2" style="margin-bottom:0px; margin-top:-30px")
+				li.siteinfoIcon(class="active" style="user-select:none") <span class="hide-on-med-and-down">Detalhes da Tarefa</span> <span class="large"> <img class="hide-on-large-only" src="/img/siteinfo.png" style="width:20px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-med-and-down">Fotos</span> <span class="large"> <img class="hide-on-large-only" src="/img/photo.png" style="width:20px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-med-and-down">Assinatura do Cliente</span> <span class="large"> <img class="hide-on-large-only" src="/img/signature3.png" style="width:25px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-med-and-down">Material Usado</span> <span class="large"> <img class="hide-on-large-only" src="/img/corrective.png" style="width:25px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-med-and-down">Auditoria</span> <span class="large"> <img class="hide-on-large-only" src="/img/audittrail.png" style="width:20px">
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:20px") Detalhes da Tarefa
+				.row
+					.col.s12.m6
+						label(for="departamento") <span data-i18n="demo.utilizador_form.departamento"></span> 
+						select.browser-default(id="departamento", name="departamento" readonly)
+							option(value="#{Carregado[0].departamento}" ) #{Carregado[0].departamento}
+					.col.s12.m6
+						label(for="jobcard_clienteid") <span data-i18n="demo.ttnumber_form.cliente"></span>
+						select.browser-default(name="cliente", id="cliente", readonly)
+							option(value="#{Carregado[0].cliente}" ) #{Carregado[0].cliente}
+					.col.s12.m6
+						label(for="jobcard_clienteid") Filial
+						select.browser-default(name="cliente", id="cliente")
+							option(value="#{Carregado[0].filial}" ) #{Carregado[0].filial}
+					.col.s12.m6
+						label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+						select.browser-default(name="regiao", id="regiao", style="font-family:", readonly)
+							option(value="#{Carregado[0].regiao}") #{Carregado[0].regiao}
+					.col.s12.m6
+						label <span data-i18n="demo.utilizador_form.provincia"></span>
+						select.browser-default.browser-default(name="provincia_trabalho", id="provincia_trabalho", style="font-family:", readonly)
+							option(value="#{Carregado[0].provincia}") #{Carregado[0].provincia}
+					.input-field.col.s12.m6
+						label(for="local") Local
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="local", readonly, name="local" value="#{Carregado[0].local}")
+					-if(Carregado[0].pessoacontacto_nome != -1)
+						.row
+							.input-field.col.s12.m6
+								label(for="local") Pessoa de contacto
+								input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="local", readonly, name="local" value="#{Carregado[0].pessoacontacto_nome}")
+				h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") Equipa
+				.row
+					.col.s12.m6
+						label(for="tecnico") Equipe Tecnica
+						select.browser-default(name="tecnico", id="tecnico", style="font-family:")
+							option(value="#{Carregado[0].tecnico}") #{Carregado[0].tecnico}
+					.col.s12.m6
+						label Matricula da viatura
+						select.browser-default.browser-default(name="viatura", id="viatura", style="font-family:")
+							option(value="#{Carregado[0].viatura}" ) #{Carregado[0].viatura}
+					.col.s12.m6(style="margin-top:2px")
+						label(for="jobcard_priority") <span data-i18n="demo.ttnumber_form.prioridade"></span>
+						select.browser-default(name="jobcard_priority", id="jobcard_priority")
+							option(value="" disabled selected) Escolha a opção
+							option(value="Alta" selected="#{Carregado[0].prioridade}"=="Alta"?true:false) Alta
+							option(value="Media" selected="#{Carregado[0].prioridade}"=="Media"?true:false) Média
+							option(value="Baixa"  selected="#{Carregado[0].prioridade}"=="Baixa"?true:false) Baixa
+					.input-field.col.s12.m6
+						label(for="data") Data prevista
+						input.datepicker(autocomplete="off", type="text", style="font-family:;color:#12375c" value="#{Carregado[0].data_inicio}" readonly,id="data", name="data")  
+					.input-field.col.s12.m6
+						label(for="razao") Razao
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="razao",  value="#{Carregado[0].razao}", name="razao")
+					-if(DataU._id == Carregado[0].tecnico_ref && Carregado[0].status=="new" )
+						.col.s12.m6(style="padding-top:20px")
+							a.waves-effect.waves-light.btn(href="/stock_request/tecnicos/#{DataU._id}" ) <i class="material-icons left">search</i> Meu stock
+				.row
+
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") Assistentes
+					.col.s12
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th Nomes
+									th
+							tbody(id="myTable_responsaveis" style="height:auto !important; text-transform:capitalize")
+								-for(let i=0; i<Carregado[0].assistentes.length; i++)
+									tr
+										td #{Carregado[0].assistentes[i].nome}
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:20px") Fotos
+				row(style="margin-bottom:20px")
+					.col.s12.m12.input-field
+						-for(let i=0; i<(Carregado[0].photoinfo.length); i++)
+							img.verimagem(style="width:100px; margin: 20px;" , src="#{Carregado[0].photoinfo[i]}")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" ) Assinatura do Cliente
+				.div
+					img(src="#{Carregado[0].assinatura}" style="width:65vw !important; height:50vh")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" ) Material Usado
+				-if(Carregado[0].spares_usados.length > 0)
+					table.responsive-table.bordered.striped.icn1
+						thead
+							tr.selmecAzul
+								th Referencia
+								th Descricao
+								th Quantidade	
+						-for(var index =0; index<Carregado[0].spares_usados.length ; index++)
+							tr.highlight(data-funcionario="#{Carregado[0]._id}", data-nome="#{Carregado[0].jobcard_audittrail[index].jobcard_audittrailname}",style="color:#{Carregado[0].observacao}")
+								td #{Carregado[0].jobcard_cod}
+								td #{Carregado[0].spares_usados[index].descricao}
+								td #{Carregado[0].spares_usados[index].quantidade}
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul") Auditoria
+				table.responsive-table.bordered.striped.icn1
+					thead
+						tr.selmecAzul
+							th Nome
+							th Accao
+							th Data	
+					-for(var index =0; index<Carregado[0].jobcard_audittrail.length ; index++)
+						tr.highlight(data-funcionario="#{Carregado[0]._id}", data-nome="#{Carregado[0].jobcard_audittrail[index].jobcard_audittrailname}",style="color:#{Carregado[0].observacao}")
+							td #{Carregado[0].jobcard_audittrail[index].jobcard_audittrailname}
+							td #{Carregado[0].jobcard_audittrail[index].jobcard_audittrailaction}
+							//- td #{((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getDate()<10? '0'+(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getDate():(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getDate())+'/'+(((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMonth()+1)<10? ('0'+((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMonth()+1)):((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMonth()+1))+'/'+((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getFullYear())+'   '+((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getHours()<10? ('0'+(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getHours()): (Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getHours() )+' : '+((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMinutes()<10? ('0'+(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMinutes()):(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMinutes())}
+							//- td #{((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getDate()<10? '0'+(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getDate():(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getDate())+'/'+(((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMonth()+1)<10? ('0'+((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMonth()+1)):((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMonth()+1))+'/'+((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getFullYear())+'   '+((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getHours()<10? ('0'+(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getHours()): (Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getHours() )+' : '+((Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMinutes()<10? ('0'+(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMinutes()):(Carregado[0].jobcard_audittrail[index].jobcard_audittraildate).getMinutes())}
+				.row#recolherdados(data-user-new="#{Carregado[0]._id}")
+					-if(Carregado[0].jobcard_audittrail.length>2)
+						button#vermapahvvac(type="button", ghsyu="#{Carregado[0]._id}", class="btn waves-efect waves-light activarAzul") Mapa
+					-if((Carregado[0].jobcard_estadoactual !='On hold' && DataU.nome == Carregado[0].jobcard_controladorintervenientes[1]) && ((Carregado[0].jobcard_controlador.length) < 3 || (Carregado[0].jobcard_controlador[3] == 0)))
+						input.sendapprovalproject(type="button", name="submit", data-user-new="#{Carregado[0]._id}", class="submit action-button", value="Send for approval" style="width:180px")
+					-else
+						if(DataU.nome == "David De Almeida" || DataU.funcao == "Call Center" || DataU.funcao =="Rogerio Galrito")
+							input.editjobcard_project(type="button", name="submit", class="submit action-button", value="Update Jobcard" style="width:180px")
+						-if((Carregado[0].jobcard_audittrail.length>3 && Carregado[0].jobcard_estadoactual != "Approved" && Carregado[0].jobcard_estadoactual != "Sent back") && (Carregado[0].ttnumber_status == "In Progress") && DataU.funcao != "Tecnico" )
+							button#aprovarcallouthvac(type="button", data-user-new="#{Carregado[0]._id}", class="btn waves-efect waves-light activarAzul", style="margin:22px") Aprovar
+							button#sendbackcallouthvac(type="button", data-user-new="#{Carregado[0]._id}", href = "/manutencao/detalhesDevolverJobcardhvac/#{Carregado[0]._id}" ,class="btn waves-efect waves-light activarAzul", style="margin:0px") Devolver
+							
+		block js
+
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".siteinfoIcon").click(function(e){
+			e.preventDefault();
+			$("#progressbar2 li:not(:first)").removeClass("active");
+
+			$("fieldset").hide();
+
+			// if(animating) return false;
+			// animating = true;
+			var maximo= $(this).index(".siteinfoIcon");
+
+		
+			for(var i=0; i<maximo; i++){
+			$("#progressbar2 li").eq((i+1)).addClass("active");
+			console.log("happme************")
+			}
+
+			console.log(maximo);
+			$("fieldset").eq(maximo).show()
+			})
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<800){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			//- document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+			var listaprovincia = new Array(11) ;
+			listaprovincia["empty"] = ["Provincia"]; 
+			listaprovincia["Maputo Cidade"] = ["KaMpfumo", "Nlhamankulu", "KaMaxaquene", "KaMavota", "KaMubukwana", "KaTembe", "KaNyaka"];
+			listaprovincia["Maputo Provincia"] = ["Boane", "Magude", "Manhiça", "Marracuene", "Matutuíne", "Moamba", "Namaacha"];
+			listaprovincia["Gaza"] = ["Bilene Macia", "Chibuto", "Chicualacuala", "Chigubo", "Chókwè", "Guijá", "Mabalane", "Manjacaze", "Massangena", "Massingir", "Xai-Xai"];
+			listaprovincia["Inhambane"] = ["Funhalouro", "Govuro", "Homoíne", "Inhambane", "Inharrime", "Inhassoro", "Jangamo", "Mabote", "Massinga", "Morrumbene", "Panda", "Vilanculos", "Zavala"];
+			listaprovincia["Manica"] = ["Bárue", "Gondola", "Guro", "Macate", "Machaze", "Macossa", "Manica", "Mossurize", "Sussundenga", "Tambara", "Vanduzi"];
+			listaprovincia["Sofala"] = ["Búzi", "Caia", "Chemba", "Cheringoma", "Chibabava", "Dondo", "Gorongosa", "Machanga", "Maringué", "Marromeu", "Muanza", "Nhamatanda"];
+			listaprovincia["Tete"] = ["Angónia", "Cahora-Bassa", "Changara", "Chifunde", "Chiuta", "Dôa", "Macanga", "Magoé", "Marara", "Marávia", "Moatize", "Mutarara", "Tsangano", "Zumbo"];
+			listaprovincia["Zambezia"] = ["Alto Molócue", "Chinde", "Derre", "Gilé", "Gurué", "Ile", "Inhassunge", "Luabo", "Lugela", "Maganja da Costa", "Milange", "Mocuba", "Mocubela", "Molumbo", "Mopeia", "Morrumbala", "Mulevala", "Namacurra", "Namarroi", "Nicoadala", "Pebane", "Quelimane"];
+			listaprovincia["Nampula"] = ["Angoche", "Eráti", "Ilha de Moçambique", "Lalaua", "Larde", "Liúpo", "Malema", "Meconta", "Mecubúri", "Memba", "Mogincual", "Mogovolas", "Moma", "Monapo", "Mossuril", "Muecate", "Murrupula", "Nacala-a-Velha", "Nacarôa", "Nampula", "Ribaué"];
+			listaprovincia["Niassa"] = ["Cuamba", "Lago", "Lichinga", "Majune", "Mandimba", "Marrupa", "Maúa", "Mavago", "Mecanhelas", "Mecula", "Metarica", "Muembe", "N'gauma", "Nipepe", "Sanga"];
+			listaprovincia["Cabo Delgado"] = ["Ancuabe", "Balama", "Chiúre", "Ibo", "Macomia", "Mecufi", "Meluco", "Metuge", "Mocímboa da Praia", "Montepuez", "Mueda", "Muidumbe", "Namuno", "Nangade", "Palma", "Pemba Metuge", "Quissanga"];
+
+			function countryChange(selectObj) { 
+			
+				// get the index of the selected option 
+				var idx = selectObj.selectedIndex; 
+				
+				// get the value of the selected option 
+				var which = selectObj.options[idx].value; 
+				
+				// use the selected option value to retrieve the list of items from the countryLists array 
+				var cList = listaprovincia[which]; 
+				
+				// get the country select element via its known id 
+				var cSelect = document.getElementById("siteinfo_area"); 
+				
+				// remove the current options from the country select 
+				var len=cSelect.options.length; 
+				
+				while (cSelect.options.length > 0) { 
+				cSelect.remove(0); 
+				} 
+
+				var newOption; 
+				// create new options 
+				for (var i=0; i<cList.length; i++) { 
+
+					newOption = document.createElement("option"); 
+					
+					newOption.value = cList[i];  // assumes option string and value are the same 
+					newOption.text=cList[i]; 
+					
+					cSelect.appendChild(newOption);
+					 //- console.log(cSelect); 
+					//- // add the new option 
+					//- try { 
+					//- 	cSelect.add(newOption);  // this will fail in DOM browsers but is needed for IE 
+					//- } 
+					//- catch (e) { 
+					//- 	
+					//- } 
+				}
+
+				
+			}

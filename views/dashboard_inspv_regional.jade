@@ -1,0 +1,64 @@
+extends layout
+block content
+	.container.seccao.white
+		.row
+			.col.s12#container.chartjs-stacked-bar(dataa="#{Mensagem}" ,cor="#{backgrnd}", style="position: relative; height:70vh; width:75vw !important")
+				canvas#myChart1(style="position: relative; height:70vh; width:75vw !important") 
+				
+
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		//- script(src="https://canvasjs.com/assets/script/canvasjs.min.js")
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+			
+			let dados1=JSON.parse($("#container").attr("dataa"))
+			var ctx1 = document.getElementById("myChart1").getContext('2d');
+			var myChart = new Chart(ctx1, {
+			type: 'bar',
+			data: {
+			labels: ["Centro", "Maputo", "Norte", "Sul"],
+			datasets: [{
+			backgroundColor: [
+			$("#container").attr("cor"),
+			$("#container").attr("cor"),
+			$("#container").attr("cor"),$("#container").attr("cor")
+			],
+			data: [(dados1.findIndex(x => x._id =="centro")!=-1? dados1[dados1.findIndex(x => x._id =="centro")].soma:0), (dados1.findIndex(x => x._id =="maputo")!=-1? dados1[dados1.findIndex(x => x._id =="maputo")].soma:0), (dados1.findIndex(x => x._id =="norte")!=-1? dados1[dados1.findIndex(x => x._id =="norte")].soma:0), (dados1.findIndex(x => x._id =="sul")!=-1? dados1[dados1.findIndex(x => x._id =="sul")].soma:0)]
+			}]
+			},
+			options: {
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: true
+			},scales:{yAxes:[{ticks:{beginAtZero: true}}]}
+			}
+			});
+
+			var canvas1 = document.getElementById('myChart1');
+			canvas1.onclick = function(evt) {
+			var activePoint = myChart.getElementAtEvent(evt)[0];
+			var data = activePoint._chart.data;
+			var datasetIndex = activePoint._datasetIndex;
+			var label = data.datasets[datasetIndex].label;
+			var value = data.datasets[datasetIndex].data[activePoint._index];
+			var regiao= data.labels[activePoint._index]
+			//- label=label.replace("Estado", '').trim()
+			//- if(regiao!="Maputo Cidade")
+			//- regiao=regiao.replace("Região", '').toLowerCase().trim()
+
+			//- var rule = label+'1'+regiao
+			
+			var linkk= regiao;
+			console.log(linkk);
+			window.location.href="/dashboard/inspveh/"+linkk+"/"+$("#container").attr("cor");
+			};

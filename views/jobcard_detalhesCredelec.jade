@@ -1,0 +1,174 @@
+extends layout
+block content
+	if JobcardDetalhes
+		.row
+			-if(JobcardDetalhes.jobcard_jobtype == "Callout")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/inprogress") <i class=" activarAzul material-icons">reply</i>
+			-else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/inprogress") <i class=" activarAzul material-icons">reply</i>
+		form#ttnumberform
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") Detalhes Energia
+			.row#recolherdados(style="margin-top:-30px; margin-bottom:0px" dadosreferenciajobcard="#{JobcardDetalhes._id}" dadosjobtype = "#{JobcardDetalhes.jobcard_jobtype}" datacredelecarray="#{DadosIdcredelecinfojobcard}")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_amountadded") <span data-i18n="demo.manutencao_form.amountadded"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_amountadded" ,name="jobcard_amountadded" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_amountadded}")
+				.col.s12.m6.input-field(style="margin-top:0px")
+					label(for="jobcard_amount") <span data-i18n="demo.manutencao_form.amoutcredelec"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_amount" ,name="jobcard_amount" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_amount}")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:0px")
+					label(for="jobcard_currentkwh") <span data-i18n="demo.manutencao_form.currentkwh"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_currentkwh" ,name="jobcard_currentkwh" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_currentkwh}")
+				//- .col.s12.m6.input-field(style="margin-top:0px")
+				//- 	label(for="jobcard_kwhafter") <span data-i18n="demo.manutencao_form.afterkwh"></span>
+				//- 	input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_kwhafter" ,name="jobcard_kwhafter" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_kwhafter}")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:0px")
+					label(for="jobcard_payamount") <span data-i18n="demo.manutencao_form.amount"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_payamount" ,name="jobcard_payamount" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_payamount}")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_transactionr") <span data-i18n="demo.manutencao_form.transactionr1"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_transactionr" ,name="jobcard_transactionr" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_transactionr}")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_credelecnr") <span data-i18n="demo.manutencao_form.credelecnr"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_credelecnr" ,name="jobcard_credelecnr" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_credelecnr}")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					//- label(for="jobcard_credelecnr") <span data-i18n="demo.manutencao_form.credelecnr"></span>
+					//- input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_itemphoto" ,name="jobcard_itemphoto" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_itemphoto}")
+					-if(JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_itemphoto)
+						img.verimagem(style="width:100px; margin: 20px;", id="jobcard_itemphoto", name="jobcard_itemphoto" , src="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_itemphoto}")
+			-if((DataU.funcao == "Call Center") || (JobcardDetalhes.jobcard_controladorintervenientes[2] == DataU.nome))
+				button(type="button", id="jobcardcredlecinfo_update", class="btn modal-action waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	if Jobcard
+		.row
+			-if(Jobcard.jobcard_jobtype == "Callout")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/inprogress") <i class=" activarAzul material-icons">reply</i>
+			-else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/inprogress") <i class=" activarAzul material-icons">reply</i>
+		form#ttnumberform
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") Detalhes Energia
+			.row#recolherdados(style="margin-top:-30px; margin-bottom:0px" dadosreferenciajobcard="#{Jobcard._id}" dadosjobtype = "#{Jobcard.jobcard_jobtype}")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_amountadded") <span data-i18n="demo.manutencao_form.amountadded"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_amountadded" ,name="jobcard_amountadded")
+				.col.s12.m6.input-field(style="margin-top:0px")
+					label(for="jobcard_amount") <span data-i18n="demo.manutencao_form.amoutcredelec"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_amount" ,name="jobcard_amount")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:0px")
+					label(for="jobcard_payamount") <span data-i18n="demo.manutencao_form.amount"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_payamount" ,name="jobcard_payamount")
+				.col.s12.m6.input-field(style="margin-top:0px")
+					label(for="jobcard_currentkwh") <span data-i18n="demo.manutencao_form.currentkwh"></span>
+					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_currentkwh" ,name="jobcard_currentkwh")
+			.row(style="margin-bottom:0px")
+				//- .col.s12.m6.input-field(style="margin-top:0px")
+				//- 	label(for="jobcard_kwhafter") <span data-i18n="demo.manutencao_form.afterkwh"></span>
+				//- 	input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_kwhafter" ,name="jobcard_kwhafter")				
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_transactionr") <span data-i18n="demo.manutencao_form.transactionr"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_transactionr" ,name="jobcard_transactionr")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_credelecnr") <span data-i18n="demo.manutencao_form.credelecnr"></span>
+					input( autocomplete="off", type="text", value="#{site.siteinfo_credelec}", style="font-family:;color:#12375c" ,id="jobcard_credelecnr" ,name="jobcard_credelecnr")
+			.row(style="margin-bottom:30px")
+				.col.s12.m6.input-field.mostrarfotoitem(style="margin-top:-6px")
+					<span data-i18n="demo.manutencao_form.imagemspare"></span>
+					input.preencher(type="file", id="jobcard_itemphoto", name="jobcard_itemphoto",autocomplete="off" style="padding:5px")
+			button(type="button", id="jobcardcredlecinfo_yes_btn", class="btn modal-action waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- extends layout
+//- block content
+//- 	if JobcardDetalhes
+//- 		.row
+//- 			-if(JobcardDetalhes.jobcard_jobtype == "Callout")
+//- 				div(class="fixed-action-btn horizontal fixed-add-bottom")
+//- 					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/inprogress") <i class=" activarAzul material-icons">reply</i>
+//- 			-else
+//- 				div(class="fixed-action-btn horizontal fixed-add-bottom")
+//- 					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/inprogress") <i class=" activarAzul material-icons">reply</i>
+//- 		form#ttnumberform
+//- 			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") Detalhes Energia
+//- 			.row#recolherdados(style="margin-top:-30px; margin-bottom:0px" dadosreferenciajobcard="#{JobcardDetalhes._id}" dadosjobtype = "#{JobcardDetalhes.jobcard_jobtype}" datacredelecarray="#{DadosIdcredelecinfojobcard}")
+//- 				.col.s12.m6.input-field(style="margin-top:0px")
+//- 					label(for="jobcard_currentkwh") <span data-i18n="demo.manutencao_form.currentkwh"></span>
+//- 					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_currentkwh" ,name="jobcard_currentkwh" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_currentkwh}")
+//- 				.col.s12.m6.input-field(style="margin-top:0px")
+//- 					label(for="jobcard_kwhafter") <span data-i18n="demo.manutencao_form.afterkwh"></span>
+//- 					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_kwhafter" ,name="jobcard_kwhafter" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_kwhafter}")
+//- 			.row(style="margin-bottom:0px")
+//- 				.col.s12.m6.input-field(style="margin-top:3px")
+//- 					label(for="jobcard_amountadded") <span data-i18n="demo.manutencao_form.amountadded"></span>
+//- 					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_amountadded" ,name="jobcard_amountadded" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_amountadded}")
+//- 				.col.s12.m6.input-field(style="margin-top:3px")
+//- 					label(for="jobcard_transactionr") <span data-i18n="demo.manutencao_form.transactionr"></span>
+//- 					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_transactionr" ,name="jobcard_transactionr" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_transactionr}")
+//- 			.row(style="margin-bottom:0px")
+//- 				.col.s12.m6.input-field(style="margin-top:3px")
+//- 					label(for="jobcard_credelecnr") <span data-i18n="demo.manutencao_form.credelecnr"></span>
+//- 					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_credelecnr" ,name="jobcard_credelecnr" value="#{JobcardDetalhes.jobcard_credelecinfo[posicao].jobcard_credelecnr}")
+//- 			-if((DataU.funcao == "Call Center") || (JobcardDetalhes.jobcard_controladorintervenientes[2] == DataU.nome))
+//- 				button(type="button", id="jobcardcredlecinfo_update", class="btn modal-action waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+//- 	if Jobcard
+//- 		.row
+//- 			-if(Jobcard.jobcard_jobtype == "Callout")
+//- 				div(class="fixed-action-btn horizontal fixed-add-bottom")
+//- 					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/inprogress") <i class=" activarAzul material-icons">reply</i>
+//- 			-else
+//- 				div(class="fixed-action-btn horizontal fixed-add-bottom")
+//- 					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/inprogress") <i class=" activarAzul material-icons">reply</i>
+//- 		form#ttnumberform
+//- 			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") Detalhes Energia
+//- 			.row#recolherdados(style="margin-top:-30px; margin-bottom:0px" dadosreferenciajobcard="#{Jobcard._id}" dadosjobtype = "#{Jobcard.jobcard_jobtype}")
+//- 				.col.s12.m6.input-field(style="margin-top:0px")
+//- 					label(for="jobcard_currentkwh") <span data-i18n="demo.manutencao_form.currentkwh"></span>
+//- 					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_currentkwh" ,name="jobcard_currentkwh")
+//- 				.col.s12.m6.input-field(style="margin-top:0px")
+//- 					label(for="jobcard_kwhafter") <span data-i18n="demo.manutencao_form.afterkwh"></span>
+//- 					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_kwhafter" ,name="jobcard_kwhafter")
+//- 			.row(style="margin-bottom:0px")
+//- 				.col.s12.m6.input-field(style="margin-top:3px")
+//- 					label(for="jobcard_amountadded") <span data-i18n="demo.manutencao_form.amountadded"></span>
+//- 					input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_amountadded" ,name="jobcard_amountadded")
+//- 				.col.s12.m6.input-field(style="margin-top:3px")
+//- 					label(for="jobcard_transactionr") <span data-i18n="demo.manutencao_form.transactionr"></span>
+//- 					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_transactionr" ,name="jobcard_transactionr")
+//- 			.row(style="margin-bottom:0px")
+//- 				.col.s12.m6.input-field(style="margin-top:3px")
+//- 					label(for="jobcard_credelecnr") <span data-i18n="demo.manutencao_form.credelecnr"></span>
+//- 					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_credelecnr" ,name="jobcard_credelecnr")
+//- 			button(type="button", id="jobcardcredlecinfo_yes_btn", class="btn modal-action waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+//- 	block js
+//- 		script(type="text/javascript" src="/js/jquery.mask.js")
+//- 		script.
+//- 			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+//- 			setTimeout(function(){
+				
+//- 			if(window.innerWidth<780){
+//- 			document.getElementById("mySidebar").style.width = "0";
+//- 			document.getElementById("main").style.marginLeft= "0";
+//- 			document.getElementById("main").style.width="100%";
+//- 			document.getElementById("main").style.marginBottom="0";
+//- 			document.getElementByClassName("capitalize").style.class="pequeno";
+//- 			}
+//- 			}, 50);

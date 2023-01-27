@@ -1,0 +1,35 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST", enctype="multipart/form-data") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.ficheiro"></span>
+				.row
+					.col.s12.m4.input-field
+						span Comprovativo
+						input(type="file", id="carrager_comprovativo", name="carrager_comprovativo",autocomplete="off")
+					.col.s12.m4.input-field
+						span Ficheiro Excel
+						input(type="file", id="carrager_ficheiro", name="carrager_ficheiro",autocomplete="off")
+			fieldset.no-border
+				.row.buttons-container
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="carragemanto_armezam") carregar
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") cancelar
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

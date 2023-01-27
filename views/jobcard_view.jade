@@ -1,0 +1,295 @@
+extends layout
+block content
+	.row
+		form(id="formulario2", method="POST")
+			ul(id="progressbar2" style="margin-bottom:0px")
+				li(class="active") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.basicinfo"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/siteinfo.png" style="width:20px">
+				li <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.cliente"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/profile3.png" style="width:20px">
+				if(Jobcards[0].travelinfoArrayJobcard.length != 0)
+					li <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.travel"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/infotravel.png" style="width:20px">
+				if(Jobcards[0].generatorArrayJobcard.length != 0)
+					li <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.gerador"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/generator1.png" style="width:20px">
+				if(Jobcards[0].equipamentoArrayJobcard.length != 0)
+					li <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.repair"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/eqrepair.png" style="width:20px">
+				if(Jobcards[0].sparesArrayJobcard.length != 0)
+					li <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.spare"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/boxspares.png" style="width:20px">
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.manutencao_form.basicinfo"></span>
+				.row#approvalinfo(data-user-new="#{Jobcards[0]._id}" detalhessession="#{NomeSession}" style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_cod") <span data-i18n="demo.manutencao_form.codigo"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_cod", readonly, value="#{Jobcards[0].jobcard_cod}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_ttnumber") <span data-i18n="demo.ttnumber_form.ttnumber"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_ttnumber", readonly, value="#{Jobcards[0].jobcard_ttnumber}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_call") Call
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_call", readonly, value="#{Jobcards[0].jobcard_call}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_departamento") <span data-i18n="demo.manutencao_form.departamento"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_departamento", readonly, value="#{Jobcards[0].jobcard_departamento}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_regiao") <span data-i18n="demo.manutencao_form.regiao"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_regiao", readonly, value="#{Jobcards[0].jobcard_regiao}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_jobtype") <span data-i18n="demo.manutencao_form.jobtype"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_jobtype", readonly, value="#{Jobcards[0].jobcard_jobtype}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_jobinfo") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_jobinfo", readonly, value="#{Jobcards[0].jobcard_jobinfo}")
+				h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.tecnico"></span>
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_tecniconome") <span data-i18n="demo.manutencao_form.tecniconome"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_tecniconome", readonly, value="#{Jobcards[0].jobcard_tecniconome}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_cell") Cell
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_cell", readonly, value="#{Jobcards[0].jobcard_cell}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_linemanager") Line Manager
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_linemanager", readonly, value="#{Jobcards[0].jobcard_linemanager}")
+				h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.reporte"></span>
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_loggedby") <span data-i18n="demo.manutencao_form.loggedby"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_loggedby", readonly, value="#{Jobcards[0].jobcard_loggedby}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_loggedon") <span data-i18n="demo.manutencao_form.loggedon"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_loggedon", readonly, value="#{Jobcards[0].jobcard_loggedon}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_datareporte") <span data-i18n="demo.manutencao_form.loggedon"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_datareporte", readonly, value="#{Jobcards[0].jobcard_datareporte}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_horareporte") <span data-i18n="demo.manutencao_form.horareporte"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_horareporte", readonly, value="#{Jobcards[0].jobcard_horareporte}")
+				-if(Jobcards[0].jobcard_jobtype == "Planned Maintenance")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="jobcard_quotacao") <span data-i18n="demo.manutencao_form.quotacao"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,name="jobcard_quotacao", readonly, value="#{Jobcards[0].jobcard_quotacao}")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.cliente"></span>
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_clientenome") <span data-i18n="demo.manutencao_form.clientenome"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_clientenome", readonly, value="#{Jobcards[0].jobcard_clientenome}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_clientebranch") <span data-i18n="demo.manutencao_form.clientebranch"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_clientebranch", readonly, value="#{Jobcards[0].jobcard_clientebranch}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field
+						label(for="jobcard_clientetelefone") <span data-i18n="demo.manutencao_form.clientetelefone"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_clientetelefone", readonly, value="#{Jobcards[0].jobcard_clientetelefone}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if(Jobcards[0].travelinfoArrayJobcard.length != 0)
+					input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px; margin-top:10px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.travel"></span>
+				.row.mostrartabela1#recolherdados2(detalhejobcard="#{DadosJobcards}" detalhesarmazens="#{DadosArmazens}")
+					table.responsive-table.bordered.striped
+						thead
+							tr.selmecAzul
+								th Site
+								th <span data-i18n="demo.manutencao_form.data"></span>
+								th <span data-i18n="demo.manutencao_form.time"></span>
+								th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.remedialaction"></span></span><span class="hide-on-med-and-up"><span data-i18n="demo.manutencao_form.remedialaction1"></span></span>
+								th
+						tbody
+							-for(var index = 0; index < Jobcards[0].travelinfoArrayJobcard.length; index++)
+								tr.highlight(style="font-family:;color:#12375c")
+									td #{Jobcards[0].jobcard_site}
+									-if(Jobcards[0].travelinfoArrayJobcard[index].jobcard_sitearrivaldate == Jobcards[0].travelinfoArrayJobcard[index].jobcard_sitedeparturedate)
+										td #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_sitearrivaldate}
+									-else
+										td #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_sitearrivaldate} - #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_sitedeparturedate}
+									td #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_sitearrivaltime} - #{Jobcards[0].travelinfoArrayJobcard[index].jobcard_sitedeparturetime}
+									td #{Jobcards[0].travelinfoArrayJobcard[0].jobcard_remedialaction}
+									td
+										a.tooltipped.pointer.mostrardetalhesTravel(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Jobcards[0]._id}", data-array-new="#{Jobcards[0].travelinfoArrayJobcard[index]._id}", data-tooltip="Details of Travel") <i class="material-icons activarVerde">info</i>
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if((Jobcards[0].generatorArrayJobcard.length != 0) || (Jobcards[0].equipamentoArrayJobcard.length != 0) || (Jobcards[0].sparesArrayJobcard.length != 0))
+					input(type="button", name="next", class="next action-button", value="Next >>")
+				else
+					if((Jobcards[0].jobcard_controlador.length) < 3 || (Jobcards[0].jobcard_controlador[3] == 0))
+						input.sendapproval(type="button", name="submit", class="submit action-button", value="Send for approval" style="width:180px")
+			if(Jobcards[0].generatorArrayJobcard.length != 0)
+				fieldset(style="padding:25px")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.gerador"></span>
+					.row#recolherdados3(detalhesitegenerator="#{DadosSiteGenerator}")
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.manutencao_form.gerador1"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.previousrefuelhrs"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.previousrefuelhrs1></span></span>
+									th <span data-i18n="demo.manutencao_form.currentgeneratorhours1"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.refuelreason"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.refuelreason1></span></span>
+									th
+							tbody
+								-for(var index = 0; index < Jobcards[0].generatorArrayJobcard.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_generator}
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_previousrefuelhrs}
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_currentgeneratorhours}
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_refuelreason}
+										td
+											a.tooltipped.pointer.mostrardetalhesGenerator(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Jobcards[0]._id}", data-array-new="#{Jobcards[0].generatorArrayJobcard[index]._id}", data-position-new="#{index}", data-tooltip="Details of Travel") <i class="material-icons activarVerde">info</i>
+					input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					if((Jobcards[0].equipamentoArrayJobcard.length != 0) || (Jobcards[0].sparesArrayJobcard.length != 0))
+						input(type="button", name="next", class="next action-button", value="Next >>")
+					else
+						if((Jobcards[0].jobcard_controlador.length) < 3 || (Jobcards[0].jobcard_controlador[3] == 0))
+							input.sendapproval(type="button", name="submit", class="submit action-button", value="Send for approval" style="width:180px")
+			if(Jobcards[0].equipamentoArrayJobcard.length != 0)
+				fieldset(style="padding:25px;")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.repair"></span>
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.equiptype"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.equiptype1></span></span>
+									th <span data-i18n="demo.manutencao_form.manufacturer"></span>
+									th <span data-i18n="demo.manutencao_form.model"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.serialnumber"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.serialnumber1></span></span>
+									th
+							tbody
+								-for(var index = 0; index < Jobcards[0].equipamentoArrayJobcard.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_equiptype}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_manufacturer}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_model}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_serialnumber}
+										td
+											a.tooltipped.pointer.mostrardetalhesEquipment(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Jobcards[0]._id}", data-array-new="#{Jobcards[0].equipamentoArrayJobcard[index]._id}", data-position-new="#{index}", data-tooltip="Details of Equipment Repairs") <i class="material-icons activarVerde">info</i>
+					input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					if(Jobcards[0].sparesArrayJobcard.length != 0)
+						input(type="button", name="next", class="next action-button", value="Next >>")
+					else
+						if((Jobcards[0].jobcard_controlador.length) < 3 || (Jobcards[0].jobcard_controlador[3] == 0))
+							input.sendapproval(type="button", name="submit", class="submit action-button", value="Send for approval" style="width:180px")
+			if(Jobcards[0].sparesArrayJobcard.length != 0)
+				fieldset(style="padding:25px;")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.spare"></span>
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.manutencao_form.item"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.quantityuse"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.quantityuse1></span></span>
+									th <span data-i18n="demo.manutencao_form.remaining"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.datauso"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.data></span></span>
+									th
+							tbody
+								-for(var index = 0; index < Jobcards[0].sparesArrayJobcard.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_item}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_quantityuse}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_remaining}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_datauso}
+										td
+											a.tooltipped.pointer.mostrardetalhesSpares(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Jobcards[0]._id}", data-array-new="#{Jobcards[0].sparesArrayJobcard[index]._id}", data-position-new="#{index}", data-tooltip="Details of Spare Used") <i class="material-icons activarVerde">info</i>
+					input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					if((Jobcards[0].jobcard_controlador.length) < 3 || (Jobcards[0].jobcard_controlador[3] == 0))
+						input.sendapproval(type="button", name="submit", class="submit action-button", value="Send for approval" style="width:180px")
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

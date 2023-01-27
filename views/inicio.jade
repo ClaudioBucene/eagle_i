@@ -1,0 +1,13 @@
+extends layout
+block content
+	div(style="display:flex; justify-content:space-around !important;")
+		img(src="/img/missao.png", style="width:45%; height:45%")
+
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		script.
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "100%";
+			document.getElementById("main").style.marginLeft= "auto";}
+			}, 1);

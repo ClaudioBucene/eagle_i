@@ -1,0 +1,211 @@
+#principal {
+  margin-top: 135px;
+}
+
+@media screen and (min-width: 993px) {
+  #principal {
+    margin-left: 300px !important;
+    font-size: 12px;
+  }
+}
+.card-reveal {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+div.card-reveal span.card-title {
+  color: #ffffff !important;
+}
+.tabs {
+  background-color: transparent;
+}
+/* td,
+th {
+  padding: 5px 5px !important;
+}
+table.highlight > tbody > tr:hover {
+  background-color: rgba(238, 110, 115, 0.6);
+}
+input[type="search"]:focus {
+  border-bottom: 1px solid #ee6e73 !important;
+  box-shadow: 0 1px 0 0 #ee6e73 !important;
+} */
+.mestre {
+  position: fixed;
+  align-items: flex-end;
+  justify-content: flex-end;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  box-shadow: 0px 0px 10px gray;
+  display: flex;
+  line-height: 50px;
+}
+
+.nav-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  background: #fff;
+  padding: 0 20px;
+  /* border-bottom: 1px solid #eee; */
+}
+
+.brand-logo {
+  margin-left: 10px;
+}
+
+#slide-out {
+  margin-top: 75px;
+  box-shadow: none;
+  border-right: 1px solid #eee;
+}
+
+.menu-slide > li {
+  box-shadow: none !important;
+  width: 100%
+}
+
+.menu-slide > li .collapsible-header .content-icon {
+  float: right;
+  margin: 0;
+}
+.menu-slide > li .collapsible-header .content-icon::after {
+  content: "expand_more";
+  display: block;
+}
+
+.menu-slide > li .collapsible-header.active .content-icon::after {
+  content: "expand_less";
+}
+
+.menu-slide > li .collapsible-body {
+  margin-left: 44px;
+  background-color: grey;
+}
+
+.menu-slide > li .collapsible-body a:hover {
+  background: none;
+  color: green;
+  /*text-decoration: underline;*/
+}
+.menu-slide > li .collapsible-body a {
+  color: grey;
+}
+
+.menu-right {
+  order: 2;
+  display: flex;
+  margin-left: auto;
+}
+
+/****** Teste *********/
+.personalised {
+  box-shadow: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.personalised .card-image {
+  text-align: center;
+  color: #a8a8a8;
+}
+
+.personalised .card-image i {
+  font-size: 100px;
+  transition: all 0.5s ease-in-out;
+}
+
+.personalised .card-content {
+  text-align: center;
+  padding-top: 10px;
+  transition: all 0.9s ease-in-out;
+}
+
+.personalised .separator {
+  width: 50%;
+  margin-top: 20px;
+
+}
+
+.personalised:hover .card-image i {
+  transform: scale(1.3);
+  color: green;
+
+}
+
+.personalised:hover .card-image img {
+  transform: scale(1.3);
+  color: green;
+ /*-webkit-filter: opacity(1.9) drop-shadow(green);*/
+  filter: invert(0.4) sepia(1) saturate(7.5) hue-rotate(90deg) brightness(0.78)
+}
+.personalised .card-image img {
+  display:inline;
+  width:50%;
+  font-size: 100px;
+  transition: all 0.5s ease-in-out;
+}
+
+
+.personalised:hover .card-content {
+  color: green;
+  font-weight:bold;
+   /*transform: scale(1.3);*/
+}
+
+.input-default {
+  outline: none;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-default:focus {
+  width: 200px;
+}
+
+@media screen and (max-width: 800px) {
+  .personalised .card-image i {
+  font-size: 50px;
+  transition: all 0.5s ease-in-out;
+}
+}
+
+/*********************************************nosso css da tabela************************/
+
+
+@media only screen and (max-width: 600px ){
+  .afastar{
+    
+    margin-top: 90px !important;
+    
+  }
+  .menu-slide{
+    margin-top: 20% !important;
+    margin-left: 0 !important;
+    margin-right: 5px !important;
+  }
+  .fill-parent{
+    width:100% !important;
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+
+  }
+  .lang-picker{
+
+  }
+  body{
+    width:100% !important;
+  }
+}
+/**********************************************end CSS Tabela****************************/

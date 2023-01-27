@@ -1,0 +1,102 @@
+extends layout
+block content
+	.container.white(style="font-family:; ")
+		form(id="inspeccao", method="post", style="color:#12375c")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold  Formulário Inspecção de Pre-utilização
+				.row
+					.input-field.col.s12.m4
+						if Epi
+							label(for="utilizador") Utilizador<span class="red-text">*</span>
+							input(id="utilizador", readonly ,style="font-family:; ", type="text", name="utilizador", value="#{Epi[0].utilizador}")
+						else
+							label(for="utilizador") Utilizador<span class="red-text">*</span>
+							input(id="utilizador", readonly ,style="font-family:; ", type="text", name="utilizador", value="#{dadosUser.nome}")
+					.col.s12.m4
+					.col.s12.m4
+						label(for="nome") Nome da Epi
+						select.browser-default.preencher(name="nome", id="nome",style="font-family:")
+							if Epi
+								-for(var i = 0; i < Nome_Epis.length; i++)
+									if Epi[0].nome == Nome_Epis[i]
+										option(value="#{Nome_Epis[i]}", selected="selected") #{Nome_Epis[i]}
+									else
+										option(value="#{Nome_Epis[i]}") #{Nome_Epis[i]}
+							else
+								option(value="" disabled selected) Escolha nome da Epi
+								-for(var i = 0; i < Nome_Epis.length; i++)
+									option(value="#{Nome_Epis[i]}") #{Nome_Epis[i]}
+					.col.s12.m4.center.imagem
+						if Epi
+							img#imagem(src="/img/Facilities/#{Epi[0].nome}.jpg", Style="width:100px; margin-top:2px")
+						else
+							img#imagem(src="/img/1.jpg", Style="width:100px; margin-top:2px")
+				.row
+					.col.s12.m4
+							label(for="_estado_geral") Estado geral<span class="red-text">*</span>
+							select.browser-default(name="_estado_geral", id="_estado_geral", style="font-family:")
+								if Epi
+									if Epi[0].estado_geral == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Epi[0].estado_geral == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											option.red(value="nao definido", selected="selected", style="color:red !important;") Não definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="componentes") componentes
+							select.browser-default(name="componentes", id="componentes", style="font-family:")
+								if Epi
+									if Epi[0].componentes == 'completo'
+										option(value="completo", selected="selected") Completo
+									else
+										if Epi[0].estado_geral == 'incompleto' 
+											option(value="incompleto", selected="selected") Incompleto
+										else
+											option.red(value="nao definido", selected="selected") Não definido
+								else
+									option(value="" disabled selected) Escolha a Opcao
+									option(value="completo") Completo
+									option(value="incompleto") Incompleto
+					.input-field.col.s12.m4
+						.material-icons.prefix mode_edit
+						textarea#observacao.materialize-textarea(style="font-family:; color:#12375c" ) #{Epi? Epi[0].observacao: ''}
+						if Epi
+							label(for="icon_prefix2") Observação
+						else
+							label(for="icon_prefix2") Escreva sua Observação					
+				.row(style="margin-top:7px !important")
+						if !Epi
+							.col.s12.m6.center(style="margin-bottom: 10px;")
+								button#captarEpi(type="button", class="btn center waves-efect waves-light") registar
+							.col.s12.m6.center
+								button#cancelarEpi(type="button", class="btn waves-efect waves-light red") cancelar
+						else
+							.col.s12.center
+								butoon#voltarEpi(type="button", class="btn waves-efect waves-light activarAzul") << Voltar
+			block js
+				script.
+					document.getElementById("nome").addEventListener("change", function(){
+					var valor= document.getElementById("nome").value
+					valor="/img/Facilities/"+valor+".jpg";
+					document.getElementById("imagem").src=valor;
+
+
+					});
+					setInterval(function(){document.getElementById("equipamentoId").className="activarAzul";}, 200);
+					setTimeout(function(){
+					if(window.innerWidth<780){
+					document.getElementById("mySidebar").style.width = "0";
+					document.getElementById("main").style.marginLeft= "0";
+					document.getElementById("main").style.width="100%";
+					document.getElementById("main").style.marginBottom="0";}
+					}, 50);
+	
+	//- image:String,
+	//- nome:String,
+	//- utilizador:String,
+	//- data_utilizador:String

@@ -1,0 +1,53 @@
+extends layout
+block content
+	.container(style="padding-top:20px")
+		.col.s6.m4
+			.card.hover-reveal.personalised#access_level_adm
+				.card-image.waves-block
+					img.icn(src="/img/access_level.png" style="width:70px" )
+				.card-content
+					h6.bold.icn1  <span data-i18n="demo.utilizador_form.modulp"></span>
+		.col.s6.m4
+			.card.hover-reveal.personalised#department_adm
+				.card-image.waves-block
+					img.icn(src="/img/department.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.departmento_adm"></span>
+		.col.m4.s6
+			.card.hover-reveal.personalised#funcoes_adm
+				.card-image.waves-block
+					img.icn(src="/img/funcoess.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.funcoes_adm"></span>
+		.col.m4.s6
+			.card.hover-reveal.personalised#province_adm
+				.card-image.waves-block
+					img.icn(src="/img/province.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.provincia_adm"></span>
+		.col.s6.m4
+			.card.hover-reveal.personalised#veiculos_adm
+				.card-image.waves-block
+					img.icn(src="/img/veiculos.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.viatura_adm"></span>
+		.col.s6.m4
+			.card.hover-reveal.personalised#region_adm
+				.card-image.waves-block
+					img.icn(src="/img/region.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.regiao_adm"></span>
+
+		block js
+			script(type="text/javascript" src="/js/jquery.mask.js")
+			script.
+				setInterval(function(){document.getElementById("adminsession").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";
+				document.getElementByClassName("capitalize").style.class="pequeno";
+				}
+				}, 50);

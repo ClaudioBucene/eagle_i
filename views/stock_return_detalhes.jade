@@ -1,0 +1,111 @@
+extends layout
+block content
+	.seccao.container.white
+		-var temp = Stock_request[0].estagio.length
+		-if ((DataU.nome==Stock_request[0].intervenientes[temp])&&(Stock_request[0].estagio.length==1))
+			.fixed-action-btn.top.fixed-add-bottom
+				a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+				ul(dados=stockData2)
+					li
+						a.btn-floating.pointer(data-position="left",href="/stock_return/aprovar/#{Stock_request[0]._id}", data-delay="10", ""class="btn-floating btn-large " , data-user-new="#{Stock_request[0]._id}" ) <i class="material-icons green">thumb_up</i>
+					li
+						a.btn-floating.pointer(data-position="left", data-delay="10", class="btn-floating btn-small waves-effect waves-light",href="/stock_return/reprovar/#{Stock_request[0]._id}" , data-user-new="#{Stock_request[0]._id}") <i class="material-icons red">thumb_down</i>
+		
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Detalhes do Retorno
+				.row
+					.col.s12.m6.input-field
+						label(for="requested_by") <span data-i18n="demo.stock_request_home.requisitado_por1"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="requested_by" ,name="requested_by", readonly value="#{Stock_request[0].returned_by}")
+					.col.s12.m6.input-field
+						label(for="book_out_to_store") <span data-i18n="demo.stok_request_form.destino"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="book_out_to_store" ,name="book_out_to_store", readonly value="#{Stock_request[0].return_to}")
+					.col.s12.m6.input-field
+						label(for="date_request") data
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="date_request" ,name="date_request", readonly value="#{((Stock_request[0].date_request).getDate()<10? '0'+(Stock_request[0].date_request).getDate():(Stock_request[0].date_request).getDate())+'/'+(((Stock_request[0].date_request).getMonth()+1)<10? ('0'+((Stock_request[0].date_request).getMonth()+1)):((Stock_request[0].date_request).getMonth()+1))+'/'+((Stock_request[0].date_request).getFullYear())+'   '+((Stock_request[0].date_request).getHours()<10? ('0'+(Stock_request[0].date_request).getHours()): (Stock_request[0].date_request).getHours() )+' : '+((Stock_request[0].date_request).getMinutes()<10? ('0'+(Stock_request[0].date_request).getMinutes()):(Stock_request[0].date_request).getMinutes())}")
+					.col.s12.m6.input-field
+						label(for="department") <span data-i18n="demo.stok_request_form.departamento"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="department" ,name="department", readonly value="#{Stock_request[0].department}")
+					.col.s12.m6.input-field
+						label(for="reason") <span data-i18n="demo.stok_request_form.razoes"></span> 
+						input.preencher( autocomplete="off", type="text", id="reason",  readonly value="#{Stock_request[0].reason}", style="font-family:")
+					-if(Stock_request[0].returned_reason)
+						.col.s12.m6.input-field
+							label(for="reason") <span data-i18n="demo.stok_request_form.razoe_dev"></span>
+							input.preencher( autocomplete="off", type="text", id="reason",  readonly value="#{Stock_request[0].returned_reason}", style="font-family:")
+					-if(Stock_request[0].stocK_request_number)
+						.col.s12.m6.input-field
+							label(for="reason") <span data-i18n="demo.stok_request_form.numero_st"></span>
+							input.preencher( autocomplete="off", type="text", id="reason",  readonly value="#{Stock_request[0].stocK_request_number}", style="font-family:")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Artigos
+				.row
+					table.responsive-table.bordered.striped.s12
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.stok_request_form.descricao"></span> 
+								th Retornado
+								th <span data-i18n="demo.stok_request_form.recebido"></span> 
+						tbody(id="myTable_tecnicos_permitidos" style="height:auto !important" )
+							-for(let i=0; i<Stock_request[0].items.length; i++)
+								tr
+									td.tooltipped.pointer(data-position="top", data-delay="10", data-tooltip="SN:#{Stock_request[0].items[i].num_serie[0]}") #{Stock_request[0].items[i].description}
+									td #{Stock_request[0].items[i].quanty}
+									td #{Stock_request[0].items[i].booked_out? Stock_request[0].items[i].booked_out: '0'}
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Resultados
+				.row
+					table.responsive-table.bordered.striped.s12(style="height:auto !important")
+						thead
+							tr
+								th <span data-i18n="demo.stok_request_form.recebido_por"></span> 
+								th <span data-i18n="demo.stok_request_form.data"></span> 
+								th <span data-i18n="demo.stok_request_form.acao"></span> 
+						tbody(style="height:auto !important")
+							-if(Stock_request[0].actual_situation=="reprovado" ||  (Stock_request[0].actual_situation=="Finalizado")&&(Stock_request[0].stock_approvers.length==2))
+								tr
+									td #{Stock_request[0].stock_approvers[1]}
+									td #{((Stock_request[0].date_actions[1]).getDate()<10? '0'+(Stock_request[0].date_actions[1]).getDate():(Stock_request[0].date_actions[1]).getDate())+'/'+(((Stock_request[0].date_actions[1]).getMonth()+1)<10? ('0'+((Stock_request[0].date_actions[1]).getMonth()+1)):((Stock_request[0].date_actions[1]).getMonth()+1))+'/'+((Stock_request[0].date_actions[1]).getFullYear())+'   '+((Stock_request[0].date_actions[1]).getHours()<10? ('0'+(Stock_request[0].date_actions[1]).getHours()): (Stock_request[0].date_actions[1]).getHours() )+' : '+((Stock_request[0].date_actions[1]).getMinutes()<10? ('0'+(Stock_request[0].date_actions[1]).getMinutes()):(Stock_request[0].date_actions[1]).getMinutes())}
+									td <span data-i18n="demo.stok_request_form.reprovado"></span> 
+							-if(Stock_request[0].actual_situation=="aprovado" || Stock_request[0].stock_approvers.length>2)
+								tr
+									td #{Stock_request[0].stock_approvers[1]}
+									td #{((Stock_request[0].date_actions[1]).getDate()<10? '0'+(Stock_request[0].date_actions[1]).getDate():(Stock_request[0].date_actions[1]).getDate())+'/'+(((Stock_request[0].date_actions[1]).getMonth()+1)<10? ('0'+((Stock_request[0].date_actions[1]).getMonth()+1)):((Stock_request[0].date_actions[1]).getMonth()+1))+'/'+((Stock_request[0].date_actions[1]).getFullYear())+'   '+((Stock_request[0].date_actions[1]).getHours()<10? ('0'+(Stock_request[0].date_actions[1]).getHours()): (Stock_request[0].date_actions[1]).getHours() )+' : '+((Stock_request[0].date_actions[1]).getMinutes()<10? ('0'+(Stock_request[0].date_actions[1]).getMinutes()):(Stock_request[0].date_actions[1]).getMinutes())}
+									td <span data-i18n="demo.stok_request_form.aprovado"></span>
+							-if(Stock_request[0].actual_situation=="Entregue" || Stock_request[0].stock_approvers.length>3)
+								tr
+									td #{Stock_request[0].stock_approvers[2]}
+									td #{((Stock_request[0].date_actions[1]).getDate()<10? '0'+(Stock_request[0].date_actions[2]).getDate():(Stock_request[0].date_actions[1]).getDate())+'/'+(((Stock_request[0].date_actions[2]).getMonth()+1)<10? ('0'+((Stock_request[0].date_actions[2]).getMonth()+1)):((Stock_request[0].date_actions[2]).getMonth()+1))+'/'+((Stock_request[0].date_actions[2]).getFullYear())+'   '+((Stock_request[0].date_actions[2]).getHours()<10? ('0'+(Stock_request[0].date_actions[2]).getHours()): (Stock_request[0].date_actions[2]).getHours() )+' : '+((Stock_request[0].date_actions[2]).getMinutes()<10? ('0'+(Stock_request[0].date_actions[2]).getMinutes()):(Stock_request[0].date_actions[2]).getMinutes())}
+									td <span data-i18n="demo.stok_request_form.entregue"></span>
+							-if(Stock_request[0].actual_situation=="Recebido")
+								tr
+									td #{Stock_request[0].stock_approvers[3]}
+									td #{((Stock_request[0].date_actions[3]).getDate()<10? '0'+(Stock_request[0].date_actions[3]).getDate():(Stock_request[0].date_actions[3]).getDate())+'/'+(((Stock_request[0].date_actions[3]).getMonth()+1)<10? ('0'+((Stock_request[0].date_actions[3]).getMonth()+1)):((Stock_request[0].date_actions[3]).getMonth()+1))+'/'+((Stock_request[0].date_actions[3]).getFullYear())+'   '+((Stock_request[0].date_actions[3]).getHours()<10? ('0'+(Stock_request[0].date_actions[3]).getHours()): (Stock_request[0].date_actions[3]).getHours() )+' : '+((Stock_request[0].date_actions[3]).getMinutes()<10? ('0'+(Stock_request[0].date_actions[3]).getMinutes()):(Stock_request[0].date_actions[3]).getMinutes())}
+									td <span data-i18n="demo.stok_request_form.recebbido"></span>
+			fieldset.no-border
+				.row.buttons-container
+					if !Stock_request
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_StRequest") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_StRequest") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#cancelar_Po(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

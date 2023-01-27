@@ -1,0 +1,92 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+			a.tooltipped.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Nova Inspecção", class="btn-floating btn-large waves-effect waves-light", href="/gerador/novoregisto") <i class="material-icons activarVerde">add</i>
+		// -if(DataU.nivel_acesso == "admin")
+		// 	.row
+		// 		.col.right
+		// 			form(id="uploadForm", enctype="multipart/form-data", action="/gerador/upload", method="post")
+		// 				input(type="file" name="file" style="border: none; width: 253px;")
+		// 				input(type="submit" value="Upload" name="submit" style="border: none; width: 100px;")
+		if !Site|| !Site.length
+			p.center-align.selmecAzul.bold( style="") <span data-i18n="demo.site_home.seminfo"></span>
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix.activarVerde search
+					label(for="pesquisadoruser") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisadoruser", name="pesquisadoruser", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.site_home.lista"></span>
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Site
+						th <span data-i18n="demo.site_home.dataplaneada"></span>
+						th <span data-i18n="demo.site_home.doneby"></span>
+						th <span data-i18n="demo.site_home.oficial"></span>
+						th <span data-i18n="demo.site_home.estado"></span>
+						th
+				tbody(id="myTableUser")
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					-for (var index = 0; index < Site.length; index++)
+						tr.highlight(data-funcionario="#{Site[index]._id}", style=";color:#12375c")
+							td #{Site[index].siteNumber}
+							td #{Site[index].dateplanned}
+							td #{Site[index].tobedoneby}
+							td #{Site[index].maintenanceofficer}
+							td
+								-if((Site[index].status == "Delayed Inspection") || (Site[index].status == "Awaiting Inspection"))
+									img(style='width:30px;' src='img/pendente.gif')
+								-else
+									-if(Site[index].status == "Done early")
+										<i class="material-icons prefix center" style="color:#f3df03">check_circle</i>
+									-else
+										-if(Site[index].status == "Done later")
+											<i class="material-icons prefix center" style="color:#ff0000">check_circle</i>
+										-else
+											<i class="material-icons prefix center" style="color:#8ab356">check_circle</i>
+							td
+								-if(DataU.nome == "Guest")
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="/manutencao/detalhesSiteinfo/#{Siteinfos[index]._id}", data-tooltip="Site Details") <i class="material-icons activarVerde">info</i>
+								-else
+									a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Detalhes pre-utilização do Site de  #{Site[index].motorista}", href="/gerador/detalhes/#{Site[index]._id}") <i class="material-icons activarVerde">info</i>
+									-if(Site[index].espera == true)
+										if !Site[index].safetyOb.veiculo_safe
+											a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/seguranca/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+										else
+											if !Site[index].EDBoardOb.connections
+												a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/edboard/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+											else
+												if !Site[index].container.container_light
+													a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/contentor/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+												else
+													if !Site[index].roofTop.mounting_poles
+														a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/rooftop/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+													else
+														if !Site[index].mast.aw_light
+															a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/mast/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+														else
+															if !Site[index].airCond.fan_blade
+																a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/arcond/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+															else
+																if !Site[index].site_general.fence_gate_locks_hinges
+																	a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/sitegeneral/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+																else
+																	if !Site[index].alarms.intruder
+																		a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/alarm/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+																	else
+																		if !Site[index].generator.engine_oil
+																			a.pointer.selmecAzul(style="margin-left: 30px;",data-position="top", data-delay="5", data-tooltip="Remover pre-utilização de #{Site[index].motorista}", href="/gerador/generator/#{Site[index]._id}", data-user-id="#{Site[index].motorista}", data-user-new="#{Site[index]._id}") <i class="material-icons bold ">note_add</i>
+	block js
+		script.
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				if(window.innerWidth<780){
+					document.getElementById("mySidebar").style.width = "0";
+					document.getElementById("main").style.marginLeft= "0";
+					document.getElementById("main").style.width="100%";
+					document.getElementById("main").style.marginBottom="0";}
+				}, 50);

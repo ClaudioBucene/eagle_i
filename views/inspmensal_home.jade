@@ -1,0 +1,106 @@
+extends layout
+block content
+	.container.seccao.white
+		.row
+			.col.s12#chartdiv(data="#{veiculosMensal}")
+		.row
+			form(id="estatistica", method="POST")
+				.row
+					.col.s4.m3
+						select(id="tipo_estatistica", name="nivel_acesso")
+							option(value="" disabled selected ) Tipo
+							option(value="diario") Diario
+							option(value="mensal") Mensal
+							option(value="anual") Anual
+					.col.s4.m3.diario.hide
+						label
+						input(type="date" class="datepicker" id="data_nascimento" name="data_nascimento", placeholder="dd/mm/aaaa")
+					.col.s4.m3.mes.hide
+						select(id="mes_estatistica", name="mes_estatistica")
+							option(value="" disabled selected ) Mês
+							option(value=1) Janeiro
+							option(value=2) Fevereiro
+							option(value=3) Março
+							option(value=4) Abril
+							option(value=5) Maio
+							option(value=6) Junho
+							option(value=7) Julho
+							option(value=8) Agosto
+							option(value=9) Setembro
+							option(value=10) Outubro
+							option(value=11) Novembro
+							option(value=12) Dezembro
+					.col.s4.m3.anooo.hide
+						select(id="anooo", name="anooo")
+							option(value="" disabled selected ) Ano
+							option(value=2019) 2019
+		
+		block js
+			script(src="/js/amcharts.js")
+			script(src="/js/serial.js")
+			script.
+				setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";}
+				}, 50);
+				//- var dados=#{veiculosMensal};
+				//- console.log(dados)
+				let teste111=JSON.parse($("#chartdiv").attr("data"));
+				console.log(teste111)
+					var chart = AmCharts.makeChart("chartdiv", {
+					"type": "serial",
+					"startDuration": 2,
+					"dataProvider": [{
+					"country": "MAU",
+					"visits": teste111[0].visits,
+					"color": teste111[0]._id //"#FF0F00"
+					}, {
+					"country": "RAZOAVEL",
+					"visits": teste111[1].visits,
+					"color": teste111[1]._id //"#FF9E01"
+					},{
+					"country": "BOM",
+					"visits": teste111[2].visits,
+					"color": teste111[2]._id //"#04D215"
+					}],
+					"valueAxes": [{
+					"position": "left",
+					"axisAlpha": 0,
+					"gridAlpha": 0
+					}],
+					"graphs": [{
+					"balloonText": "[[category]]:<b>[[value]]</b>",
+					"colorField": "color",
+					"fillAlphas": 0.85,
+					"lineAlpha": 0.1,
+					"type": "column",
+					"topRadius": 1,
+					"valueField": "visits"
+					}],
+					"depth3D": 40,
+					"angle": 30,
+					"chartCursor": {
+					"categoryBalloonEnabled": false,
+					"cursorAlpha": 0,
+					"zoomable": false
+					},
+					"categoryField": "country",
+					"categoryAxis": {
+					"gridPosition": "start",
+					"axisAlpha": 0,
+					"gridAlpha": 0
+
+					},
+					"exportConfig": {
+					"menuTop": "20px",
+					"menuRight": "20px",
+					"menuItems": [{
+					"icon": '/lib/3/images/export.png',
+					"format": 'png'
+					}]
+					}
+					});

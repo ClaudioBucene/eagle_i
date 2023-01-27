@@ -1,0 +1,109 @@
+extends layout
+block content
+		-if(Armazem.length==0)
+			p.center-align.selmecAzul.bold caro #{DataU.nome}, nao esta habilitado a fazer requisicao. Por favor contacte o administrador!
+		-else
+			.seccao.container.white
+				form(id="formulario", method="POST") 
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold Requisicao
+						.row
+							.col.s12.m6.input-field
+								label(for="requested_by") <span data-i18n="demo.stok_request_form.nome"></span>
+								input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="requested_by" ,name="requested_by", readonly value="#{Stock_request? Stock_request[0].requested_by : DataU.nome}")
+							.col.s12.m6
+								label(for="department") <span data-i18n="demo.stok_request_form.departamento"></span>
+								select.browser-default.browser-default(name="department", id="department", style="font-family:")
+									-for(var i = 0; i < Departamento.length; i++)
+										option(value="#{Departamento[i]}"  data-chefe_d="#{chefes_depart[i]}") #{Departamento[i]}
+						.row
+							.col.s12.m6.hide
+								label(for="company") Empresa
+								select.browser-default.browser-default(name="company", id="company", style="font-family:")
+									if Stock_request
+										if Stock_request[0].company == "Comserv"
+											option(value="Comserv", selected="selected") Comserv
+										else
+											option(value="Vodacom") Vodacom
+									else
+										option(value="Comserv") Comserv
+										option(value="Vodacom") Vodacom
+							.col.s12.m6
+								label(for="request_from") <span data-i18n="demo.stok_request_form.Requesitar_em"></span>
+								select.browser-default.browser-default(name="request_from", id="request_from", style="font-family:")
+									-for(var i = 0; i < Armazem.length; i++)
+										option(value="#{Armazem[i].nome}" data-wh="#{Armazem[i]._id}"  data-resp="#{Armazem[i].responsavel[0]}" data-chefe="#{Armazem[i].responsavel}") #{Armazem[i].nome}
+							.col.s12.m6.input-field
+								label(for="Date_required") <span data-i18n="demo.stok_request_form.data_uso"></span>
+								input.datepicker( autocomplete="off", type="text", id="Date_required", value="#{Stock_request ? Stock_request[0].Date_required:''}", style="font-family:")
+							.col.s12.m6.input-field.hide
+								label(for="quote_BS_number") Numero de quotacao
+								input.preencher( autocomplete="off", type="text",  style="font-family:;color:#12375c" ,id="quote_BS_number" ,name="quote_BS_number", value="#{Stock_request? Stock_request[0].quote_BS_number : ''}")
+						.row
+							.col.s12.m6.input-field
+								label(for="book_out_to_store") <span data-i18n="demo.stok_request_form.destino"></span>
+								input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="book_out_to_store" , name="book_out_to_store", readonly value="#{DataU.nome}")
+							.col.s12.m6.input-field
+								label(for="reason") <span data-i18n="demo.stok_request_form.razoes"></span> 
+								input.preencher( autocomplete="off", type="text", id="reason",  value="#{Stock_request ? Stock_request[0].reason:''}", style="font-family:")
+							.col.s12.m6.input-field
+								label(for="responsaveis") <span data-i18n="demo.stok_request_form.departamento_chefe"></span> 
+								input.preencher( autocomplete="off", type="text", id="responsaveis", daddos="#{Armazemm}", readonly, value="#{Armazem.length>0? Armazem[0].responsavel[0]:''}", canal="#{Stock_request[0]._id}", style="font-family:")
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold Artigos
+						-if(Armazem.length>0)
+							.row(class="#{Armazem.length>0? '':'hide'}")
+								.col.s12.m6
+									label(for="items[]") <span data-i18n="demo.stok_request_form.selecionar_item"></span>
+									select.browser-default.pessoas_permitidas#selectizacao1(name="items[]",  style="font-family:")
+										-if(Armazem.length>0)
+											option(value="" disabled selected selmecVerde) Escolha o artigo
+											-for(let i=0; i<Items.length; i++)
+												option(value="#{Items[i].description_item}" data-referencia="#{Items[i]._id}", data-seriallized="#{Items[i].serialized_item}") #{Items[i].description_item}
+								.col.s9.m4.input-field
+											label(for="quant_item") <span data-i18n="demo.stok_request_form.quantidade"></span>
+											input(type="number" id="quant_item" name="quant_item" min=0 class="quant_item")
+								a(class="btn-floating btn-large waves-effect waves-light add-field4 right") + 
+							.row
+								.col.s12
+									table.responsive-table.bordered.striped
+										thead
+											tr.selmecAzul
+												th Item
+												th <span data-i18n="demo.stok_request_form.quantidade"></span>
+												th
+										tbody(id="myTable_tecnicos_permitidos" style="height:auto !important" )
+											-for(let i=0; i<Stock_request[0].items.length; i++)
+												tr
+													td.item_nome(data-referenciaa="#{Stock_request[0].items[i].referencia}", data-serialized="#{Stock_request[0].items[i].serialized}", data-cliente_name="#{Stock_request[0].items[i].cliente_name}") #{Stock_request[0].items[i].description}
+													td.item_quantidade #{Stock_request[0].items[i].quanty}
+													td  <i class="material-icons pointer  delete_po">delete_forever</i>
+													
+										
+					fieldset.no-border
+						-if(Armazem.length>0)
+							.row.buttons-container(class="#{Armazem.length>0? '':'hide'}")
+								if Stock_request
+									.col.s12.m6.left-button
+										button(type="button", class="btn", id="registar_StRequest_editado") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+									.col.s12.m6.right-button
+										button(type="button", class="btn red", id="cancelar_StRequest") <span data-i18n="demo.utilizador_form.cancelar"></span>
+								else
+									.col.s12.center
+										button#cancelar_Po(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

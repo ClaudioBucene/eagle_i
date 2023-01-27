@@ -1,0 +1,137 @@
+extends layout
+block content
+	article#dados(dado="#{CalloutStatsHistory}",  pacote="#{pacote}")
+		canvas#canvas(style=" text-align:center !important; padding-top:1em")
+		
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+
+			let dados1=JSON.parse($("#dados").attr("dado"))
+			var meses=['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto','Setembro','Outubro', 'Novembro', 'Dezembro'];
+			var etiquetes = [];
+			var number = [];
+			count1=0;count2=0;count3=0;count4=0;count5=0; count6=0; count7=0; count8=0; count9=0; count10=0; count11=0; count12=0;
+			
+			dados1.forEach((obj,position) =>{
+				
+				data = new Date(obj.data_ultimaactualizacaojobcard);
+				var t= data.getMonth() + 1;
+				if(t==1){
+					count1 = count1+1;
+					etiquetes[0]=(meses[0])
+					number[0]=count1;
+				}
+				if(t==2){
+					count2 = count2+1;
+					etiquetes[1]=(meses[1]);
+					number[1]=count2;
+				}
+				if(t==3){
+					count3 = count3+1;
+					etiquetes[2]=(meses[2]);
+					number[2]=count3;
+				}
+				if(t==4){
+					count4 = count4+1;
+					etiquetes[3]=(meses[3]);
+					number[3]=count4;
+				};
+				if(t==5){
+					count5 = count5+1;
+					etiquetes[4]=(meses[4])
+					number[4]=count5;
+				}
+				if(t==6){
+					count6 = count6+1;
+					etiquetes[5]=(meses[5]);
+					number[5]=count6;
+				}
+				if(t==7){
+					count7 = count7+1;
+					etiquetes[6]=(meses[6]);
+					number[6]=count7;
+				}
+				if(t==8){
+					count8 = count8+1;
+					etiquetes[7]=(meses[7]);
+					number[7]=count8;
+				};
+				if(t==9){
+					count9 = count9+1;
+					etiquetes[8]=(meses[8]);
+					number[8]=count9;
+				}
+				if(t==10){
+					count10 = count10+1;
+					etiquetes[9]=(meses[9]);
+					number[9]=count10;
+				}
+				if(t==11){
+					count11 = count11+1;
+					etiquetes[10]=(meses[10]);
+					number[10]=count11;
+				}
+				if(t==12){
+					count12 = count12+1;
+					etiquetes[11]=(meses[11]);
+					number[11]=count12;
+				};
+			});
+			var novo = [];
+			var color = [];
+			var dataLabel = [];
+			for( var i=0; i<etiquetes.length; i++){
+				if(etiquetes[i]!=undefined){
+					novo.push(etiquetes[i]);
+					color.push('rgb(157,181,13)');
+					dataLabel.push(number[i]);
+				}
+			}
+
+			console.log((dataLabel));
+			console.log("+++++++++++++++")
+			console.log(dados1);
+			let pacote =JSON.parse($("#dados").attr("pacote"));
+	
+			var regiaoSeguido = pacote.regiaoSeguido; 
+			var fromdate = pacote.fromdate;
+			var todata = pacote.todata;
+
+			var begginerchart = document.getElementById("canvas").getContext('2d');
+			var myChart = new Chart(begginerchart, {
+			type: 'bar',
+			data: {
+			labels:novo ,
+				datasets: [{
+					label: [regiaoSeguido.toUpperCase()],
+					backgroundColor:color,
+					data: dataLabel,
+					borderWidth:1
+			}]
+			},
+			options: {
+			
+			}
+			});
+
+			var canvas1 = document.getElementById('canvas');
+			
+			canvas1.onclick = function(evt) {
+				
+				activePoint = myChart.getElementAtEvent(evt)[0];
+				var data = activePoint._chart.data;
+				var mes = data.labels[activePoint._index];
+				console.log(data);
+				console.log("active "+mes);
+
+			window.location.href="/mensagem/graphicStates/"+regiaoSeguido+"/"+mes+"/"+fromdate+"/"+todata
+			};

@@ -1,0 +1,89 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.menu.viatura"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="condutor") <span data-i18n="demo.inspdiaria_form.motorista"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c",  readonly ,id="condutor" ,name="condutor", value="#{Oficina? Oficina[0].responsavel : 'Parque'}")
+					.col.s12.m6.input-field
+						label(for="marca") <span data-i18n="demo.utilizador_form.marca"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="marca" ,name="marca", value="#{Oficina? Oficina[0].marca : ''}")
+					if !Oficina || show
+						.col.s12.m6.input-field
+							label(for="modelo") <span data-i18n="demo.utilizador_form.modelo"></span>
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="modelo" ,name="modelo", value="#{Oficina? Oficina[0].modelo : ''}")
+					.col.s12.m6.input-field
+						label(for="ano_aquisicao") <span data-i18n="demo.utilizador_form.ano"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="ano_aquisicao" ,name="ano_aquisicao", value="#{Oficina? Oficina[0].ano_aquisicao : ''}")
+				.row
+					.col.s12.m6.input-field
+						label(for="matricula") <span data-i18n="demo.utilizador_form.matricula"></span>
+						input( type="text",autocomplete="off",  id="matricula", name="matricula", value="#{Oficina? Oficina[0].matricula : ''}")
+					.col.s12.m6.input-field
+						label(for="kilometragem") <span data-i18n="demo.utilizador_form.kilometros"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="kilometragem" ,name="kilometragem", value="#{Oficina? Oficina[0].kilometragem : ''}")
+				.row
+					.col.s12.m6.hide
+						label(for="local") Local
+						select.browser-default.browser-default(id="local", name="local", style="font-family:")
+							if Oficina
+								if Oficina[0].local == "Oficina"
+									option(value="Oficina") Oficina
+								else
+									if Oficina[0].local == "Parque"
+										option(value="Parque") Parque
+
+									else
+										option(value="nao definido") Não definido
+							else 
+								option(value="Oficina") Oficina
+								option(value="Parque") Parque
+					.col.s12.m6
+							label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+							select.browser-default(name="regiao", id="regiao", style="font-family:")
+								if Oficina
+									if Oficina[0].regiao == 'sul'
+										option(value="sul", selected="selected") Sul
+									else
+										if Oficina[0].regiao == 'centro' 
+											option(value="centro", selected="selected") Centro
+										else
+											if Oficina[0].regiao == 'norte'
+												option(value="norte", selected="selected") Norte
+											else
+												option(value="maputo", selected="selected") Maputo
+								else
+									option(value="" disabled selected selmecVerde) choose Option
+									option(value="sul") Sul
+									option(value="centro") Centro
+									option(value="norte") Norte
+									option(value="maputo") Maputo
+				.row
+					//- .input-field.col.s12.m6
+					//- 	i.material-icons.prefix.selmecAzul insert_invitation
+					//- 	label(for="data_acao") <span data-i18n="demo.inspdiaria_form.data_hora"></span>
+					//- 	input.preencher(type="text", id="data_acao", readonly,name="data", value="#{Oficina? (((Oficina[0].data).getDate()<10? '0'+(Oficina[0].data).getDate():(Oficina[0].data).getDate())+'/'+(((Oficina[0].data).getMonth()+1)<10? ('0'+((Oficina[0].data).getMonth()+1)):((Oficina[0].data).getMonth()+1))+'/'+((Oficina[0].data).getFullYear())+'   '+((Oficina[0].data).getHours()<10? ('0'+(Oficina[0].data).getHours()): (Oficina[0].data).getHours() )+' : '+((Oficina[0].data).getMinutes()<10? ('0'+(Oficina[0].data).getMinutes()):(Oficina[0].data).getMinutes())): ((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours()<10? ('0'+(new Date()).getHours()): (new Date()).getHours() )+' : '+((new Date()).getMinutes()<10? ('0'+(new Date()).getMinutes()):(new Date()).getMinutes())}")
+			fieldset.no-border
+				.row.buttons-container
+					if !Oficina
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_novoCarro") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancel_action2") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							butoon#cancel_action(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+			script.
+				setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";}
+				}, 50);

@@ -1,0 +1,23 @@
+extends layout
+block content
+	form#ttnumberform(class="col s12")
+		h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.adicionarticketnumber"></span>
+		.row#recolherdados(style="margin-bottom:0px" dadosreferenciajobcard="#{Referencia}" todosjobcards="#{Jobcards}")
+			.col.s12.m6.input-field
+				label(for="jobcard_ttnumber" style="font-size:15px") <span data-i18n="demo.ttnumber_form.ttnumber"></span>
+				input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_ttnumber" ,name="jobcard_ttnumber")
+		button(type="button", id="jobcard_chegadasite_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat" style="margin-top:20px; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,150 @@
+extends layout
+block content
+	.seccao.container.white
+		.row#recolherdados(detalhessession="#{DataU._id}" detalhesprojects="#{DadosProjects}" ied="#{ied}")
+		fieldset.no-border.legend-border
+			legend.selmecAzul.bold Baterias
+
+			.row
+				.col.s12.m6
+					label(for="request_from") <span data-i18n="demo.rectificadorprojectos.marca"></span>
+					select.browser-default.browser-default(name="retificadormarca", id="retificadormarca", style="font-family:")
+						option(value="" disabled selected selmecVerde) Selecione a Marca
+						option(value="Delta") Delta
+						option(value="Battery Technology") Battery Technology
+				.col.s12.m6.retificadormodelo.hide
+					label(for="request_from") <span data-i18n="demo.rectificadorprojectos.modelo"></span>
+					select.browser-default.browser-default(name="retificadormodelo", id="retificadormodelo", style="font-family:")
+						option(value="" disabled selected selmecVerde) Selecione o Modelo
+						option(value="DPS 2900 Cell 300-6") DPS 2900 Cell 300-6
+						option(value="DPS 2900 Cell 25-6") DPS 2900 Cell 25-3
+				.col.s12.m6.retificadormodelo1.hide
+					label(for="request_from") <span data-i18n="demo.rectificadorprojectos.modelo"></span>
+					select.browser-default.browser-default(name="retificadormodelo1", id="retificadormodelo1", style="font-family:")
+						option(value="" disabled selected selmecVerde) Selecione o Modelo
+						option(value="SC 200") SC 200
+						option(value="SM 50 - 6") SM 50 - 6
+						option(value="SM 65 - 6") SM 65 - 6
+			.row
+				.col.s9.m4.input-field
+					label(for="quant_item") <span data-i18n="demo.rectificadorprojectos.numero"></span>
+					input(type="number" id="modulos" name="modulos" min=0 class="modulos")
+			.col.s9.m4.input-field
+				label(for="quant_item") <span data-i18n="demo.rectificadorprojectos.Serie"></span>
+				input(type="number" id="numeroserie" name="numeroserie" min=0 class="numeroserie")
+			a(class="btn-floating btn-large waves-effect waves-light add-field9 right") + 
+				
+			.row
+				.col.s12
+					table.bordered.striped
+						thead
+							tr.selmecAzul
+								th Numero de Serie
+								th
+						tbody(id="myTable_tecnicos_permitidos" style="height:auto !important" )
+							
+							-if(DadosProjects[0].retificador != undefined)
+								-for(let i=0; i<DadosProjects[0].retificador.length; i++)
+									tr
+										td.numeroserie #{DadosProjects[0].retificador[i].serie}
+										td  <i class="material-icons pointer delete_tecnico_permitido">delete_forever</i>
+		fieldset.no-border
+			.row.buttons-container(class="")
+				.col.s12.m6.left-button
+					button(type="button", class="btn", id="registar_retificadores") <span data-i18n="demo.utilizador_form.gravar"></span>
+				.col.s12.m6.right-button
+					button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+		
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

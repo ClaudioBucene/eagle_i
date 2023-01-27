@@ -1,0 +1,83 @@
+extends layout
+block content
+	article#dados(dado="#{CalloutStatsHistory}", pacote="#{pacote}")
+		canvas#canvas(style=" text-align:center !important; padding-top:1em")
+			
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+
+			let dados1=JSON.parse($("#dados").attr("dado"))
+			countM=0; 
+			countN=0;
+			countS=0;
+			countC=0;
+			dados1.forEach((obj,position) =>{
+				if(obj.jobcard_regiao=="maputo"){
+					countM = countM+1;
+				}
+				if(obj.jobcard_regiao=="norte"){
+					countN = countN+1;
+				}
+				if(obj.jobcard_regiao=="sul"){
+					countS = countS+1;
+				}
+				if(obj.jobcard_regiao=="centro"){
+					countC = countC+1;
+				};
+			});
+			console.log("+++++++++++++++")
+			console.log(countM);
+
+			let pacote =JSON.parse($("#dados").attr("pacote"));
+			console.log(pacote);
+
+			var fromdate = pacote.reportsmaintenance_fromdate.split('/').reverse().join('-');
+			var todate = pacote.reportsmaintenance_todate.split('/').reverse().join('-');
+			console.log(fromdate+" "+todate)
+			var begginerchart = document.getElementById("canvas").getContext('2d');
+			var myChart = new Chart(begginerchart, {
+			type: 'bar',
+			data: {
+			labels: ["Maputo", "Norte", "Sul", "Centro"],
+				datasets: [{
+					label: ["Maintenance Report"],
+					backgroundColor: ['rgb(39,48,73)',
+									'rgb(157,181,13)',
+									'rgb(229,53,58)',
+									'rgb(64,198,211)'
+							],
+					borderColor:['rgb(39,48,73)',
+								'rgb(157,181,13)',
+								'rgb(229,53,58)',
+								'rgb(64,198,211)'
+								],
+					data: [countM, countN, countS, countC],
+					borderWidth:1
+			}]
+			},
+			options: {}
+			});
+
+			var canvas1 = document.getElementById('canvas');
+			
+			canvas1.onclick = function(evt) {
+				
+				activePoint = myChart.getElementAtEvent(evt)[0];
+				var data = activePoint._chart.data;
+				var regiao = data.labels[activePoint._index].toLowerCase();
+				console.log(data);
+				console.log("active "+regiao);
+
+			window.location.href="/mensagem/graphicdetalhes/"+regiao+"/"+fromdate+"/"+todate
+			};
+			
+			

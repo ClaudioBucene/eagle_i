@@ -1,0 +1,154 @@
+extends layout
+block content
+	if(Jobcards[0].jobcardconcernsinfo != undefined)
+		form(id="msform", method="post", style="color:#12375c;")
+			h3(class="fs-title" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.preventative_maint.concerns"></span>
+			.row(style="margin-bottom:18px;")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernsmaintnumber") <span data-i18n="demo.preventative_maint.concernsmaintnumber"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernsmaintnumber" ,name="jobcard_concernsmaintnumber" value="#{Jobcards[0].jobcardconcernsinfo.jobcard_concernsmaintnumber}")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernstype") <span data-i18n="demo.preventative_maint.concernstype"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernstype" ,name="jobcard_concernstype" value="#{Jobcards[0].jobcardconcernsinfo.jobcard_concernstype}")
+			.row(style="margin-bottom:18px;")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernsdescription")  <span data-i18n="demo.preventative_maint.concernsdescription"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernsdescription" ,name="jobcard_concernsdescription" value="#{Jobcards[0].jobcardconcernsinfo.jobcard_concernsdescription}")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernsdate")  <span data-i18n="demo.preventative_maint.concernsdate"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernsdate" ,name="jobcard_concernsdate" value="#{Jobcards[0].jobcardconcernsinfo.jobcard_concernsdate}")
+			.row(style="margin-bottom:18px;")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernsacknowledged")  <span data-i18n="demo.preventative_maint.concernsacknowledged"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernsacknowledged" ,name="jobcard_concernsacknowledged" value="#{Jobcards[0].jobcardconcernsinfo.jobcard_concernsacknowledged}")
+			a(class="waves-effect waves-light action-button" style="width:100px; font-size:15px" href="/manutencao/detalhesJobcardPlanned/#{Jobcards[0]._id}") << Back
+	else
+		h3(class="fs-title selmecAzul center" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.preventative_maint.concerns"></span>
+		form#formulario2(style="margin:0px; color:#12375c;" dataref="#{Jobcards[0]._id}")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernsmaintnumber") <span data-i18n="demo.preventative_maint.concernsmaintnumber"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernsmaintnumber" ,name="jobcard_concernsmaintnumber")
+				.col.s12.m6
+					label(for="jobcard_concernstype") <span data-i18n="demo.preventative_maint.concernstype"></span>
+					select.browser-default(name="jobcard_concernstype", id="jobcard_concernstype")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Access") Access
+						option(value="Alarms") Alarms
+						option(value="Civil") Civil
+						option(value="Container") Container
+						option(value="Cooling") Cooling
+						option(value="Earthing") Earthing
+						option(value="Electrical Ac") Electrical Ac
+						option(value="Electrical Dc") Electrical Dc
+						option(value="Fence / Gate") Fence / Gate
+						option(value="Generator") Generator
+						option(value="H & S") H & S
+						option(value="Mast") Mast
+						option(value="Security") Security
+						option(value="Transmission / Rf / B.S") Transmission / Rf / B.S
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernsdescription") <span data-i18n="demo.preventative_maint.concernsdescription"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernsdescription" ,name="jobcard_concernsdescription")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernsdate") <span data-i18n="demo.preventative_maint.concernsdate"></span>
+					input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernsdate" ,name="jobcard_concernsdate")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field
+					label(for="jobcard_concernsacknowledged") <span data-i18n="demo.preventative_maint.concernsacknowledged"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_concernsacknowledged" ,name="jobcard_concernsacknowledged")
+			input(type="button", id="jobcardconcernsinfo_yes_btn", class="action-button" value="Save")
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

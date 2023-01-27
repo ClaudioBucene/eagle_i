@@ -1,0 +1,63 @@
+extends layout
+block content
+	.container(style="padding-top:50px")
+		.fixed-action-btn.top.fixed-add-bottom
+				a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+				ul(id="extrair", dados=stockData2)
+					if DataU.nivel_acesso=="admin"
+						li
+							a.btn-floating.tooltipped.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="cambio", class="btn-floating btn-large waves-effect waves-light", href="/purchase_order/cambio") <i class="material-icons activarVerde">attach_money</i>
+					else
+
+					li
+						a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Registar nova transferencia ", class="btn-floating btn-large waves-effect waves-light",  href="/purchase_order/novo") <i class="material-icons activarVerde">add</i>
+		.col.m3.s6
+			.card.hover-reveal.personalised#emprogresso
+				.card-image.waves-block
+					img.icn(src="/img/ttnumber_onprogress.png" style="width:70px" )
+				.card-content
+					h6.bold <span data-i18n="demo.po_menu.em_progresso"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#aprovados
+				.card-image.waves-block
+					img.icn(src="/img/aprovados.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.po_menu.aprovado"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#reprovados
+				.card-image.waves-block
+					img.icn(src="/img/reprovados.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.po_menu.reprovado"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#finalizados
+				.card-image.waves-block
+					img.icn(src="/img/finalizado.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.po_menu.finalizados"></span>
+		.col.m3.s6.hide
+			.card.hover-reveal.personalised#relatrios
+				.card-image.waves-block
+					img.icn(src="/img/report2.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.po_menu.relatorio"></span>
+		.col.m3.s6.hide
+			.card.hover-reveal.personalised#car_serivce
+				.card-image.waves-block
+					img.icn(src="/img/car_service.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.po_menu.car_service"></span>
+
+		block js
+			script(type="text/javascript" src="/js/jquery.mask.js")
+			script.
+				setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";
+				document.getElementByClassName("capitalize").style.class="pequeno";
+				}
+				}, 50);

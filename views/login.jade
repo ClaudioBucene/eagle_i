@@ -1,0 +1,61 @@
+doctype html
+html
+	head
+		title= title
+		meta(name="author", content="Helio baseMatchesProperty(path, srcValue)")
+		meta(name="generator", content="Jade")
+		meta(name="application name", content="gestao  de viaturas")
+		meta(name="description", content="Helio Romao Mahesse")
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(http-equiv="default-style", content="text/css")
+		link(rel="stylesheet", type="text/css", href="/css/style.css")
+		link(rel="stylesheet", type="text/css", href="/css/login.css")
+		script(type="text/javascript", src="/js/jquery-2.1.1.min.js")
+		script(type="text/javascript", src="/js/materialize.min.js")
+		link(rel="manifest", href="../manifest.json")
+		link(rel="icon" href="/images/icons/icon-152x152.png")
+		meta(name="theme-color" content="#008aff")
+		meta(name="apple-mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="default")
+		meta(name="apple-mobile-web-app-title" content="COMSERV")
+		link(rel="apple-touch-icon" href="/images/icons/icon-152x152.png")
+		meta(name="msapplication-TileImage" content="/images/icons/icon-152x152.png")
+		meta(name="msapplication-TileColor" content="#fff")
+	body.policia-background-color
+			.row.valign-wrapper
+				.col.s12.m10.l8.offset-m1.offset-l2.valign
+					.container
+						.row.white.shadow.round-border
+							.col.s10.m10.l10.offset-m1.offset-l1.offset-s1
+								.row.center-align
+									.col.s12.m12.l12
+										img(src="/img/logo.png", style="width: 80px; height: auto; margin-top: 20px; padding-top:20px;  padding-bottom:20px")
+									
+										form(name="formulario", autocomplete="off", action="/", method="POST", id="formulario")
+											.col.s12.m10.l10.offset-l1
+												.col.s12.m12.l12.input-field
+													i.login-form-icon(class="material-icons prefix") account_circle
+													label.login-form-text(for="username") Username
+													input(type="text", id="username", name="username")
+											.col.s12.m10.l10.offset-l1
+												.col.s12.m12.l12.input-field
+													i.login-form-icon(class="material-icons prefix") vpn_key
+													label.login-form-text(for="senha") Password
+													input(type="password", id="senha", name="senha")
+											if (err)
+												.row
+													.col.s12
+														span.red-text(style="font-weight:bold") Username or password is incorrect
+											fieldset(style="border:none")
+												.row
+													.col.s12.m12.l12.center-align
+														button#entrar(style="background-color: rgba(18,55,92,1) !important", type="submit", class="btn waves-effect waves-light", name="action")
+															|Login
+															i(class="material-icons right") send
+
+		script(type="text/javascript", src="/js/jquery-1.12.3.min.js")
+		script(type="text/javascript", src="/js/bin/materialize.min.js")
+		script(src='loader.js')
+		script(type="text/javascript").
+			$('.formulario').css('height', $( window ).height());

@@ -1,0 +1,61 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+				a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Add new inspection ", class="btn-floating btn-large waves-effect waves-light", href="/stock_return/novo") <i class="material-icons activarVerde">add</i>
+		if !Stock_request || !Stock_request.length
+			p.center-align.selmecAzul.bold Vazio!
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Lista de Retorno 
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.stock_request_home.requisitado_por1"></span>
+						th <span data-i18n="demo.stok_request_form.Requesitar_em1"></span>
+						th <span data-i18n="demo.stock_request_home.data"></span> 
+						th status
+						th
+				tbody(id="myTable")
+					-for(var index = (Stock_request.length-1), j=0; index>=0 && j<500 ; index--, j++)
+						tr.highlight(data-funcionario="#{Stock_request[index]._id}", data-nome="#{Stock_request[index].nome}",style="color:#{Stock_request[index].observacao}")
+							td #{Stock_request[index].returned_by}
+							td #{Stock_request[index].return_to}
+							td #{((Stock_request[index].date_request).getDate()<10? '0'+(Stock_request[index].date_request).getDate():(Stock_request[index].date_request).getDate())+'/'+(((Stock_request[index].date_request).getMonth()+1)<10? ('0'+((Stock_request[index].date_request).getMonth()+1)):((Stock_request[index].date_request).getMonth()+1))+'/'+((Stock_request[index].date_request).getFullYear())+'   '+((Stock_request[index].date_request).getHours()<10? ('0'+(Stock_request[index].date_request).getHours()): (Stock_request[index].date_request).getHours() )+' : '+((Stock_request[index].date_request).getMinutes()<10? ('0'+(Stock_request[index].date_request).getMinutes()):(Stock_request[index].date_request).getMinutes())}
+							td 
+								-if (Stock_request[index].estagio.length <2)
+										img(style='width:25px;' src='/img/glasshour.png')
+								-else
+									-if(Stock_request[index].estagio[1]==1)
+										img(style='width:30px;' src='/img/checked2.png')
+									-else
+										img(style='width:30px;' src='/img/dinied.png')
+							td 
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Stock_request[index].marca_modelo} transference", href="/stock_return/detalhes/#{Stock_request[index]._id}") <i class="material-icons activarVerde">info</i>
+									-var temp = Stock_request[index].estagio.length
+									-if ((DataU.nivel_acesso=="admin" || Stock_request[index].intervenientes[1]==DataU.nome)&&(Stock_request[index].estagio.length==1))
+										a.pointer(style="margin-left: 15px; color:green",data-position="top", data-delay="10", data-tooltip="Aprovar a transferência #{Stock_request[index].marca_modelo}",href="/stock_return/aprovar/#{Stock_request[index]._id}", data-user-id="#{Stock_request[index].marca_modelo}", data-user-new="#{Stock_request[index]._id}") <i class="material-icons bold">thumb_up</i>
+										a.pointer(style="margin-left: 15px; color:red",data-position="top", data-delay="10", data-tooltip="Reprovar a transferência #{Stock_request[index].marca_modelo}",href="/stock_return/reprovar/#{Stock_request[index]._id}", data-user-id="#{Stock_request[index].marca_modelo}", data-user-new="#{Stock_request[index]._id}") <i class="material-icons bold">thumb_down</i>
+									-if((DataU.nome==Stock_request[index].intervenientes[temp])&&(Stock_request[index].estagio.length==2)&&(Stock_request[index].actual_situation=="aprovado"))
+										a.pointer(style="margin-left: 30px; color:green", href="/stock_return/entradas_/#{Stock_request[index]._id}", data-position="top", data-delay="10", data-tooltip="Receber stock", data-user-new="#{Stock_request[index]._id}") <img src="/img/mercadoriass.png" style="width:25px"></img>
+									// -if ((DataU.nome==Stock_request[index].intervenientes[0])&&(Stock_request[index].estagio.length==1)&&(Stock_request[index].returned_reason))
+									//  	a.pointer.editar_stock_request(style="margin-left: 20px; color:green",data-position="top", data-delay="10", data-tooltip="editar o stock request", data-user-id="", data-user-new="#{Stock_request[index]._id}") <i class="material-icons bold">edit</i>
+								
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

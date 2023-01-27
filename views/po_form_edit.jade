@@ -1,0 +1,232 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST", enctype="multipart/form-data") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.titulo_p"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="requested_by") <span data-i18n="demo.po_form.nome"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="requested_by" ,name="requested_by", data-sete="#{Forncedorres}" readonly, data-new-sr="#{Po_data[0]._id}", data-oito="#{Cambio}" value="#{Po_data? Po_data[0].requested_by : DataU.nome}")
+					.col.s12.m6
+						label(for="supplier") <span data-i18n="demo.po_form.fornecedor"></span>
+						select.browser-default(name="supplier", id="supplier", style="font-family:")
+								-for(var i = 0; i < Fornecedor.length; i++)
+									option(value="#{Fornecedor[i].cliente_nome}" cliente_reff="#{Fornecedor[i]._id}" selected="#{Po_data[0].supplier}"=="#{Fornecedor[i].cliente_nome}"? true:false) #{Fornecedor[i].cliente_nome}
+				.row
+					.col.s12.m6.input-field
+						label(for="deliver_shipping") <span data-i18n="demo.po_form.Frete"></span>
+						input( autocomplete="off", readonly, type="text",  style="font-family:;color:#12375c" ,id="deliver_shipping" ,name="deliver_shipping",  placeholder="Frete...", value="#{Po_data? Po_data[0].deliver_shipping : ''}")
+					.col.s12.m6.input-field
+						label(for="supplier_contact") <span data-i18n="demo.po_form.cont_fornecedor"></span>
+						input( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="supplier_contact" ,  placeholder="+258...", name="supplier_contact", value="#{Po_data? Po_data[0].supplier_contact : ''}")
+				.row
+					.col.s12.m6.input-field
+						label(for="address") <span data-i18n="demo.po_form.endereco"></span>
+						input(autocomplete="off",  type="text", readonly, style="font-family:;color:#12375c" ,id="address" ,  placeholder="Rua...", name="address",  value="#{Po_data? Po_data[0].address : ''}")
+					.col.s12.m6.input-field
+						label(for="supplier_code") <span data-i18n="demo.po_form.cod_fornecedor"></span>
+						input( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="supplier_code" ,  placeholder="cod...",name="supplier_code", value="#{Po_data? Po_data[0].supplier_code : ''}")
+					.col.s12.m6.input-field
+						label(for="comment") <span data-i18n="demo.po_form.razoes"></span>
+						input.preencher( autocomplete="off", type="text", id="comment",  value="#{Po_data ? Po_data[0].comment:''}", style="font-family:")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.titulo_Pagamento"></span>
+				.row
+					.col.s12.m6
+						label(for="payment_method") <span data-i18n="demo.po_form.metodo_pagamento"></span>
+						select.browser-default(name="payment_method", id="payment_method", style="font-family:")
+							option(value="Cash" selected="#{Po_data[0].payment_method}"=='Cash'? true:false) Cash
+							option(value="Deposito Bancario" selected="#{Po_data[0].payment_method}"=='Deposito Bancario'? true:false) Deposito Bancario
+					.col.s12.m6
+						label(for="terms") <span data-i18n="demo.po_form.termo"></span>
+						select.browser-default(name="terms", id="terms", style="font-family:")
+							option(value="cash" selected="#{Po_data[0].terms}"=='cash'? true:false) Cash
+							option(value="Pronto Pagamento" selected="#{Po_data[0].terms}"=='Pronto Pagamento'? true:false) Pronto pagamento
+							option(value="50% / 50%" selected="#{Po_data[0].terms}"=='50% / 50%'? true:false) 50% / 50%
+							option(value="15 dia" selected="#{Po_data[0].terms}"=='15 dia'? true:false) 15 dia
+							option(value="30 dias" selected="#{Po_data[0].terms}"=='30 dias'? true:false) 30 dias
+							option(value="45 dias" selected="#{Po_data[0].terms}"=='45 dias'? true:false) 45 dias
+							option(value="Anual" selected="#{Po_data[0].terms}"=='Anual'? true:false) Anual
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.orde_pagamento"></span>
+				.row
+					.col.s12.m6
+						label(for="department") <span data-i18n="demo.po_form.departamento"></span>
+						select.browser-default(id="department", name="department")
+							-for(let i=0; i<AdMagen[0].departamento.length; i++)
+								option(value="#{AdMagen[0].departamento[i].nome}" , data-cont="#{AdMagen[0].departamento[i]._id}", selected="#{Po_data[0].department_ref}"=="#{AdMagen[0].departamento[i]._id}"? true:false) #{AdMagen[0].departamento[i].nome}
+						//- select.browser-default.browser-default(name="department", id="department", style="font-family:")
+						//- 	option(value="" disabled selected) choose option
+						//- 	option(value="Administration" selected="#{Po_data[0].department}"=="Administration"? true:false) Administration
+						//- 	option(value="Call Center" selected="#{Po_data[0].department}"=="Call Center"? true:false) Call Center
+						//- 	option(value="Data Center" selected="#{Po_data[0].department}"=="Data Center"? true:false) Data Center
+						//- 	option(value="Finance" selected="#{Po_data[0].department}"=="Finance"? true:false) Finance
+						//- 	option(value="Fleet" selected="#{Po_data[0].department}"=="Fleet"? true:false) Fleet
+						//- 	option(value="HVAC" selected="#{Po_data[0].department}"=="HVAC"? true:false) HVAC
+						//- 	option(value="Health & Safety" selected="#{Po_data[0].department}"=="Health & Safety"? true:false) Health & Safety
+						//- 	option(value="Information Technology" selected="#{Po_data[0].department}"=="Information Technology"? true:false) Information Technology
+						//- 	option(value="Logistics" selected="#{Po_data[0].department}"=="Logistics"? true:false) Logistics
+						//- 	option(value="Power" selected="#{Po_data[0].department}"=="Power"? true:false) Power
+						//- 	option(value="Procurement" selected="#{Po_data[0].department}"=="Procurement"? true:false) Procurement
+						//- 	option(value="Telco" selected="#{Po_data[0].department}"=="Telco"? true:false) Telco
+					.col.s12.m6
+						label(for="department")  <span data-i18n="demo.po_form.proposito"></span>
+						select.browser-default(name="proposito", id="proposito", style="font-family:")
+							option(value="internal use" selected="#{Po_data[0].proposito}"=="internal use"? true:false) Internal Use
+							option(value="project" selected="#{Po_data[0].proposito}"=="project"? true:false) Poject
+							option(value="stock" selected="#{Po_data[0].proposito}"=="stock"? true:false) Stock
+						
+				.row
+					.col.s12.m6.input-field
+						label(for="quotation_number") <span data-i18n="demo.po_form.numero_cotacao"></span>
+						input.preencher( autocomplete="off", type="text", id="quotation_number", name="quotation_number", value="#{Po_data ? Po_data[0].quotation_number : ''}", style="font-family:")
+					.col.s12.m6
+						label(for="for_store") Destino
+						select.browser-default(name="for_store", id="for_store", style="font-family:")
+							-for(let i=0; i<Armazem.length; i++)
+								option(value="#{Armazem[i].nome}",  data-for_store_ref="#{Armazem[i]._id}" selected="#{Po_data[0].for_store}"=="#{Armazem[i].nome}"? true:false) #{Armazem[i].nome}
+				.row
+					.col.s12.m6.clientte_name(class="#{Po_data[0].proposito}"=='project'? '':'hide')
+						label(for="clientte_name") Cliente
+						select.browser-default.browser-default(name="clientte_name", id="clientte_name", style="font-family:")
+							-for(var i = 0; i < Clientte.length; i++)
+								option(value="#{Clientte[i].cliente_nome}" selected="#{Po_data[0].clientte_name}"=="#{Clientte[i].cliente_nome}"? true:false) #{Clientte[i].cliente_nome}
+					.col.s12.m6.input-field.quotation_number_project(class="#{Po_data[0].proposito}"=='project'? '':'hide')
+						label(for="quotation_number_project")  <span data-i18n="demo.po_form.project_quot_number"></span>
+						input( autocomplete="off", type="text", id="quotation_number_project", name="quotation_number_project", value="#{Po_data ? Po_data[0].quotation_number : ''}", style="font-family:")
+
+				.row
+					.col.s12.m6.input-field.hide
+						label(for="po_approver") Aprovado por
+						input( autocomplete="off", type="text", id="po_approver", name="po_approver", value="#{Po_data ? Po_data[0].po_approver : ''}", style="font-family:")
+				.row
+					.col.s12
+						.col.s2
+							label(for="currency") <span data-i18n="demo.po_form.moeda"></span>
+						.col.s4.m2
+							input.bom(type="radio" id="currency_mzn" name="currency"  value="MZN" checked="#{Po_data[0].currency}"=='MZN'? true:false)
+							label(for="currency_mzn") MZN					
+						.col.s4.m2
+							input.bom(type="radio", id="currency_euro", name='currency', value="EURO" checked="#{Po_data[0].currency}"=='EURO'? true:false)
+							label(for="currency_euro") EURO
+						.col.s4.m2
+							input.bom(type="radio" id="currency_usd" name="currency"  value="USD" checked="#{Po_data[0].currency}"=='USD'? true:false)
+							label(for="currency_usd") USD					
+						.col.s4.m2
+							input.bom(type="radio", id="currency_zar", name='currency', value="ZAR" checked="#{Po_data[0].currency}"=='ZAR'? true:false)
+							label(for="currency_zar") ZAR
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.cotacao_titulo"></span>
+				.row.multi-field-wrapper.col.s12
+					.multi-fields.col.s12
+						.multi-field.col.s12
+							.col.s10.m4
+								label(for="pessoas_permitidas[]") Item 
+								select.browser-default.pessoas_permitidas#selectizacao(name="pessoas_permitidas[]",  style="font-family:")
+									option(value="" disabled selected selmecVerde) Escolha opcao
+									-for(var i = 0; i < Items.length; i++)
+										option(value="#{Items[i].description_item}" data-referencia="#{Items[i]._id}" data-serializedd="#{Items[i].serialized_item}" data-cliente_name="#{Items[i].cliente_name}") #{Items[i].description_item}
+							.col.s10.m4.input-field
+								label(for="quant_item") <span data-i18n="demo.po_form.quantidade"></span>
+								input(type="number" id="quant_item"  min=0 name="quant_item" class="quant_item")
+							.col.s10.m4.input-field
+								label(for="preco_item") <span data-i18n="demo.po_form.Preco_unit"></span>
+								input(type="number" id="preco_item" min=0 name="preco_item" class="preco_item")
+					a(class="btn-floating btn-large waves-effect waves-light add-field3 right") +
+				.row
+					.col.s12
+						table.responsive-table.bordered.striped(style="height:auto !important")
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.po_form.descricao"></span>
+									th <span data-i18n="demo.po_form.preco_unit"></span>
+									th Qtd
+									th Total
+									th 
+							tbody(id="myTable_tecnicos_permitidos", style="height:auto !important")
+								-for(let i=0; i<Po_data[0].items.length;i++)
+									tr
+										td.item_nome(data-referenciaa="#{Po_data[0].items[i].referencia}", data-serialized="#{Po_data[0].items[i].serialized}",  data-cliente_name="#{Po_data[0].items[i].cliente_name}") #{Po_data[0].items[i].nome_item}
+										td.item_preco #{Po_data[0].items[i].price}
+										td.item_quantidade #{Po_data[0].items[i].quantity}
+										td.total #{Po_data[0].items[i].total}
+										td.material-icons.pointer.delete_po delete_forever
+						hr
+						table(style="height:auto !important")
+							tbody(style="height:auto !important")
+								tr
+									td
+									td 
+									th Sub-total
+									td#subtotal #{Po_data[0].subtotal}
+									td
+								tr
+									td
+									td 
+									th IVA 17%
+									td#iva_valor #{Po_data[0].iva}
+									td
+								tr
+									td
+									td 
+									th Total
+									td#total_a_pagar #{Po_data[0].total_to_pay}
+									td
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.valor"></span>
+				.row
+					table.responsive-table(style="height:auto !important")
+						thead
+							tr
+								th MZN
+								th USD
+								th EURO
+								th ZAR
+								th
+						tbody(style="height:auto !important")
+							tr
+								td#metical_converted #{Po_data[0].valor_em_metical}
+								td#dolar_converted #{Po_data[0].valor_em_dolar}
+								td#euro_converted #{Po_data[0].valor_em_euro}
+								td#rand_converted #{Po_data[0].valor_em_rand}
+								td
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.ficheiro"></span>
+				.row
+					.col.s12.m4.input-field
+						span <span data-i18n="demo.po_form.ficheiro_1"></span>
+						input(type="file", id="primeiro_ficheiro", name="primeiro_ficheiro",autocomplete="off")
+					.col.s12.m4.input-field
+						span <span data-i18n="demo.po_form.ficheiro_2"></span>
+						input(type="file", id="segundo_ficheiro", name="segundo_ficheiro",autocomplete="off")
+					.col.s12.m4.input-field
+						span <span data-i18n="demo.po_form.ficheiro_3"></span>
+						input(type="file", id="terceiro_ficheiro", name="terceiro_ficheiro",autocomplete="off")
+			fieldset.no-border
+				.row.buttons-container
+					if Po_data
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_Po_editado") <span data-i18n="demo.utilizador_form.enviar_po"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+			script(type="text/javascript" src="/js/selectize.min.js")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

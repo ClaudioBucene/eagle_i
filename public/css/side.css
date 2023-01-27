@@ -1,0 +1,227 @@
+body {
+        font-family: "Lato", sans-serif;
+        overflow:auto;
+    }
+
+    .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .sidebar a {
+        padding: 8px 8px 8px 0px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #12375c;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .activarVerde {
+        color: #9db50d !important;
+    }
+    .activarAzul {
+      background-color: #12375c !important;
+        color: #9db50d !important;
+    }
+    .selmecAzul{
+      color: #12375c !important;
+    }
+
+  .selmecVerde{
+      color: #9db50d !important;
+    }
+
+    .sidebar a:hover {
+        color: #9db50d;
+    }
+    li {
+       color: #12375c;
+      transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      -webkit-transition: all 1s ease;
+      -o-transition: all 1s ease;
+   }
+
+    .sidebar li:hover {
+      transform: scale(1.0);
+      -moz-transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+      -o-transform: scale(1.0);
+      -ms-transform: scale(1.0); /* IE 9 */
+      -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=1.5, M12=0, M21=0, M22=1.5, SizingMethod='auto expand')"; /* IE8 */
+      filter: progid:DXImageTransform.Microsoft.Matrix(M11=1.5, M12=0, M21=0, M22=1.5, SizingMethod='auto expand'); /* IE6 and 7 */ 
+} 
+   .activos{
+       color: #9db50d !important;
+      -o-transform: scale(1.0);
+      -ms-transform: scale(1.0);
+   }
+   .direita{
+      text-align: center;
+   }
+
+    .sidebar .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+       
+    }
+
+    .openbtn {
+        font-size: 20px;
+        cursor: pointer;
+        background-color: #111;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+
+    }
+
+    .openbtn:hover {
+        background-color: #444;
+    }
+
+    #main {
+        transition: margin-left .5s;
+        padding: 16px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidebar {padding-top: 100%;}
+        .sidebar a {font-size: 15px;}
+    }
+     .sidebarbackgr{
+      background-color:#12375c !important; 
+   }
+
+   table#table_list {
+      width:100%;
+    }
+    table#table_list, table#table_list th, table#table_list td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    table#table_list th, table#table_list td {
+      padding: 5px;
+      text-align: left;
+    }
+    table#table_list tr:nth-child(even) {
+      background-color: #eee;
+    }
+    table#table_list tr:nth-child(odd) {
+      background-color:#fff;
+    }
+    table#table_list th {
+      background-color: black;
+      color: white;
+    }
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+#regForm {
+  /*background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  /*width: 70%;
+  min-width: 300px;*/
+  overflow-x: none
+}
+
+h1 {
+  text-align: center;  
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  /*font-family: Raleway;*/
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+
+
+.lang-picker {
+	/* padding: 2rem 0 0 0; */
+	text-align: center;
+}
+
+.lang-picker li {
+	list-style: none;
+	display: inline-block;
+	/* font: 400 14px/20px sans-serif; */
+	color: #393939;
+	cursor: pointer;
+}
+
+.lang-picker li.selected {
+	font-weight: 900;
+	color: #496992;
+}

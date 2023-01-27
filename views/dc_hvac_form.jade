@@ -1,0 +1,182 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold HVAC for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12.m6
+						label(for="name") HVAC
+						select.browser-default(name="name", id="name", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="ADC" selected="#{DC.name}"=='ADC'? true:false) ADC
+							option(value="ADC+" selected="#{DC.name}"=='ADC+'? true:false) ADC+
+							option(value="Core Network" selected="#{DC.name}"=='Core Network'? true:false) Core Network
+							option(value="Energy Center" selected="#{DC.name}"=='Energy Center'? true:false) Energy Center
+							option(value="EARTH STATION" selected="#{DC.name}"=='EARTH STATION'? true:false) EARTH STATION
+							option(value="POWER AC" selected="#{DC.name}"=='POWER AC'? true:false) POWER AC
+							option(value="POWER DC" selected="#{DC.name}"=='POWER DC'? true:false) POWER DC
+							option(value="POWER ROOM A" selected="#{DC.name}"=='POWER ROOM A'? true:false) POWER ROOM A
+							option(value="POWER ROOM B" selected="#{DC.name}"=='POWER ROOM B'? true:false) POWER ROOM B
+							option(value="MACHINE" selected="#{DC.name}"=='MACHINE'? true:false) MACHINE
+							option(value="MPESA" selected="#{DC.name}"=='MPESA'? true:false) MPESA
+							option(value="Radio Transmission" selected="#{DC.name}"=='Radio Transmission'? true:false) Radio Transmission
+							option(value="BSC" selected="#{DC.name}"=='BSC'? true:false) BSC
+					.col.s12.m6
+						label(for="specific") Description
+						select.browser-default(name="specific", id="specific", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="HVAC A" selected="#{DC.specific}"=='HVAC A'? true:false) HVAC A
+							option(value="HVAC B" selected="#{DC.specific}"=='HVAC B'? true:false) HVAC B
+							option(value="HVAC C" selected="#{DC.specific}"=='HVAC C'? true:false) HVAC C
+							option(value="HVAC D" selected="#{DC.specific}"=='HVAC D'? true:false) HVAC D
+							option(value="HVAC E" selected="#{DC.specific}"=='HVAC E'? true:false) HVAC E
+							option(value="HVAC F" selected="#{DC.specific}"=='HVAC F'? true:false) HVAC F
+							option(value="HVAC G" selected="#{DC.specific}"=='HVAC G'? true:false) HVAC G
+							option(value="HVAC H" selected="#{DC.specific}"=='HVAC H'? true:false) HVAC H
+							option(value="HVAC I" selected="#{DC.specific}"=='HVAC I'? true:false) HVAC I
+							option(value="HVAC 1" selected="#{DC.specific}"=='HVAC 1'? true:false) HVAC 1
+							option(value="HVAC 2" selected="#{DC.specific}"=='HVAC 2'? true:false) HVAC 2
+							option(value="HVAC 3" selected="#{DC.specific}"=='HVAC 3'? true:false) HVAC 3
+							option(value="HVAC 4" selected="#{DC.specific}"=='HVAC 4'? true:false) HVAC 4
+							option(value="HVAC 5" selected="#{DC.specific}"=='HVAC 5'? true:false) HVAC 5
+							option(value="HVAC 6" selected="#{DC.specific}"=='HVAC 6'? true:false) HVAC 6
+							option(value="POWER CONTAINER A" selected="#{DC.specific}"=='POWER CONTAINER A'? true:false) POWER CONTAINER A
+							option(value="POWER CONTAINER B" selected="#{DC.specific}"=='POWER CONTAINER B'? true:false) POWER CONTAINER B
+							option(value="EQUIPMENT CONTAINER" selected="#{DC.specific}"=='EQUIPMENT CONTAINER'? true:false) EQUIPMENT CONTAINER
+
+				.row
+					.col.s12
+						label(for="alarms") 
+						h6 1.Check all HVAC’s, for alarms
+					.col.s6
+						input.bom(type="radio" id="alarms_OK" checked="#{DC.alarms}"=='ok'? true:false name="alarms"  value="ok")
+						label(for="alarms_OK") OK					
+					.col.s6
+						input.mau(type="radio", id="alarms_no",  name='alarms', checked="#{DC.alarms}"=='not ok'?true:false  value="not ok")
+						label(for="alarms_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="alarms_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="alarms_comment",value="#{DC.alarms_comment?DC.alarms_comment:''}",  identifica="#{DC_insp._id}" ,name="alarms_comment")
+				.row
+					.col.s12
+						label(for="temperature") 
+						h6 2.Check temperature and humidity on all HVAC’s Temperature 18 – 22°C Humidity 50 – 65%
+					.col.s6
+						input.bom(type="radio" id="temperature_ok" checked="#{DC.temperature}"=='ok'? true:false name="temperature"  value="ok")
+						label(for="temperature_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="temperature_no",  name='temperature', checked="#{DC.temperature}"=='not ok'?true:false  value="not ok")
+						label(for="temperature_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="temperature_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="temperature_comment",value="#{DC.temperature_comment?DC.temperature_comment:''}",  identifica="#{DC_insp._id}" ,name="temperature_comment")
+				.row
+					.col.s12
+						label(for="air_filter") 
+						h6 3.Air Filters Cleaning
+					.col.s6
+						input.bom(type="radio" id="air_filter_ok" checked="#{DC.air_filter}"=='ok'? true:false name="air_filter"  value="ok")
+						label(for="air_filter_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="air_filter_no",  name='air_filter', checked="#{DC.air_filter}"=='not ok'?true:false  value="not ok")
+						label(for="air_filter_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="air_filter_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="air_filter_comment",value="#{DC.air_filter_comment?DC.air_filter_comment:''}",  identifica="#{DC_insp._id}" ,name="air_filter_comment")
+				.row
+					.col.s12
+						label(for="condensate_ext_cleaning") 
+						h6 4.Condensates External Cleaning 
+					.col.s6
+						input.bom(type="radio" id="condensate_ext_cleaning_ok" checked="#{DC.condensate_ext_cleaning}"=='ok'? true:false name="condensate_ext_cleaning"  value="ok")
+						label(for="condensate_ext_cleaning_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="condensate_ext_cleaning_no",  name='condensate_ext_cleaning', checked="#{DC.condensate_ext_cleaning}"=='not ok'?true:false  value="not ok")
+						label(for="condensate_ext_cleaning_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="condensate_ext_cleaning_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="condensate_ext_cleaning_comment",value="#{DC.condensate_ext_cleaning_comment?DC.condensate_ext_cleaning_comment:''}",  identifica="#{DC_insp._id}" ,name="condensate_ext_cleaning_comment")
+				.row
+					.col.s12
+						label(for="motor_defletor") 
+						h6 5.Check motor and deflectors working
+					.col.s6
+						input.bom(type="radio" id="motor_defletor_ok" checked="#{DC.motor_defletor}"=='ok'? true:false name="motor_defletor"  value="ok")
+						label(for="motor_defletor_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="motor_defletor_no",  name='motor_defletor', checked="#{DC.motor_defletor}"=='not ok'?true:false  value="not ok")
+						label(for="motor_defletor_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="motor_defletor_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="motor_defletor_comment",value="#{DC.motor_defletor_comment?DC.motor_defletor_comment:''}",  identifica="#{DC_insp._id}" ,name="motor_defletor_comment")
+				.row
+					.col.s12
+						label(for="drainage") 
+						h6 6.Check drainage system: cleaning
+					.col.s6
+						input.bom(type="radio" id="drainage_ok" checked="#{DC.drainage}"=='ok'? true:false name="drainage"  value="ok")
+						label(for="drainage_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="drainage_no",  name='drainage', checked="#{DC.drainage}"=='not ok'?true:false  value="not ok")
+						label(for="drainage_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="drainage_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="drainage_comment",value="#{DC.drainage_comment?DC.drainage_comment:''}",  identifica="#{DC_insp._id}" ,name="drainage_comment")
+				.row
+					.col.s12
+						label(for="abnormal_noise") 
+						h6 7.Check abnormal noises and vibrations
+					.col.s6
+						input.bom(type="radio" id="abnormal_noise_ok" checked="#{DC.abnormal_noise}"=='ok'? true:false name="abnormal_noise"  value="ok")
+						label(for="abnormal_noise_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="abnormal_noise_no",  name='abnormal_noise', checked="#{DC.abnormal_noise}"=='not ok'?true:false  value="not ok")
+						label(for="abnormal_noise_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="abnormal_noise_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="abnormal_noise_comment",value="#{DC.abnormal_noise_comment?DC.abnormal_noise_comment:''}",  identifica="#{DC_insp._id}" ,name="abnormal_noise_comment")
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.name
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_hvac_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

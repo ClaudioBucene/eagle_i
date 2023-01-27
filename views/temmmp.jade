@@ -1,0 +1,131 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Dados Pessoais
+				.row
+					.col.s12.m6.input-field
+						label(for="nome") Nome
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome" ,name="nome", value="#{Usuarios? Usuarios[0].nome : ''}")
+
+					.col.s12.m6
+						label(for="carta_conducao") Carta de Conducao
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="carta_conducao" ,name="carta_conducao", value="#{Usuarios? Usuarios[0].carta_conducao : ''}")
+				.row
+					.col.s12.m6.browser-default.browser-default
+						label(for="data_nascimento") Data de Nascimento
+						input( type="text", class="datepicker", id="data_nascimento", name="data_nascimento", value="#{Usuarios? (Usuarios[0].data_nascimento.getDate()+'/'+Usuarios[0].data_nascimento.getMonth()+'/'+Usuarios[0].data_nascimento.getFullYear()) : ''}") 
+					.col.s12.m6.input-field
+						label(for="supervisor") Nome do Supervisor
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="supervisor" ,name="supervisor", value="#{Usuarios? Usuarios[0].supervisor : ''}")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Area de trabalho
+				.row
+					.col.s12.m6.input-field
+						label(for="area_formacao") Regiao
+						input.preencher( autocomplete="off", style="font-family:",type="text", id="regiao", name="regiao", value="#{Usuarios ? Usuarios[0].regiao : ''}")
+					.col.s12.m6.input-field
+						label(for="area_formacao") Departamento
+						input.preencher( autocomplete="off", type="text" id="departamento" name="departamento" value="#{Usuarios ? Usuarios[0].departamento : ''}", style="font-family:")
+					.col.s12.m6
+						label(for="provincia_trabalho") provincia de trabalho
+						select.browser-default.browser-default(name="provincia_trabalho", id="provincia_trabalho", style="font-family:")
+							if Usuarios
+								-for(var i = 0; i < provincias.length; i++)
+									if Usuarios[0].provincia_trabalho == provincias[i]
+										option(value="#{provincias[i]}", selected="selected") #{provincias[i]}
+									else
+										option(value="#{provincias[i]}") #{provincias[i]}
+							else
+								-for(var i = 0; i < provincias.length; i++)
+									option(value="#{provincias[i]}") #{provincias[i]}
+					.col.s12.m6.input-field
+						label(for="profissao") Supervisor
+						input.preencher( autocomplete="off", type="text" id="supervisor" name="supervisor" value="#{Usuarios ? Usuarios[0].supervisor : ''}", style="font-family:")
+				
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Contactos
+				.row
+					.col.s12.m6.input-field
+						label(for="telefone_1") Telefone 1
+						input.preencher( autocomplete="off", type="text", id="telefone_1", name="telefone_1", value="#{Usuarios ? Usuarios[0].telefone_1 : ''}", style="font-family:")
+
+					.col.s12.m6.input-field
+						label(for="telefone_2") Telefone 2
+						input.preencher( autocomplete="off", type="text", name="telefone_2", id="telefone_2", value="#{Usuarios ? Usuarios[0].telefone_2 : ''}", style="font-family:")
+				.row
+					.col.s12.m6.input-field
+						label(for="email") Email
+						input.preencher( autocomplete="off", type="email", name="email", id="email", value="#{Usuarios ? Usuarios[0].email : ''}", style="font-family:")
+							
+					.col.s12.m6.input-field
+						label(for="matricula") Matricula
+						input.preencher( autocomplete="off", type="text", name="matricula", id="matricula", data-mask="SSS 000 SS",value="#{Usuarios ? Usuarios[0].matricula : ''}", style="font-family:")
+			
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Credenciais
+				.row
+					.col.s12.m6.input-field
+						label(for="username") Username
+						input.preencher( autocomplete="off", type="text", name="username", id="username", value="#{Usuarios ? Usuarios[0].username : ''}", style="font-family:")
+					.col.s12.m6
+						label(for="nivel_acesso") Nivel de Acesso
+						select.browser-default.browser-default(id="nivel_acesso", name="nivel_acesso", style="font-family:")
+							if Usuarios
+								if Usuarios[0].nivel_acesso == "gestor"
+									option(value="gestor", select.browser-defaulted="select.browser-defaulted") Gestor
+								else if Usuarios[0].nivel_acesso == "normal"
+									option(value="normal", select.browser-defaulted="select.browser-defaulted") Normal
+
+								else
+									option(value="admin", select.browser-defaulted="select.browser-defaulted") Administrador
+							else
+								option(value="normal") Normal
+								option(value="gestor") Gestor
+								option(value="admin") Administrador
+
+				.row
+					.col.s12.m6.input-field
+						label(for="senha") Senha
+						input.preencher( autocomplete="off", type="password", id="senha", name="senha", value="#{Usuarios ? Usuarios[0].senha : ''}", style="font-family:")
+
+					.col.s12.m6.input-field
+						label(for="confirmacao_senha") Confirmacao da Senha
+						input.preencher( autocomplete="off", type="password", id="confirmacao_senha", value="#{Usuarios ? Usuarios[0].senha:''}", style="font-family:")
+
+			fieldset.no-border
+				.row.buttons-container
+					if !Usuarios
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_util") Registar
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_util") Cancelar
+					else
+						.col.s12.center
+							butoon#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Voltar
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setInterval(function(){document.getElementById("utilizadorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);
+
+			document.ready(function(){function mes(){
+			var novoo;
+			var ms= new Date()
+			if((ms.getMonth()+1)<10)
+				novoo='0'+ms
+				return novoo;
+			}
+			else{
+			novoo=''+(ms.getMonth()+1);
+			return novoo;
+			}
+			}})

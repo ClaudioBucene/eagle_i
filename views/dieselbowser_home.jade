@@ -1,0 +1,49 @@
+extends layout
+block content
+	.container.seccao.white
+		-if((DataU.nome == "Lino Matandalasse")|| (DataU.nivel_acesso=="admin") ||(DataU.nome == "Faiza Tricamo"))
+			.fixed-action-btn.top.fixed-add-bottom
+				a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+				ul(id="extrair", dados=stockData2)
+					li
+						a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Registar novo Diesel Bowser ", class="btn-floating btn-large waves-effect waves-light", href="/ferramenta/bowsernovo") <i class="material-icons activarVerde">add</i>
+		if !Ferramenta || ! Ferramenta.length
+			p.center-align.selmecAzul.bold( style="font-family:") Sem informacao de sobre atrelado !
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix.activarVerde search
+					label(for="pesquisadoruser") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisadoruser", name="pesquisadoruser", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Lista de Atrelados
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Atrelado de Diesel
+						th <span data-i18n="demo.utilizador_form.matricula"></span>
+						th
+				tbody(id="myTableUser")
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					-for(var index = 0; index < Ferramenta.length; index++)
+						tr.highlight(data-funcionario="#{Ferramenta[index]._id}", data-nome="#{Ferramenta[index].nome}",style="font-family:;color:#12375c")
+							td #{Ferramenta[index].dieselbowser}
+							td #{Ferramenta[index].matricula}
+							td.center-align
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="/ferramenta/detalhesbowser/#{Ferramenta[index]._id}") <i class="material-icons activarVerde">info</i>
+								-if(DataU.nivel_acesso=="admin" || DataU.nome=="Faiza Tricamo" || DataU.nome=="Lino Matandalasse")
+									a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="/ferramenta/editarbowser/#{Ferramenta[index]._id}") <i class="material-icons selmecAzul">edit</i>
+								if(((Ferramenta[index].responsavel=="Oficina")||(Ferramenta[index].responsavel=="Parque"))&&((DataU.nome=="Faiza Tricamo")||(DataU.funcao=="regional_manager")||(DataU.funcao=="Regional Manager")||(DataU.nivel_acesso=="admin")||(DataU.nome=="Lino Matandalasse")))
+									a.delete-veiculo1.pointer(style="margin-left: 30px; color:red",data-position="top", data-delay="10", data-tooltip="Remover Inspecção de #{Ferramenta[index].nome}", data-user-id="#{Ferramenta[index].nome}", data-user-new="#{Ferramenta[index]._id}", href="/ferramenta/remove/#{Ferramenta[index]._id}") <img style='width:45px;' src=' /img/receivd.png'>
+		block js
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);
+	

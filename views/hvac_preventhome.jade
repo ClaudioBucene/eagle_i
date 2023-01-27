@@ -1,0 +1,103 @@
+extends layout
+block content
+	.row(style="margin-top:15px;margin-bottom: 0px !important;")
+		.row#recolherdados(jobsinprogress = "#{HvacInprogress}", detalhessession = "#{DataU.nome}")
+		if(((DataU.funcao_id == "611e6bd559c6e30a006ede59") && (DataU.departamento_id == "611e45e68cd71c1f48cf45bd")) || ((DataU.funcao == "Manager") && (DataU.departamento_id == "611e45e68cd71c1f48cf45bd")) || (DataU.nivel_acesso == "admin"))
+			.row
+				.col.right
+					form(id="uploadForm", enctype="multipart/form-data", action="/climatizacao/uploadplanhvac", method="post")
+						input(type="file" name="file" style="border: none; width: 253px;")
+						input(type="submit" value="Upload" name="submit" style="border: none; width: 100px;")
+		//- .row
+		//- 	if(Jobcards.length == 0)
+		//- 		p.center-align.selmecAzul.bold <span data-i18n="demo.ttnumber_form.semplano"></span>
+		if !HvacJobs || ! HvacJobs.length
+			p.center-align.selmecAzul.bold Lista de Manutencao Correctiva
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			if(HvacJobs[0].status == "new")
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.preventativemaint"></span>
+			else
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.preventativemaint"></span>
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Cód. Tarefa
+						th Cliente
+						th Filial
+						th Local
+						th Tecnico
+						th Data Planeada
+						th Estado
+						
+						th
+				tbody(id="myTable")
+					-for(var index = 0, j=0; index<HvacJobs.length && j<100 ; index++, j++)
+						tr.highlight(data-funcionario="#{HvacJobs[index]._id}", data-nome="#{HvacJobs[index].nome}")
+							td #{HvacJobs[index].jobcard_cod ? HvacJobs[index].jobcard_cod: HvacJobs[index].jobcard_loggedby}
+							td #{HvacJobs[index].cliente ? HvacJobs[index].cliente: HvacJobs[index].jobcard_loggedby}
+							td #{HvacJobs[index].filial ? HvacJobs[index].filial: "Sede"}
+							td #{HvacJobs[index].local? HvacJobs[index].local: "----"}
+							td #{HvacJobs[index].tecnico? HvacJobs[index].tecnico: HvacJobs[index].jobcard_tecniconome}
+							td #{HvacJobs[index].jobcard_planneddate? HvacJobs[index].jobcard_planneddate: HvacJobs[index].data_inicio} 
+							-if (HvacJobs[index].estadoactual == "New")
+								td <span data-i18n =demo.manutencao_form.new></span>
+							-else if (HvacJobs[index].estadoactual == "Planned")
+								td <span data-i18n =demo.manutencao_form.planned></span>
+							-else if (HvacJobs[index].estadoactual == "On Site")
+								td No local
+							-else if (HvacJobs[index].estadoactual == "Awaiting approval")
+								td <span data-i18n =demo.manutencao_form.awaitingapproval></span>
+							-else if (HvacJobs[index].estadoactual == "On Route")
+								td <span data-i18n =demo.manutencao_form.onroute></span>
+							-else if (HvacJobs[index].estadoactual == "On hold")
+								td Em espera
+							-else if (HvacJobs[index].estadoactual == "Approved")
+								td <span data-i18n =demo.manutencao_form.approved></span>
+							-else if (HvacJobs[index].estadoactual == "Sent Back")
+								td <span data-i18n =demo.manutencao_form.sentback></span>
+							-else
+								td.left-align ----
+							td 
+								-if(HvacJobs[index].status != "In Progress" && (DataU.nome==HvacJobs[index].tecnico || DataU.nivel_acesso==HvacJobs[index].tecnico) )
+									a.pointer.aprovarhvacjbs(style="color:green; margin-left: 15px", valor="#{carregado2[index]}" labell="AKS 709 MC" lat="#{HvacJobs[index].geolocalizacao}"!=undefined? "#{HvacJobs[index].geolocalizacao[0].latitude}":"", long="#{HvacJobs[index].geolocalizacao}"!=undefined? "#{HvacJobs[index].geolocalizacao[0].longitude}":"",hvscip="#{HvacJobs[index]._id}") <i class="material-icons bold">thumb_up</i>
+								-if( (HvacJobs[index].status != "Complete") && (((DataU.departamento_id == "611e45e68cd71c1f48cf45bd" && DataU.funcao_id == "611e6bd559c6e30a006ede59")) || ((DataU.departamento_id == "611e45e68cd71c1f48cf45bd" && DataU.funcao == "Manager")) || (DataU.funcao == "General Manager") || (DataU.nivel_acesso == "admin")))
+									a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Tomar Acção" href="/climatizacao/detalhesAccaoPrioridade/#{HvacJobs[index]._id}") <i class="material-icons selmecAzul">pan_tool</i>
+								-if((HvacJobs[index].status == "In Progress") && (HvacJobs[index].tecarrivaldate == undefined) && ((HvacJobs[index].sitearrivaldate == undefined && DataU.funcao == "Tecnico") || (HvacJobs[index].sitearrivaldate == undefined && DataU.funcao == "Assistente" || DataU.funcao == "Assistant")))
+									a.pointer.chegadasitehvac(style="margin-left: 30px; color:green",data-position="top", data-delay="10", data-tooltip="Site Arrival", datajobtype ="#{HvacJobs[index].jobcard_jobtype}" ,data-user-new="#{HvacJobs[index]._id}") <i class="material-icons selmecAzul">location_on</i>
+								-else
+									-if(HvacJobs[index].jobcard_analisederisco.jobcard_risk1)
+										-if(((HvacJobs[index].sitearrivaldate != undefined) && (HvacJobs[index].tecnico == DataU.nome)) && (HvacJobs[index].estadoactual != "Awaiting approval" && HvacJobs[index].estadoactual != "Approved" && HvacJobs[index].estadoactual != "Complete") )
+											-if(HvacJobs[index].spares_usados.length==0)
+												a.tooltipped.pointer.sparesusedhvac(style="margin-left: 10px; color:green",data-position="top", data-delay="10",href="/climatizacao/spareused/#{HvacJobs[index]._id}" data-tooltip="Spares Used", data-user-new="#{HvacJobs[index]._id}", data-user-name="#{HvacJobs[index].tecnico_ref}") <img width="30px" src="/img/boxspares.png" style="margin-bottom:-2px">
+											a.tooltipped.pointer.photoinfohvac(style="margin-left: 10px; color:green",data-position="top", id = "photoinfohvac" data-delay="10", data-tooltip="Jobcard photos" ,data-user-new="#{HvacJobs[index]._id}") <img width="30px" src="/img/photo.png" style="margin-bottom:-2px">
+											-if(HvacJobs[index].assinatura == "" || HvacJobs[index].assinatura == undefined)
+												a.tooltipped.pointer.hvacsignature(style="margin-left: 10px; color:green",data-position="top", id = "hvacsignature" data-delay="10", data-tooltip="Jobcard Signature" ,data-user-new="#{HvacJobs[index]._id}") <i class="material-icons selmecAzul">border_color</i>
+											a.tooltipped.pointer(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Submit work", href = "/climatizacao/submiteClima/#{HvacJobs[index]._id}" data-user-new="#{HvacJobs[index]._id}") <img width="30px" src="/img/notifycallcenterimg.png" style="margin-bottom:-2px">	
+										-if((HvacJobs[index].status == "In Progress" && DataU.nome==HvacJobs[index].tecnico) && (HvacJobs[index].estadoactual == "Approved"))
+											a.pointer.saidasitecallouthvac(style="margin-left: 0px; color:green",data-position="top", data-delay="10", data-tooltip="Site Departure", datajobcardtype="#{HvacJobs[index].jobcard_jobtype}" ,data-user-new="#{HvacJobs[index]._id}") <i class="material-icons selmecAzul">time_to_leave</i>
+									-else
+										a.tooltipped.pointer.analiseRisco(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Analise de Risco", data-user-new="#{HvacJobs[index]._id}", datajobtype="#{HvacJobs[index].jobcard_jobtype}") <img width="30px" src="/img/risk2.png" style="margin-bottom:-2px">
+								-if(DataU.nome=="David De Almeida" && HvacJobs[index].viatura && HvacJobs[index].estadoactual=="Planned")
+								-if(DataU.nome=="Rogerio Galrito" && HvacJobs[index].status=="new")
+									a.pointer(style="margin-left: 15px" href="/climatizacao/editash/#{HvacJobs[index]._id}") <i class="material-icons selmecAzul ">edit</i>
+								a.pointer.detalhescsss(style="margin-left: 10px", labell="#{HvacJobs[index]._id}" ) <i class="material-icons activarVerde">info</i>
+								
+	block js
+		script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGI4PphO0TcAodia57tSsJXRSVlTAwNaU&callback=initMap&libraries=&v=weekly")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

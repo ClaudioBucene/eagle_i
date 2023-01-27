@@ -1,0 +1,73 @@
+extends layout
+block content
+	.seccao.container.white
+		-if(DataU.matricula!="SEM VEICULO")
+			.fixed-action-btn.top.fixed-add-bottom
+				a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+				ul(id="extrair", dados=stockData2)
+					if DataU.nivel_acesso=="admin"
+						li.hide
+							a.btn-floating.tooltipped.pointer.activarAzul#exportar(data-position="left", data-delay="10", data-tooltip="Exportar lista", class="btn-floating btn-large waves-effect waves-light", href="/transferencia/exportartocsv") <i class="material-icons activarVerde">publish</i>
+					else
+
+					li
+						a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Registar nova transferencia ", class="btn-floating btn-large waves-effect waves-light", href="/transferencia/novo") <i class="material-icons activarVerde">add</i>
+		if !Transferencias || !Transferencias.length
+			p.center-align.selmecAzul.bold <span data-i18n="demo.transferencia_home.lista_vazia"></span>
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix.activarVerde search
+					label(for="pesquisadoruser") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisadoruser", name="pesquisadoruser", style="border-bottom:none !important;")
+					.col.s6.file-field.input-field.hide
+						.btn-floating.tooltipped.white.pointer#exportar(style="box-shadow:none !important;" data-position="left", data-delay="10", data-tooltip="Exportar Kilometragem", class="btn-floating btn-large waves-effect waves-light")
+						input(type="file", id="upexcel",  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+						i.material-icons.activarVerde.small file_upload 
+						<span class="hide-on-small-only"> Carregar</span>
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.transferencia_home.lista"></span>
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.inspdiaria_home.matricula"></span>
+						th <span data-i18n="demo.transferencia_home.de"></span>
+						th <span data-i18n="demo.transferencia_home.para"></span>
+						th <span data-i18n="demo.transferencia_home.Data_Hora"></span>
+						th.center Status
+						th
+				tbody(id="myTableUser")
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					-for(var index = (Transferencias.length-1), j=0; index >=0 && j<100; index--, j++)
+						if Transferencias[index].nome != 'admin'
+							tr.highlight(data-caso="#{Transferencias[index]._id}", style="color:#12375c")
+								td #{Transferencias[index].matricula}
+								td #{Transferencias[index].motorista}
+								td #{Transferencias[index].nome_receptor}
+								td #{Transferencias[index].data_transferencia}
+								//- td #{Transferencias[index].data.getDate()+'/'+(Transferencias[index].data.getMonth()+1)+'/'+Transferencias[index].data.getFullYear()}
+								td.center-align 
+									-if (Transferencias[index].estagio.length <3)
+										img(style='width:25px;' src='/img/glasshour.png')
+									-else
+										-if(Transferencias[index].estagio[2]==1)
+											img(style='width:30px;' src='/img/checked2.png')
+										-else
+											img(style='width:30px;' src='/img/dinied.png')
+								td.center-align
+									a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Transferencias[index].marca_modelo} transference", href="/transferencia/detalhes/#{Transferencias[index]._id}") <i class="material-icons activarVerde">info</i>
+									-var temp = Transferencias[index].estagio.length
+									-if ((DataU.nome==Transferencias[index].intervenientes[temp] || DataU.nivel_acesso=="admin" || DataU.nome=="Faiza Tricamo")&&(Transferencias[index].estagio.length<3))
+										a.tooltipped.pointer.aprovar_transferencia(style="margin-left: 30px; color:green",data-position="top", data-delay="10", data-tooltip="Aprovar a transferência #{Transferencias[index].marca_modelo}", data-user-id="#{Transferencias[index].marca_modelo}", data-user-new="#{Transferencias[index]._id}") <i class="material-icons bold">thumb_up</i>
+										a.tooltipped.pointer.reprovar_transferencia(style="margin-left: 30px; color:red",data-position="top", data-delay="10", data-tooltip="Reprovar a transferência #{Transferencias[index].marca_modelo}", data-user-id="#{Transferencias[index].marca_modelo}", data-user-new="#{Transferencias[index]._id}") <i class="material-icons bold">thumb_down</i>
+		block js
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);

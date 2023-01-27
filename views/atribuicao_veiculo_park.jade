@@ -1,0 +1,55 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST", enctype="multipart/form-data")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Atribuição da Viatura
+				.row
+					.col.s12.m6.input-field
+						label(for="condutor") <span data-i18n="demo.menu.utilizadores"></span>
+						input.preencher(autocomplete="off", type="text", readonly,style="font-family:;color:#12375c" ,id="condutor" ,name="condutor", value="#{Oficina.responsavel }" , datainserted="#{Oficina._id}")
+					.col.s12.m6.input-field
+						label(for="marca") Marca
+						input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="marca" ,readonly,name="marca", value="#{Oficina.marca}")
+				.row
+					.col.s12.m6.input-field
+						label(for="matricula") Matricula
+						input( type="text",  id="matricula", name="matricula",readonly, value="#{Oficina.matricula}")
+					.col.s12.m6.input-field
+						label(for="kilometragem") kilometragem
+						input.preencher( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="kilometragem" ,name="kilometragem", value="#{Oficina.kilometragem}")
+				.row
+					.col.s12.m6
+						label(for="local") modelo
+						input.preencher( autocomplete="off", readonly, type="text", style="font-family:;color:#12375c" ,id="modelo" ,name="modelo", value="#{Oficina.modelo}")
+				.row
+					.input-field.col.s12.m6
+						i.material-icons.prefix.selmecAzul insert_invitation
+						label(for="data_atribuicao") <span data-i18n="demo.inspdiaria_form.data_hora"></span>
+						input.preencher(type="text", id="data_atribuicao", readonly, name="data_atribuicao", value="#{((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours()<10? ('0'+(new Date()).getHours()): (new Date()).getHours() )+' : '+((new Date()).getMinutes()<10? ('0'+(new Date()).getMinutes()):(new Date()).getMinutes())}")
+					.col.s12.m6
+						label(for="beneficiario") Para
+						select(name="beneficiario", id="beneficiario", style="font-family:")
+							-for(var i = 0; i < Usuarios.length; i++)
+								option(value="#{Usuarios[i].nome}") #{Usuarios[i].nome}
+			fieldset.no-border
+				.row.buttons-container
+					if Oficina
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="atribuir_viatura_park") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_atri") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							butoon#cancel_action(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+			script.
+				setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";}
+				}, 50);

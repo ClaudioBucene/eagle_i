@@ -1,0 +1,212 @@
+extends layout
+block content
+	.row(style="margin-top:15px;margin-bottom: 0px !important;")
+		.row#recolherdados(detalhesjobcards="#{DadosJobcards}" detalhessession="#{DataU.nome}" detalhesprojectos="#{DadosProjects}")
+			if((DataU.funcao == "Call Center" && DataU.nivel_acesso == "normal") || (DataU.funcao == admin))
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul.novocallout(data-position="left", data-delay="10", data-tooltip="add new ttnumber", class="btn-floating btn-large waves-effect waves-light") <i class=" activarAzul material-icons">add</i>
+		.row
+			if(Jobcards.length == 0)
+				p.center-align.selmecAzul.bold <span data-i18n="demo.ttnumber_form.seminfo"></span>
+			else
+				if(Jobcards[0].ttnumber_status == "New")
+					form#tthomenewpesquisa(class="col s12"  method="POST" onsubmit="return validateFormTThomenew()" name="tthomenewpesquisa")
+						.row
+							.col.s12.m6
+							.col.s12.m6.right.input-field
+								i.material-icons.prefix search
+								label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+								input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+					h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Folhas de Serviço Escalonadas
+				else
+					if(Jobcards[0].ttnumber_status == "In Progress")
+						form#tthomeinprogresspesquisa(class="col s12"  method="POST" onsubmit="return validateFormTThomeinprogress()" name="tthomeinprogresspesquisa")
+							.row
+								.col.s12.m6
+								.col.s12.m6.right.input-field
+									i.material-icons.prefix search
+									label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+									input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+						h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Folhas de Serviço Escalonadas
+					else
+						form#tthomecompletepesquisa(class="col s12"  method="POST" onsubmit="return validateFormTThomecomplete()" name="tthomecompletepesquisa")
+							.row
+								.col.s12.m6
+								.col.s12.m6.right.input-field
+									i.material-icons.prefix search
+									label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+									input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+						h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Folhas de Serviço Escalonadas
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold
+				table.responsive-table.bordered.striped#myTable
+					thead
+						tr.selmecAzul
+							th TT Number
+							th Site
+							//- th <span data-i18n="demo.manutencao_form.priority"></span>
+							th <span data-i18n="demo.ttnumber_form.cliente"></span>
+							th Call
+							th <span data-i18n="demo.manutencao_form.tecnico"></span>
+							th <span data-i18n="demo.manutencao_form.dataregistro"></span>
+							th <span data-i18n="demo.manutencao_form.lastupdate"></span>
+							th <span data-i18n="demo.manutencao_form.region"></span>
+							th Call Center
+							th <span data-i18n="demo.manutencao_form.estadotrabalho"></span>
+							th
+					tbody(id="myTableUser1")
+						-for(var index = 0; index < Jobcards.length; index++)
+							tr.highlight(style="font-family:;color:#12375c")
+								td #{Jobcards[index].jobcard_ttnumber}
+								td #{Jobcards[index].jobcard_site}
+								//- -if (Jobcards[index].jobcard_priority != undefined)
+								//- 	td #{Jobcards[index].jobcard_priority}
+								//- -else
+								//- 	td ----
+								td #{Jobcards[index].jobcard_clientenome}
+								td #{Jobcards[index].jobcard_jobinfo.join()}
+								td #{Jobcards[index].jobcard_tecniconome}
+								td #{Jobcards[index].data_registojobcard.toLocaleString()}
+								-if (Jobcards[index].jobcard_audittrail.length == 1)
+									td ----
+								-else
+									td #{Jobcards[index].data_ultimaactualizacaojobcard.toLocaleString(en-GB)}
+								td #{Jobcards[index].jobcard_regiao}
+								td #{Jobcards[index].jobcard_loggedby}
+								-if (Jobcards[index].jobcard_estadoactual == "New")
+									td <span data-i18n=demo.manutencao_form.new></span>
+								-if (Jobcards[index].jobcard_estadoactual == "Planned")
+									td <span data-i18n=demo.manutencao_form.planned></span>
+								-if (Jobcards[index].jobcard_estadoactual == "On site")
+									td <span data-i18n=demo.manutencao_form.onsite></span>
+								-if (Jobcards[index].jobcard_estadoactual == "Awaiting approval")
+									td <span data-i18n=demo.manutencao_form.awaitingapproval></span>
+								-if (Jobcards[index].jobcard_estadoactual == "On route")
+									td <span data-i18n=demo.manutencao_form.onroute></span>
+								-if (Jobcards[index].jobcard_estadoactual == "On hold")
+									td <span data-i18n=demo.manutencao_form.onhold></span>
+								-if (Jobcards[index].jobcard_estadoactual == "Approved")
+									td <span data-i18n=demo.manutencao_form.approved></span>
+								-if (Jobcards[index].jobcard_estadoactual == "Sent Back")
+									td <span data-i18n=demo.manutencao_form.sentback></span>
+								td.right-align
+									-if(DataU.nome == "Guest")
+										a.tooltipped.pointer.detalhesJobcardCallOut.info(style="margin-left: 5px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Details of job card") <i class="material-icons activarVerde">info</i>
+									-else
+										-if(Jobcards[index].jobcard_callcenteractions && (Jobcards[index].jobcard_callcenteractions.findIndex(x=>x.jobcard_callcenteraction == "Tecnician called")!=-1))
+											a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Comments made") <i class="material-icons">phone</i>
+										-if(Jobcards[index].jobcard_prioritycomments)
+											-if(Jobcards[index].jobcard_prioritycomments.length > 0)
+												-if(Jobcards[index].jobcard_prioritycomments.findIndex(x=>x.jobcard_commentpriority=="Media") > Jobcards[index].jobcard_prioritycomments.findIndex(x=>x.jobcard_commentpriority=="Alta"))
+													a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Comments made") <i class="material-icons", style ="color:green">flag</i>
+												-else
+													a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Comments made") <i class="material-icons", style ="color:red">flag</i>
+										//- -if(Jobcards[index].jobcard_prioritycomments && (Jobcards[index].jobcard_prioritycomments.findIndex(x=>x.jobcard_commentpriority=="Media")!=-1))
+										//- 	a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Comments made") <i class="material-icons", style ="color:green">flag</i>
+										//- -else if(Jobcards[index].jobcard_prioritycomments && (Jobcards[index].jobcard_prioritycomments.findIndex(x=>x.jobcard_commentpriority=="Alta")!=-1))
+										//- 	a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Comments made") <i class="material-icons", style ="color:red">flag</i>
+										-if ((DataU.nome==Jobcards[index].jobcard_controladorintervenientes[1]) && (Jobcards[index].jobcard_controlador.length == 1))
+											a.pointer.aprovarttnumber(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Accept the jobcard", data-user-new="#{Jobcards[index]._id}", datajobtype="#{Jobcards[index].jobcard_jobtype}", detalhescall="#{JSON.stringify(Jobcards[index].jobcard_call)}") <i class="material-icons bold">thumb_up</i>
+										-if ((DataU.nome==Jobcards[index].jobcard_controladorintervenientes[1]) && (Jobcards[index].jobcard_controlador.length == 2))
+											-if ((Jobcards[index].jobcard_tecarrivaldate != undefined) && Jobcards[index].jobcard_sitearrivaldate == undefined)
+												a.pointer.chegadasite(style="margin-left: 30px; color:green",data-position="top", data-delay="10", data-tooltip="Site Arrival", data-user-new="#{Jobcards[index]._id}", datajobtype="#{Jobcards[index].jobcard_jobtype}") <i class="material-icons selmecAzul">location_on</i>
+											-else
+												-if(Jobcards[index].jobcard_sitearrivaldate != undefined)
+													a.tooltipped.pointer.generatordetalhes(style="margin-left: 0px; color:green",data-position="top", data-delay="10", data-tooltip="Generator Details", datareferencia="#{Jobcards[index]._id}") <img width="27px" src="/img/generator.png" style="margin-bottom:-2px">
+													a.tooltipped.pointer.credelecdetalhes(style="margin-left: 0px; color:green",data-position="top", data-delay="10", data-tooltip="Credelec Details", datareferencia="#{Jobcards[index]._id}") <img width="27px" src="/img/electricity.png" style="margin-bottom:-2px">
+													a.tooltipped.pointer.sparesused(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Spares Used", data-user-new="#{Jobcards[index]._id}", data-user-name="#{Jobcards[index].jobcard_tecnicoid}") <img width="30px" src="/img/boxspares.png" style="margin-bottom:-2px">
+													a.tooltipped.pointer.notifycallcenter(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Submit work", data-user-new="#{Jobcards[index]._id}" datajobtype="#{Jobcards[index].jobcard_jobtype}") <img width="30px" src="/img/notifycallcenterimg.png" style="margin-bottom:-2px">
+										-if ((DataU.nome==Jobcards[index].jobcard_controladorintervenientes[1]) && (Jobcards[index].jobcard_controlador.length == 4))
+											a.pointer.saidasitecallout(style="margin-left: 0px; color:green",data-position="top", data-delay="10", data-tooltip="Site Departure", data-user-new="#{Jobcards[index]._id}" datajobtype="#{Jobcards[index].jobcard_jobtype}") <i class="material-icons selmecAzul">time_to_leave</i>
+										-if ((DataU.nome==Jobcards[index].jobcard_controladorintervenientes[2] || DataU.verificador_funcao == "Regional Manager" || DataU.nivel_acesso == "admin" || DataU.nome == "Antonio Biquiza" || DataU.nome == "Luis Brazuna") && (Jobcards[index].jobcard_sitedeparturedate == undefined) && (Jobcards[index].jobcard_controlador.length < 3))
+											a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Take action" href="/manutencao/detalhesAccaoPrioridade/#{Jobcards[index]._id}") <i class="material-icons selmecAzul">pan_tool</i>
+										-if((DataU.funcao == "Call Center") && (Jobcards[index].jobcard_sitedeparturedate == undefined && DataU.nivel_acesso == "normal"))
+											a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Add comments", href="/manutencao/detalhesCallCenterComments/#{Jobcards[index]._id}") <img width="20px" src="/img/addcomments.png" style="margin-bottom:-2px">
+											a.tooltipped.pointer(style="margin-left: 5px", data-position="top", data-delay="10", data-tooltip="Take action" href="/manutencao/detalhesAccaoCallcenter/#{Jobcards[index]._id}") <i class="material-icons selmecAzul">pan_tool</i>
+										-if(DataU.nome == "Ernest Mckay" && DataU.funcao == "Manager")
+											a.pointer.tooltipped.deletejobcard(style="margin-left: 5px; color:green", data-position="top", data-delay="10", data-tooltip="Delete Jobcard", data-user-new="#{Jobcards[index]._id}", detalhescall="#{JSON.stringify(Jobcards[index].jobcard_call)}") <i class="material-icons selmecAzul bold">delete</i>
+										a.tooltipped.pointer.detalhesJobcardCallOut.info(style="margin-left: 5px", data-position="top", data-delay="10", data-user-new="#{Jobcards[index]._id}", data-tooltip="Details of jobcard") <i class="material-icons activarVerde">info</i>
+						if !Dadospesquisa
+							if(dadostotalnr > 1)
+								if(Jobcards[0].ttnumber_status == "New")
+									tr.highlight(style="font-family:;color:#12375c")
+										td.center-align
+											if(dadoscontroladordecr != 0)
+												a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/manutencao/ttnumberhome/new/previouspage/#{dadoscontroladordecr}/#{dadostotalnr}") <i class="material-icons selmecAzul">fast_rewind</i>
+										td
+										td
+										td
+										td
+										td
+										td
+										td
+										td.center-align
+											if(dadoscontroladorincr < dadostotalnr)
+												a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/manutencao/ttnumberhome/new/nextpage/#{dadoscontroladorincr}/#{dadostotalnr}") <i class="material-icons selmecAzul">fast_forward</i>
+								else
+									if(Jobcards[0].ttnumber_status == "In Progress")
+										tr.highlight(style="font-family:;color:#12375c")
+											td.center-align
+												if(dadoscontroladordecr != 0)
+													a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/manutencao/ttnumberhome/inprogress/previouspage/#{dadoscontroladordecr}/#{dadostotalnr}") <i class="material-icons selmecAzul">fast_rewind</i>
+											td
+											td
+											td
+											td
+											td
+											td
+											td
+											td.center-align
+												if(dadoscontroladorincr < dadostotalnr)
+													a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/manutencao/ttnumberhome/inprogress/nextpage/#{dadoscontroladorincr}/#{dadostotalnr}") <i class="material-icons selmecAzul">fast_forward</i>
+									else
+										tr.highlight(style="font-family:;color:#12375c")
+											td.center-align
+												if(dadoscontroladordecr != 0)
+													a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/manutencao/ttnumberhome/complete/previouspage/#{dadoscontroladordecr}/#{dadostotalnr}") <i class="material-icons selmecAzul">fast_rewind</i>
+											td
+											td
+											td
+											td
+											td
+											td
+											td
+											td.center-align
+												if(dadoscontroladorincr < dadostotalnr)
+													a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/manutencao/ttnumberhome/complete/nextpage/#{dadoscontroladorincr}/#{dadostotalnr}") <i class="material-icons selmecAzul">fast_forward</i>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			function validateFormTThomenew() {
+				var pesquisador = document.forms["tthomenewpesquisa"]["pesquisador"].value;
+				if(pesquisador != ""){
+					document.getElementById("tthomenewpesquisa").action = "/manutencao/tthomenewpesquisa";
+				}
+			}
+
+			function validateFormTThomeinprogress() {
+				var pesquisador = document.forms["tthomeinprogresspesquisa"]["pesquisador"].value;
+				if(pesquisador != ""){
+					document.getElementById("tthomeinprogresspesquisa").action = "/manutencao/tthomeinprogresspesquisa";
+				}
+			}
+
+			function validateFormTThomecomplete() {
+				var pesquisador = document.forms["tthomecompletepesquisa"]["pesquisador"].value;
+				if(pesquisador != ""){
+					document.getElementById("tthomecompletepesquisa").action = "/manutencao/tthomecompletepesquisa";
+				}
+			}
+
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

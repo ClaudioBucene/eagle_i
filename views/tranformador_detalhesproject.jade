@@ -1,0 +1,156 @@
+extends layout
+block content
+	.seccao.container.white
+		.row#recolherdados(detalhessession="#{DataU._id}" detalhesprojects="#{DadosProjects}" ied="#{ied}")
+		fieldset.no-border.legend-border
+			legend.selmecAzul.bold Baterias
+
+			.row
+				.col.s12.m6
+					label(for="request_from") <span data-i18n="demo.transformadorproject.marca"></span>
+					select.browser-default.browser-default(name="marcatransformador", id="marcatransformador", style="font-family:")
+						option(value="" disabled selected selmecVerde) Selecione a Marca
+						option(value="SGB - SMIT POWER MATLA") SGB - SMIT POWER MATLA
+				.col.s12.m6.input-field
+					label(for="bateriaserie") <span data-i18n="demo.transformadorproject.capacidade"></span> 
+					input(type="number" id="capacidadetransformador" name="capacidadetransformador" class="capacidadetransformador")
+					//-input.preencher( autocomplete="off", type="text", name="bateriaserie", id="bateriaserie", style="font-family:")
+			.row
+				.col.s9.m4.input-field
+					label(for="quant_item") <span data-i18n="demo.transformadorproject.tensao"></span>
+					input(type="number" id="tensaotransformador" name="tensaotransformador" min=0 class="tensaotransformador")
+
+				.col.s9.m4.input-field
+					label(for="quant_item") <span data-i18n="demo.transformadorproject.corrente"></span>
+					input(type="number" id="correntetransformador" name="correntetransformador" min=0 class="correntetransformador")
+			.row
+				.col.s12.m6
+					label(for="request_from") <span data-i18n="demo.transformadorproject.funcionalidade"></span>
+					select.browser-default.browser-default(name="funcionalidadetransformador", id="funcionalidadetransformador", style="font-family:")
+						option(value="" disabled selected selmecVerde) Selecione a Marca
+						option(value="2 Fases") 2 Fases
+						option(value="3 Fases") 3 Fases
+
+				a(class="btn-floating btn-large waves-effect waves-light add-field8 right") + 
+				
+			.row
+				.col.s12sss
+					table.bordered.striped
+						thead
+							tr.selmecAzul
+								th Marca
+								th Capacidade
+								th Tensao Nominal
+								th Corrente Nominal 
+								th Funcionalidade 
+								th
+						tbody(id="myTable_tecnicos_permitidos" style="height:auto !important" )
+							-if(DadosProjects[0].transformador != undefined)
+								-for(let i=0; i<DadosProjects[0].transformador.length; i++)
+									tr
+										td.marcatransformador #{DadosProjects[0].transformador[i].marca}
+										td.capacidadetransformador #{DadosProjects[0].transformador[i].capacidade}
+										td.tensaotransformador #{DadosProjects[0].transformador[i].tensao}
+										td.correntetransformador #{DadosProjects[0].transformador[i].corrente}
+										td.funcionalidadetransformador #{DadosProjects[0].transformador[i].funcionalidade}
+										td  <i class="material-icons pointer delete_tecnico_permitido">delete_forever</i>
+		fieldset.no-border
+			.row.buttons-container(class="")
+				.col.s12.m6.left-button
+					button(type="button", class="btn", id="registar_transformadores") <span data-i18n="demo.utilizador_form.gravar"></span>
+				.col.s12.m6.right-button
+					button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+		
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

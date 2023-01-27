@@ -1,0 +1,1262 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="POST", action="", style="color:#12375c;", enctype="multipart/form-data")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta1"></span>
+				.row
+					.row(id="intruder")
+						if Site
+							if Site[0].alarms.intruder=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="intruderok" name="intruder" checked value="ok")
+									label(for="intruderok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="intrudernotok", name='intruder', value="not ok")
+									label(for="intrudernotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="intruderna", name='intruder', value="na")
+									label(for="intruderna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="intruder_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="intruder_comment", autocomplete="off", type="text", name="intruder_comment", value="#{Site? Site[0].alarms.intruder_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.intruder_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.intruder_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.intruder_image[i]}")							
+							else
+								if Site[0].alarms.intruder=="not ok"
+									.col.s12
+										span.
+										
+									.col.s4.m3
+										input.bom(type="radio" id="intruderok" name="intruder"  value="ok")
+										label(for="intruderok") ok					
+									.col.s4.m3
+										input.mau(type="radio", id="intrudernotok", name='intruder', checked value="not ok")
+										label(for="intrudernotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="intruderna", name='intruder', value="na")
+										label(for="intruderna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="intruder_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="intruder_comment", autocomplete="off", type="text", name="intruder_comment", value="#{Site? Site[0].alarms.intruder_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.intruder_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.intruder_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.intruder_image[i]}")
+								else
+									.col.s12
+										span.
+										
+									.col.s4.m3
+										input.bom(type="radio" id="intruderok" name="intruder"  value="ok")
+										label(for="intruderok") ok					
+									.col.s4.m3
+										input.mau(type="radio", id="intrudernotok", name='intruder', value="not ok")
+										label(for="intrudernotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="intruderna", name='intruder',checked value="na")
+										label(for="intruderna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="intruderok" name="intruder"  value="ok")
+								label(for="intruderok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="intrudernotok", name='intruder', value="not ok")
+								label(for="intrudernotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="intruderna", name='intruder', value="na")
+								label(for="intruderna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="intruder_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="intruder_comment", autocomplete="off", type="text", name="intruder_comment", value="#{Site? Site[0].intruder_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="intruder_image", name="intruder_image",autocomplete="off", value="#{Site ? Site[0].intruder_image:''}", multiple)
+								table
+									tbody#alarm1.alarm1
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta2"></span>
+				.row
+					.row(id="movement")
+						if Site
+							if Site[0].alarms.movement=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="movementok" name="movement" checked value="ok")
+									label(for="movementok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="movementnotok", name='movement', value="not ok")
+									label(for="movementnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="movementna", name='movement', value="na")
+									label(for="movementna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="movement_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="movement_comment", autocomplete="off", type="text", name="movement_comment", value="#{Site? Site[0].alarms.movement_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.movement_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.movement_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.movement_image[i]}")
+							else
+								if Site[0].alarms.movement=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="movementok" name="movement"  value="ok")
+										label(for="movementok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="movementnotok", name='movement', checked value="not ok")
+										label(for="movementnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="movementna", name='movement', value="na")
+										label(for="movementna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="movement_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="movement_comment", autocomplete="off", type="text", name="movement_comment", value="#{Site? Site[0].alarms.movement_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.movement_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.movement_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.movement_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="movementok" name="movement"  value="ok")
+										label(for="movementok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="movementnotok", name='movement', value="not ok")
+										label(for="movementnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="movementna", name='movement', checked, value="na")
+										label(for="movementna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="movementok" name="movement"  value="ok")
+								label(for="movementok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="movementnotok", name='movement', value="not ok")
+								label(for="movementnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="movementna", name='movement', value="na")
+								label(for="movementna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="movement_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="movement_comment", autocomplete="off", type="text", name="movement_comment", value="#{Site? Site[0].movement_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="movement_image", name="movement_image",autocomplete="off", multiple)
+								table
+									tbody#alarm2.alarm2
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta3"></span>
+				.row
+					.row(id="high_temp")
+						if Site
+							if Site[0].alarms.high_temp=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="high_tempok" name="high_temp" checked value="ok")
+									label(for="high_tempok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="high_tempnotok", name='high_temp', value="not ok")
+									label(for="high_tempnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="high_tempna", name='high_temp', value="na")
+									label(for="high_tempna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="high_temp_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="high_temp_comment", autocomplete="off", type="text", name="high_temp_comment", value="#{Site? Site[0].alarms.high_temp_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.high_temp_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.high_temp_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.high_temp_image[i]}")
+							else
+								if Site[0].alarms.high_temp=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="high_tempok" name="high_temp"  value="ok")
+										label(for="high_tempok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="high_tempnotok", name='high_temp', checked value="not ok")
+										label(for="high_tempnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="high_tempna", name='high_temp', value="na")
+										label(for="high_tempna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="high_temp_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="high_temp_comment", autocomplete="off", type="text", name="high_temp_comment", value="#{Site? Site[0].alarms.high_temp_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.high_temp_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.high_temp_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.high_temp_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="high_tempok" name="high_temp"  value="ok")
+										label(for="high_tempok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="high_tempnotok", name='high_temp', value="not ok")
+										label(for="high_tempnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="high_tempna", name='high_temp', checked, value="na")
+										label(for="high_tempna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="high_tempok" name="high_temp"  value="ok")
+								label(for="high_tempok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="high_tempnotok", name='high_temp', value="not ok")
+								label(for="high_tempnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="high_tempna", name='high_temp', value="na")
+								label(for="high_tempna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="high_temp_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="high_temp_comment", autocomplete="off", type="text", name="high_temp_comment", value="#{Site? Site[0].high_temp_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="high_temp_image", name="high_temp_image",autocomplete="off", multiple)
+								table
+									tbody#alarm3.alarm3
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta4"></span>
+				.row
+					.row(id="rectifier_system")
+						if Site
+							if Site[0].alarms.rectifier_system=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="rectifier_systemok" name="rectifier_system" checked value="ok")
+									label(for="rectifier_systemok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="rectifier_systemnotok", name='rectifier_system', value="not ok")
+									label(for="rectifier_systemnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="rectifier_systemna", name='rectifier_system', value="na")
+									label(for="rectifier_systemna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rectifier_system_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="rectifier_system_comment", autocomplete="off", type="text", name="rectifier_system_comment", value="#{Site? Site[0].alarms.rectifier_system_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.rectifier_system_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.rectifier_system_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.rectifier_system_image[i]}")
+							else
+								if Site[0].alarms.rectifier_system=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="rectifier_systemok" name="rectifier_system"  value="ok")
+										label(for="rectifier_systemok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="rectifier_systemnotok", name='rectifier_system', checked value="not ok")
+										label(for="rectifier_systemnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="rectifier_systemna", name='rectifier_system', value="na")
+										label(for="rectifier_systemna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="rectifier_system_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="rectifier_system_comment", autocomplete="off", type="text", name="rectifier_system_comment", value="#{Site? Site[0].alarms.rectifier_system_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.rectifier_system_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.rectifier_system_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.rectifier_system_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="rectifier_systemok" name="rectifier_system"  value="ok")
+										label(for="rectifier_systemok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="rectifier_systemnotok", name='rectifier_system', value="not ok")
+										label(for="rectifier_systemnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="rectifier_systemna", name='rectifier_system', checked, value="na")
+										label(for="rectifier_systemna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="rectifier_systemok" name="rectifier_system"  value="ok")
+								label(for="rectifier_systemok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="rectifier_systemnotok", name='rectifier_system', value="not ok")
+								label(for="rectifier_systemnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="rectifier_systemna", name='rectifier_system', value="na")
+								label(for="rectifier_systemna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="rectifier_system_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="rectifier_system_comment", autocomplete="off", type="text", name="rectifier_system_comment", value="#{Site? Site[0].rectifier_system_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="rectifier_system_image", name="rectifier_system_image",autocomplete="off", multiple)
+								table
+									tbody#alarm4.alarm4
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta5"></span>
+				.row
+					.row(id="rectifier_module")
+						if Site
+							if Site[0].alarms.rectifier_module=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="rectifier_moduleok" name="rectifier_module" checked value="ok")
+									label(for="rectifier_moduleok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="rectifier_modulenotok", name='rectifier_module', value="not ok")
+									label(for="rectifier_modulenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="rectifier_modulena", name='rectifier_module', value="na")
+									label(for="rectifier_modulena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="rectifier_module_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="rectifier_module_comment", autocomplete="off", type="text", name="rectifier_module_comment", value="#{Site? Site[0].alarms.rectifier_module_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.rectifier_module_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.rectifier_module_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.rectifier_module_image[i]}")
+							else
+								if Site[0].alarms.rectifier_module=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="rectifier_moduleok" name="rectifier_module"  value="ok")
+										label(for="rectifier_moduleok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="rectifier_modulenotok", name='rectifier_module', checked value="not ok")
+										label(for="rectifier_modulenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="rectifier_modulena", name='rectifier_module', value="na")
+										label(for="rectifier_modulena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="rectifier_module_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="rectifier_module_comment", autocomplete="off", type="text", name="rectifier_module_comment", value="#{Site? Site[0].alarms.rectifier_module_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.rectifier_module_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.rectifier_module_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.rectifier_module_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="rectifier_moduleok" name="rectifier_module"  value="ok")
+										label(for="rectifier_moduleok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="rectifier_modulenotok", name='rectifier_module', value="not ok")
+										label(for="rectifier_modulenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="rectifier_modulena", name='rectifier_module', checked, value="na")
+										label(for="rectifier_modulena") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="rectifier_moduleok" name="rectifier_module"  value="ok")
+								label(for="rectifier_moduleok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="rectifier_modulenotok", name='rectifier_module', value="not ok")
+								label(for="rectifier_modulenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="rectifier_modulena", name='rectifier_module', value="na")
+								label(for="rectifier_modulena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="rectifier_module_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="rectifier_module_comment", autocomplete="off", type="text", name="rectifier_module_comment", value="#{Site? Site[0].rectifier_module_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="rectifier_module_image", name="rectifier_module_image",autocomplete="off", multiple)
+								table
+									tbody#alarm5.alarm5
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta6"></span>
+				.row
+					.row(id="aircon1")
+						if Site
+							if Site[0].alarms.aircon1=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="aircon1ok" name="aircon1" checked value="ok")
+									label(for="aircon1ok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="aircon1notok", name='aircon1', value="not ok")
+									label(for="aircon1notok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="aircon1na", name='aircon1', value="na")
+									label(for="aircon1na") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircon1_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="aircon1_comment", autocomplete="off", type="text", name="aircon1_comment", value="#{Site? Site[0].alarms.aircon1_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.aircon1_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.aircon1_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.aircon1_image[i]}")
+							else
+								if Site[0].alarms.aircon1=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="aircon1ok" name="aircon1"  value="ok")
+										label(for="aircon1ok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="aircon1notok", name='aircon1', checked value="not ok")
+										label(for="aircon1notok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="aircon1na", name='aircon1', value="na")
+										label(for="aircon1na") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="aircon1_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="aircon1_comment", autocomplete="off", type="text", name="aircon1_comment", value="#{Site? Site[0].alarms.aircon1_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.aircon1_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.aircon1_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.aircon1_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="aircon1ok" name="aircon1"  value="ok")
+										label(for="aircon1ok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="aircon1notok", name='aircon1', value="not ok")
+										label(for="aircon1notok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="aircon1na", name='aircon1', checked, value="na")
+										label(for="aircon1na") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="aircon1ok" name="aircon1"  value="ok")
+								label(for="aircon1ok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="aircon1notok", name='aircon1', value="not ok")
+								label(for="aircon1notok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="aircon1na", name='aircon1', value="na")
+								label(for="aircon1na") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="aircon1_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="aircon1_comment", autocomplete="off", type="text", name="aircon1_comment", value="#{Site? Site[0].aircon1_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="aircon1_image", name="aircon1_image",autocomplete="off", multiple)
+								table
+									tbody#alarm6.alarm6
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta7"></span>
+				.row
+					.row(id="aircon2")
+						if Site
+							if Site[0].alarms.aircon2=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="aircon2ok" name="aircon2" checked value="ok")
+									label(for="aircon2ok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="aircon2notok", name='aircon2', value="not ok")
+									label(for="aircon2notok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="aircon2na", name='aircon2', value="na")
+									label(for="aircon2na") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircon2_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="aircon2_comment", autocomplete="off", type="text", name="aircon2_comment", value="#{Site? Site[0].alarms.aircon2_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.aircon2_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.aircon2_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.aircon2_image[i]}")
+							else
+								if Site[0].alarms.aircon2=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="aircon2ok" name="aircon2"  value="ok")
+										label(for="aircon2ok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="aircon2notok", name='aircon2', checked value="not ok")
+										label(for="aircon2notok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="aircon2na", name='aircon2', value="na")
+										label(for="aircon2na") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="aircon2_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="aircon2_comment", autocomplete="off", type="text", name="aircon2_comment", value="#{Site? Site[0].alarms.aircon2_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.aircon2_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.aircon2_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.aircon2_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="aircon2ok" name="aircon2"  value="ok")
+										label(for="aircon2ok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="aircon2notok", name='aircon2', value="not ok")
+										label(for="aircon2notok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="aircon2na", name='aircon2', checked, value="na")
+										label(for="aircon2na") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="aircon2ok" name="aircon2"  value="ok")
+								label(for="aircon2ok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="aircon2notok", name='aircon2', value="not ok")
+								label(for="aircon2notok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="aircon2na", name='aircon2', value="na")
+								label(for="aircon2na") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="aircon2_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="aircon2_comment", autocomplete="off", type="text", name="aircon2_comment", value="#{Site? Site[0].aircon2_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", multiple, id="aircon2_image", name="aircon2_image",autocomplete="off")
+								table
+									tbody#alarm7.alarm7
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta8"></span>
+				.row
+					.row(id="generator_fuel")
+						if Site
+							if Site[0].alarms.generator_fuel=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="generator_fuelok" name="generator_fuel" checked value="ok")
+									label(for="generator_fuelok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="generator_fuelnotok", name='generator_fuel', value="not ok")
+									label(for="generator_fuelnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="generator_fuelna", name='generator_fuel', value="na")
+									label(for="generator_fuelna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_fuel_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="generator_fuel_comment", autocomplete="off", type="text", name="generator_fuel_comment", value="#{Site? Site[0].alarms.generator_fuel_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.generator_fuel_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.generator_fuel_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_fuel_image[i]}")
+							else
+								if Site[0].alarms.generator_fuel=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="generator_fuelok" name="generator_fuel"  value="ok")
+										label(for="generator_fuelok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="generator_fuelnotok", name='generator_fuel', checked value="not ok")
+										label(for="generator_fuelnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="generator_fuelna", name='generator_fuel', value="na")
+										label(for="generator_fuelna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="generator_fuel_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="generator_fuel_comment", autocomplete="off", type="text", name="generator_fuel_comment", value="#{Site? Site[0].alarms.generator_fuel_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.generator_fuel_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.generator_fuel_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_fuel_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="generator_fuelok" name="generator_fuel"  value="ok")
+										label(for="generator_fuelok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="generator_fuelnotok", name='generator_fuel', value="not ok")
+										label(for="generator_fuelnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="generator_fuelna", name='generator_fuel', checked, value="na")
+										label(for="generator_fuelna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="generator_fuelok" name="generator_fuel"  value="ok")
+								label(for="generator_fuelok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="generator_fuelnotok", name='generator_fuel', value="not ok")
+								label(for="generator_fuelnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="generator_fuelna", name='generator_fuel', value="na")
+								label(for="generator_fuelna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="generator_fuel_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="generator_fuel_comment", autocomplete="off", type="text", name="generator_fuel_comment", value="#{Site? Site[0].generator_fuel_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="generator_fuel_image", name="generator_fuel_image",autocomplete="off", multiple)
+								table
+									tbody#alarm8.alarm8
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta9"></span>
+				.row
+					.row(id="generator_abnormal")
+						if Site
+							if Site[0].alarms.generator_abnormal=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="generator_abnormalok" name="generator_abnormal" checked value="ok")
+									label(for="generator_abnormalok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="generator_abnormalnotok", name='generator_abnormal', value="not ok")
+									label(for="generator_abnormalnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="generator_abnormalna", name='generator_abnormal', value="na")
+									label(for="generator_abnormalna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_abnormal_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="generator_abnormal_comment", autocomplete="off", type="text", name="generator_abnormal_comment", value="#{Site? Site[0].alarms.generator_abnormal_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.generator_abnormal_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.generator_abnormal_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_abnormal_image[i]}")
+							else
+								if Site[0].alarms.generator_abnormal=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="generator_abnormalok" name="generator_abnormal"  value="ok")
+										label(for="generator_abnormalok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="generator_abnormalnotok", name='generator_abnormal', checked value="not ok")
+										label(for="generator_abnormalnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="generator_abnormalna", name='generator_abnormal', value="na")
+										label(for="generator_abnormalna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="generator_abnormal_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="generator_abnormal_comment", autocomplete="off", type="text", name="generator_abnormal_comment", value="#{Site? Site[0].alarms.generator_abnormal_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.generator_abnormal_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.generator_abnormal_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_abnormal_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="generator_abnormalok" name="generator_abnormal"  value="ok")
+										label(for="generator_abnormalok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="generator_abnormalnotok", name='generator_abnormal', value="not ok")
+										label(for="generator_abnormalnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="generator_abnormalna", name='generator_abnormal', checked, value="na")
+										label(for="generator_abnormalna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="generator_abnormalok" name="generator_abnormal"  value="ok")
+								label(for="generator_abnormalok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="generator_abnormalnotok", name='generator_abnormal', value="not ok")
+								label(for="generator_abnormalnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="generator_abnormalna", name='generator_abnormal', value="na")
+								label(for="generator_abnormalna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="generator_abnormal_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="generator_abnormal_comment", autocomplete="off", type="text", name="generator_abnormal_comment", value="#{Site? Site[0].generator_abnormal_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="generator_abnormal_image", name="generator_abnormal_image",autocomplete="off", multiple)
+								table
+									tbody#alarm9.alarm9
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta10"></span>
+				.row(id="aircraft_warning")
+					if Site
+						if Site[0].alarms.aircraft_warning=="ok"
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="aircraft_warningok" name="aircraft_warning" checked value="ok")
+								label(for="aircraft_warningok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="aircraft_warningnotok", name='aircraft_warning', value="not ok")
+								label(for="aircraft_warningnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="aircraft_warningna", name='aircraft_warning', value="na")
+								label(for="aircraft_warningna") N/A
+							.input-field.col.s12(style="text-align: left !important")
+								label(for="aircraft_warning_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="aircraft_warning_comment", autocomplete="off", type="text", name="aircraft_warning_comment", value="#{Site? Site[0].alarms.aircraft_warning_comment:''}")
+							.col.s12.m6.input-field
+								-if(Site[0].alarms.aircraft_warning_image.length!=0)
+									-for(let i=0;i<Site[0].alarms.aircraft_warning_image.length; i++)
+										img.verimagem(style="width:100px", src="#{Site[0].alarms.aircraft_warning_image[i]}")
+						else
+							if Site[0].alarms.aircraft_warning=="not ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="aircraft_warningok" name="aircraft_warning"  value="ok")
+									label(for="aircraft_warningok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="aircraft_warningnotok", name='aircraft_warning', checked value="not ok")
+									label(for="aircraft_warningnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="aircraft_warningna", name='aircraft_warning', value="na")
+									label(for="aircraft_warningna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aircraft_warning_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="aircraft_warning_comment", autocomplete="off", type="text", name="aircraft_warning_comment", value="#{Site? Site[0].alarms.aircraft_warning_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.aircraft_warning_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.aircraft_warning_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.aircraft_warning_image[i]}")
+							else
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="aircraft_warningok" name="aircraft_warning"  value="ok")
+									label(for="aircraft_warningok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="aircraft_warningnotok", name='aircraft_warning', value="not ok")
+									label(for="aircraft_warningnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="aircraft_warningna", name='aircraft_warning', checked, value="na")
+									label(for="aircraft_warningna") N/A
+					else
+						.col.s12
+							span.
+								
+						.col.s4.m3
+							input.bom(type="radio" id="aircraft_warningok" name="aircraft_warning"  value="ok")
+							label(for="aircraft_warningok") ok					
+						.col.s4.m3
+							input.mau(type="radio", id="aircraft_warningnotok", name='aircraft_warning', value="not ok")
+							label(for="aircraft_warningnotok") not ok
+						.col.s4.m3
+							input.moderado(type="radio", id="aircraft_warningna", name='aircraft_warning', value="na")
+							label(for="aircraft_warningna") N/A
+						.input-field.col.s12.m6(style="text-align: left !important")
+							label(for="aircraft_warning_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+							input(id="aircraft_warning_comment", autocomplete="off", type="text", name="aircraft_warning_comment", value="#{Site? Site[0].aircraft_warning_comment:''}")
+						.col.s12.m6.input-field
+							<span data-i18n="demo.alarm_form.imagem"></span>
+							input.preencher(type="file", id="aircraft_warning_image", name="aircraft_warning_image",autocomplete="off", multiple)
+							table
+								tbody#alarm10.alarm10
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta11"></span>
+				.row
+					.row(id="smoke")
+						if Site
+							if Site[0].alarms.smoke=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="smokeok" name="smoke" checked value="ok")
+									label(for="smokeok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="smokenotok", name='smoke', value="not ok")
+									label(for="smokenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="smokena", name='smoke', value="na")
+									label(for="smokena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="smoke_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="smoke_comment", autocomplete="off", type="text", name="smoke_comment", value="#{Site? Site[0].alarms.smoke_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.smoke_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.smoke_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.smoke_image[i]}")
+							else
+								if Site[0].alarms.smoke=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="smokeok" name="smoke"  value="ok")
+										label(for="smokeok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="smokenotok", name='smoke', checked value="not ok")
+										label(for="smokenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="smokena", name='smoke', value="na")
+										label(for="smokena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="smoke_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="smoke_comment", autocomplete="off", type="text", name="smoke_comment", value="#{Site? Site[0].alarms.smoke_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.smoke_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.smoke_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.smoke_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="smokeok" name="smoke"  value="ok")
+										label(for="smokeok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="smokenotok", name='smoke', value="not ok")
+										label(for="smokenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="smokena", name='smoke', checked, value="na")
+										label(for="smokena") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="smokeok" name="smoke"  value="ok")
+								label(for="smokeok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="smokenotok", name='smoke', value="not ok")
+								label(for="smokenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="smokena", name='smoke', value="na")
+								label(for="smokena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="smoke_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="smoke_comment", autocomplete="off", type="text", name="smoke_comment", value="#{Site? Site[0].smoke_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="smoke_image", name="smoke_image",autocomplete="off", multiple)
+								table
+									tbody#alarm11.alarm11
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta12"></span>
+				.row
+					.row(id="ac_mains_failure")
+						if Site
+							if Site[0].alarms.ac_mains_failure=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="ac_mains_failureok" name="ac_mains_failure" checked value="ok")
+									label(for="ac_mains_failureok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="ac_mains_failurenotok", name='ac_mains_failure', value="not ok")
+									label(for="ac_mains_failurenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="ac_mains_failurena", name='ac_mains_failure', value="na")
+									label(for="ac_mains_failurena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="ac_mains_failure_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="ac_mains_failure_comment", autocomplete="off", type="text", name="ac_mains_failure_comment", value="#{Site? Site[0].alarms.ac_mains_failure_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.ac_mains_failure_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.ac_mains_failure_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.ac_mains_failure_image[i]}")
+							else
+								if Site[0].alarms.ac_mains_failure=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="ac_mains_failureok" name="ac_mains_failure"  value="ok")
+										label(for="ac_mains_failureok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="ac_mains_failurenotok", name='ac_mains_failure', checked value="not ok")
+										label(for="ac_mains_failurenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="ac_mains_failurena", name='ac_mains_failure', value="na")
+										label(for="ac_mains_failurena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="ac_mains_failure_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="ac_mains_failure_comment", autocomplete="off", type="text", name="ac_mains_failure_comment", value="#{Site? Site[0].alarms.ac_mains_failure_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.ac_mains_failure_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.ac_mains_failure_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.ac_mains_failure_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="ac_mains_failureok" name="ac_mains_failure"  value="ok")
+										label(for="ac_mains_failureok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="ac_mains_failurenotok", name='ac_mains_failure', value="not ok")
+										label(for="ac_mains_failurenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="ac_mains_failurena", name='ac_mains_failure', checked, value="na")
+										label(for="ac_mains_failurena") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="ac_mains_failureok" name="ac_mains_failure"  value="ok")
+								label(for="ac_mains_failureok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="ac_mains_failurenotok", name='ac_mains_failure', value="not ok")
+								label(for="ac_mains_failurenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="ac_mains_failurena", name='ac_mains_failure', value="na")
+								label(for="ac_mains_failurena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="ac_mains_failure_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="ac_mains_failure_comment", autocomplete="off", type="text", name="ac_mains_failure_comment", value="#{Site? Site[0].ac_mains_failure_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="ac_mains_failure_image", name="ac_mains_failure_image",autocomplete="off", multiple)
+								table
+									tbody#alarm12.alarm12
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta13"></span>
+				.row
+					.row(id="battery_low")
+						if Site
+							if Site[0].alarms.battery_low=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="battery_lowok" name="battery_low" checked value="ok")
+									label(for="battery_lowok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="battery_lownotok", name='battery_low', value="not ok")
+									label(for="battery_lownotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="battery_lowna", name='battery_low', value="na")
+									label(for="battery_lowna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="battery_low_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="battery_low_comment", autocomplete="off", type="text", name="battery_low_comment", value="#{Site? Site[0].alarms.battery_low_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.battery_low_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.battery_low_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.battery_low_image[i]}")
+							else
+								if Site[0].alarms.battery_low=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="battery_lowok" name="battery_low"  value="ok")
+										label(for="battery_lowok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="battery_lownotok", name='battery_low', checked value="not ok")
+										label(for="battery_lownotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="battery_lowna", name='battery_low', value="na")
+										label(for="battery_lowna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="battery_low_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+										input(id="battery_low_comment", autocomplete="off", type="text", name="battery_low_comment", value="#{Site? Site[0].alarms.battery_low_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].alarms.battery_low_image.length!=0)
+											-for(let i=0;i<Site[0].alarms.battery_low_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].alarms.battery_low_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="battery_lowok" name="battery_low"  value="ok")
+										label(for="battery_lowok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="battery_lownotok", name='battery_low', value="not ok")
+										label(for="battery_lownotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="battery_lowna", name='battery_low', checked, value="na")
+										label(for="battery_lowna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="battery_lowok" name="battery_low"  value="ok")
+								label(for="battery_lowok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="battery_lownotok", name='battery_low', value="not ok")
+								label(for="battery_lownotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="battery_lowna", name='battery_low', value="na")
+								label(for="battery_lowna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="battery_low_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="battery_low_comment", autocomplete="off", type="text", name="battery_low_comment", value="#{Site? Site[0].battery_low_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.alarm_form.imagem"></span>
+								input.preencher(type="file", id="battery_low_image", name="battery_low_image",autocomplete="off", multiple)
+								table
+									tbody#alarm13.alarm13
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.alarm_form.alarme"></span>
+				h2(class="fs-title") <span data-i18n="demo.alarm_form.pergunta14"></span>
+				.row(id="generator_running")
+					if Site
+						if Site[0].alarms.generator_running=="ok"
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="generator_runningok" name="generator_running"   checked value="ok")
+								label(for="generator_runningok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="generator_runningnotok", name='generator_running', value="not ok")
+								label(for="generator_runningnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="generator_runningna", name='generator_running', value="na")
+								label(for="generator_runningna") N/A
+							.input-field.col.s12(style="text-align: left !important")
+								label(for="generator_running_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+								input(id="generator_running_comment", autocomplete="off", type="text", name="generator_running_comment", value="#{Site? Site[0].alarms.generator_running_comment:''}")
+							.col.s12.m6.input-field
+								-if(Site[0].alarms.generator_running_image.length!=0)
+									-for(let i=0;i<Site[0].alarms.generator_running_image.length; i++)
+										img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_running_image[i]}")
+						else
+							if Site[0].alarms.generator_running=="not ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="generator_runningok" name="generator_running"  value="ok")
+									label(for="generator_runningok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="generator_runningnotok", name='generator_running', checked value="not ok")
+									label(for="generator_runningnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="generator_runningna", name='generator_running', value="na")
+									label(for="generator_runningna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="generator_running_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+									input(id="generator_running_comment", autocomplete="off", type="text", name="generator_running_comment",  value="#{Site? Site[0].alarms.generator_running_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].alarms.generator_running_image.length!=0)
+										-for(let i=0;i<Site[0].alarms.generator_running_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].alarms.generator_running_image[i]}")
+							else
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="generator_runningok" name="generator_running"  value="ok")
+									label(for="generator_runningok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="generator_runningnotok", name='generator_running', value="not ok")
+									label(for="generator_runningnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="generator_runningna", name='generator_running', checked, value="na")
+									label(for="generator_runningna") N/A
+					else
+						.col.s12
+							span.
+								
+						.col.s4.m3
+							input.bom(type="radio" id="generator_runningok" name="generator_running"  value="ok")
+							label(for="generator_runningok") ok					
+						.col.s4.m3
+							input.mau(type="radio", id="generator_runningnotok", name='generator_running', value="not ok")
+							label(for="generator_runningnotok") not ok
+						.col.s4.m3
+							input.moderado(type="radio", id="generator_runningna", name='generator_running', value="na")
+							label(for="generator_runningna") N/A
+						.input-field.col.s12.m6(style="text-align: left !important")
+							label(for="generator_running_comment") <span data-i18n="demo.alarm_form.comentarios"></span>
+							input(id="generator_running_comment", autocomplete="off", type="text", name="generator_running_comment", value="#{Site? Site[0].generator_running_comment:''}")
+						.col.s12.m6.input-field
+							<span data-i18n="demo.alarm_form.imagem"></span>
+							input.preencher(type="file", id="generator_running_image", name="generator_running_image",autocomplete="off", multiple)
+							table
+								tbody#alarm14.alarm14
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Site
+					input#captarAlarm(type="submit", dataref="#{referencia._id}", numSite= "#{referencia.siteNumber}", nomesessiondetalhes= "#{DataU.nome}",name="submit", class="submit action-button", value="Save")
+				else
+					if Site[0].generator.engine_oil
+						input#captarAlarmDetalhes(type="button", name="next", dataref="#{op}", class="next action-button", value="Next >>")
+		
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

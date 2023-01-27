@@ -1,0 +1,59 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Reprovacao da P.O
+				.row
+					.col.s12.m6.input-field
+						label(for="requested_by") Requisitado por
+						input.preencher(autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="requested_by" ,name="requested_by", data-sete="#{Po_data[0]._id}" readonly value="#{Po_data[0].requested_by}")
+					.col.s12.m6.input-field
+						label(for="data") data
+						input.preencher(autocomplete="off", type="text", id="data", readonly value="#{((Po_data[0].data_po).getDate()<10? '0'+(Po_data[0].data_po).getDate():(Po_data[0].data_po).getDate())+'/'+(((Po_data[0].data_po).getMonth()+1)<10? ('0'+((Po_data[0].data_po).getMonth()+1)):((Po_data[0].data_po).getMonth()+1))+'/'+((Po_data[0].data_po).getFullYear())+'   '+((Po_data[0].data_po).getHours()<10? ('0'+(Po_data[0].data_po).getHours()): (Po_data[0].data_po).getHours() )+' : '+((Po_data[0].data_po).getMinutes()<10? ('0'+(Po_data[0].data_po).getMinutes()):(Po_data[0].data_po).getMinutes())}", style="font-family:")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Valor Em:
+				.row
+					table.responsive-table(style="height:auto !important")
+						thead
+							tr
+								th MZN
+								th USD
+								th EURO
+								th ZAR
+						tbody(style="height:auto !important")
+							tr
+								td #{Po_data[0].valor_em_metical}
+								td #{Po_data[0].valor_em_dolar}
+								td #{Po_data[0].valor_em_euro}
+								td #{Po_data[0].valor_em_rand}
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Razoes:
+				.row
+					.col.s12.m6
+						label(for="razoes") Conteudo
+						textarea.preencher.materialize-textarea( autocomplete="off", data_categoria="#{categoriias}" data_subcaegoria="#{subcategoriias}" style="font-family:;color:#12375c" ,id="razoes" ,name="razoes")
+
+			fieldset.no-border
+				.row.buttons-container
+					if Po_data
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="reprovar_po1") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_reprovacao_po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

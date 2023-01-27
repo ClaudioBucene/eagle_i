@@ -1,0 +1,284 @@
+include ./modals/modals
+//- include ./mixin/footer.jade
+doctype html
+html
+	head
+		title= title
+		meta(name="author", content="Helio Romao Mahesse")
+		meta(name="application name", content="Sistema de Gestao de Viaturas da COMSERV")
+		meta(name="description", content="COMSERV MOCAMBIQUE")
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(http-equiv="default-style", content="text/css")
+		link(rel="stylesheet", type="text/css", href="/css/selectize.css")
+		link(rel="stylesheet", type="text/css", href="/css/meuEstilo.css")
+		link(rel="stylesheet", type="text/css", href="/css/style.css")
+		script(type="text/javascript", src="/js/jquery-2.1.1.min.js")
+		script(type="text/javascript", src="/js/materialize.min.js")
+		
+		link(rel="stylesheet", type="text/css", href="/css/side.css")
+		link(rel="stylesheet", type="text/css", href="/css/util.css")
+		link(rel="stylesheet", type="text/css", href="/css/diaria.css")
+		link(rel="stylesheet", type="text/css", href="/css/meuEstilo.css")
+		
+		//- link(href="https://fonts.googleapis.com/css?family=Raleway", rel="stylesheet")
+		//- link(rel="stylesheet", type="text/css", href="/css/mestre.css")	
+		
+		// ******************************************************************************
+		
+		script(type="text/javascript", src="/js/helper.js")
+		script(type="text/javascript", src="/js/nav.js")
+		script(type="text/javascript", src="/js/unico.js")
+		script(type="text/javascript", src="/js/jquery.easing.1.3.js")
+		script(type="text/javascript", src="/js/xlsx.full.min.js")
+		script(type="text/javascript" src="/js/selectize.min.js")
+		script(type="text/javascript" src="/js/browserimagecompress.js")
+		//- script(type="text/javascript" src="/js/DecoderWorker.js")
+		//- script(type="text/javascript" src="/js/exif.js")
+		//- script(type="text/javascript" src="/js/BarcodeReader.js")
+		//- script(type="text/javascript", src="/js/scandit.min.js")
+		// script(type="text/javascript" src="/js/signature_pad.min.js")
+		script(type="text/javascript", src="/js/core.js")
+		script(type="text/javascript", src="/js/charts.js")
+		// script(src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js")
+		link(rel="manifest", href="/js/manifest.json")
+		//- link(rel="icon" href="/images/icons/icon-152x152.png")
+		meta(name="theme-color" content="#008aff")
+		meta(name="apple-mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="default")
+		meta(name="apple-mobile-web-app-title" content="COMSERV")
+		link(rel="apple-touch-icon" href="/images/icons/icon-152x152.png")
+		meta(name="msapplication-TileImage" content="/images/icons/icon-152x152.png")
+		meta(name="msapplication-TileColor" content="#fff")
+	body.white(style="min-width:100%")
+		
+		nav.white.parent-width(style="height: 120px !important; position:fixed; z-index:9; display:flex !important; flex-direction: ")
+			.nav-wrapper.fill-parent(style="display:flex; justify-content:space-between")
+				img.lang-picker(src="/img/logo.png" , fisheir="#{DataU.nome}", fishier="#{DataU.nivel_acesso}",  class="hide-on-med-and-down imagee",style="width:130px;margin-left:100px;margin-top:40px;", incident="#{DataU.data}",value="#{(!DataU.idioma || DataU.idioma=='pt' )? 'pt':'en'}", onclick="image()")
+				img.lang-picker(src="/img/logo.png", fisheir="#{DataU.nome}",  fishier="#{DataU.nivel_acesso}",class="hide-on-large-only imagee",style="width:80px;margin-top:20px; margin-left:1px", incident="#{DataU.data}", value="#{(!DataU.idioma || DataU.idioma=='pt' )? 'pt':'en'}")
+				ul(class="right verde-policial ", style="height: 40px; margin-top:12px; position:relative; top: 5px; right:20px !important")
+					li(class="hide-on-med-and-down")
+						
+					li(style="display:flex !important; justify-content:flex-end !important")
+						a.verde-policial.dropdown-trigger(data-activates="dropdown_23") <img src="#{(DataU.profile_pic && DataU.profile_pic.length>0)? DataU.profile_pic: '/img/pprofile.png' }"  alt="" style="width:30px; height:30px; margin-left:0px; float:right" class="circle responsive-img"> <span class="center" style="margin-top:0px; padding-top:0px;padding-right:0px !important; font-size:10px; text-align:right margin-right:10px"> <br>#{DataU.nome.lastIndexOf(" ")!=-1? (DataU.nome.charAt(0)+ DataU.nome.substr(DataU.nome.lastIndexOf(" ")+1)):DataU.nome}</span>
+						ul.dropdown-content(id="dropdown_23" )
+							li
+								a.selmecAzul#sair.pointer( style="text-align:center" data-position="bottom", data-delay="10", data-tooltip="clique para sair do sistema", data-user-id="ujh") <i class="material-icons center">power_settings_new</i>
+							li
+								.col.s6.file-field.input-field
+									input(type="file" id="carregar_photo")
+									i.login-form-icon.selmecAzul.center(class="material-icons") add_a_photo
+							li
+								a.selmecAzul.pointer( style="text-align:center" data-position="bottom", href="/keywords", data-delay="10", data-tooltip="clique para sair do sistema", data-user-id="ujh") <i class="material-icons center">settings</i>
+									
+				//- ul(class="right verde-policial", style="height: 40px; margin-top:12px; position:relative; top: 5px; right:20px !important")
+				//- 	li(class="hide-on-med-and-down")
+						
+				//- 	li(class="hide-on-med-and-down")
+				//- 		a.verde-policial.perfil(style="margin-left: 30px",data-position="bottom", data-delay="10", data-tooltip="perfil do utilizador", data-user-id="ujh") <i class="material-icons left">person</i>
+				//- 	li 
+				//- 		a.verde-policial#sair.pointer(style="margin-left: 30px", data-position="bottom", data-delay="10", data-tooltip="clique para sair do sistema", data-user-id="ujh") <i class="material-icons left">power_settings_new</i>
+				//- 	li
+				//- 		ul(class="lang-picker")
+				//- 			li(id="portuguese" style="padding-right: 10px; padding-left: 10px" value="pt") pt
+				//- 			li(id="english" value="en") en
+
+		main(style="display:flex !important; flex-direction:row !important; width:100% !important")
+			.container.fill-parent#menus
+				row.sidebar#mySidebar(style="width:250px; display:flex !important; flex-direction:column !important;align-items:center !important; margin-top:9% !important;")
+					//- a(href="javascript:void(0)",class="closebtn hide-on-med-and-up", onclick="closeNav()") X
+					ul(class="collapsible popout menu-slide" style="width:90%")
+						-if(DataU.nivel_acesso=="admin" || DataU.modulos.findIndex(x=>x.referencia=="611d38cde812e7056c51d5ea")!=-1)
+							li#viaturaId
+								.collapsible-header <i class="material-icons left">drive_eta</i> 
+									|<span data-i18n="demo.menu.viatura"></span>
+
+									i.material-icons.content-icon
+								.collapsible-body.activos
+									ul(class="activos")
+										li.sidebarbackgr
+											a(href="/inspdiaria/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left small">search</i> <span data-i18n="demo.menu.viturainspdiaria"></span>
+										li.sidebarbackgr
+											a(href="/transferencia", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons small">swap_horiz</i> <span data-i18n="demo.menu.viaturaTransfere"></span>
+										-if  (true)
+											li.sidebarbackgr
+												a(href="/ferramenta/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left small">directions_car</i> <span data-i18n="demo.menu.viaturas"></span>
+											li.sidebarbackgr
+												a(href="/ferramenta/bowser", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left small">rv_hookup</i> Atrelado
+						-if(DataU.nivel_acesso=="admin" || DataU.modulos.findIndex(x=>x.referencia=="611e49ce8cd71c1f48cf45c2")!=-1)
+							li#geradorId
+								.collapsible-header <i class="material-icons left">settings_input_antenna</i> 
+									|<span data-i18n="demo.menu.tarefas"></span>
+
+									i.material-icons.content-icon
+								.collapsible-body.activos
+									ul(class="activos ")
+										li.sidebarbackgr
+											a(href="/manutencao", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">build</i> <span data-i18n="demo.menu.folhaserv"></span>
+										-if(DataU.funcao != "Tecnico")
+											li.sidebarbackgr
+												a(href="/gerador", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">settings_input_antenna</i> <span data-i18n="demo.menu.siteinsp"></span>
+											li.sidebarbackgr.hide
+												a(href="/site_estatistica/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">assessment</i>Estatistica
+						-if(DataU.nivel_acesso=="admin" || DataU.modulos.findIndex(x=>x.referencia=="611e328ba4d34d2114830f85")!=-1)
+							li#StockId
+								.collapsible-header 
+									<i class="material-icons left">local_offer</i> 
+									|Inventario
+
+									i.material-icons.content-icon
+								.collapsible-body.activos
+									ul(class="activos")
+										-if(DataU.nivel_acesso=="admin" || DataU.funcao=="Regional Manager" || DataU.funcao=="regional_manager" || DataU.funcao=="Manager" || DataU.funcao=="Commercial" || DataU.nome=="Albertino Changule" || DataU.nome=="Luis Matine" || DataU.funcao=="Procurement" || DataU.nome=="Lino Matandalasse")
+											li.sidebarbackgr
+												a(href="/stock_item/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">local_offer</i> Artigos
+										-if(false)
+											li.sidebarbackgr
+												a(href="/purchase_order/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">assignment</i> P.O.
+										li.sidebarbackgr
+											a(href="/stock_request/home", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">format_list_numbered</i> Inventario
+										-if(DataU.nivel_acesso=="admin" || DataU.funcao=="Warehouse Manager" || (DataU.funcao == "Commercial" && DataU.departamento_id == "611e45e68cd71c1f48cf45bd"))
+										-if(false)
+											li.sidebarbackgr
+												a(href="/cliente/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">local_shipping</i> <span data-i18n="demo.menu.cliente"></span>
+						li#tanqueId.hide
+							.collapsible-header <i class="material-icons left">local_gas_station</i> Tanque
+							.collapsible-body.activos
+								ul(class="activos ")
+									li.sidebarbackgr
+										a(href="/tanque", class="activos", style="line-height:25px;font-size:18px") <i class="material-icons left">search</i>Insp Pre-Utilizacao
+						-if(true)
+							li#equipamentoId.hide
+								.collapsible-header <i class="material-icons left">remove_circle_outline</i> Em desuso
+								.collapsible-body.activos
+									ul(class="activos ",)
+											li.sidebarbackgr
+												a(href="/ferramenta", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">build</i> Oficina
+											if(true)
+												li.sidebarbackgr
+													a(href="/epi", class="activos", style="line-height:20px;font-size:12px") <i class="material-icons left">history</i> Histórico
+						-if(DataU.nivel_acesso=="admin" || DataU.modulos.findIndex(x=>x.referencia=="611e49e18cd71c1f48cf45c3")!=-1 || DataU.funcao_id=="627e49eacba3d2105c26ed35" || DataU.nome=="Leonardo Rungo" || DataU.nome=="Neila Cassam" || DataU.funcao=="regional_manager" || DataU.funcao=="Manager")
+							li#reportersId
+								.collapsible-header <i class="material-icons left">library_books</i>
+									|<span data-i18n="demo.po_menu.relatorio"></span>
+
+									i.material-icons.content-icon
+								.collapsible-body.activos
+									ul(class="activos")
+										-if(DataU.funcao!="Manager" && DataU.funcao!="Project")
+											li.sidebarbackgr
+												a(href="/mensagem/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">drive_eta</i> <span data-i18n="demo.menu.viaturas"></span>
+										-if(DataU.nivel_acesso=="admin" || DataU.funcao=="Warehouse Manager" || DataU.funcao=="regional_manager" || DataU.nome=="Hamilton Sitoe" || DataU.funcao=="Supervisor"  || DataU.funcao=="Regional Manager" || DataU.nome=="Neila Cassam" )	
+											li.sidebarbackgr#warehouse_report
+												a( class="activos pointer", style="line-height:25px;font-size:12px") <i class="material-icons left">local_offer</i> Inventario
+										-if( DataU.nome!="Leonardo Rungo" || DataU.funcao!="Manager")
+											li.sidebarbackgr
+												a(href="/manutencao/maintenancereports", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">build</i> <span data-i18n="demo.manutencao_form.maintenance"></span>
+										-if(DataU.funcao!="Manager" && DataU.funcao!="Project")
+											li.sidebarbackgr
+												a(href="/dashboard/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">dashboard</i> Dashboard
+							// -if(DataU.nome=="Ernest Mckay")
+						// 	li#financasId
+						// 		.collapsible-header <i class="material-icons left">attach_money</i> <span data-i18n="demo.menu.financas"></span>
+						// 		.collapsible-body.activos
+						// 			ul(class="activos ")
+						// 				li.sidebarbackgr
+						// 					a(href="/pettycash/menupettycash", class="activos", style="line-height:25px;font-size:15px") <i class="material-icons left">card_membership</i> Petty Cash
+						-if(DataU.nivel_acesso=="admin")
+							li#utilizadorId
+								.collapsible-header <i class="material-icons left">people</i> <span data-i18n="demo.menu.utilizador"></span>
+								.collapsible-body.activos
+									ul(class="activos ")
+											li.sidebarbackgr
+												a(href="/utilizador/", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">people</i> <span data-i18n="demo.menu.utilizadores"></span>
+								.collapsible-body.activos
+						-if(DataU.nivel_acesso=="admin")
+							li#adminsession
+								.collapsible-header <i class="material-icons left">work</i> <span data-i18n="demo.menu.configr"></span>
+								.collapsible-body.activos
+									ul(class="activos ")
+										li.sidebarbackgr
+											a(href="/sisadmin", class="activos", style="line-height:25px;font-size:12px") <i class="material-icons left">lock_open</i> <span data-i18n="demo.menu.configr"></span>
+					p#time.center
+				.row#main(style="width:auto;margin-left:280px; margin-top:120px; margin-right:10px; margin-bottom:60px ")
+					//- .principal(style="position:absolute; ")
+					//- button(class="openbtn hide-on-med-and-up",onclick="openNav()") ☰
+					block content
+				//- footer.center-align.bold
+				//- 	.container.white(style="color:#fff !important; text-align:center !important") COMSERV © #{new Date().getFullYear()}<i class="hide-on-small-only", style="font-size:14px !important; display: inline"> todos direitos reservados </i>
+			div(id="msg_modal_", class="modal", style="width: 60% !important")
+				div(class="modal-content")
+					h4 Mensagem do servidor
+					p #{msg_modal}
+
+			if msg_toast
+				script.
+					Materialize.toast('#{msg_toast}', 4000, 'rounded');
+
+			//- if msg_modal
+			//- 	script.
+			//- 		$('#msg_modal_').openModal();
+		+modals()
+		//- script(src='loader.js')
+		script.
+			$(".button-collapse").sideNav();
+			$(document).ready(function(){ 
+			Materialize.updateTextFields();
+			openNav();closeNav();
+			})
+			
+			//- function openNav(){
+			//- document.getElementById("mySidebar").style.width = "250px";
+			//- document.getElementById("mySidebar").style.marginTop = "120px";
+			//- document.getElementById("mySidebar").style.position = "fixed";
+			//- document.getElementById("main").style.marginLeft = "250px";
+			//- }
+			//- function closeNav(){
+			//- document.getElementById("mySidebar").style.width = "0"
+			//- document.getElementById("main").style.marginLeft= "0"}
+			//- setInterval(function(){
+			//- 	updateLayout();
+			//- }, 100);
+			//- $(window).resize(updateLayout);
+			//- function updateLayout(){
+			//- 	if($("main").height() + $("nav").height() + $("footer").height() > ($(window).height() - 80)){
+			//- 		$("footer").css("position", "static");
+			//- 		$("footer").css("width", "100%");
+			//- 	} else {
+			//- 		$("footer").css("position", "absolute");
+			//- 		$("footer").css("width", "inherit");
+			//- 	}
+			//- }
+			$('.datepicker').pickadate({
+				selectMonths: true, // Creates a dropdown to control month
+				selectYears: 15 // Creates a dropdown of 15 years to control year
+			});
+
+			$('#voltar-btn').click(function(){
+				window.history.back();
+			})
+
+			$('a.block-menu').mouseover(function(){
+			$(this).find('i').css('font-size', '140px');
+			$(this).find('figcaption').css('font-size', '21px');
+			$(this).find('figcaption').css('top', '-5px');
+			$(this).find('figcaption').css('letter-spacing', '3px');
+			})
+
+			$('a.block-menu').mouseout(function(){
+				$(this).find('i').css('font-size', '120px');
+				$(this).find('figcaption').css('font-size', '18px');
+				$(this).find('figcaption').css('top', '10px');
+				$(this).find('figcaption').css('letter-spacing', '0px');
+			})
+			//- window.onload=function(){
+			//- document.getElementById("loading").fadeIn().delay(3000).fadeOut();
+			//- }
+			//- $(document).ready(function(){
+			//- $("#viaturaId").addClass("activarAzul")
+			//- });
+
+			//- $('.perfil').click(function(){
+			//- 		$("#perfil_modal").openModal();
+			//- 	})
+		block js

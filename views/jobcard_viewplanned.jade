@@ -1,0 +1,1156 @@
+extends layout
+block content
+	.row
+		-if(Jobcards[0].ttnumber_status == "New")
+			div(class="fixed-action-btn horizontal fixed-add-bottom")
+				a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/new") <i class=" activarAzul material-icons">reply</i>
+		-else
+			-if(Jobcards[0].ttnumber_status == "In Progress")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/inprogress") <i class=" activarAzul material-icons">reply</i>
+			-else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/complete") <i class=" activarAzul material-icons">reply</i>
+		form(id="formulario2", method="POST")
+			ul(id="progressbar2" style="margin-bottom:0px")
+				li.jobcardinfoIcon(class="active" style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.basicinfo"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/siteinfo.png" style="width:20px">
+				li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.cliente"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/profile3.png" style="width:20px">
+				if(Jobcards[0].geolocationJobcardInfo.length != 0)
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.travel"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/infotravel.png" style="width:20px">
+				if(Jobcards[0].jobcard_analisederisco != undefined)
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.analiseRisco"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/infotravel.png" style="width:20px">	
+				if(Jobcards[0].jobcard_analisederiscoAmbiental != undefined)
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.analiseRiscoAmbiental.riscoAmbiental"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/infotravel.png" style="width:20px">			
+				if(Jobcards[0].generatorArrayJobcard.length != 0)
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.gerador"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/generator1.png" style="width:20px">
+				if(Jobcards[0].jobcard_credelecinfo.length != 0)
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.detalhesenergia"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/electricity.png" style="width:20px">
+				if(Jobcards[0].equipamentoArrayJobcard.length != 0)
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.repair"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/eqrepair.png" style="width:20px">
+				if(Jobcards[0].sparesArrayJobcard.length != 0)
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.spare"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/boxspares.png" style="width:20px">
+				-if((JSON.stringify(Jobcards[0].jobcardsignage) != "{}") || (JSON.stringify(Jobcards[0].jobcardcontainer) != "{}") || (JSON.stringify(Jobcards[0].jobcardmast) != "{}") || (JSON.stringify(Jobcards[0].jobcardcleaning) != "{}") || (JSON.stringify(Jobcards[0].jobcardlocks) != "{}") || (JSON.stringify(Jobcards[0].jobcardenvironmental) != "{}") || (JSON.stringify(Jobcards[0].jobcardfallarrest) != "{}") || (JSON.stringify(Jobcards[0].jobcardgeneratorinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardedBoardinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardelectricalinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardrectifierinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardbatterybanksinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardaircondinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardantennasinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardeainfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardtxinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardvsatinfo) != "{}") || (Jobcards[0].jobcardphotoinfo.length != 0) || (JSON.stringify(Jobcards[0].jobcardconcernsinfo) != "{}"))
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.addinfo"></span></span> <span class="hide-on-med-and-up"> <img class="hide-on-med-and-up" src="/img/addinfo.png" style="width:20px">
+					li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.photo"></span></span> <span class="hide-on-med-and-up"> <img class="hide-on-med-and-up" src="/img/photo.png" style="width:20px">
+				li.jobcardinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.audittrail"></span></span> <span class="hide-on-med-and-up"> <img class="hide-on-med-and-up" src="/img/audittrail.png" style="width:20px">
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.manutencao_form.basicinfo"></span>
+				.row#approvalinfo(data-user-new="#{Jobcards[0]._id}" detalhessession="#{NomeSession}" style="margin-bottom:0px" datajobtype="#{Jobcards[0].jobcard_jobtype}" detalhesjobcard="#{DadosJobcard}" detalhessiteinfo="#{SiteInfo}" detalhescall="#{JSON.stringify(Jobcards[0].jobcard_call)}" todosjobcards="#{DadosJobcards}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_cod") <span data-i18n="demo.manutencao_form.codigo"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_cod", readonly, value="#{Jobcards[0].jobcard_cod}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_ttnumber") <span data-i18n="demo.ttnumber_form.ttnumber"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_ttnumber", id="jobcard_ttnumber", value="#{Jobcards[0].jobcard_ttnumber}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_regiao") <span data-i18n="demo.manutencao_form.regiao"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_regiao", readonly, value="#{Jobcards[0].jobcard_regiao}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_jobtype") <span data-i18n="demo.manutencao_form.jobtype"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_jobtype", readonly, value="#{Jobcards[0].jobcard_jobtype}")
+				.row(style="margin-bottom:0px")
+					-if(Jobcards[0].jobcard_sitedeparturedate != undefined)
+						.col.s12.m6.jobcard_healthsafety11(style="margin-top:2px")
+							label <span data-i18n="demo.manutencao_form.healthsafety"></span>
+							select.browser-default(name="jobcard_healthsafety1" id = "jobcard_healthsafety1")
+								option(value="" disabled) Escolha a opção
+								option(value="#{Jobcards[0].jobcard_healthsafety}" selected) #{Jobcards[0].jobcard_healthsafety}
+					-if((Jobcards[0].jobcard_sitedeparturedate != undefined) && (Jobcards[0].jobcard_healthsafety == "Yes"))
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="jobcard_hsreason1") <span data-i18n="demo.manutencao_form.hsreason"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_hsreason1" ,name="jobcard_hsreason1", value="#{Jobcards[0].jobcard_hsreason}")
+				h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.tecnico"></span>
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_tecniconome") <span data-i18n="demo.manutencao_form.tecniconome"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_tecniconome", readonly, value="#{Jobcards[0].jobcard_tecniconome}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_cell") Cell
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_cell", readonly, value="#{Jobcards[0].jobcard_cell}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_linemanager") Line Manager
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_linemanager", readonly, value="#{Jobcards[0].jobcard_linemanager}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_linemanagercell") Line Manager
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_linemanagercell", readonly, value="#{Jobcards[0].jobcard_linemanagercell}")
+				h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.reporte"></span>
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_loggedby") <span data-i18n="demo.manutencao_form.loggedby"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_loggedby", readonly, value="#{Jobcards[0].jobcard_loggedby}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_planneddate") <span data-i18n="demo.manutencao_form.planneddate"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_planneddate", readonly, value="#{Jobcards[0].jobcard_planneddate}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_quotacao") <span data-i18n="demo.manutencao_form.quotacao"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,name="jobcard_quotacao", id="jobcard_quotacao", value="#{Jobcards[0].jobcard_quotacao}")
+				//- input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.cliente"></span>
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_clientenome") <span data-i18n="demo.manutencao_form.clientenome"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_clientenome", readonly, value="#{Jobcards[0].jobcard_clientenome}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="jobcard_clientebranch") <span data-i18n="demo.manutencao_form.clientebranch"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_clientebranch", readonly, value="#{Jobcards[0].jobcard_clientebranch}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field
+						label(for="jobcard_clientetelefone") <span data-i18n="demo.manutencao_form.clientetelefone"></span>
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_clientetelefone", readonly, value="#{Jobcards[0].jobcard_clientetelefone}")
+					.col.s12.m6.input-field
+						label(for="jobcard_site") Site
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c", name="jobcard_site", readonly, value="#{Jobcards[0].jobcard_site}")
+				//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				//- input(type="button", name="next", class="next action-button", value="Next >>")
+			if(Jobcards[0].geolocationJobcardInfo.length != 0)
+				fieldset(style="padding:25px; margin-top:10px")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.travel"></span>
+					if(Jobcards[0].jobcard_tecarrivaldate != undefined)
+						.row.mostrartabela1#recolherdados2(detalhejobcard="#{DadosJobcards}" detalhesarmazens="#{DadosArmazens}")
+							table.m.responsive-table.bordered.striped
+								thead
+									tr.selmecAzul
+										th <span data-i18n="demo.manutencao_form.data"></span>
+										th <span data-i18n="demo.manutencao_form.time"></span>
+										th <span data-i18n="demo.manutencao_form.duration"></span>
+										th <span data-i18n="demo.manutencao_form.accao"></span>
+								tbody
+									-if(Jobcards[0].jobcard_tecarrivaldate != undefined)
+										tr.highlight(style="font-family:;color:#12375c")
+											td #{Jobcards[0].jobcard_tecarrivaldate}
+											td #{Jobcards[0].jobcard_tecarrivaltime}
+											td -
+											td <span data-i18n="demo.manutencao_form.accao1"></span>
+									-if(Jobcards[0].jobcard_sitearrivaldate != undefined)
+										tr.highlight(style="font-family:;color:#12375c")
+											td #{Jobcards[0].jobcard_sitearrivaldate}
+											td #{Jobcards[0].jobcard_sitearrivaltime}
+											td #{Jobcards[0].jobcard_tecarrivalduration}
+											td <span data-i18n="demo.manutencao_form.accao2"></span>
+									-if(Jobcards[0].jobcard_sitedeparturedate != undefined)
+										tr.highlight(style="font-family:;color:#12375c")
+											td #{Jobcards[0].jobcard_sitedeparturedate}
+											td #{Jobcards[0].jobcard_sitedeparturetime}
+											td #{Jobcards[0].jobcard_arrivaldepartureduration}
+											td <span data-i18n="demo.manutencao_form.accao3"></span>
+					//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					input.mostrarDetalhesMapa(type="button", name="submit", class="submit action-button", data-user-new="#{Jobcards[0]._id}", datagpsinfo = "#{JSON.stringify(Jobcards[0].geolocationJobcardInfo)}",value="See Map" style="width:180px")
+					//- input.carregarGeradoresJobcard(type="button", name="next", class="next action-button", value="Next >>")
+
+			if( Jobcards[0].jobcard_analisederisco != undefined)
+				fieldset(style="padding:25px; margin-top:10px")
+					h3(class="fs-title" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.analiseRisco"></span>
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk1"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk1=="ok")
+								input.bom(type="radio" id="jobcard_risk1ok" name="jobcard_risk1"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk1ok" name="jobcard_risk1"  value="ok")
+							label(for="jobcard_risk1ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk1=="not ok")
+								input.mau(type="radio", id="jobcard_risk1notok", name='jobcard_risk1', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk1notok", name='jobcard_risk1', value="not ok")
+							label(for="jobcard_risk1notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk1=="na")
+								input.moderado(type="radio", id="jobcard_risk1na", name='jobcard_risk1', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk1na", name='jobcard_risk1', value="na")
+							label(for="jobcard_risk1na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk2"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk2=="ok")
+								input.bom(type="radio" id="jobcard_risk2ok" name="jobcard_risk2"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk2ok" name="jobcard_risk2"  value="ok")
+							label(for="jobcard_risk2ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk2=="not ok")
+								input.mau(type="radio", id="jobcard_risk2notok", name='jobcard_risk2', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk2notok", name='jobcard_risk2', value="not ok")
+							label(for="jobcard_risk2notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk2=="na")
+								input.moderado(type="radio", id="jobcard_risk2na", name='jobcard_risk2', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk2na", name='jobcard_risk2', value="na")
+							label(for="jobcard_risk2na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk3"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk3=="ok")
+								input.bom(type="radio" id="jobcard_risk3ok" name="jobcard_risk3"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk3ok" name="jobcard_risk3"  value="ok")
+							label(for="jobcard_risk3ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk3=="not ok")
+								input.mau(type="radio", id="jobcard_risk3notok", name='jobcard_risk3', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk3notok", name='jobcard_risk3', value="not ok")
+							label(for="jobcard_risk3notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk3=="na")
+								input.moderado(type="radio", id="jobcard_risk3na", name='jobcard_risk3', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk3na", name='jobcard_risk3', value="na")
+							label(for="jobcard_risk3na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk4"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk4=="ok")
+								input.bom(type="radio" id="jobcard_risk4ok" name="jobcard_risk4"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk4ok" name="jobcard_risk4"  value="ok")
+							label(for="jobcard_risk4ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk4=="not ok")
+								input.mau(type="radio", id="jobcard_risk4notok", name='jobcard_risk4', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk4notok", name='jobcard_risk4', value="not ok")
+							label(for="jobcard_risk4notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk4=="na")
+								input.moderado(type="radio", id="jobcard_risk4na", name='jobcard_risk4', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk4na", name='jobcard_risk4', value="na")
+							label(for="jobcard_risk4na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk5"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk5=="ok")
+								input.bom(type="radio" id="jobcard_risk5ok" name="jobcard_risk5"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk5ok" name="jobcard_risk5"  value="ok")
+							label(for="jobcard_risk5ok") Sim 	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk5=="not ok")
+								input.mau(type="radio", id="jobcard_risk5notok", name='jobcard_risk5', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk5notok", name='jobcard_risk5', value="not ok")
+							label(for="jobcard_risk5notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk5=="na")
+								input.moderado(type="radio", id="jobcard_risk5na", name='jobcard_risk5', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk5na", name='jobcard_risk5', value="na")
+							label(for="jobcard_risk5na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk6"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk6=="ok")
+								input.bom(type="radio" id="jobcard_risk6ok" name="jobcard_risk6"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk6ok" name="jobcard_risk6"  value="ok")
+							label(for="jobcard_risk6ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk6=="not ok")
+								input.mau(type="radio", id="jobcard_risk6notok", name='jobcard_risk6', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk6notok", name='jobcard_risk6', value="not ok")
+							label(for="jobcard_risk6notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk6=="na")
+								input.moderado(type="radio", id="jobcard_risk6na", name='jobcard_risk6', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk6na", name='jobcard_risk6', value="na")
+							label(for="jobcard_risk6na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk7"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk7=="ok")
+								input.bom(type="radio" id="jobcard_risk7ok" name="jobcard_risk7"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk7ok" name="jobcard_risk7"  value="ok")
+							label(for="jobcard_risk7ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk7=="not ok")
+								input.mau(type="radio", id="jobcard_risk7notok", name='jobcard_risk7', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk7notok", name='jobcard_risk7', value="not ok")
+							label(for="jobcard_risk7notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk7=="na")
+								input.moderado(type="radio", id="jobcard_risk7na", name='jobcard_risk7', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk7na", name='jobcard_risk7', value="na")
+							label(for="jobcard_risk7na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk8"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk8=="ok")
+								input.bom(type="radio" id="jobcard_risk8ok" name="jobcard_risk8"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk8ok" name="jobcard_risk8"  value="ok")
+							label(for="jobcard_risk8ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk8=="not ok")
+								input.mau(type="radio", id="jobcard_risk8notok", name='jobcard_risk8', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk8notok", name='jobcard_risk8', value="not ok")
+							label(for="jobcard_risk8notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk8=="na")
+								input.moderado(type="radio", id="jobcard_risk8na", name='jobcard_risk8', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk8na", name='jobcard_risk8', value="na")
+							label(for="jobcard_risk8na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk9"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk9=="ok")
+								input.bom(type="radio" id="jobcard_risk9ok" name="jobcard_risk9"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk9ok" name="jobcard_risk9"  value="ok")
+							label(for="jobcard_risk9ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk9=="not ok")
+								input.mau(type="radio", id="jobcard_risk9notok", name='jobcard_risk9', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk9notok", name='jobcard_risk9', value="not ok")
+							label(for="jobcard_risk9notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk9=="na")
+								input.moderado(type="radio", id="jobcard_risk9na", name='jobcard_risk9', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk9na", name='jobcard_risk9', value="na")
+							label(for="jobcard_risk9na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk10"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk10=="ok")
+								input.bom(type="radio" id="jobcard_risk10ok" name="jobcard_risk10"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk10ok" name="jobcard_risk10"  value="ok")
+							label(for="jobcard_risk10ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk10=="not ok")
+								input.mau(type="radio", id="jobcard_risk10notok", name='jobcard_risk10', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk10notok", name='jobcard_risk10', value="not ok")
+							label(for="jobcard_risk10notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk10=="na")
+								input.moderado(type="radio", id="jobcard_risk10na", name='jobcard_risk10', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk10na", name='jobcard_risk10', value="na")
+							label(for="jobcard_risk10na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk11"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk11=="ok")
+								input.bom(type="radio" id="jobcard_risk11ok" name="jobcard_risk11"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk11ok" name="jobcard_risk11"  value="ok")
+							label(for="jobcard_risk11ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk11=="not ok")
+								input.mau(type="radio", id="jobcard_risk11notok", name='jobcard_risk11', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk11notok", name='jobcard_risk11', value="not ok")
+							label(for="jobcard_risk11notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk11=="na")
+								input.moderado(type="radio", id="jobcard_risk11na", name='jobcard_risk11', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk11na", name='jobcard_risk11', value="na")
+							label(for="jobcard_risk11na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk12"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk12=="ok")
+								input.bom(type="radio" id="jobcard_risk12ok" name="jobcard_risk12"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk12ok" name="jobcard_risk12"  value="ok")
+							label(for="jobcard_risk12ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk12=="not ok")
+								input.mau(type="radio", id="jobcard_risk12notok", name='jobcard_risk12', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk12notok", name='jobcard_risk12', value="not ok")
+							label(for="jobcard_risk12notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk12=="na")
+								input.moderado(type="radio", id="jobcard_risk12na", name='jobcard_risk12', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk12na", name='jobcard_risk12', value="na")
+							label(for="jobcard_risk12na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk13"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk13=="ok")
+								input.bom(type="radio" id="jobcard_risk1ok" name="jobcard_risk13"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk1ok" name="jobcard_risk13"  value="ok")
+							label(for="jobcard_risk13ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk13=="not ok")
+								input.mau(type="radio", id="jobcard_risk13notok", name='jobcard_risk13', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk13notok", name='jobcard_risk13', value="not ok")
+							label(for="jobcard_risk13notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk13=="na")
+								input.moderado(type="radio", id="jobcard_risk13na", name='jobcard_risk13', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk13na", name='jobcard_risk13', value="na")
+							label(for="jobcard_risk13na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk14"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk14=="ok")
+								input.bom(type="radio" id="jobcard_risk14ok" name="jobcard_risk14"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk14ok" name="jobcard_risk14"  value="ok")
+							label(for="jobcard_risk14ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk14=="not ok")
+								input.mau(type="radio", id="jobcard_risk14notok", name='jobcard_risk14', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk14notok", name='jobcard_risk14', value="not ok")
+							label(for="jobcard_risk14notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk14=="na")
+								input.moderado(type="radio", id="jobcard_risk14na", name='jobcard_risk14', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk14na", name='jobcard_risk14', value="na")
+							label(for="jobcard_risk14na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk15"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk15=="ok")
+								input.bom(type="radio" id="jobcard_risk51ok" name="jobcard_risk15"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk15ok" name="jobcard_risk15"  value="ok")
+							label(for="jobcard_risk15ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk15=="not ok")
+								input.mau(type="radio", id="jobcard_risk15notok", name='jobcard_risk15', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk15notok", name='jobcard_risk15', value="not ok")
+							label(for="jobcard_risk15notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk15=="na")
+								input.moderado(type="radio", id="jobcard_risk15na", name='jobcard_risk15', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk15na", name='jobcard_risk15', value="na")
+							label(for="jobcard_risk15na") N/A
+					
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk16"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk16=="ok")
+								input.bom(type="radio" id="jobcard_risk16ok" name="jobcard_risk16"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk16ok" name="jobcard_risk16"  value="ok")
+							label(for="jobcard_risk16ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk16=="not ok")
+								input.mau(type="radio", id="jobcard_risk16notok", name='jobcard_risk16', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk16notok", name='jobcard_risk16', value="not ok")
+							label(for="jobcard_risk16notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk1=="na")
+								input.moderado(type="radio", id="jobcard_risk16na", name='jobcard_risk16', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk16na", name='jobcard_risk16', value="na")
+							label(for="jobcard_risk16na") N/A
+					
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk17"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk17=="ok")
+								input.bom(type="radio" id="jobcard_risk17ok" name="jobcard_risk17"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk17ok" name="jobcard_risk17"  value="ok")
+							label(for="jobcard_risk17ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk17=="not ok")
+								input.mau(type="radio", id="jobcard_risk17notok", name='jobcard_risk17', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk17notok", name='jobcard_risk17', value="not ok")
+							label(for="jobcard_risk17notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk17=="na")
+								input.moderado(type="radio", id="jobcard_risk17na", name='jobcard_risk17', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk17na", name='jobcard_risk17', value="na")
+							label(for="jobcard_risk17na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk18"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk18=="ok")
+								input.bom(type="radio" id="jobcard_risk18ok" name="jobcard_risk18"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk18ok" name="jobcard_risk18"  value="ok")
+							label(for="jobcard_risk18ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk18=="not ok")
+								input.mau(type="radio", id="jobcard_risk18notok", name='jobcard_risk18', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk18notok", name='jobcard_risk18', value="not ok")
+							label(for="jobcard_risk18notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk18=="na")
+								input.moderado(type="radio", id="jobcard_risk18na", name='jobcard_risk18', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk18na", name='jobcard_risk18', value="na")
+							label(for="jobcard_risk18na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRisco.risk19"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk19=="ok")
+								input.bom(type="radio" id="jobcard_risk19ok" name="jobcard_risk19"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk19ok" name="jobcard_risk19"  value="ok")
+							label(for="jobcard_risk19ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk19=="not ok")
+								input.mau(type="radio", id="jobcard_risk19notok", name='jobcard_risk19', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk19notok", name='jobcard_risk19', value="not ok")
+							label(for="jobcard_risk19notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederisco.jobcard_risk19=="na")
+								input.moderado(type="radio", id="jobcard_risk19na", name='jobcard_risk19', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk19na", name='jobcard_risk19', value="na")
+							label(for="jobcard_risk19na") N/A
+
+					.row(style="margin-bottom:18px;")
+						.col.s12.m12.input-field
+							label(for="jobcard_radiocomments") <span data-i18n="demo.analiseRisco.commentario"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_radiocomments" ,name="jobcard_radiocomments" value="#{Jobcards[0].jobcard_analisederisco.jobcard_radiocomments}")
+
+			if(Jobcards[0].jobcard_analisederiscoAmbiental != undefined && Jobcards[0].jobcard_analisederiscoAmbiental.length != 0)
+				fieldset(style="padding:25px; margin-top:10px")
+					h3(class="fs-title" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.analiseRiscoAmbiental.analise_riscoAmbiental"></span>
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRiscoAmbiental.risk1"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk21=="ok")
+								input.bom(type="radio" id="jobcard_risk21ok" name="jobcard_risk21"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk21ok" name="jobcard_risk21"  value="ok")
+							label(for="jobcard_risk21ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk21=="not ok")
+								input.mau(type="radio", id="jobcard_risk21notok", name='jobcard_risk21', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk21notok", name='jobcard_risk21', value="not ok")
+							label(for="jobcard_risk21notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk21=="na")
+								input.moderado(type="radio", id="jobcard_risk21na", name='jobcard_risk21', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk21na", name='jobcard_risk21', value="na")
+							label(for="jobcard_risk21na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRiscoAmbiental.risk2"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk22=="ok")
+								input.bom(type="radio" id="jobcard_risk22ok" name="jobcard_risk22"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk22ok" name="jobcard_risk22"  value="ok")
+							label(for="jobcard_risk22ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk22=="not ok")
+								input.mau(type="radio", id="jobcard_risk22notok", name='jobcard_risk22', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk22notok", name='jobcard_risk22', value="not ok")
+							label(for="jobcard_risk22notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk22=="na")
+								input.moderado(type="radio", id="jobcard_risk22na", name='jobcard_risk22', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk22na", name='jobcard_risk22', value="na")
+							label(for="jobcard_risk22na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRiscoAmbiental.risk3"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk23=="ok")
+								input.bom(type="radio" id="jobcard_risk23ok" name="jobcard_risk23"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk23ok" name="jobcard_risk23"  value="ok")
+							label(for="jobcard_risk23ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk23=="not ok")
+								input.mau(type="radio", id="jobcard_risk23notok", name='jobcard_risk23', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk23notok", name='jobcard_risk23', value="not ok")
+							label(for="jobcard_risk23notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk23=="na")
+								input.moderado(type="radio", id="jobcard_risk23na", name='jobcard_risk23', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk23na", name='jobcard_risk23', value="na")
+							label(for="jobcard_risk23na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRiscoAmbiental.risk4"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk24=="ok")
+								input.bom(type="radio" id="jobcard_risk24ok" name="jobcard_risk24"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk24ok" name="jobcard_risk24"  value="ok")
+							label(for="jobcard_risk24ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk24=="not ok")
+								input.mau(type="radio", id="jobcard_risk24notok", name='jobcard_risk24', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk24notok", name='jobcard_risk24', value="not ok")
+							label(for="jobcard_risk24notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk24=="na")
+								input.moderado(type="radio", id="jobcard_risk24na", name='jobcard_risk24', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk24na", name='jobcard_risk24', value="na")
+							label(for="jobcard_risk24na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRiscoAmbiental.risk5"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk25=="ok")
+								input.bom(type="radio" id="jobcard_risk25ok" name="jobcard_risk25"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk25ok" name="jobcard_risk25"  value="ok")
+							label(for="jobcard_risk25ok") Sim 	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk25=="not ok")
+								input.mau(type="radio", id="jobcard_risk25notok", name='jobcard_risk25', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk25notok", name='jobcard_risk25', value="not ok")
+							label(for="jobcard_risk25notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk25=="na")
+								input.moderado(type="radio", id="jobcard_risk25na", name='jobcard_risk25', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk25na", name='jobcard_risk25', value="na")
+							label(for="jobcard_risk25na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRiscoAmbiental.risk6"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk26=="ok")
+								input.bom(type="radio" id="jobcard_risk26ok" name="jobcard_risk26"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk26ok" name="jobcard_risk26"  value="ok")
+							label(for="jobcard_risk26ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk26=="not ok")
+								input.mau(type="radio", id="jobcard_risk26notok", name='jobcard_risk26', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk26notok", name='jobcard_risk26', value="not ok")
+							label(for="jobcard_risk26notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk26=="na")
+								input.moderado(type="radio", id="jobcard_risk26na", name='jobcard_risk26', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk26na", name='jobcard_risk26', value="na")
+							label(for="jobcard_risk26na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRiscoAmbiental.risk7"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk27=="ok")
+								input.bom(type="radio" id="jobcard_risk27ok" name="jobcard_risk27"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk27ok" name="jobcard_risk27"  value="ok")
+							label(for="jobcard_risk27ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk27=="not ok")
+								input.mau(type="radio", id="jobcard_risk27notok", name='jobcard_risk27', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk27notok", name='jobcard_risk27', value="not ok")
+							label(for="jobcard_risk27notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk27=="na")
+								input.moderado(type="radio", id="jobcard_risk27na", name='jobcard_risk27', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk27na", name='jobcard_risk27', value="na")
+							label(for="jobcard_risk27na") N/A
+
+					.row(style="margin-bottom:18px;")
+						h3(class="fs-title" style="margin-bottom:15px;") <span data-i18n="demo.analiseRiscoAmbiental.risk8"></span>
+						.col.s3.m3(style="margin-left:37px;")
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk28=="ok")
+								input.bom(type="radio" id="jobcard_risk28ok" name="jobcard_risk28"  value="ok" checked)
+							-else
+								input.bom(type="radio" id="jobcard_risk28ok" name="jobcard_risk28"  value="ok")
+							label(for="jobcard_risk28ok") Sim	
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk28=="not ok")
+								input.mau(type="radio", id="jobcard_risk28notok", name='jobcard_risk28', value="not ok" checked)
+							-else
+								input.mau(type="radio", id="jobcard_risk28notok", name='jobcard_risk28', value="not ok")
+							label(for="jobcard_risk28notok") Nao
+						.col.s3.m3
+							-if(Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_risk28=="na")
+								input.moderado(type="radio", id="jobcard_risk28na", name='jobcard_risk28', value="na" checked)
+							-else
+								input.moderado(type="radio", id="jobcard_risk28na", name='jobcard_risk28', value="na")
+							label(for="jobcard_risk28na") N/A
+
+					.row(style="margin-bottom:18px;")
+						.col.s12.m12.input-field
+							label(for="jobcard_radiocomments2") <span data-i18n="demo.analiseRiscoAmbiental.commentario"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_radiocomments2" ,name="jobcard_radiocomments2" value="#{Jobcards[0].jobcard_analisederiscoAmbiental.jobcard_radiocomments2}")
+
+
+
+			if(Jobcards[0].generatorArrayJobcard.length != 0)
+				fieldset(style="padding:25px")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.gerador"></span>
+					.row#recolherdados3(detalhesitegenerator="#{DadosSiteGenerator}")
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.manutencao_form.gerador1"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.previousgeneratorhrs"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.previousgeneratorhrsc></span></span>
+									th <span data-i18n="demo.manutencao_form.currentgeneratorhours1"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.previousrefuelhrs"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.previousrefuelhrs1></span></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.refuelreason"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.refuelreason1></span></span>
+									th
+							tbody
+								-for(var index = 0; index < Jobcards[0].generatorArrayJobcard.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_generatorname}
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_previousgeneratorhrs}
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_currentgeneratorhours}
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_previousrefuelhrs}
+										td #{Jobcards[0].generatorArrayJobcard[index].jobcard_refuelreason}
+										td
+											a.tooltipped.pointer.mostrardetalhesGenerator(style="margin-left: 25px", data-position="top", data-delay="10", datareferencia="#{Jobcards[0]._id}", data-position-new="#{index}", data-tooltip="Generator Details" datageradorarray="#{Jobcards[0].generatorArrayJobcard[index]._id}") <i class="material-icons activarVerde">info</i>
+					//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					//- input(type="button", name="next", class="next action-button", value="Next >>")
+			if(Jobcards[0].jobcard_credelecinfo.length != 0)
+				fieldset(style="padding:25px")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.detalhesenergia"></span>
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th Valor Trasacao
+									-if(Jobcards[0].jobcard_credelecinfo[0].jobcard_amount)
+										th Valor Energia
+									th <span data-i18n="demo.manutencao_form.currentkwh"></span>
+									//- th <span data-i18n="demo.manutencao_form.afterkwh"></span>
+									-if(Jobcards[0].jobcard_credelecinfo[0].jobcard_payamount)	
+										th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.amount"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.amountadded1></span></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.transactionr"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.transactionr1></span></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.credelecnr"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.credelecnr1></span></span>
+									th
+							tbody(style="margin-top:5px; margin-bottom:0px")
+								-for(var index = 0; index < Jobcards[0].jobcard_credelecinfo.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].jobcard_credelecinfo[index].jobcard_amountadded}
+										-if(Jobcards[0].jobcard_credelecinfo[index].jobcard_amount)
+											td #{Jobcards[0].jobcard_credelecinfo[index].jobcard_amount}
+										td #{Jobcards[0].jobcard_credelecinfo[index].jobcard_currentkwh}
+										//- td #{Jobcards[0].jobcard_credelecinfo[index].jobcard_kwhafter}
+										//- td #{Jobcards[0].jobcard_credelecinfo[index].jobcard_amountadded}
+										-if(Jobcards[0].jobcard_credelecinfo[index].jobcard_payamount)
+											td #{Jobcards[0].jobcard_credelecinfo[index].jobcard_payamount}
+										td #{Jobcards[0].jobcard_credelecinfo[index].jobcard_transactionr}
+										td #{Jobcards[0].jobcard_credelecinfo[index].jobcard_credelecnr}
+										td 
+											a.tooltipped.pointer.mostrardetalhesCredelecInfo(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Jobcards[0]._id}", data-array-new="#{Jobcards[0].jobcard_credelecinfo[index]._id}", data-position-new="#{index}", data-tooltip="Details of Credelec") <i class="material-icons activarVerde">info</i>
+						.col.s12.m12(style="margin-top:5px; margin-top:20px")
+							-for(var index = 0; index < Jobcards[0].jobcard_credelecinfo.length; index++)
+								-if(Jobcards[0].jobcard_credelecinfo[index].jobcard_itemphoto)
+									img.verimagem(style="width:100px; margin: 20px;" , src="#{Jobcards[0].jobcard_credelecinfo[index].jobcard_itemphoto}")
+					//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					//- input(type="button", name="next", class="next action-button", value="Next >>")
+			if(Jobcards[0].equipamentoArrayJobcard.length != 0)
+				fieldset(style="padding:25px;")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.repair"></span>
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.equiptype"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.equiptype1></span></span>
+									th <span data-i18n="demo.manutencao_form.manufacturer"></span>
+									th <span data-i18n="demo.manutencao_form.model"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.serialnumber"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.serialnumber1></span></span>
+									th
+							tbody
+								-for(var index = 0; index < Jobcards[0].equipamentoArrayJobcard.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_equiptype}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_manufacturer}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_model}
+										td #{Jobcards[0].equipamentoArrayJobcard[index].jobcard_serialnumber}
+										td
+											a.tooltipped.pointer.mostrardetalhesEquipment(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Jobcards[0]._id}", data-array-new="#{Jobcards[0].equipamentoArrayJobcard[index]._id}", data-position-new="#{index}", data-tooltip="Details of Equipment Repairs") <i class="material-icons activarVerde">info</i>
+					//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					//- input(type="button", name="next", class="next action-button", value="Next >>")
+			if(Jobcards[0].sparesArrayJobcard.length != 0)
+				fieldset(style="padding:25px;")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.spare"></span>
+					.row
+						table.m.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.manutencao_form.item"></span>
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.quantityuse"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.quantityuse1></span></span>
+									th Spare Owner
+									th <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.datauso"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.manutencao_form.data></span></span>
+									th
+							tbody
+								-for(var index = 0; index < Jobcards[0].sparesArrayJobcard.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_item}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_quantityuse}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_itemowner}
+										td #{Jobcards[0].sparesArrayJobcard[index].jobcard_datauso}
+										td
+											a.tooltipped.pointer.mostrardetalhesSpares(style="margin-left: 25px", data-position="top", data-delay="10", datareferencia="#{Jobcards[0]._id}", posicao="#{index}", data-tooltip="Details of Spare Used" dataspareusadoarray = "#{Jobcards[0].sparesArrayJobcard[index]._id}" data-user-name="#{Jobcards[0].jobcard_tecnicoid}") <i class="material-icons activarVerde">info</i>
+					//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					//- input(type="button", name="next", class="next action-button", value="Next >>")
+			-if((JSON.stringify(Jobcards[0].jobcardsignage) != "{}") || (JSON.stringify(Jobcards[0].jobcardcontainer) != "{}") || (JSON.stringify(Jobcards[0].jobcardmast) != "{}") || (JSON.stringify(Jobcards[0].jobcardcleaning) != "{}") || (JSON.stringify(Jobcards[0].jobcardlocks) != "{}") || (JSON.stringify(Jobcards[0].jobcardenvironmental) != "{}") || (JSON.stringify(Jobcards[0].jobcardfallarrest) != "{}") || (JSON.stringify(Jobcards[0].jobcardgeneratorinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardedBoardinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardelectricalinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardrectifierinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardbatterybanksinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardaircondinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardantennasinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardeainfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardtxinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardvsatinfo) != "{}") || (Jobcards[0].jobcardphotoinfo.length != 0) || (JSON.stringify(Jobcards[0].jobcardconcernsinfo) != "{}"))
+				fieldset(style="padding:25px;")
+					.row#recolherid(data_id="#{Jobcards[0]._id}")
+						-if(Jobcards[0].jobcardsignage != undefined)
+							.col.m4.s6
+								.card.hover-reveal.personalised.signageModalDetails(datajobcardsignage="#{JSON.stringify(Jobcards[0].jobcardsignage)}")
+									.card-image.waves-block
+										img.icn(src="/img/signageicon.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.signage"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardcontainer) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.containerModalDetails(datajobcardcontainer="#{JSON.stringify(Jobcards[0].jobcardcontainer)}")
+									.card-image.waves-block
+										img.icn(src="/img/containerr.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.container"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardmast) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.mastModalDetails(datajobcardmast="#{JSON.stringify(Jobcards[0].jobcardmast)}")
+									.card-image.waves-block
+										img.icn(src="/img/mast.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.mast"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardcleaning) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.cleaningModalDetails(datajobcardcleaning="#{JSON.stringify(Jobcards[0].jobcardcleaning)}")
+									.card-image.waves-block
+										img.icn(src="/img/cleanning.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.cleaning"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardlocks) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.locksModalDetails(datajobcardlocks="#{JSON.stringify(Jobcards[0].jobcardlocks)}")
+									.card-image.waves-block
+										img.icn(src="/img/security.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.locks"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardenvironmental) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.environmentalModalDetails(datajobcardenvironmental="#{JSON.stringify(Jobcards[0].jobcardenvironmental)}")
+									.card-image.waves-block
+										img.icn(src="/img/environmental.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.environmental"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardfallarrest) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.fallarrestModalDetails(datajobcardfallarrest="#{JSON.stringify(Jobcards[0].jobcardfallarrest)}")
+									.card-image.waves-block
+										img.icn(src="/img/fallarrest.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.fallarrest"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardgeneratorinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.generatorinfojobcardModalDetails(datajobcardgeneratorinfo="#{JSON.stringify(Jobcards[0].jobcardgeneratorinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/generator.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.generator"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardedBoardinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.edBoardModalDetails(datajobcardedBoardinfo="#{JSON.stringify(Jobcards[0].jobcardedBoardinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/edb.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.edBoard"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardelectricalinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.electricalModalDetails(datajobcardelectricalinfo="#{JSON.stringify(Jobcards[0].jobcardelectricalinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/electrical.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.electrical"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardrectifierinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.rectifierModalDetails(datajobcardrectifierinfo="#{JSON.stringify(Jobcards[0].jobcardrectifierinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/rectifier.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.rectifier"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardbatterybanksinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.batterybanksModalDetails(datajobcardbatterybanksinfo="#{JSON.stringify(Jobcards[0].jobcardbatterybanksinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/batterybanks.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.batterybanks"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardaircondinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.aircondModalDetails(datajobcardaircondinfo="#{JSON.stringify(Jobcards[0].jobcardaircondinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/acond.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.aircond"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardantennasinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.antennasModalDetails(datajobcardantennasinfo="#{JSON.stringify(Jobcards[0].jobcardantennasinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/antenna.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.antennas"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardeainfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.eainfoModalDetails(datajobcardeainfo="#{JSON.stringify(Jobcards[0].jobcardeainfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/acond.png" style="width:50px" )
+									.card-content
+										h6.bold EA Info
+						-if(JSON.stringify(Jobcards[0].jobcardtxinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.txinfoModalDetails(datajobcardtxinfo="#{JSON.stringify(Jobcards[0].jobcardtxinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/mast.png" style="width:50px" )
+									.card-content
+										h6.bold TX Info
+						-if(JSON.stringify(Jobcards[0].jobcardvsatinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.vsatinfoModalDetails(datajobcardvsatinfo="#{JSON.stringify(Jobcards[0].jobcardvsatinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/vsat.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.vsatinfo"></span>
+						-if(Jobcards[0].jobcardphotoinfo.length != 0)
+							.col.m4.s6
+								.card.hover-reveal.personalised.photoModalDetails(datajobcardphotoinfo="#{JSON.stringify(Jobcards[0].jobcardphotoinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/photo.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.photo"></span>
+						-if(JSON.stringify(Jobcards[0].jobcardconcernsinfo) != "{}")
+							.col.m4.s6
+								.card.hover-reveal.personalised.concernsModalDetails(datajobcardconcernsinfo="#{JSON.stringify(Jobcards[0].jobcardconcernsinfo)}")
+									.card-image.waves-block
+										img.icn(src="/img/concern.png" style="width:50px" )
+									.card-content
+										h6.bold <span data-i18n="demo.preventative_maint.concerns"></span>
+					//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					//- input(type="button", name="next", class="next action-button", value="Next >>")
+				fieldset(style="padding:25px;")
+					row(style="margin-bottom:20px")
+						.col.s12.m12.input-field
+							-for(let i=0; i<(Jobcards[0].jobcardphotoinfo.length); i++)
+								img.verimagem(style="width:100px; margin: 20px;" , src="#{Jobcards[0].jobcardphotoinfo[i]}")
+					//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					input(type="button", name="addphotoButton", id="addphotoButton", class="action-button", data-user-new="#{Jobcards[0]._id}", href="/manutencao/detalhesPhotoModal/#{Jobcards[0]._id}",value="Add Photos", style="width:180px")
+					//- input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px;")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:10px") <span data-i18n="demo.manutencao_form.audittrail"></span>
+				.row
+					table.responsive-table.bordered.striped
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.manutencao_form.responsavel"></span>
+								th <span data-i18n="demo.manutencao_form.planneddate1"></span>
+								th <span data-i18n="demo.manutencao_form.accao"></span>
+								th
+						tbody
+							-for(var index = 0; index < Jobcards[0].jobcard_audittrail.length; index++)
+								tr.highlight(style="font-family:;color:#12375c")
+									td #{Jobcards[0].jobcard_audittrail[index].jobcard_audittrailname}
+									td #{Jobcards[0].jobcard_audittrail[index].jobcard_audittraildate}
+									-if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Create TT number")
+										td <span data-i18n="demo.manutencao_form.creatett"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Accept the jobcard")
+										td <span data-i18n="demo.manutencao_form.jobcardaccepted"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Upload plan")
+										td <span data-i18n="demo.manutencao_form.uploadplan"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Arrives on site")
+										td <span data-i18n="demo.manutencao_form.sitearrival"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Update Generator Info")
+										td <span data-i18n="demo.manutencao_form.updategeninfo"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Update Credelec Info")
+										td <span data-i18n="demo.manutencao_form.updatecredinfo"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Update Jobcard")
+										td <span data-i18n="demo.manutencao_form.jobcardupdated"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Sent for approval")
+										td <span data-i18n="demo.manutencao_form.sentforapproval"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Left site")
+										td <span data-i18n="demo.manutencao_form.leavesite"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Job Card Approved")
+										td <span data-i18n="demo.manutencao_form.jobcardapproved"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Send Back")
+										td <span data-i18n="demo.manutencao_form.sentback"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Generator hours has been updated due to Generator Swopped")
+										td <span data-i18n="demo.manutencao_form.genhrsupdatedgenswopped"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Generator hours has been updated due to New Generator Installed")
+										td <span data-i18n="demo.manutencao_form.genhrsupdatednewgeninst"></span>
+									-else if ( Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Generator hours has been updated due to New Controller Replaced")
+										td <span data-i18n="demo.manutencao_form.genhrsupdatedcontrreplaced"></span>
+									-else
+										td #{Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction}
+									td
+										if(Jobcards[0].jobcard_audittrail[index].jobcard_audittrailaction == "Send Back")
+											a.tooltipped.pointer.info.mostrarrazoessendback(style="margin-left: 15px", data-position="top", data-delay="10" data-tooltip="See the reasons" detalhesrazoes="#{Jobcards[0].jobcard_razaoreprovar}") <i class="material-icons activarVerde">info</i>
+				//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if(DataU.funcao == "Call Center")
+					input.editjobcardbackoffice(type="button", name="submit", class="submit action-button", value="Update Jobcard" style="width:180px")
+					if (Jobcards[0].jobcard_controlador.length == 3)
+						input.aprovarjobcard(type="button", name="submit", class="submit action-button", value="Jobcard Done" style="width:180px" data-user-new="#{Jobcards[0]._id}" datajobtype="#{Jobcards[0].jobcard_jobtype}")
+						input.reprovarjobcard(type="button", name="submit", class="submit action-button", value="Send Back" style="width:180px" data-user-new="#{Jobcards[0]._id}" datajobtype="#{Jobcards[0].jobcard_jobtype}")
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+
+			$(".jobcardinfoIcon").click(function(e){
+				e.preventDefault();
+				$("#progressbar2 li:not(:first)").removeClass("active");
+
+				$("fieldset").hide();
+
+				// if(animating) return false;
+				// animating = true;
+				var maximo= $(this).index(".jobcardinfoIcon");
+
+			
+				for(var i=0; i<maximo; i++){
+				$("#progressbar2 li").eq((i+1)).addClass("active");
+				console.log("happme************")
+				}
+
+				console.log(maximo);
+				$("fieldset").eq(maximo).show()
+			})
+
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

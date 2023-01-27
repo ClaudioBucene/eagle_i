@@ -1,0 +1,75 @@
+.policia-text-color, label.login-form-text, i.login-form-icon{
+	color:rgba(18,55, 92, 1) !important;
+}
+
+.policia-background-color{
+	background-color: rgba(148, 150, 163, 0.5) !important;
+}
+
+.cinzento{
+	background-color: rgba(158, 158, 158, 0.3) !important;
+}
+
+button:hover{
+	font-size: larger;
+}
+label{
+	color: rgba(0, 0, 0, 0.9) !important;
+}
+
+body, html{
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	/*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+	font-family: "lato", sans-serif;
+	font-family: montserrat, arial, verdana !important;
+}
+
+body > .row{
+	width: 100%;
+	height: 90%;
+}
+
+@media screen and (max-width:688px){
+	html, body{
+		font-size: 15px !important;
+	container {
+		width: 100%
+
+		}
+	}
+}
+
+.branco-transparente{
+	background-color:rgba(255,255,255,0.6);
+}
+
+.round-border{
+	border-radius: 30px;
+	margin-bottom: 10px;
+}
+
+.block{
+	display: block;
+}
+
+input{
+	border: none !important;
+}
+
+.bold{
+	text-decoration: bold;
+}
+
+.shadow{
+	box-shadow: 5px 5px 90px rgba(0, 0, 0, 0.6), 5px 5px 90px rgba(0, 0, 0, 0.6);
+}
+
+.titulo-do-sistema{
+	font-size: 1.5em !important;
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 70%; } }

@@ -1,0 +1,81 @@
+extends layout
+block content
+	.container(style="padding-top:20px")
+		.col.s6.m3
+			.card.hover-reveal.personalised#my_stock_request
+				.card-image.waves-block
+					img.icn(src="/img/request1.png" style="width:70px" )
+				.card-content
+					h6.bold.icn1  Pedido
+		.col.s6.m3
+			.card.hover-reveal.personalised#stock_request_expediente
+				.card-image.waves-block
+					img.icn(src="/img/processando.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.expediente"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#stocks_aprovado
+				.card-image.waves-block
+					img.icn(src="/img/aprovados.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.aprovados"></span>
+		.col.m3.s6.hide
+			.card.hover-reveal.personalised#stocks_reprovado
+				.card-image.waves-block
+					img.icn(src="/img/reprovados.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.reprovados"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#stocks_finalizadoss
+				.card-image.waves-block
+					img.icn(src="/img/finalizado.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.finalizados"></span>
+		.col.s6.m3
+			.card.hover-reveal.personalised#stock_request_tecnicos
+				.card-image.waves-block
+					img.icn(src="/img/arquivo1.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 Utilizadores
+		.col.s6.m3
+			.card.hover-reveal.personalised#stock_return_tecnicos
+				.card-image.waves-block
+					img.icn(src="/img/stock_returnn.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.retornados"></span>
+		-if(DataU.funcao_id=="627e49eacba3d2105c26ed35" || DataU.funcao_id=="611e3b3d6ed713019c50cf79" || DataU.funcao_id=="611e2b8cf9b1b31cd868a30c" || DataU.departamento_id=="61728d3d07fec02d40e0ab3f" || DataU.nivel_acesso=="admin" || DataU.nome=="Hamilton Sitoe" || DataU.funcao=="Supervisor"  || DataU.funcao=="Regional Manager" || DataU.funcao=="regional_manager"|| DataU.funcao=="Manager" || DataU.nome=="Neila Cassam" || DataU.nome=="William Goldswain"  || DataU.nome=="Celeste Sambo"  || DataU.nome=="Marilia Casquinha")
+			.col.s6.m3
+				.card.hover-reveal.personalised#armazzens
+					.card-image.waves-block
+						img.icn(src="/img/armazens.png" style="width:70px" data-activates='dropdown2')
+					.card-content
+						h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.armazem"></span>
+		-if(DataU.nivel_acesso=="admin" || DataU.funcao=="Manager" || DataU.nome=="Hamilton Sitoe")
+			.col.s6.m3
+				.card.hover-reveal.personalised#track_prudot
+					.card-image.waves-block
+						img.icn(src="/img/tracking_packet.png" style="width:70px" data-activates='dropdown2')
+					.card-content
+						h6.bold.icn1 <span data-i18n="demo.Stock_request_home_menu.moviment"></span>
+		-if(DataU.nivel_acesso=="admin")
+			.col.s6.m3.hide
+				.card.hover-reveal.personalised#warehouse_report
+					.card-image.waves-block
+						img.icn(src="/img/report2.png" style="width:70px" data-activates='dropdown2')
+					.card-content
+						h6.bold.icn1 <span data-i18n="demo.po_menu.relatoriobb"></span>
+		
+
+		block js
+			script(type="text/javascript" src="/js/jquery.mask.js")
+			script.
+				setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";
+				document.getElementByClassName("capitalize").style.class="pequeno";
+				}
+				}, 50);

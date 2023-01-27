@@ -1,0 +1,67 @@
+extends layout 
+block content
+	div(class="modal-content" style="padding-top:20px")
+		h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.detalhesgerador"></span>
+		div(class="row center")
+			form.jobcardtecnicoform(class="col s12")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6(style="margin-top:2px")
+						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.generatortype></span>
+						select.browser-default(name="siteinfo_generatortype", id="siteinfo_generatortype")
+							option(value="" disabled selected selmecVerde) Escolha uma opção
+							option(value="Cummins") Cummins
+							option(value="Deutz") Deutz
+							option(value="Mitsubishi") Mitsubishi
+							option(value="Perkins") Perkins
+							option(value="Volvo") Volvo
+							option(value="Yanmar") Yanmar
+							option(value="Perkins AGG") Perkins AGG
+							option(value="Himoinsa") Himoinsa
+					.col.s12.m6.input-field(style="margin-top:22px")
+						label(for="siteinfo_generatoroutputkw") <span data-i18n="demo.site_info.outputkw"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatoroutputkw" ,name="siteinfo_generatoroutputkw")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="siteinfo_generatormodelno") <span data-i18n="demo.site_info.modelno"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatormodelno" ,name="siteinfo_generatormodelno")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="siteinfo_generatorengineserialnumber") <span data-i18n="demo.site_info.engineserialnumber"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatorengineserialnumber" ,name="siteinfo_generatorengineserialnumber")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6(style="margin-top:2px")
+						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.enginecapacity></span>
+						select.browser-default(name="siteinfo_generatorenginecapacity", id="siteinfo_generatorenginecapacity")
+							option(value="" disabled selected selmecVerde) Escolha uma opção
+							option(value="2 Cylinder") 2 Cylinder
+							option(value="4 Cylinder") 4 Cylinder
+							option(value="4 Cylinder Turbo") 4 Cylinder Turbo
+							option(value="6 Cylinder") 6 Cylinder
+					.col.s12.m6(style="margin-top:2px")
+						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.startertype></span>
+						select.browser-default(name="siteinfo_generatorstartertype", id="siteinfo_generatorstartertype", style="font-family:")
+							option(value="" disabled selected selmecVerde) Escolha uma opção
+							option(value="Bosch") Bosch
+							option(value="Bosch 2 Hole") Bosch 2 Hole
+							option(value="Bosch 3 Hole") Bosch 3 Hole
+							option(value="Cummins") Cummins
+							option(value="Denso") Denso
+							option(value="Perkins") Perkins
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:22px")
+						label(for="siteinfo_generatorfuelconsumption") <span data-i18n="demo.site_info.fuelconsumption"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatorfuelconsumption" ,name="siteinfo_generatorfuelconsumption")
+				button(type="button", id="jobcardequipmentproject_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

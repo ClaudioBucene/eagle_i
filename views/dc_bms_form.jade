@@ -1,0 +1,65 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold BMS for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12
+						label(for="bms_tablet_alarm") 
+						h6 Visual check on BMS tablet alarm logs
+					.col.s6
+						input.bom(type="radio" id="bms_tablet_alarm_ok" name="bms_tablet_alarm" checked="#{DC.bms_tablet_alarm}"=='ok'? true:false value="ok")
+						label(for="bms_tablet_alarm_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="bms_tablet_alarm_no",  name='bms_tablet_alarm', checked="#{DC.bms_tablet_alarm}"=='not ok'? true:false value="not ok")
+						label(for="bms_tablet_alarm_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="bms_tablet_alarm_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="bms_tablet_alarm_comment",value="#{DC.bms_tablet_alarm_comment?DC.bms_tablet_alarm_comment:''}",  identifica="#{DC_insp._id}" ,name="bms_tablet_alarm_comment")				
+
+
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.bms_tablet_alarm
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_bms_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

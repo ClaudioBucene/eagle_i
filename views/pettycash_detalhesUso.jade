@@ -1,0 +1,94 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="post", style="color:#12375c;")
+			h3.center-align.selmecAzul.bold(style="font-size: 1.5em; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.pettycash_home.detalhesuso"></span>
+			.row(style="margin-bottom:0px")
+				.input-field.col.s12.m6(style="margin-top:2px")
+					label(for="viewpettycash_nome") <span data-i18n="demo.pettycash_home.nome"></span>
+					input(id="viewpettycash_nome", autocomplete="off",readonly, type="text", name="viewpettycash_nome", value="#{nomeUser}")
+				.input-field.col.s12.m6(style="margin-top:2px")
+					label(for="viewpettycash_saldoactual") <span data-i18n="demo.pettycash_home.saldoactual"></span>
+					input(type="text", id="viewpettycash_saldoactual", readonly, name="viewpettycash_saldoactual", value="#{saldoUser}")
+			.row(style="margin-bottom:5px")
+				-var meses = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept','Oct', 'Nov', 'Dec'];
+				.col.s12.m2
+					label(for="mesfrom") <span data-i18n="demo.pettycash_home.mes"></span>
+					select.browser-default(name="mesfrom", id="mesfrom")
+						option(value="" disabled) Escolha a opção
+						-for(var j = 0; j < meses.length; j++)
+							-if(MesFrom == j)
+								option(value="#{j}" selected) #{meses[j]}
+							-else
+								option(value="#{j}") #{meses[j]}
+				.col.s12.m2
+					label(for="anofrom") <span data-i18n="demo.pettycash_home.ano"></span>
+					select.browser-default(name="anofrom", id="anofrom")
+						option(value="" disabled) Escolha a opção
+						-for(var j = 0; j < listaanomes.length; j++)
+							-if(listaanomes[j]._id == YearFrom)
+								option(value="#{listaanomes[j]._id}" selected) #{listaanomes[j]._id}
+							-else
+								option(value="#{listaanomes[j]._id}") #{listaanomes[j]._id}
+				.col.s12.m2(style="margin-top:26px")
+					i.material-icons.prefix.selmecAzul arrow_forward
+				.col.s12.m2
+					label(for="mesto") <span data-i18n="demo.pettycash_home.mes"></span>
+					select.browser-default(name="mesto", id="mesto")
+						option(value="" disabled) Escolha a opção
+						-for(var j = 0; j < meses.length; j++)
+							-if(MesTo == j)
+								option(value="#{j}" selected) #{meses[j]}
+							-else
+								option(value="#{j}") #{meses[j]}
+				.col.s12.m2
+					label(for="anoto") <span data-i18n="demo.pettycash_home.ano"></span>
+					select.browser-default(name="anoto", id="anoto")
+						option(value="" disabled) Escolha a opção
+						-for(var j = 0; j < listaanomes.length; j++)
+							-if(listaanomes[j]._id == YearTo)
+								option(value="#{listaanomes[j]._id}" selected) #{listaanomes[j]._id}
+							-else
+								option(value="#{listaanomes[j]._id}") #{listaanomes[j]._id}
+				.col.s12.m2
+					input#procurarPettyCash(type="button", name="procurarPettyCash", class="submit action-button", value="Search")
+			.row(style="margin-bottom:0px")
+				if( DadosPettyCash.length != 0)
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.pettycash_home.data"></span>
+									th <span data-i18n="demo.pettycash_home.credito"></span>
+									th <span data-i18n="demo.pettycash_home.debito"></span>
+									th <span data-i18n="demo.pettycash_home.saldo"></span>
+									th
+							tbody(id="myTable")
+								-for(var i = 0, j=0; i< DadosPettyCash.length; i++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{DadosPettyCash[i].pettycash_data}
+										td #{DadosPettyCash[i].pettycash_credito}
+										td #{DadosPettyCash[i].pettycash_debito}
+										td #{DadosPettyCash[i].pettycash_saldo}
+										td
+											if(DadosPettyCash[i].pettycash_purchase.length != 0)
+												a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="/pettycash/detalhesRegistros/#{DadosPettyCash[i]._id}") <i class="material-icons activarVerde">info</i>
+												if(DadosPettyCash[i].pettycash_verify.length == 1)
+													if((DataU.nome == "Amancio Mazivila") || (DataU.nome == "Luis Brazuna") || (DataU.nivel_acesso == "admin"))
+														a.pointer.info.refusepettycash(style="margin-left: 15px", data-position="top", data-delay="10", dataref="#{DadosPettyCash[i]._id}" detalhescaminho="#{Caminho}" debitovalue="#{DadosPettyCash[i].pettycash_debito}") <i class="material-icons" style="color:#f44336">highlight_off</i>
+												else
+													a.pointer.info.tooltipped#verpettycashreason(style="margin-left: 15px", data-position="top", data-delay="10", dataref="#{DadosPettyCash[i]._id}", data-tooltip="Razões:  #{DadosPettyCash[i].pettycash_verifyReason}") <i class="material-icons" style="color:#ffa500">warning</i>
+											else
+												a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="/pettycash/detalhesRegistrosCredit/#{DadosPettyCash[i]._id}") <i class="material-icons activarVerde">info</i>
+												if((DataU.nome == "Amancio Mazivila") || (DataU.nome == "Luis Brazuna") || (DataU.nivel_acesso == "admin"))
+													a.pointer.info.editCreditPettycash.tooltipped(style="margin-left: 15px", data-position="top", data-delay="10", dataref="#{DadosPettyCash[i]._id}" data-tooltip="Edit value" detalhescaminho="#{Caminho}" creditovalue="#{DadosPettyCash[i].pettycash_credito}" saldovalue="#{DadosPettyCash[i].pettycash_saldo}") <i class="material-icons selmecAzul">edit</i>
+	block js
+		script.
+			setInterval(function(){document.getElementById("financasId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

@@ -1,0 +1,65 @@
+extends layout
+block content
+	.seccao
+		.col.s6.m4.center
+			if referencia.siteName
+				img.baseinfo(src="/img/assign.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Basic info
+		.col.s6.m4.center
+			if referencia.safetyOb.veiculo_safe
+				img.securedetails(src="/img/seguro.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Safety
+		.col.s6.m4.center
+			if referencia.EDBoardOb.connections
+				img.edboraddetails( src="/img/edb.png", dataref="#{referencia._id}")
+				figcaption
+					p Ext D. Board
+		.col.s6.m4.center
+			if referencia.container.container_light
+				img.containerdetails(src="/img/containerr.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Container
+		.col.s6.m4.center
+			if referencia.roofTop.mounting_poles
+				img.rooftopdetails( src="/img/rooftop.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Roof Top
+		.col.s6.m4.center
+			if referencia.mast.aw_light
+				img.mastdetails(src="/img/mast.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Mast
+		.col.s6.m4.center
+			if referencia.airCond.fan_blade
+				img.airconddetails( class="inspacond" src="/img/acond2.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Ar conditioner
+		.col.s6.m4.center
+			if referencia.site_general.fence_gate_locks_hinges
+				img.generalsitedetails( style="width:120px", src="/img/cellsite3.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Site General
+		.col.s6.m4.center
+			if referencia.alarms.intruder
+				img.alarmdetails( src="/img/alarm.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Alarm
+		.col.s6.m4.center
+			if referencia.generator.oil_leak
+				img.generatordetails( src="/img/generator.png", dataref="#{referencia._id}")
+				figcaption
+					p.center Generator
+	block js
+	script.
+		setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+		setTimeout(function(){
+		if(window.innerWidth<780){
+		document.getElementById("mySidebar").style.width = "0";
+		document.getElementById("main").style.marginLeft= "0";
+		document.getElementById("main").style.width="100%";
+		document.getElementById("main").style.marginBottom="0";
+		document.getElementByClassName("capitalize").style.class="pequeno";
+		}
+		}, 50);

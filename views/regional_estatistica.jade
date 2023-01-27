@@ -1,0 +1,133 @@
+extends layout
+block content
+	.container.seccao.white
+		.row
+			.col.s12#container.chartjs-stacked-bar(dataa="#{Mensagem}" , mess="#{mess}", anoseguido = "#{anoseguido}", style="position: relative; height:65vh; width:75vw !important")
+				canvas#chart(style="position: relative; height:70vh; width:75vw !important") 
+				
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		//- script(src="https://canvasjs.com/assets/script/canvasjs.min.js")
+		script.
+			let dados=JSON.parse($("#container").attr("dataa"))
+			for(let i=0; i< dados.length; i++){
+			dados[i].lista=dados[i].lista.sort((a, b) => (a.observacao >b.observacao)? 1 : -1)
+			console.log(dados[i].lista);
+			}
+			var meses=['Jan','Fev', 'Mar','Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+			let meses_fully=['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto','Setembro','Outubro', 'Novembro', 'Dezembro'];
+			let temporario=parseInt(JSON.parse($("#container").attr("mess")));
+			var texto=meses_fully[temporario]
+			texto="Estatisticas Regionais referente ao Mes de  " + texto;
+			console.log(temporario);
+			var etiquetas=[];
+			var valores1=[];
+			var valores2=[];
+			var valores3=[];
+
+			var etiquetas=[];
+			var fechho=[];
+			var rendiccao=[];
+			var abertura=[];
+			var pannico=[];
+
+			for(var i=0; i<dados.length;i++){
+			etiquetas.push(dados[i]._id);
+			var makhap1 = dados[i].lista.findIndex(x => x.observacao =="grey");
+			var makhap2 = dados[i].lista.findIndex(x => x.observacao =="orange");
+			var makhap3 = dados[i].lista.findIndex(x => x.observacao =="green");
+			var makhap4 = dados[i].lista.findIndex(x => x.observacao =="red");
+
+			if(makhap1!=-1)
+				fechho.push(dados[i].lista[makhap1].soma);
+			else
+				fechho.push(0);
+
+			if(makhap2!=-1)
+				rendiccao.push(dados[i].lista[makhap2].soma);
+			else
+				rendiccao.push(0);
+
+			if(makhap3!=-1)
+				abertura.push(dados[i].lista[makhap3].soma);
+			else
+				abertura.push(0);
+
+			if(makhap4!=-1)
+				pannico.push(dados[i].lista[makhap4].soma);
+			else
+				pannico.push(0);
+
+
+			}
+			console.log(etiquetas)
+
+			var ctx = document.getElementById('chart');
+
+			var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+			labels: etiquetas,
+			datasets: [
+			{
+			label: 'Bom estado',
+			data: abertura,
+			backgroundColor: 'green',
+			},
+			
+			{
+			label: 'Estado Razoável',
+			data: rendiccao,
+			backgroundColor: 'orange',
+			},
+			{
+			label: 'Mau estado',
+			data: pannico,
+			backgroundColor: 'red',
+			},
+			{
+			label: 'Nao feito',
+			data: fechho,
+			backgroundColor: 'grey',
+			}
+			]
+			},
+			options: {
+			title: {
+				display: true,
+				text: texto
+				},
+			scales: {
+			xAxes: [{ stacked: true }],
+			yAxes: [{ stacked: true }]
+			},
+			}
+			});
+
+			var canvas1 = document.getElementById('chart');
+			canvas1.onclick = function(evt) {
+			var activePoint = myChart.getElementAtEvent(evt)[0];
+			var data = activePoint._chart.data;
+			var datasetIndex = activePoint._datasetIndex;
+			var label = data.datasets[datasetIndex].label;
+			var value = data.datasets[datasetIndex].data[activePoint._index];
+			var regiao= data.labels[activePoint._index]
+			//- label=label.replace("Estado", '').trim()
+			//- if(regiao!="Maputo Cidade")
+			//- regiao=regiao.replace("Região", '').toLowerCase().trim()
+
+			//- var rule = label+'1'+regiao
+			
+			var linkk= regiao+"_"+temporario;
+			console.log(linkk);
+			window.location.href="/mensagem/detalhes_e/" + $("#container").attr("anoseguido")+ "/" + linkk;
+			};
+
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

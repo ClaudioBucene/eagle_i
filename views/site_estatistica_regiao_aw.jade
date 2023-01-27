@@ -1,0 +1,175 @@
+extends layout
+block content
+	nav(style="height: 50px;")
+		div(class="nav-wrapper" style="background-color:#fff")
+			div(class="col s12")
+				a(href="/site_estatistica/" class="breadcrumb") <span data-i18n="demo.estatistica.inspanual"></span>
+				a(href="/site_estatistica/mensal/#{ano}/awaiting" class="breadcrumb") <span data-i18n="demo.estatistica.inspmensal"></span>
+				a(href="/site_estatistica/regiao/#{ano}/#{mes}/awaiting" class="breadcrumb") <span data-i18n="demo.estatistica.inspregional"></span>
+	.container.seccao.white
+		//if Site
+		.col.s12#container(dataa = "#{Site}" dataaa = "#{contarraw}" ano = "#{ano}" mes = "#{mes}")
+		div(id="chartdiv" width="900" height="800")
+	block js
+		script.
+			var dados = JSON.parse($("#container").attr("dataa"));
+			var dados1 = JSON.parse($("#container").attr("dataaa"));
+			
+			//let dados = JSON.parse($("container").attr("dataa"))
+			/* Create the chart */
+			var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+			/* Make automatic colors more distinctive by increasing steps */
+			chart.colors.step = 2;
+			chart.colors.list = [
+			  am4core.color("#3e66c2"),
+			  am4core.color("#f26c24")
+			];
+
+			/* Set data 
+			chart.data = [{
+				"category":"Maputo",
+				"value1": dados1[0]
+				}, {
+				"category":"South",
+				"value1": dados1[1]
+				}, {
+				"category":"Central",
+				"value1": dados1[2]
+				}, {
+				"category":"North",
+				"value1": dados1[3]
+				}];
+			*/
+			
+
+			
+			
+			/* Add legend */
+			chart.legend = new am4charts.Legend();
+
+			/* Add category axis */
+			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+			var topContainer = chart.chartContainer.createChild(am4core.Container);
+			var axisTitle = topContainer.createChild(am4core.Label);
+			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+			var series1 = chart.series.push(new am4charts.ColumnSeries());
+
+			setTimeout(function(){
+				categoryAxis.title.text = "Legenda";
+				axisTitle.text = "Inspecções Regionais";
+				valueAxis.title.text = "Número de inspecções";
+				series1.name = "Inspecção em espera";
+
+				chart.data = [{
+				"category":"Maputo",
+				"value1": dados1[0]
+				}, {
+				"category":"Sul",
+				"value1": dados1[1]
+				}, {
+				"category":"Centro",
+				"value1": dados1[2]
+				}, {
+				"category":"Norte",
+				"value1": dados1[3]
+				}];
+			}, 500);
+
+			$('#portuguese').click(function() {
+				categoryAxis.title.text = "Legenda";
+				axisTitle.text = "Inspecções Regionais";
+				valueAxis.title.text = "Número de inspecções";
+				series1.name = "Inspecção em espera";
+				chart.data = [{
+				"category":"Maputo",
+				"value1": dados1[0]
+				}, {
+				"category":"Sul",
+				"value1": dados1[1]
+				}, {
+				"category":"Centro",
+				"value1": dados1[2]
+				}, {
+				"category":"Norte",
+				"value1": dados1[3]
+				}];
+			});
+			$('#english').click(function() {
+				categoryAxis.title.text = "Label";
+				axisTitle.text = "Regional Inspections";
+				valueAxis.title.text = "Number of inspections";
+				series1.name = "Awaiting Inspection";
+				chart.data = [{
+				"category":"Maputo",
+				"value1": dados1[0]
+				}, {
+				"category":"South",
+				"value1": dados1[1]
+				}, {
+				"category":"Central",
+				"value1": dados1[2]
+				}, {
+				"category":"North",
+				"value1": dados1[3]
+				}];
+			});
+
+
+			categoryAxis.dataFields.category = "category";
+			categoryAxis.renderer.grid.template.location = 0;
+			categoryAxis.renderer.minGridDistance = 30;
+			categoryAxis.renderer.cellStartLocation = 0.2;
+			categoryAxis.renderer.cellEndLocation = 0.8;
+			categoryAxis.events.on("hit", function(ev) {
+				window.location.href = '/site_estatistica/tecnico/' + $("#container").attr("ano") + '/'+ $("#container").attr("mes") + '/'+  ev.event.path[0].innerHTML; 
+			});
+
+
+			
+			topContainer.layout = "absolute";
+			topContainer.toBack();
+			topContainer.paddingBottom = 15;
+			topContainer.width = am4core.percent(100);
+
+			
+			axisTitle.fontWeight = 600;
+			axisTitle.fontSize = 20;
+			axisTitle.align = "center";
+			axisTitle.paddingLeft = 10;
+			/* Add value axis */
+			
+			
+			
+
+			var a = $("#container").attr("ano");
+			 a.toString();
+			var b = $("#container").attr("mes");
+			 b.toString();
+			/* Add column series */
+			
+			//series1.tooltipText = "{name}\n[bold]{valueY.value}";
+			series1.columns.template.tooltipHTML = '{name}<br><a style="color:#ffff" href="/site_estatistica/tecnico/'+ a + '/'+ b +'/{categoryX}/awaiting"><b>{valueY.value}</b></a>';
+			series1.tooltip.label.interactionsEnabled = true;
+			series1.tooltip.keepTargetHover = true;
+			series1.tooltip.label.textAlign = "middle";
+			series1.dataFields.categoryX = "category";
+			series1.dataFields.valueY = "value1";
+			series1.columns.template.tooltipY = 0;
+			series1.tooltip.pointerOrientation = "down";
+			series1.tooltip.dy = -5;
+			series1.columns.template.width = am4core.percent(70);
+			series1.columns.template.events.on("hit", function(ev) {
+				window.location.href = '/site_estatistica/tecnico/' + $("#container").attr("ano") + '/'+ $("#container").attr("mes") + '/'+  ev.target.dataItem.categoryX + '/' + 'awaiting'; 
+			});
+
+			
+			
+
+			/* Add chart cursor */
+			chart.cursor = new am4charts.XYCursor();
+			chart.cursor.xAxis = categoryAxis;
+			chart.cursor.fullWidthLineX = true;
+			chart.cursor.lineX.strokeWidth = 0;
+			chart.cursor.lineX.fill = am4core.color("#8F3985");
+			chart.cursor.lineX.fillOpacity = 0.1;

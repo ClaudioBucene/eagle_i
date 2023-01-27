@@ -1,0 +1,56 @@
+extends layout
+block content
+		-if(Items.length==0)
+			p.center-align.selmecAzul.bold Ola #{DataU.nome}, nao possui stock no sistema! <br> Requiste o stock ou contacte o seu supervisor!
+		-else
+			.seccao.container
+				form(id="formulario", method="POST") 
+					fieldset.legend-border
+						legend.selmecAzul.bold Items
+							.row
+								.col.s12.m6
+									label(for="items[]") <span data-i18n="demo.stok_request_form.selecionar_item"></span>
+									select.browser-default.pessoas_permitidas.controle_max12(name="items[]",  style="font-family:")
+										option(value="" disabled selected selmecVerde) Escolha o Item
+										-for(let i=0; i<Items.length; i++)
+											-if(Items[i].disponivel !=0)
+												option(value="#{Items[i].description_item}" data-referencia="#{Items[i].referencia}" data-seriallized="#{Items[i].serialized}" data-contr="#{Items[i].disponivel}", data-cliente_name="#{Items[i].cliente_name}", data-maxx="#{Items[i].disponivel}") #{Items[i].description_item}
+								.col.s12.m6.input-field
+										label(for="quant_item") <span data-i18n="demo.stok_request_form.quantidade"></span>
+										input.quantyy.arranjo(type="number" autocomplete="off", id="quant_item" econtro="#{econtro}" escollher="#{Esconder}" name="quant_item" min=0 class="quant_item")
+								.col.s9.m4.input-field
+										label(for="serial_number_rettt") serial Number
+										input(type="text" id="serial_number_rettt" autocomplete="off", name="serial_number_rettt" min=0 class="quant_item")
+								a(class="hide btn-floating btn-large waves-effect waves-light add-field52 right") + 
+							.row
+								.col.s12
+									table.bordered.striped
+										thead
+											tr.selmecAzul
+												th Item
+												th <span data-i18n="demo.stok_request_form.quantidade"></span>
+												th
+										tbody(id="myTable_tecnicos_permitidos" style="height:auto !important" )
+					fieldset.no-border
+						-if(Items.length>0)
+							.row.buttons-container
+								.col.s12.m6.left-button
+									button(type="button", class="btn", id="registar_StUsedd") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+								.col.s12.m6.right-button
+										button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

@@ -1,0 +1,109 @@
+extends layout
+block content
+	.row(style="margin-top:15px;margin-bottom: 0px !important;")
+		.row
+			.col.s12
+				ul#tabsmanutencao.tabs(style="width:285px !important;")
+					li.tab.currentMan.col.s3
+						a#verTabsSiteInfo.active(href="#") <span data-i18n="demo.manutencao_form.siteinfo"></span>
+					li.tab.col.s3
+						a#verTabsCorrectiveMaintenance(href="#") <span data-i18n="demo.manutencao_form.correctivemaint"></span>
+					li.tab.col.s3
+						a#verTabsPreventiveMaintenance(href="") <span data-i18n="demo.manutencao_form.preventivemaint"></span>
+		.row.tabsSiteInfo
+			.row
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="add new site info", class="btn-floating btn-large waves-effect waves-light", href="/manutencao/novositeinfo") <i class=" activarAzul material-icons">add</i>
+			.row
+				if !Siteinfos
+					p.center-align.selmecAzul.bold Empty!
+				else
+					h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.site_info.listasiteinfo"></span>
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					table.responsive-table.bordered.striped
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.site_info.numero"></span>
+								th Site
+								th <span data-i18n="demo.site_info.regiaoselmec"></span>
+								th <span data-i18n="demo.site_info.maintoff"></span>
+								th
+						tbody(id="myTableUser1")
+							-for(var index = 0; index < Siteinfos.length; index++)
+								tr.highlight(style="font-family:;color:#12375c")
+									td #{Siteinfos[index].siteinfo_sitenum}
+									td #{Siteinfos[index].siteinfo_sitename}
+									td #{Siteinfos[index].siteinfo_regiaoselmec}
+									td #{Siteinfos[index].siteinfo_maintoff}
+									td.center-align
+										a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="/manutencao/detalhesSiteinfo/#{Siteinfos[index]._id}", data-tooltip="Details of job card") <i class="material-icons activarVerde">info</i>
+										//- a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="#") <i class="material-icons selmecAzul">edit</i>	
+		.row.tabsJobCard.hide
+			.row
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="add new job card", class="btn-floating btn-large waves-effect waves-light", href="/manutencao/novojobcard") <i class=" activarAzul material-icons">add</i>
+		.row.tabsCorrectiveMaintenance.hide
+			if !Jobcards
+				p.center-align.selmecAzul.bold Empty!
+			else
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.jobcard"></span>
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold
+				table.responsive-table.bordered.striped
+					thead
+						tr.selmecAzul
+							th Call
+							th <span data-i18n="demo.manutencao_form.cliente"></span>
+							th <span data-i18n="demo.manutencao_form.tecnico"></span>
+							th <span data-i18n="demo.manutencao_form.datareporte"></span>
+							th
+					tbody(id="myTableUser1")
+						-for(var index = 0; index < Jobcards.length; index++)
+							-if(Jobcards[index].jobcard_jobtype=="callout")
+								tr.highlight(style="font-family:;color:#12375c")
+									td #{Jobcards[index].jobcard_call}
+									td #{Jobcards[index].jobcard_clientenome}
+									td #{Jobcards[index].jobcard_tecniconome}
+									td #{Jobcards[index].jobcard_datareporte}
+									td.center-align
+										a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="/manutencao/detalhesJobcard/#{Jobcards[index]._id}", data-tooltip="Details of job card") <i class="material-icons activarVerde">info</i>
+										//- a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="#") <i class="material-icons selmecAzul">edit</i>
+		.row.tabsPreventiveMaintenance.hide
+			if !Jobcards
+				p.center-align.selmecAzul.bold Empty!
+			else
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.jobcard"></span>
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold
+				table.responsive-table.bordered.striped
+					thead
+						tr.selmecAzul
+							th Call
+							th <span data-i18n="demo.manutencao_form.cliente"></span>
+							th <span data-i18n="demo.manutencao_form.tecnico"></span>
+							th <span data-i18n="demo.manutencao_form.datareporte"></span>
+							th
+					tbody(id="myTableUser1")
+						-for(var index = 0; index < Jobcards.length; index++)
+							-if(Jobcards[index].jobcard_jobtype=="planned maintenance")
+								tr.highlight(style="font-family:;color:#12375c")
+									td #{Jobcards[index].jobcard_call}
+									td #{Jobcards[index].jobcard_clientenome}
+									td #{Jobcards[index].jobcard_tecniconome}
+									td #{Jobcards[index].jobcard_datareporte}
+									td.center-align
+										a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", href="#") <i class="material-icons activarVerde">info</i>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,44 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Formulario de cambio do dia
+				.row
+					.col.s12.m6.input-field
+						label(for="metical_euro") Euro
+						input.preencher( autocomplete="off", type="number", style="font-family: ;color:#12375c" ,id="metical_euro" ,name="metical_euro", value="#{Cambio? Cambio[0].metical_euro :''}")
+					.col.s12.m6.input-field
+						label(for="metical_dolar") Dolar (USD)
+						input.preencher( autocomplete="off", type="number", id="metical_dolar", name="metical_dolar", value="#{Cambio ? Cambio[0].metical_dolar : ''}", style="font-family:")
+				.row
+					.col.s12.m6.input-field
+						label(for="metical_rand") Rand (ZAR)
+						input.preencher( autocomplete="off", type="number", id="metical_rand",  value="#{Cambio ? Cambio[0].metical_rand:''}", style="font-family:")
+
+			fieldset.no-border
+				.row.buttons-container
+					if !Cambio
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_cambio") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_cambio") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_cambio(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

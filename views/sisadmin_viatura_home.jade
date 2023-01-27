@@ -1,0 +1,52 @@
+extends layout
+
+block content
+	.seccao.container.white
+		div(class="fixed-action-btn horizontal fixed-add-bottom")
+			if (DataU.nivel_acesso =="admin")
+				a.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="add new user", class="btn-floating btn-large waves-effect waves-light", href="/sisadmin/vehicleform") <i class=" activarAzul material-icons">add</i>
+		if !(Departamenttos && Departamenttos.length>0 && Departamenttos[0].viatura.length>0)
+			p.center-align.selmecAzul.bold <span data-i18n="demo.utilizador_home.lista_vazia"></span>
+		else
+			.row
+				.col.s6.m6.right.input-field
+					i.material-icons.prefix.activarVerde search
+					label(for="pesquisadoruser") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisadoruser", name="pesquisadoruser", style="border-bottom:none !important;")
+
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.utilizador_form.lista_viaturasss"></span>
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.utilizador_form.marca"></span>
+						th <span data-i18n="demo.utilizador_form.modelo"></span>
+						th <span data-i18n="demo.utilizador_home.data"></span> 
+						th 
+				tbody(id="myTableUser")
+					-for(var index = 0; index < Departamenttos[0].viatura.length; index++)
+						if(!Departamenttos[0].viatura[index].status || Departamenttos[0].viatura[index].status!="anactivo")
+							tr.highlight(data-caso="#{Departamenttos[0].nivel_acesso[index]._id}", data-nome="#{Departamenttos[0].viatura[index].nome}",style="font-family:;color:#12375c")
+								td #{Departamenttos[0].viatura[index].marca}
+								td #{Departamenttos[0].viatura[index].modelo}
+								td #{((Departamenttos[0].viatura[index].data_registo).getDate()<10? '0'+(Departamenttos[0].viatura[index].data_registo).getDate():(Departamenttos[0].viatura[index].data_registo).getDate())+'/'+(((Departamenttos[0].viatura[index].data_registo).getMonth()+1)<10? ('0'+((Departamenttos[0].viatura[index].data_registo).getMonth()+1)):((Departamenttos[0].viatura[index].data_registo).getMonth()+1))+'/'+((Departamenttos[0].viatura[index].data_registo).getFullYear())+'   '+((Departamenttos[0].viatura[index].data_registo).getHours()<10? ('0'+(Departamenttos[0].viatura[index].data_registo).getHours()): (Departamenttos[0].viatura[index].data_registo).getHours() )+' : '+((Departamenttos[0].viatura[index].data_registo).getMinutes()<10? ('0'+(Departamenttos[0].viatura[index].data_registo).getMinutes()):(Departamenttos[0].viatura[index].data_registo).getMinutes())}
+								td.center-align
+									if (DataU.nivel_acesso=="admin")
+										a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Departamenttos[0].viatura[index].nome}", href="/sisadmin/detalhes_viat/#{Departamenttos[0].viatura[index]._id}") <i class="material-icons activarVerde">info</i>
+										a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit #{Departamenttos[0].viatura[index].nome}", href="/sisadmin/editar_viat/#{Departamenttos[0].viatura[index]._id}") <i class="material-icons selmecAzul">edit</i>
+										a.pointer.info(style="margin-left: 15px; color:red", data-position="top", data-delay="10", data-tooltip="edit #{Departamenttos[0].viatura[index].nome}", href="/sisadmin/vehicledetele/#{Departamenttos[0].viatura[index]._id}") <i class="material-icons ">delete</i>
+		block js
+		script.
+			
+
+			setInterval(function(){document.getElementById("adminsession").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

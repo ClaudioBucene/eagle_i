@@ -1,0 +1,141 @@
+extends layout
+block content
+	if JobcardDetalhes
+		.row
+			-if(JobcardDetalhes.jobcard_jobtype == "Callout")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/inprogress") <i class=" activarAzul material-icons">reply</i>
+			-else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/inprogress") <i class=" activarAzul material-icons">reply</i>
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.repair"></span>
+			.row#recolherdados(style="margin-bottom:18px" dadosreferenciajobcard="#{JobcardDetalhes._id}" dadosjobtype = "#{JobcardDetalhes.jobcard_jobtype}" detalhescall="#{JSON.stringify(JobcardDetalhes.jobcard_call)}" dataequipmentarray="#{DadosIdequipmentjobcard}")
+				.col.s12.m6(style="margin-top:2px")
+					-var equiptypeArray = ["Aircond", "Condensor" , "Evaporador", "Generator"];
+					label(for="jobcard_equiptype") <span data-i18n="demo.manutencao_form.equiptype"></span>
+					select.browser-default(name="jobcard_equiptype", id="jobcard_equiptype")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<equiptypeArray.length; i++)
+							-if(JobcardDetalhes.equipamentoArrayJobcard[posicao].jobcard_equiptype == equiptypeArray[i])
+								option(value="#{equiptypeArray[i]}" selected) #{equiptypeArray[i]}
+							-else
+								option(value="#{equiptypeArray[i]}") #{equiptypeArray[i]}
+				.col.s12.m6(style="margin-top:2px")
+					-var manufacturerArray = ["Dunham Bush", "Cummins", 'Perkins'];
+					label(for="jobcard_manufacturer") <span data-i18n="demo.manutencao_form.manufacturer"></span>
+					select.browser-default(name="jobcard_manufacturer", id="jobcard_manufacturer")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<manufacturerArray.length; i++)
+							-if(JobcardDetalhes.equipamentoArrayJobcard[posicao].jobcard_manufacturer == manufacturerArray[i])
+								option(value="#{manufacturerArray[i]}" selected) #{manufacturerArray[i]}
+							-else
+								option(value="#{manufacturerArray[i]}") #{manufacturerArray[i]}
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_model") <span data-i18n="demo.manutencao_form.model"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_model" ,name="jobcard_model" value="#{JobcardDetalhes.equipamentoArrayJobcard[posicao].jobcard_model}")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_serialnumber") <span data-i18n="demo.manutencao_form.serialnumber"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_serialnumber" ,name="jobcard_serialnumber" value="#{JobcardDetalhes.equipamentoArrayJobcard[posicao].jobcard_serialnumber}")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_capacity") <span data-i18n="demo.manutencao_form.capacity"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_capacity" ,name="jobcard_capacity" value="#{JobcardDetalhes.equipamentoArrayJobcard[posicao].jobcard_capacity}")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_type") <span data-i18n="demo.manutencao_form.type"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_type" ,name="jobcard_type" value="#{JobcardDetalhes.equipamentoArrayJobcard[posicao].jobcard_type}")
+			-if((DataU.funcao == "Call Center") || (JobcardDetalhes.jobcard_controladorintervenientes[2] == DataU.nome))
+				button(type="button", id="jobcardequipment_update", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	if Jobcard
+		.row
+			-if(Jobcard.jobcard_jobtype == "Callout")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/inprogress") <i class=" activarAzul material-icons">reply</i>
+			-else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/inprogress") <i class=" activarAzul material-icons">reply</i>
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.repair"></span>
+			.row#recolherdados(style="margin-bottom:18px" dadosreferenciajobcard="#{Jobcard._id}" dadosjobtype = "#{Jobcard.jobcard_jobtype}" detalhescall="#{JSON.stringify(Jobcard.jobcard_call)}")
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_equiptype") <span data-i18n="demo.manutencao_form.equiptype"></span>
+					select.browser-default(name="jobcard_equiptype", id="jobcard_equiptype")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Aircond") Aircond
+						option(value="Condensor") Condensor
+						option(value="Evaporador") Evaporador
+						option(value="Generator") Gerador
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_manufacturer") <span data-i18n="demo.manutencao_form.manufacturer"></span>
+					select.browser-default(name="jobcard_manufacturer", id="jobcard_manufacturer")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Dunham Bush") Dunham Bush
+						option(value="Cummins") Cummins
+						option(value="Perkins") Perkins
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_model") <span data-i18n="demo.manutencao_form.model"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_model" ,name="jobcard_model")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_serialnumber") <span data-i18n="demo.manutencao_form.serialnumber"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_serialnumber" ,name="jobcard_serialnumber")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_capacity") <span data-i18n="demo.manutencao_form.capacity"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_capacity" ,name="jobcard_capacity")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_type") <span data-i18n="demo.manutencao_form.type"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_type" ,name="jobcard_type")
+			button(type="button", id="jobcardequipment_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	if Projects
+		.row
+			div(class="fixed-action-btn horizontal fixed-add-bottom")
+				a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/jobcardprojectshome/inprogress") <i class=" activarAzul material-icons">reply</i>
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.repair"></span>
+			.row#recolherdados(style="margin-bottom:18px" dadosreferenciaprojecto="#{Projects._id}")
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_equiptype") <span data-i18n="demo.manutencao_form.equiptype"></span>
+					select.browser-default(name="jobcard_equiptype", id="jobcard_equiptype")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Aircond") Aircond
+						option(value="Condensor") Condensor
+						option(value="Evaporador") Evaporador
+						option(value="Generator") Gerador
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_manufacturer") <span data-i18n="demo.manutencao_form.manufacturer"></span>
+					select.browser-default(name="jobcard_manufacturer", id="jobcard_manufacturer")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Dunham Bush") Dunham Bush
+						option(value="Cummins") Cummins
+						option(value="Perkins") Perkins
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_model") <span data-i18n="demo.manutencao_form.model"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_model" ,name="jobcard_model")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_serialnumber") <span data-i18n="demo.manutencao_form.serialnumber"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_serialnumber" ,name="jobcard_serialnumber")
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_capacity") <span data-i18n="demo.manutencao_form.capacity"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_capacity" ,name="jobcard_capacity")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_type") <span data-i18n="demo.manutencao_form.type"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_type" ,name="jobcard_type")
+			button(type="button", id="jobcardequipmentproject_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

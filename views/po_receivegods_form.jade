@@ -1,0 +1,53 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Recepcao do Stock
+				.row
+					.col.s12.m6.input-field
+						label(for="invoice_number") Invoice Number
+						input( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="invoice_number" ,name="invoice_number",  value="")
+				-for(var i=0; i<Stock_request[0].items.length; i++)
+					.row
+						.col.s12.m6.input-field
+							label(for="description_item") Descricao do item
+							input.decricao( autocomplete="off", type="text", readonly, prrice="#{Stock_request[0].items[i].price}", referencia="#{Stock_request[0].items[i].referencia}",  serialized="#{Stock_request[0].items[i].serialized}",cliente_name="#{Stock_request[0].items[i].cliente_name}", style="font-family:;color:#12375c" ,id="#{'description_item'+i}" ,name="{'description_item'+i}", value="#{Stock_request[0].items[i].nome_item}")
+						.col.s6.m2.input-field
+							label(for="#{'quanty_max'+i}") Rquisitado
+							input( autocomplete="off", type="number", readonly, style="font-family:;color:#12375c" ,id="#{'quanty_max'+i}" ,name="#{'quanty_max'+i}" , value="#{Stock_request[0].items[i].quantity}")
+						.col.s6.m2.input-field
+							label(for="#{'quanty_recebido'+i}" ) Recebido
+							input.quantyy.preencher( autocomplete="off", type="number",  data_max="#{'quanty_max'+i}" style="color:#12375c" ,id="#{'quanty_recebido'+i}" , serialized="#{Stock_request[0].items[i].serialized}" ,name="#{'quanty_recebido'+i}", min=0, value=0, max="#{Stock_request[0].items[i].quantity}")
+						.col.s6.m2.input-field
+							label(for="#{'precos'+i}" ) Valor Unitario(MZN)
+							input.preencher.precos( autocomplete="off", type="number",  style="color:#12375c" ,id="#{'precos'+i}"  ,name="#{'precos'+i}")
+				.row
+					.col.s12.m4.input-field
+						span Comprovativo
+						input.preencher(type="file", id="comprovativo", name="comprovativo",autocomplete="off")
+			fieldset.no-border
+				.row.buttons-container
+					if Stock_request[0].items.length>0
+						.col.s12.m6.left-button
+							button(type="button", class="btn", data_user_new="#{Stock_request[0]._id}", id="receber_stock_po") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="voltar_util") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,69 @@
+extends layout
+block content
+	.container.seccao.white
+		h6.center.bold(style="text-align:center !important") Estatísticas de Inspecção de Sites
+		.row
+			.col.s12#container(dataa="#{Site}" style="position: relative; height:500px !important")
+				canvas#oilChart(style="position: relative; height:70vh; width:80vw !important") 
+	block is
+		script(type="text/javascript" src="/js/Chart.min.js")
+		script.
+			var dados=JSON.parse($("#container").attr("dataa"));
+			var etiqueta=[];
+			var valores = [];
+			var cores = [];
+
+			for(var i=0; i<dados.length; i++){
+
+				etiqueta.push(dados[i]._id);
+				valores.push(dados[i].num);
+
+				if(dados[i]._id == "Awaiting Inspection"){
+					cores.push("#12375c");
+				}
+				if(dados[i]._id == "Delayed Inspection"){
+					cores.push("orange");
+				}
+				if(dados[i]._id == "Done early"){
+					cores.push("#ffea00");
+				}
+				if(dados[i]._id == "Done later"){
+					cores.push("red");
+				}
+				if(dados[i]._id == "Done on time"){
+					cores.push("#a1cf67");
+				}
+				
+			}
+			console.log(etiqueta,valores)
+			var ctx = document.getElementById("oilChart");
+			var myChart = new Chart(ctx, {
+			type: 'pie',
+			data: {
+			labels: etiqueta,
+			datasets: [{
+			label: '# of Tomatoes',
+			data: valores,
+			backgroundColor: cores,
+
+			borderWidth: 1
+			}]
+			},
+			options: {
+			cutoutPercentage: 40,
+			responsive: true,
+
+			}
+			});
+
+
+
+			setTimeout(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+			

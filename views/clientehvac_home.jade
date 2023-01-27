@@ -1,0 +1,39 @@
+extends layout
+block content
+	.container.seccao.white
+		div(class="fixed-action-btn top fixed-add-bottom")
+			a.btn-floating.pointer.activarAzul.criarnovohvacclientflag(data-position="left", data-delay="10" href="/cliente/criarcliente" data-tooltip="Adicionar novo cliente", class="btn-floating btn-large waves-effect waves-light") <i class=" activarAzul material-icons">add</i>
+		if(Cliente.length == 0)
+			p.center-align.selmecAzul.bold Empty!
+		else
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.cliente_form.listaClientes"></span>
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.cliente_form.nome"></span>
+						th 
+				tbody(id="myTable")
+					-for(var index = 0; index < Cliente.length; index++)
+						tr.highlight(data-caso="#{Cliente[index]._id}", data-nome="#{Cliente[index].nome}",style="font-family:;color:#12375c")
+							td #{Cliente[index].nome_cliente}
+							td.left-align
+								if (DataU.nivel_acesso=="admin" || DataU.funcao_id == "611e6bd559c6e30a006ede59" || DataU.funcao_id == "611e2b8cf9b1b31cd868a30c")
+									a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Cliente[index].nome_cliente}", href="/cliente/detalhesClienteshvac/#{Cliente[index]._id}") <i class="material-icons activarVerde">info</i>
+									//- a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit  #{Cliente[index].nome_cliente}", href="/cliente/editarClientehvac/#{Cliente[index]._id}") <i class="material-icons selmecAzul">edit</i>
+									if(Cliente[index].filial.length > 0)
+										a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Filiais de #{Cliente[index].nome_cliente}", href="/cliente/filialclimatizacao/#{Cliente[index]._id}") <i class="material-icons selmecAzul">location_city</i>
+block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

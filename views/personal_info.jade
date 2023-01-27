@@ -1,0 +1,167 @@
+extends layout
+block content
+	.container
+		.fixed-action-btn.top.fixed-add-bottom
+					a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="edita perfil ", class="btn-floating btn-large waves-effect waves-light", href="/utilizador/profile_edit") <i class="material-icons activarVerde">edit</i>
+
+		.row
+			.valign-wrapper
+					.col.s6
+						img.circle(style="float:center" src="#{(DataU.profile_pic && DataU.profile_pic.length>0)? DataU.profile_pic: '/img/pprofile.png' }")
+					.col.s12(style="border-left: 1px solid grey")
+						.col.s12.m6.input-field
+							input(type="text", id="name", value="#{DataU.nome}" readonly style="border-bottom:none; font-style:italic" disable)
+							label(for="name") Name 
+						.col.s12.m6.input-field.hide-on-small-only
+							input(type="text", id="idioma", value="#{(DataU.idioma && DataU.idioma=='en')? 'Ingles':'Portugues'}" readonly style="border-bottom:none; font-style:italic")
+							label(for="nuit") Idioma
+						.col.s12.m6.input-field.hide-on-small-only
+							input(type="text", id="username", value="#{DataU.telefone_1}" readonly style="border-bottom:none; font-style:italic")
+							label(for="nuit") Contacto
+						.col.s12.m6.input-field
+							input(type="text", id="email", value="#{DataU.email}" readonly style="border-bottom:none; font-style:italic")
+							label(for="email") Email
+		.row(style="margin-left:10px")
+			.col.s6.m6.input-field.hide-on-med-and-up
+				input(type="text", id="contacto", value="#{DataU.telefone_1}" readonly style="border-bottom:none; font-style:italic")
+				label(for="contacto") Contacto
+			.col.s6.m6.input-field.hide-on-med-and-up
+				input(type="text", id="password", value="#{(DataU.idioma=='pt' && DataU.idioma.length >0)? 'Portugues':'Ingles'}" readonly style="border-bottom:none; font-style:italic")
+				label(for="idioma") idioma
+		.row(style="margin-left:10px")
+			.col.s6.m6.input-field
+				input(type="text", id="username", value="#{DataU.username}" readonly style="border-bottom:none; font-style:italic")
+				label(for="username") Username
+			.col.s6.m6.input-field
+				input(type="text", name="senha", value="***************" readonly style="border-bottom:none; font-style:italic")
+				label(for="senha") Password
+			
+		
+		//- .row.perfil_mestre(style="margin-top:50px;")
+		//- 	.col.s12
+		//- 	fieldset.no-border.legend-border
+		//- 		legend.selmecAzul.bold.italic Dados Pessoais
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="nuit", value="12458962" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="nuit") NUIT
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="nacionalidade", value="Mocambicana" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="nacionalidade") Nacionalidade
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="estado civil", value="Solteiro" readonly style="border-bottom:none")
+		//- 			label(for="estado civil") Estado civil
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="genero", value="Masculino" readonly style="border-bottom:none; ")
+		//- 			label(for="genero") Genero
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="data_nasc", value="30/05/1974" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="data_nasc") Data Nasc.
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="idioma", value="Portugues" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="idioma") Idioma
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="estado bi_numero", value="1105533245Y" readonly style="border-bottom:none")
+		//- 			label(for="estado bi_numero") B.Identidade
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="naturalidade", value="Maputo" readonly style="border-bottom:none; ")
+		//- 			label(for="naturalidade") Natural
+		//- 	.col.s12
+		//- 	fieldset.no-border.legend-border
+		//- 		legend.selmecAzul.bold Contactos
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="celular", value="(+258) 84 990 12 34" readonly style="border-bottom:none; ")
+		//- 			label(for="celular") Celular
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="pin", value="0000" readonly style="border-bottom:none; ")
+		//- 			label(for="pin") PIN
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="puk", value="584632" readonly style="border-bottom:none; ")
+		//- 			label(for="puk") PUK
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="_3G", value="(+258) 84 558 12 63" readonly style="border-bottom:none; ")
+		//- 			label(for="_3G") Numero 3G
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="pin_3G", value="0000" readonly style="border-bottom:none; ")
+		//- 			label(for="pin_3G") PIN 3G
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="puk_3G", value="0000" readonly style="border-bottom:none; ")
+		//- 			label(for="puk_3G") PUK 3G
+		//- 		.col.s12.m6.input-field
+		//- 			input(type="text", id="email", value="manuelfernando@comserv.co.mz" readonly style="border-bottom:none")
+		//- 			label(for="email") Email
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="puk", value="12345879" readonly style="border-bottom:none; ")
+		//- 			label(for="puk") PUK 3G
+		//- 	.col.s12
+		//- 	fieldset.no-border.legend-border
+		//- 		legend.selmecAzul.bold Endereco
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="provincia", value="Maputo" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="provincia") Provincia
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="distrito", value="KaMpfumo" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="distrito") Distrito
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="bairro", value="Malhangalene" readonly style="border-bottom:none")
+		//- 			label(for="bairro") Bairro
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="casa_n", value="420" readonly style="border-bottom:none; ")
+		//- 			label(for="casa_n") Casa
+		//- 	.col.s12
+		//- 	fieldset.no-border.legend-border
+		//- 		legend.selmecAzul.bold Financas
+		//- 		.col.s12
+		//- 			table.bordered.striped.pettycash(style="font-style:italic; height:auto !important")
+		//- 				thead
+		//- 					tr
+		//- 						th Type card
+		//- 						th Number
+		//- 				tbody(style="height:auto !important")
+		//- 					tr
+		//- 						td Petty Cash
+		//- 						td 51489
+		//- 					tr
+		//- 						td Galp
+		//- 						td 123584
+		//- 					tr
+		//- 						td TOTAL
+		//- 						td 123584					
+		//- 	.col.s12
+		//- 	fieldset.no-border.legend-border
+		//- 		legend.selmecAzul.bold.italic Informacao Medicinal
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="medical_id", value="12458" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="medical_id") Numero Medicinal
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="plano_medicinal", value="Mocambicana" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="plano_medicinal") Plano Medicinal
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="estado civil", value="Solteiro" readonly style="border-bottom:none")
+		//- 			label(for="estado civil") Estado civil
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="genero", value="Masculino" readonly style="border-bottom:none; ")
+		//- 			label(for="genero") Genero
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="data_nasc", value="30/05/1974" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="data_nasc") Data Nasc.
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="idioma", value="Portugues" readonly style="border-bottom:none; font-style:italic")
+		//- 			label(for="idioma") Idioma
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="estado bi_numero", value="1105533245Y" readonly style="border-bottom:none")
+		//- 			label(for="estado bi_numero") B.Identidade
+		//- 		.col.s6.m6.input-field
+		//- 			input(type="text", id="naturalidade", value="Maputo" readonly style="border-bottom:none; ")
+		//- 			label(for="naturalidade") Natural
+	block js
+		script.
+			setTimeout(function(){document.getElementById("human_resource").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+
+

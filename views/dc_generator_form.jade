@@ -1,0 +1,207 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Generator for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12
+						label(for="diesel_leak") 
+						h6 1.Check for any diesel leaks on the tanks or diesel filter
+					.col.s6
+						input.bom(type="radio" id="diesel_leak_ok" checked="#{DC.diesel_leak}"=='ok'? true:false name="diesel_leak"  value="ok")
+						label(for="diesel_leak_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="diesel_leak_no",  name='diesel_leak', checked="#{DC.diesel_leak}"=='not ok'?true:false  value="not ok")
+						label(for="diesel_leak_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="diesel_leak_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="diesel_leak_comment",value="#{DC.diesel_leak_comment?DC.diesel_leak_comment:''}",  identifica="#{DC_insp._id}" ,name="diesel_leak_comment")
+				.row
+					.col.s12
+						label(for="oil_leak") 
+						h6 2.Check for any oil leaks on oil filter or motor
+					.col.s6
+						input.bom(type="radio" id="oil_leak_ok" checked="#{DC.oil_leak}"=='ok'? true:false name="oil_leak"  value="ok")
+						label(for="oil_leak_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="oil_leak_no",  name='oil_leak', checked="#{DC.oil_leak}"=='not ok'?true:false  value="not ok")
+						label(for="oil_leak_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="oil_leak_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="oil_leak_comment",value="#{DC.oil_leak_comment?DC.oil_leak_comment:''}",  identifica="#{DC_insp._id}" ,name="oil_leak_comment")
+				.row
+					.col.s12
+						label(for="temperature") 
+						h6 3.Check temperature controller for the coolant system (Feel heater on side of the generator) Gen A: 31ºC – 55ºC	Gen B: 21ºC – 50ºC
+
+					.col.s6
+						input.bom(type="radio" id="temperature_ok" checked="#{DC.temperature}"=='ok'? true:false name="temperature"  value="ok")
+						label(for="temperature_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="temperature_no",  name='temperature', checked="#{DC.temperature}"=='not ok'?true:false  value="not ok")
+						label(for="temperature_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="temperature_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="temperature_comment",value="#{DC.temperature_comment?DC.temperature_comment:''}",  identifica="#{DC_insp._id}" ,name="temperature_comment")
+				.row
+					.col.s12
+						label(for="control_switch") 
+						h6 4.Check control switch, always in the AUTO position (On main changeover breaker)
+					.col.s6
+						input.bom(type="radio" id="control_switch_ok" checked="#{DC.control_switch}"=='ok'? true:false name="control_switch"  value="ok")
+						label(for="control_switch_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="control_switch_no",  name='control_switch', checked="#{DC.control_switch}"=='not ok'?true:false  value="not ok")
+						label(for="control_switch_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="control_switch_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="control_switch_comment",value="#{DC.control_switch_comment?DC.control_switch_comment:''}",  identifica="#{DC_insp._id}" ,name="control_switch_comment")
+				.row
+					.col.s12
+						label(for="battery_charge_rate") 
+						h6 5.Check battery charge rate, approximately +/- 27 Volts.
+					.col.s6
+						input.bom(type="radio" id="battery_charge_rate_ok" checked="#{DC.battery_charge_rate}"=='ok'? true:false name="battery_charge_rate"  value="ok")
+						label(for="battery_charge_rate_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="battery_charge_rate_no",  name='battery_charge_rate', checked="#{DC.battery_charge_rate}"=='not ok'?true:false  value="not ok")
+						label(for="battery_charge_rate_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="battery_charge_rate_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="battery_charge_rate_comment",value="#{DC.battery_charge_rate_comment?DC.battery_charge_rate_comment:''}",  identifica="#{DC_insp._id}" ,name="battery_charge_rate_comment")
+				.row
+					.col.s12
+						label(for="battery_charge_terminal") 
+						h6 6.Check battery terminals, acid build up and tightness.
+					.col.s6
+						input.bom(type="radio" id="battery_charge_terminal_ok" checked="#{DC.battery_charge_terminal}"=='ok'? true:false name="battery_charge_terminal"  value="ok")
+						label(for="battery_charge_terminal_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="battery_charge_terminal_no",  name='battery_charge_terminal', checked="#{DC.battery_charge_terminal}"=='not ok'?true:false  value="not ok")
+						label(for="battery_charge_terminal_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="battery_charge_terminal_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="battery_charge_terminal_comment",value="#{DC.battery_charge_terminal_comment?DC.battery_charge_terminal_comment:''}",  identifica="#{DC_insp._id}" ,name="battery_charge_terminal_comment")
+				.row
+					.col.s12
+						label(for="week_start_wtout_load") 
+						h6 7.Weekly: start up without load
+					.col.s6
+						input.bom(type="radio" id="week_start_wtout_load_ok" checked="#{DC.week_start_wtout_load}"=='ok'? true:false name="week_start_wtout_load"  value="ok")
+						label(for="week_start_wtout_load_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="week_start_wtout_load_no",  name='week_start_wtout_load', checked="#{DC.week_start_wtout_load}"=='not ok'?true:false  value="not ok")
+						label(for="week_start_wtout_load_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="week_start_wtout_load_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="week_start_wtout_load_comment",value="#{DC.week_start_wtout_load_comment?DC.week_start_wtout_load_comment:''}",  identifica="#{DC_insp._id}" ,name="week_start_wtout_load_comment")
+				.row
+					.col.s12
+						label(for="generator_run_hour") 
+						h6 8.Check for generator running hours
+					.col.s6
+						input.bom(type="radio" id="generator_run_hour_ok" checked="#{DC.generator_run_hour}"=='ok'? true:false name="generator_run_hour"  value="ok")
+						label(for="generator_run_hour_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="generator_run_hour_no",  name='generator_run_hour', checked="#{DC.generator_run_hour}"=='not ok'?true:false  value="not ok")
+						label(for="generator_run_hour_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="generator_run_hour_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="generator_run_hour_comment",value="#{DC.generator_run_hour_comment?DC.generator_run_hour_comment:''}",  identifica="#{DC_insp._id}" ,name="generator_run_hour_comment")
+				.row
+					.col.s12
+						label(for="diesel_level") 
+						h6 9.Check for diesel level Maximum capacity: 6000L on Generator A and 5000L on Generator B Gen A consumption per hour: 100L Gen B consumption per hour: 150L
+					.col.s6
+						input.bom(type="radio" id="diesel_level_ok" checked="#{DC.diesel_level}"=='ok'? true:false name="diesel_level"  value="ok")
+						label(for="diesel_level_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="diesel_level_no",  name='diesel_level', checked="#{DC.diesel_level}"=='not ok'?true:false  value="not ok")
+						label(for="diesel_level_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="diesel_level_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="diesel_level_comment",value="#{DC.diesel_level_comment?DC.diesel_level_comment:''}",  identifica="#{DC_insp._id}" ,name="diesel_level_comment")
+				.row
+					.col.s12
+						label(for="oil_level") 
+						h6 10.Check for oil level
+					.col.s6
+						input.bom(type="radio" id="oil_level_ok" checked="#{DC.oil_level}"=='ok'? true:false name="oil_level"  value="ok")
+						label(for="oil_level_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="oil_level_no",  name='oil_level', checked="#{DC.oil_level}"=='not ok'?true:false  value="not ok")
+						label(for="oil_level_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="oil_level_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="oil_level_comment",value="#{DC.oil_level_comment?DC.oil_level_comment:''}",  identifica="#{DC_insp._id}" ,name="oil_level_comment")
+				.row
+					.col.s12
+						label(for="water_level") 
+						h6 11.Check for water level
+					.col.s6
+						input.bom(type="radio" id="water_level_ok" checked="#{DC.water_level}"=='ok'? true:false name="water_level"  value="ok")
+						label(for="water_level_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="water_level_no",  name='water_level', checked="#{DC.water_level}"=='not ok'?true:false  value="not ok")
+						label(for="water_level_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="water_level_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="water_level_comment",value="#{DC.water_level_comment?DC.water_level_comment:''}",  identifica="#{DC_insp._id}" ,name="water_level_comment")
+				.row
+					.col.s12
+						label(for="intercooler_hose_clamp") 
+						h6 12.Check for intercooler and flexible hoses clamps tightening
+					.col.s6
+						input.bom(type="radio" id="intercooler_hose_clamp_ok" checked="#{DC.intercooler_hose_clamp}"=='ok'? true:false name="intercooler_hose_clamp"  value="ok")
+						label(for="intercooler_hose_clamp_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="intercooler_hose_clamp_no",  name='intercooler_hose_clamp', checked="#{DC.intercooler_hose_clamp}"=='not ok'?true:false  value="not ok")
+						label(for="intercooler_hose_clamp_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="intercooler_hose_clamp_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="intercooler_hose_clamp_comment",value="#{DC.intercooler_hose_clamp_comment?DC.intercooler_hose_clamp_comment:''}",  identifica="#{DC_insp._id}" ,name="intercooler_hose_clamp_comment")
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.name
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_generator_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

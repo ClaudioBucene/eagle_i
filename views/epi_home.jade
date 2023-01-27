@@ -1,0 +1,46 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+			//- a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+			//- ul(id="extrair", dados=stockData2)
+			//- 	if (DataU.nivel_acesso=="admin")
+			//- 		li
+			//- 			a.btn-floating.tooltipped.pointer.activarAzul#exportar(data-position="left", data-delay="10", data-tooltip="Exportar lista", class="btn-floating btn-large waves-effect waves-light", href="/Epi/exportartocsvEpis") <i class="material-icons activarVerde">publish</i>
+			//- 	li
+			//- 		a.btn-floating.tooltipped.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Registar nova Inspecção ", class="btn-floating btn-large waves-effect waves-light", href="/Epi/novo") <i class="material-icons activarVerde">add</i>
+		if !Epi
+			p.center-align.selmecAzul.bold( style="font-family:") Sem informacao  para mostrar !
+		else
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Histórico
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Marca
+						th Matricula
+						th Data
+						th Beneficiario
+						th
+				tbody
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					-for(var index = 0; index < Epi.length; index++)
+						tr.highlight(data-funcionario="#{Epi[index]._id}", data-nome="#{Epi[index].nome}",style="font-family:;color:#12375c")
+							td #{Epi[index].marca}
+							td #{Epi[index].matricula}
+							td #{Epi[index].data_atribuicao.getDate()+'/'+(Epi[index].data_atribuicao.getMonth()+1)+'/'+Epi[index].data_atribuicao.getFullYear()}
+							td #{Epi[index].beneficiario}
+							//- td.center-align
+							//- 	if (DataU.nivel_acesso=="admin")
+							//- 		a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Detalhes da Inspecção do #{Epi[index].nome}", href="/epi/detalhes/#{Epi[index]._id}") <i class="material-icons activarVerde">info</i>
+							//- 		a.delete-veiculo1.tooltipped.pointer.apagar_Epi(style="margin-left: 30px; color:red",data-position="top", data-delay="10", data-tooltip="Remover Inspecção de #{Epi[index].nome}", data-user-id="#{Epi[index].nome}", data-user-new="#{Epi[index]._id}") <i class="material-icons bold">close</i>
+	block js
+		script.
+			setInterval(function(){document.getElementById("equipamentoId").className="activarAzul"}, 200);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);

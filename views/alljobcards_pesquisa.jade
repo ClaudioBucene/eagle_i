@@ -1,0 +1,78 @@
+extends layout
+block content
+	.row(style="margin-top:15px;margin-bottom: 0px !important;")
+		-if(AllJobcardsHistory.length>0)
+		.row
+			if(AllJobcardsHistory.length == 0)
+				p.center-align.selmecAzul.bold <span data-i18n="demo.ttnumber_form.seminfo"></span>
+			else
+				.row
+					.col.s12.m6
+					.col.s12.m6.right.input-field
+						i.material-icons.prefix search
+						label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+						input(type="text", id="pesquisador", valor="#{Pacote}", name="pesquisador", style="border-bottom:none !important;")
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Todos Jobcards
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold
+				table.responsive-table.bordered.striped#myTable
+					thead
+						tr.selmecAzul
+							th Tt number
+							th Site
+							th Data Planeada
+							th Técnico
+							th Região
+							th Job Type
+							th Spare Usado
+							th Reabast. Diesel 
+							th Credelec adic.
+							th Status
+							th 
+					tbody(id="myTableUser1")
+						-for(var index = 0; index < AllJobcardsHistory.length; index++)
+							tr.highlight(style="font-family:;color:#12375c")
+								td #{AllJobcardsHistory[index].jobcard_ttnumber}
+								td #{AllJobcardsHistory[index].jobcard_site}
+								-if((AllJobcardsHistory[index].jobcard_planneddate != undefined) && (AllJobcardsHistory[index].jobcard_planneddate != ""))
+									td #{AllJobcardsHistory[index].jobcard_planneddate}
+								-else
+									td ----
+								td #{AllJobcardsHistory[index].jobcard_tecniconome}
+								td #{AllJobcardsHistory[index].jobcard_regiao}
+								-if((AllJobcardsHistory[index].jobcard_jobtype != undefined) && (AllJobcardsHistory[index].jobcard_jobtype != ""))
+									td #{AllJobcardsHistory[index].jobcard_jobtype}
+								-else
+									td.center-align ----
+								td 
+									-if(AllJobcardsHistory[index].sparesArrayJobcard.length != 0)
+										a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Use") <img style='width:20px;' src='/img/checked2.png'>
+									-else
+										a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{AllJobcardsHistory[index]._id}", data-tooltip="Don't use") <img style='width:20px;' src='/img/dinied.png'>
+								td
+									-if((AllJobcardsHistory[index].generatorArrayJobcard.length != 0) && (AllJobcardsHistory[index].generatorArrayJobcard.findIndex(x => x.jobcard_generatorrefuel == "0") == -1))
+										a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Added") <img style='width:20px;' src='/img/checked2.png'>
+									-else
+										a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{AllJobcardsHistory[index]._id}", data-tooltip="Didn't add") <img style='width:20px;' src='/img/dinied.png'>
+								td 
+									-if(AllJobcardsHistory[index].jobcard_credelecinfo.length != 0)
+										a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Added") <img style='width:20px;' src='/img/checked2.png'>
+									-else
+										a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-user-new="#{AllJobcardsHistory[index]._id}", data-tooltip="Didn't add") <img style='width:20px;' src='/img/dinied.png'>
+								td #{AllJobcardsHistory[index].ttnumber_status}
+								td.center-align
+									a.tooltipped.pointer.info(style="margin-left: 25px", data-position="top", data-delay="10", href="/manutencao/detalhesJobcardCallOut/#{AllJobcardsHistory[index]._id}", data-tooltip="Details of planned maintenance") <i class="material-icons activarVerde">info</i>												
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

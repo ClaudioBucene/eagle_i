@@ -1,0 +1,37 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Adicionar Modulo para #{Person.nome}
+				.row
+					.col.s12.m6
+						label(for="nome") <span data-i18n="demo.utilizador_form.modulo"></span>
+						select.browser-default(id="nome", name="nome")
+							-for(let i=0; i<AdMagen[0].nivel_acesso.length; i++)
+								option(value="#{AdMagen[0].nivel_acesso[i].nome}" , data-cont="#{AdMagen[0].nivel_acesso[i]._id}") #{AdMagen[0].nivel_acesso[i].nome}
+			fieldset.no-border
+				.row.buttons-container
+					if !Usuarios
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="adicionar_modulukeUser", ghsyu="#{Person._id}") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="voltar_util") <span data-i18n="demo.utilizador_form.cancelar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setTimeout(function(){document.getElementById("adminsession").className="activarAzul"}, 100);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+

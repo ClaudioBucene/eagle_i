@@ -1,0 +1,239 @@
+extends layout
+block content
+	.seccao.container.white
+		-var temp = Po_data[0].estagio.length
+		-if ((DataU.nome==Po_data[0].intervenientes[temp])&&(Po_data[0].estagio.length==1))
+			.fixed-action-btn.top.fixed-add-bottom
+				a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+				ul(dados=stockData2)
+					li
+						a.btn-floating.pointer.returnPoo(data-position="left", data-delay="10", class="btn-floating btn-small waves-effect waves-light" , data-user-new="#{Po_data[0]._id}") <i class="material-icons blue">replay</i>
+					li
+						a.btn-floating.pointer.reprovar_po(data-position="left", data-delay="10", class="btn-floating btn-small waves-effect waves-light" , data-user-new="#{Po_data[0]._id}") <i class="material-icons red">thumb_down</i>
+					li
+						a.btn-floating.pointer.aprovar_po(data-position="left", data-delay="10", ""class="btn-floating btn-large " , data-user-new="#{Po_data[0]._id}" ) <i class="material-icons green">thumb_up</i>
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Detalhes de P.O
+				.row
+					.col.s12.m6.input-field
+						label(for="requested_by") <span data-i18n="demo.po_form.nome"></span>
+						input.preencher(autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="requested_by" ,name="requested_by", data-sete="#{Forncedorres}" readonly value="#{Po_data[0].requested_by}")
+					.col.s12.m6.input-field
+						label(for="data") data da P.O
+						input.preencher(autocomplete="off", type="text", id="data", readonly value="#{((Po_data[0].data_po).getDate()<10? '0'+(Po_data[0].data_po).getDate():(Po_data[0].data_po).getDate())+'/'+(((Po_data[0].data_po).getMonth()+1)<10? ('0'+((Po_data[0].data_po).getMonth()+1)):((Po_data[0].data_po).getMonth()+1))+'/'+((Po_data[0].data_po).getFullYear())+'   '+((Po_data[0].data_po).getHours()<10? ('0'+(Po_data[0].data_po).getHours()): (Po_data[0].data_po).getHours() )+' : '+((Po_data[0].data_po).getMinutes()<10? ('0'+(Po_data[0].data_po).getMinutes()):(Po_data[0].data_po).getMinutes())}", style="font-family:")
+				.row
+					.col.s12.m6.input-field
+						label(for="supplier") <span data-i18n="demo.po_form.fornecedor"></span>
+						input.preencher( autocomplete="off", readonly, type="text",  style="font-family:;color:#12375c" ,id="supplier" ,name="supplier",  placeholder="Frete...", value="#{Po_data[0].supplier}")
+					.col.s12.m6.input-field
+						label(for="deliver_shipping") <span data-i18n="demo.po_form.Frete"></span>
+						input.preencher( autocomplete="off", readonly, type="text",  style="font-family:;color:#12375c" ,id="deliver_shipping" , placeholder="Frete...",name="deliver_shipping", value="#{Po_data[0].deliver_shipping}")
+				.row
+					.col.s12.m6.input-field
+						label(for="supplier_contact") <span data-i18n="demo.po_form.cont_fornecedor"></span>
+						input.preencher( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="supplier_contact" , name="supplier_contact", value="#{Po_data[0].supplier_contact}")
+					.col.s12.m6.input-field
+						label(for="address") <span data-i18n="demo.po_form.endereco"></span>
+						input.preencher(autocomplete="off",  type="text", readonly, style="font-family:;color:#12375c" ,id="address" ,  name="address",  value="#{Po_data[0].address}")
+				.row
+					.col.s12.m6.input-field
+						label(for="supplier_code") <span data-i18n="demo.po_form.cod_fornecedor"></span>
+						input.preencher( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="supplier_code" ,  placeholder="cod...",name="supplier_code", value="#{Po_data[0].supplier_code}")
+					.col.s12.m6.input-field
+						label(for="comment") <span data-i18n="demo.po_form.razoes"></span>
+						input.preencher( autocomplete="off", type="text", id="comment", readonly value="#{Po_data[0].comment}", style="font-family:")
+
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.titulo_Pagamento"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="payment_method") <span data-i18n="demo.po_form.metodo_pagamento"></span>
+						input( autocomplete="off", type="text", id="payment_method", readonly value="#{Po_data[0].payment_method}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="terms") <span data-i18n="demo.po_form.termo"></span>
+						input.preencher( autocomplete="off", type="text", id="terms", readonly  value="#{Po_data[0].terms}", style="font-family:")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.orde_pagamento"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="department") <span data-i18n="demo.po_form.departamento"></span>
+						input.preencher( autocomplete="off", type="text", id="department", readonly value="#{Po_data[0].department}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="subdepartment") <span data-i18n="demo.po_form.proposito"></span>
+						input.preencher( autocomplete="off", type="text", id="proposito", readonly  value="#{Po_data[0].proposito? Po_data[0].proposito:''}", style="font-family:")
+				.row
+					.col.s12.m6.input-field
+						label(for="quotation_number") <span data-i18n="demo.po_form.numero_cotacao"></span>
+						input.preencher( autocomplete="off", type="text", id="quotation_number", name="quotation_number", value="#{Po_data[0].quotation_number}",readonly style="font-family:")
+					.col.s12.m6.input-field
+						label(for="for_store") <span data-i18n="demo.po_form.destino"></span>
+						input.preencher( autocomplete="off", type="text",readonly id="for_store",  value="#{Po_data[0].for_store}", style="font-family:")
+				.row
+					.col.s12.m6.input-field.hide
+						label(for="po_approver") Aprovado por
+						input.preencher( autocomplete="off", readonly type="text", id="po_approver", name="po_approver", value="#{Po_data[0].po_approver}", style="font-family:")
+					-if(Po_data[0].po_number)
+						.col.s12.m6.input-field
+							label(for="reason") Numero de PO
+							input.preencher( autocomplete="off", type="text", id="reason",  readonly value="#{Po_data[0].po_number}", style="font-family:")
+				.row
+					.col.s12
+						.col.s2
+							label(for="currency") <span data-i18n="demo.po_form.moeda"></span>
+						.col.s4.m2
+							input.bom(type="radio" id="currency_mzn" checked="#{Po_data[0].currency}"=='MZN'? true:false, name="currency"  value="MZN")
+							label(for="currency_mzn") MZN					
+						.col.s4.m2
+							input.bom(type="radio", id="currency_euro", checked="#{Po_data[0].currency}"=='EURO'? true:false name='currency', value="EURO")
+							label(for="currency_euro") EURO
+						.col.s4.m2
+							input.bom(type="radio" id="currency_usd" name="currency", checked="#{Po_data[0].currency}"=='USD'? true:false, value="USD")
+							label(for="currency_usd") USD					
+						.col.s4.m2
+							input.bom(type="radio", id="currency_zar", name='currency', checked="#{Po_data[0].currency}"=='ZAR'? true:false, value="ZAR")
+							label(for="currency_zar") ZAR
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.cotacao_titulo"></span>
+				.row
+					.col.s12
+						table.responsive-table.bordered.striped(style="height:auto !important")
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.po_form.descricao"></span>
+									th <span data-i18n="demo.po_form.preco_unit"></span>
+									th Qtd
+									th Total
+									th Recebido
+							tbody(id="myTable_tecnicos_permitidos", style="height:auto !important")
+								-for(let i=0; i<Po_data[0].items.length; i++)
+									tr
+										td #{Po_data[0].items[i].nome_item}
+										td #{Po_data[0].items[i].price}
+										td #{Po_data[0].items[i].quantity}
+										td #{Po_data[0].items[i].total}
+										td #{Po_data[0].items[i].received? Po_data[0].items[i].received: '0'}
+						hr
+						table(style="height:auto !important")
+							tbody(style="height:auto !important")
+								tr
+									td
+									td 
+									th sub-total
+									td #{Po_data[0].subtotal}
+									td
+								tr
+									td
+									td 
+									th IVA 17%
+									td #{Po_data[0].iva}
+									td
+								tr
+									td
+									td 
+									th Total
+									td #{Po_data[0].total_to_pay}
+									td
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.valor"></span>
+				.row
+					table.responsive-table(style="height:auto !important")
+						thead
+							tr
+								th MZN
+								th USD
+								th EURO
+								th ZAR
+						tbody(style="height:auto !important")
+							tr
+								td #{Po_data[0].valor_em_metical}
+								td #{Po_data[0].valor_em_dolar}
+								td #{Po_data[0].valor_em_euro}
+								td #{Po_data[0].valor_em_rand}
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.ficheiro"></span>
+				.row
+					-if(Po_data[0].primeiro_ficheiro)
+						.col.s3
+							img(id="primeiro_fichero" src="/img/pdficon.png" style="width:40px" valor="#{Po_data[0].primeiro_ficheiro}")
+							label cotacao 1
+					-if(Po_data[0].segundo_ficheiro)
+						.col.s3
+							img(id="segundo_fichero" src="/img/pdficon.png" style="width:40px" valor="#{Po_data[0].segundo_ficheiro}")
+							label cotacao 2
+					-if(Po_data[0].terceiro_ficheiro)
+						.col.s3
+							img(id="terceiro_fichero" src="/img/pdficon.png" style="width:40px" valor="#{Po_data[0].terceiro_ficheiro}")
+							label cotacao 3
+					-if(Po_data[0].comprovativo)
+						.col.s3
+							img(id="comprovativo_ficheiro" src="/img/pdficon.png" style="width:40px" valor="#{Po_data[0].comprovativo}")
+							label Comprovativo
+
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.resultados"></span>
+				.row
+					table.responsive-table.bordered.striped(style="height:auto !important")
+						thead
+							tr
+								th <span data-i18n="demo.po_form.recebidos"></span>
+								th <span data-i18n="demo.po_form.data"></span>
+								th <span data-i18n="demo.po_form.acao"></span>
+						tbody(style="height:auto !important")
+							tr
+								td #{Po_data[0].requested_by}
+								td #{((Po_data[0].data_po).getDate()<10? '0'+(Po_data[0].data_po).getDate():(Po_data[0].data_po).getDate())+'/'+(((Po_data[0].data_po).getMonth()+1)<10? ('0'+((Po_data[0].data_po).getMonth()+1)):((Po_data[0].data_po).getMonth()+1))+'/'+((Po_data[0].data_po).getFullYear())+'   '+((Po_data[0].data_po).getHours()<10? ('0'+(Po_data[0].data_po).getHours()): (Po_data[0].data_po).getHours() )+' : '+((Po_data[0].data_po).getMinutes()<10? ('0'+(Po_data[0].data_po).getMinutes()):(Po_data[0].data_po).getMinutes())}
+								td SENT FOR APPROVAL
+							-if((Po_data[0].actual_situation=="reprovado") && (Po_data[0].estagio[1]==0)&& (Po_data[0].po_approvers.length==2)&& (Po_data[0].po_approvers[1]==Po_data[0].intervenientes[1]))
+								tr
+									td #{Po_data[0].po_approvers[1]}
+									td #{((Po_data[0].date_actions[1]).getDate()<10? '0'+(Po_data[0].date_actions[1]).getDate():(Po_data[0].date_actions[1]).getDate())+'/'+(((Po_data[0].date_actions[1]).getMonth()+1)<10? ('0'+((Po_data[0].date_actions[1]).getMonth()+1)):((Po_data[0].date_actions[1]).getMonth()+1))+'/'+((Po_data[0].date_actions[1]).getFullYear())+'   '+((Po_data[0].date_actions[1]).getHours()<10? ('0'+(Po_data[0].date_actions[1]).getHours()): (Po_data[0].date_actions[1]).getHours() )+' : '+((Po_data[0].date_actions[1]).getMinutes()<10? ('0'+(Po_data[0].date_actions[1]).getMinutes()):(Po_data[0].date_actions[1]).getMinutes())}
+									td REPROVADO
+							-if(Po_data[0].actual_situation=="aprovado" || Po_data[0].po_approvers.length>2)
+								tr
+									td #{Po_data[0].po_approvers[1]}
+									td #{((Po_data[0].date_actions[1]).getDate()<10? '0'+(Po_data[0].date_actions[1]).getDate():(Po_data[0].date_actions[1]).getDate())+'/'+(((Po_data[0].date_actions[1]).getMonth()+1)<10? ('0'+((Po_data[0].date_actions[1]).getMonth()+1)):((Po_data[0].date_actions[1]).getMonth()+1))+'/'+((Po_data[0].date_actions[1]).getFullYear())+'   '+((Po_data[0].date_actions[1]).getHours()<10? ('0'+(Po_data[0].date_actions[1]).getHours()): (Po_data[0].date_actions[1]).getHours() )+' : '+((Po_data[0].date_actions[1]).getMinutes()<10? ('0'+(Po_data[0].date_actions[1]).getMinutes()):(Po_data[0].date_actions[1]).getMinutes())}
+									td APROVADO
+							-if(Po_data[0].actual_situation=="Finalizado")
+								tr
+									td #{Po_data[0].po_approvers[2]}
+									td #{((Po_data[0].date_actions[2]).getDate()<10? '0'+(Po_data[0].date_actions[2]).getDate():(Po_data[0].date_actions[2]).getDate())+'/'+(((Po_data[0].date_actions[2]).getMonth()+1)<10? ('0'+((Po_data[0].date_actions[2]).getMonth()+1)):((Po_data[0].date_actions[2]).getMonth()+1))+'/'+((Po_data[0].date_actions[2]).getFullYear())+'   '+((Po_data[0].date_actions[2]).getHours()<10? ('0'+(Po_data[0].date_actions[2]).getHours()): (Po_data[0].date_actions[2]).getHours() )+' : '+((Po_data[0].date_actions[2]).getMinutes()<10? ('0'+(Po_data[0].date_actions[2]).getMinutes()):(Po_data[0].date_actions[2]).getMinutes())}
+									td RECEBIDO
+							-if(Po_data[0].actual_situation=="reprovado" && Po_data[0].po_approvers[2] && Po_data[0].po_approvers[1])
+								tr
+									td #{Po_data[0].po_approvers[2]}
+									td #{((Po_data[0].date_actions[2]).getDate()<10? '0'+(Po_data[0].date_actions[2]).getDate():(Po_data[0].date_actions[2]).getDate())+'/'+(((Po_data[0].date_actions[2]).getMonth()+1)<10? ('0'+((Po_data[0].date_actions[2]).getMonth()+1)):((Po_data[0].date_actions[2]).getMonth()+1))+'/'+((Po_data[0].date_actions[2]).getFullYear())+'   '+((Po_data[0].date_actions[2]).getHours()<10? ('0'+(Po_data[0].date_actions[2]).getHours()): (Po_data[0].date_actions[2]).getHours() )+' : '+((Po_data[0].date_actions[2]).getMinutes()<10? ('0'+(Po_data[0].date_actions[2]).getMinutes()):(Po_data[0].date_actions[2]).getMinutes())}
+									td CANCELADO
+							-if(Po_data[0].actual_situation=="reprovado" && Po_data[0].po_approvers[1] && Po_data[0].estagio[1]==0 && !Po_data[0].po_approvers[2] && Po_data[0].po_approvers[1]==Po_data[0].po_approvers[0])
+								tr
+									td #{Po_data[0].po_approvers[1]}
+									td #{((Po_data[0].date_actions[1]).getDate()<10? '0'+(Po_data[0].date_actions[1]).getDate():(Po_data[0].date_actions[1]).getDate())+'/'+(((Po_data[0].date_actions[1]).getMonth()+1)<10? ('0'+((Po_data[0].date_actions[1]).getMonth()+1)):((Po_data[0].date_actions[1]).getMonth()+1))+'/'+((Po_data[0].date_actions[1]).getFullYear())+'   '+((Po_data[0].date_actions[1]).getHours()<10? ('0'+(Po_data[0].date_actions[1]).getHours()): (Po_data[0].date_actions[1]).getHours() )+' : '+((Po_data[0].date_actions[1]).getMinutes()<10? ('0'+(Po_data[0].date_actions[1]).getMinutes()):(Po_data[0].date_actions[1]).getMinutes())}
+									td CANCELADO
+				.row
+					-if(Po_data[0].decline_reasons)
+						.col.s12.m6.input-field
+							label(for="reason") razoes da reprovacao
+							input.preencher( autocomplete="off", type="text", id="reason",  readonly value="#{Po_data[0].decline_reasons}", style="font-family:")
+					-if(Po_data[0].returned)
+						.col.s12.m6.input-field
+							label(for="reason") Razoes do retorno
+							input.preencher( autocomplete="off", type="text", id="reason",  readonly value="#{Po_data[0].returned_reason}", style="font-family:")
+			fieldset.no-border
+				.row.buttons-container
+					.col.s12.center
+						button#cancelar_Po(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

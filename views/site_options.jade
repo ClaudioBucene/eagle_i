@@ -1,0 +1,60 @@
+extends layout
+block content
+	.seccao
+		.col.s6.m4.center
+			if !referencia.safetyOb.veiculo_safe
+				img.inspseguro(src="/img/seguro.png", dataref="#{referencia._id}")
+				figcaption
+					p.center <span data-i18n="demo.site_options.safety"></span>
+		.col.s6.m4.center
+			if !referencia.EDBoardOb.connections
+				img.inspedboard( src="/img/edb.png", dataref="#{referencia._id}")
+				figcaption
+					p <span data-i18n="demo.site_options.extboar"></span>
+		.col.s6.m4.center
+			if !referencia.container.container_light
+				img.inspcontainer(src="/img/containerr.png", dataref="#{referencia._id}")
+				figcaption
+					p.center <span data-i18n="demo.site_options.container"></span>
+		.col.s6.m4.center
+			if !referencia.airCond.fan_blade
+				img.inspacond(src="/img/acond2.png", dataref="#{referencia._id}")
+				figcaption
+					p.center <span data-i18n="demo.site_options.arcond"></span>
+		.col.s6.m4.center
+			if !referencia.mast.aw_light
+				img.inspmast(src="/img/mast.png", dataref="#{referencia._id}")
+				figcaption
+					p.center <span data-i18n="demo.site_options.mast"></span>
+		.col.s6.m4.center
+			if !referencia.alarms.intruder
+				img.inspalarm( src="/img/alarm.png", dataref="#{referencia._id}")
+				figcaption
+					p.center <span data-i18n="demo.site_options.alarme"></span>
+		.col.s6.m4.center
+			if !referencia.generator.oil_leak
+				img.inspgenerator( src="/img/generator.png", dataref="#{referencia._id}")
+				figcaption
+					p.center <span data-i18n="demo.site_options.gerador"></span>
+		.col.s6.m4.center
+			if !referencia.roofTop.mounting_poles
+				img.insprooftop( src="/img/rooftop.png", dataref="#{referencia._id}")
+				figcaption
+					p.center <span data-i18n="demo.site_options.telhado"></span>
+		.col.s6.m4.center
+			if !referencia.site_general.fence_gate_locks_hinges
+				img.inspsitegeneral( style="width:120px", src="/img/cellsite3.png", dataref="#{referencia._id}")
+				figcaption
+					p.center <span data-i18n="demo.site_options.sitegeral"></span>
+	block js
+	script.
+		setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+		setTimeout(function(){
+		if(window.innerWidth<780){
+		document.getElementById("mySidebar").style.width = "0";
+		document.getElementById("main").style.marginLeft= "0";
+		document.getElementById("main").style.width="100%";
+		document.getElementById("main").style.marginBottom="0";
+		document.getElementByClassName("capitalize").style.class="pequeno";
+		}
+		}, 50);

@@ -1,0 +1,48 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.dados_basicos"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="nome") <span data-i18n="demo.utilizador_form.provincia"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome", readonly,name="nome", value="#{Depp? Depp.nome : ''}")
+					.col.s12.m6.input-field
+						label(for="nome_supervisor") <span data-i18n="demo.utilizador_form.supervisor"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome_supervisor", readonly,name="nome_supervisor", value="#{Depp? Depp.nome_supervisor : ''}")
+				.row
+					.col.s12.m6.input-field
+						label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+						input(type="text",  id="regiao", name="regiao", readonly, value="#{Depp? Depp.regiao : ''}" )
+					.col.s12.m6.input-field
+						label(for="registado_por") Registado por
+						input(type="text",  id="registado_por", name="registado_por", readonly, value="#{Depp? Depp.registado_por : ''}" )
+					-if(Depp.data_edicao)
+						.col.s12.m6.input-field
+							label(for="editado_por") Editado por
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="editado_por", readonly,name="editado_por", value="#{Depp? Depp.editado_por : ''}")
+						.col.s12.m6.input-field
+							label(for="data_edicao") Data de edicao
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="data_edicao", readonly,name="data_edicao", value="#{Depp? Depp.data_edicao : ''}")
+			fieldset.no-border
+				.row.buttons-container
+					.col.s12.center
+						butoon#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setTimeout(function(){document.getElementById("adminsession").className="activarAzul"}, 100);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+

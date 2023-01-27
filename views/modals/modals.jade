@@ -1,0 +1,395 @@
+mixin modals()
+	div(id="yes_no_modal", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal",style="color:#12375c")
+			p(id="yes_no_content_modal")
+		
+		div(class="modal-footer")
+			button(type="button", id="no_btn_modal_" class="btn red modal-action modal-close waves-effect waves-green btn-flat clicarrr", vvl="nao" style="margin-left: 20px !important") <span data-i18n="demo.inspdiaria_form.naoo"></span>
+			button(type="button", id="yes_btn_modal", vvl="sim" class="btn green modal-action modal-close waves-effect waves-green btn-flat clicarrr") <span data-i18n="demo.inspdiaria_form.simm"></span>
+	
+	div(id="yes_no_modal_return_stock", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal_return_stock",style="color:#12375c;  font-size:90% !important")
+			p(id="yes_no_content_modal_return_stock")
+		
+		div(class="modal-footer")
+			button.reducao_botao(type="button", id="no_btn_modal__return_stock" class="btn red modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") <span data-i18n="demo.utilizador_form.cancelar"></span>
+			button.reducao_botao(type="button", id="yes_btn_modal_return_stock", class="btn green modal-action modal-close waves-effect waves-green btn-flat") <span data-i18n="demo.utilizador_form.gravar"></span>
+	div(id="yes_no_modal_return_stock__", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal_return_stock__",style="color:#12375c;  font-size:90% !important")
+			p(id="yes_no_content_modal_return_stock__")
+		
+		div(class="modal-footer")
+			button(type="button", id="cancelar_bbkt", class="btn red waves-effect waves-green btn-flat" style="margin-left: 20px !important") <span >Cancel</span>
+			button#redutorII(type="button",  class="btn green waves-effect waves-green btn-flat hide",  style="margin-left: 20px !important") Next >>
+	
+	div(id="yes_no_modal_return_stock__po", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal_return_stock__po",style="color:#12375c;  font-size:90% !important")
+			p(id="yes_no_content_modal_return_stock__po")
+		
+		div(class="modal-footer")
+			button#redutorIII(type="button",  class="btn green waves-effect waves-green btn-flat",  style="margin-left: 20px !important") Next >>
+	
+	div(id="loading" style="display:none;")
+		.loading1 <br>
+		span.bold(class="hide-on-small-only") processando...
+
+
+	div(id="msg_modal", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="msg_title_modal", style="color:#12375c")
+			p(id="msg_content_modal")
+		
+		div(class="modal-footer")
+			button(type="button", class="btn modal-action modal-close waves-effect waves-green btn-flat btn waves-efect waves-light activarAzul", id="ok_btn_modal") OK
+
+	div(id="msg_modal_2", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			p(id="msg_content_modal_2")
+		
+		div(class="modal-footer")
+			button(type="button", class="btn modal-action modal-close waves-effect waves-green btn-flat", id="ok_btn_modal") OK
+
+	div(id="image_modal", class="modal center")
+		div(id="jobcardphotoinfodetalhes_modal", class="modal center")
+		a(id="jobcardphotoinfodetalhes_cancel" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="jobcardphotoinfodetalhes_title_modal",style="color:#12375c") <span data-i18n="demo.preventative_maint.photo"></span>
+			div(class="row center")
+				form#msform(class="col s12" style="margin:0px; color:#12375c;" method="POST", action="", enctype="multipart/form-data")
+
+	div(id="preloader" )
+
+
+	div(id="jobcardaddticket_modal", class="modal", style="width: 70% !important")
+		a(id="jobcardaddticket_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="jobcardaddticket_modal_title_modal",style="color:#12375c") <span data-i18n="demo.ttnumber_form.adicionarticketnumber"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					.row
+						.input-field.col.s12.m12(style="margin-top:0px")
+							label(for="jobcard_ttnumber") <span data-i18n="demo.ttnumber_form.ttnumber"></span>
+							input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_ttnumber" ,name="jobcard_ttnumber")
+					div(class="modal-footer")
+						button(type="button", id="jobcardaddticket_modal_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	//- escolher formulario de cliente ou de fornecedor
+	div(id="clientesupp_modal", class="modal", style="width: 60% !important")
+		a(id="clientesuppopt_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px; padding:10px !important")
+			h4(id="clientesupp_title_modal",style="color:#12375c") <span data-i18n="demo.cliente_form.clientesupp"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					.row#paragrafoatt.hide
+						p.red <span data-i18n="demo.cliente_form.escolhaop"></span>!
+					.row(style="margin-top:20px; margin-bottom:20px")
+						.col.s2.hide-on-small-only
+							label(for="clientesuppopt") <span data-i18n="demo.cliente_form.escolhaop"></span>:
+						.col.s5
+							input(type="radio" id="formulariocliente" name="clientesuppopt"  value="cliente")
+							label(for="formulariocliente") <span data-i18n=demo.cliente_form.cliente></span>	
+						.col.s5
+							input(type="radio", id="formulariofornecedor", name='clientesuppopt', value="fornecedor")
+							label(for="formulariofornecedor") <span data-i18n=demo.cliente_form.fornecedor></span>
+					div(class="modal-footer")
+						//- button(type="button", id="clientesuppopt_cancel_btn_modal_" class="center btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") <span data-i18n="demo.ttnumber_form.cancelar"></span>
+						button(type="button", id="clientesuppopt_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat") <span data-i18n="demo.ttnumber_form.create"></span>
+	div(id="pettycashreport_modal", class="modal", style="width: 50% !important")
+		a(id="pettycashreport_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px; padding:10px !important")
+			h4(id="pettycashreport_title_modal",style="color:#12375c") <span data-i18n="demo.pettycash_home.pettycashreport"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					.row#paragrafoatt1.hide
+						p(style="color:red") <span data-i18n="demo.pettycash_home.escolhaop"></span>!
+					.row#paragrafoatt3.hide
+						p(style="color:red") <span data-i18n="demo.pettycash_home.escolhaop1"></span>!
+					.row#paragrafoatt4.hide
+						p(style="color:red") <span data-i18n="demo.pettycash_home.escolhaop2"></span>!
+					.row(style="margin-bottom:0px; margin-top:20px;")
+						.col.s12.m6(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.nomecolaborador"></span>
+							select.browser-default(name="pettycashreportcolaborador" id = "pettycashreportcolaborador")
+								option(value="" disabled selected) Choose
+					.row(style="margin-bottom:0px")
+						.col.s12.m2(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.mes"></span>
+							select.browser-default(name="pettycashreportmesfrom" id = "pettycashreportmesfrom")
+								option(value="" disabled selected) Choose
+						.col.s12.m2(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.ano"></span>
+							select.browser-default(name="pettycashreportanofrom" id = "pettycashreportanofrom")
+								option(value="" disabled selected) Choose
+						.col.s12.m1(style="margin-top:26px")
+							i.material-icons.prefix.selmecAzul arrow_forward
+						.col.s12.m2(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.mes"></span>
+							select.browser-default(name="pettycashreportmesto" id = "pettycashreportmesto")
+								option(value="" disabled selected) Choose
+						.col.s12.m2(style="margin-top:2px")
+							label <span data-i18n="demo.pettycash_home.ano"></span>
+							select.browser-default(name="pettycashreportanoto" id = "pettycashreportanoto")
+								option(value="" disabled selected) Choose
+					div(class="modal-footer")
+						//- button(type="button", id="clientesuppopt_cancel_btn_modal_" class="center btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") <span data-i18n="demo.ttnumber_form.cancelar"></span>
+						button(type="button", id="pettycashreport_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat") <span data-i18n="demo.pettycash_home.create"></span>
+	div(id="pettycashreason_modal", class="modal", style="width: 60% !important")
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="pettycashreason_title_modal",style="color:#12375c") <span data-i18n="demo.pettycash_home.reason"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12")
+					.row#paragrafoatt2.hide
+						p.red <span data-i18n="demo.pettycash_home.escolhaop"></span>!
+					.row(style="margin-top:20px;")
+						.col.s12.m6.input-field
+							select(name="reasonoptions", id="reasonoptions" multiple)
+								option(value="" disabled selected) Escolha a opção
+								option(value="Documentos em falta") Documentos em falta
+								option(value="Dados da empresa incorrectos") Dados da empresa incorrectos
+								option(value="Outros") Outros
+							label <span data-i18n="demo.pettycash_home.reason1"></span>
+						.col.s12.m6.input-field.hide#mostrarOutros
+							label(for="reasonoutros" style="font-size:15px") <span data-i18n="demo.pettycash_home.outros"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="reasonoutros" ,name="reasonoutros")
+					div(class="modal-footer")
+						button(type="button", id="pettycashreason_cancel_btn_modal_" class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") <span data-i18n="demo.ttnumber_form.cancelar"></span>
+						button(type="button", id="pettycashreason_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	div(id="pettycasheditcredit_modal", class="modal", style="width: 60% !important")
+		a(id="pettycasheditcredit_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="pettycasheditcredit_title_modal",style="color:#12375c") <span data-i18n="demo.pettycash_home.editcredit"></span>
+			div(class="row")
+				form.jobcardtecnicoform(class="col s12 center")
+					//- .row#paragrafoatt2.hide
+					//- 	p.red <span data-i18n="demo.pettycash_home.escolhaop"></span>!
+					.row(style="margin-top:20px;")
+						.col.s12.m12.input-field
+							label(for="reasonoutros" style="font-size:15px") <span data-i18n="demo.pettycash_home.credito"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="pettycash_credito1" ,name="pettycash_credito1")
+					div(class="modal-footer")
+						button(type="button", id="pettycasheditcredit_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	div(id="siteinfodistributionrackinfo_modal", class="modal", style="width: 70% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.distributionrackdetails"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(for="siteinfo_distribuitionRackInverters") <span data-i18n="demo.site_info.inverters"></span>
+							select.browser-default(name="siteinfo_distribuitionRackInverters", id="siteinfo_distribuitionRackInverters", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_distribuitionRackInvertersType") <span data-i18n="demo.site_info.invertertype"></span>
+							select.browser-default(name="siteinfo_distribuitionRackInvertersType", id="siteinfo_distribuitionRackInvertersType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Inverter - 48VDC/220VAC") Inverter - 48VDC/220VAC
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackVaRating") <span data-i18n="demo.site_info.varating"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_distribuitionRackVaRating" ,name="siteinfo_distribuitionRackVaRating")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackInvertQty") <span data-i18n="demo.site_info.inverterqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_distribuitionRackInvertQty" ,name="siteinfo_distribuitionRackInvertQty")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackDcInput") <span data-i18n="demo.site_info.inputdc"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_distribuitionRackDcInput" ,name="siteinfo_distribuitionRackDcInput")
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackACOutput") <span data-i18n="demo.site_info.outputac"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_distribuitionRackACOutput" ,name="siteinfo_distribuitionRackACOutput")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:22px")
+							label(for="siteinfo_distribuitionRackRedudancyctrller") <span data-i18n="demo.site_info.redcontroller"></span>
+							select.browser-default(name="siteinfo_distribuitionRackRedudancyctrller", id="siteinfo_distribuitionRackRedudancyctrller", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					div(class="modal-footer")
+						button.adicionardistributionrack(type="button", id="siteinfodistributionrackinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.adddistrack"></span>
+						button.hide(type="button", id="siteinfodistributionrackinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updatedistrack"></span>
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+	div(id="siteinfotransmissioncabinfo_modal", class="modal", style="width: 70% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="resetgeneratorhours_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.transmissioncabinetdetails"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:22px")
+							label(style="margin-left:0.2rem;" for="siteinfo_transmissioncabInstalled") <span data-i18n="demo.site_info.transmissioncabinst"></span>
+							select.browser-default(name="siteinfo_transmissioncabInstalled", id="siteinfo_transmissioncabInstalled", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:22px")
+							label(style="margin-left:0.2rem;" for="siteinfo_transmissioncabType") <span data-i18n="demo.site_info.transmissioncabtype"></span>
+							select.browser-default(name="siteinfo_transmissioncabType", id="siteinfo_transmissioncabType", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="19' in door (47 u inside container) ") 19' in door (47 u inside container) 
+								option(value="Other") Other
+								option(value="Other bts bs82") Other bts bs82
+								option(value="Rectifier cabinet") Rectifier cabinet
+								option(value="Site star cabinet") Site star cabinet
+								option(value="Tctf (huawei)") Tctf (huawei)
+					.row(style="margin-top:22px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;" for="siteinfo_transmissioncabServiceProvider") <span data-i18n="demo.site_info.transmissionprovider"></span>
+							select.browser-default(name="siteinfo_transmissioncabServiceProvider", id="siteinfo_transmissioncabServiceProvider", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Vodacom") Vodacom
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_transmissioncabQty") <span data-i18n="demo.site_info.transmissioncabqty"></span>
+							input( autocomplete="off", type="text", style="font-family;color:#12375c" ,id="siteinfo_transmissioncabQty" ,name="siteinfo_transmissioncabQty")
+					div(class="modal-footer")
+						button.adicionartransmissioncabinet(type="button", id="siteinfotransmissioncabinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addrectcab"></span>
+						button.hide(type="button", id="siteinfotransmissioncabinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updaterectcab"></span>
+	div(id="canceljobcard_modal", class="modal", style="width: 50% !important")
+		a.resetgeneratorhours_modal_cancel_btn_modal_(id="canceljobcard_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+		div(class="modal-content" style="padding-top:20px")
+			h4(style="color:#12375c") <span data-i18n="demo.site_info.canceljobcard"></span>
+			div(class="row center")
+				form.jobcardtecnicoform(class="col s12")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.canceljobcard></span>
+							select.browser-default(name="cancel_reason", id="cancel_reason")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="Site up without intervention") Site up without intervention 
+					div(class="modal-footer")
+						button(type="button", id="canceljobcard_confirm_btn", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.canceljobcard"></span>
+
+	//- div(id="siteinfogeneratorinfo_modal", class="modal", style="width: 70% !important")
+	//- 	a.siteinfogeneratorinfo_modal_cancel_btn_modal_(id="siteinfogeneratorinfo_modal_cancel_btn_modal_" style="margin-right: 0px; position:absolute; right:0px; background:#12375c; width:33px;" class="modal-action modal-close waves-effect waves-green") <i class="material-icons activarVerde">close</i>
+	//- 	div(class="modal-content" style="padding-top:20px")
+	//- 		h4(id="siteinfogeneratorinfo_title_modal",style="color:#12375c") <span data-i18n="demo.site_info.detalhesgerador"></span>
+	//- 		div(class="row center")
+	//- 			form.jobcardtecnicoform(class="col s12")
+	//- 				.row(style="margin-bottom:0px")
+	//- 					.col.s12.m6(style="margin-top:2px")
+	//- 						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.generatortype></span>
+	//- 						select.browser-default(name="siteinfo_generatortype", id="siteinfo_generatortype")
+	//- 							option(value="" disabled selected selmecVerde) Escolha uma opção
+	//- 							option(value="Cummins") Cummins
+	//- 							option(value="Deutz") Deutz
+	//- 							option(value="Mitsubishi") Mitsubishi
+	//- 							option(value="Perkins") Perkins
+	//- 							option(value="Volvo") Volvo
+	//- 							option(value="Yanmar") Yanmar
+	//- 							option(value="Perkins AGG") Perkins AGG
+	//- 					.col.s12.m6.input-field(style="margin-top:22px")
+	//- 						label(for="siteinfo_generatoroutputkw") <span data-i18n="demo.site_info.outputkw"></span>
+	//- 						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatoroutputkw" ,name="siteinfo_generatoroutputkw")
+	//- 				.row(style="margin-bottom:0px")
+	//- 					.col.s12.m6.input-field(style="margin-top:2px")
+	//- 						label(for="siteinfo_generatormodelno") <span data-i18n="demo.site_info.modelno"></span>
+	//- 						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatormodelno" ,name="siteinfo_generatormodelno")
+	//- 					.col.s12.m6.input-field(style="margin-top:2px")
+	//- 						label(for="siteinfo_generatorengineserialnumber") <span data-i18n="demo.site_info.engineserialnumber"></span>
+	//- 						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatorengineserialnumber" ,name="siteinfo_generatorengineserialnumber")
+	//- 				.row(style="margin-bottom:0px")
+	//- 					.col.s12.m6(style="margin-top:2px")
+	//- 						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.enginecapacity></span>
+	//- 						select.browser-default(name="siteinfo_generatorenginecapacity", id="siteinfo_generatorenginecapacity")
+	//- 							option(value="" disabled selected selmecVerde) Escolha uma opção
+	//- 							option(value="2 Cylinder") 2 Cylinder
+	//- 							option(value="4 Cylinder") 4 Cylinder
+	//- 							option(value="4 Cylinder Turbo") 4 Cylinder Turbo
+	//- 							option(value="6 Cylinder") 6 Cylinder
+	//- 					.col.s12.m6(style="margin-top:2px")
+	//- 						label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.startertype></span>
+	//- 						select.browser-default(name="siteinfo_generatorstartertype", id="siteinfo_generatorstartertype", style="font-family:")
+	//- 							option(value="" disabled selected selmecVerde) Escolha uma opção
+	//- 							option(value="Bosch") Bosch
+	//- 							option(value="Bosch 2 Hole") Bosch 2 Hole
+	//- 							option(value="Bosch 3 Hole") Bosch 3 Hole
+	//- 							option(value="Cummins") Cummins
+	//- 							option(value="Denso") Denso
+	//- 							option(value="Perkins") Perkins
+	//- 				.row(style="margin-bottom:0px")
+	//- 					.col.s12.m6.input-field(style="margin-top:22px")
+	//- 						label(for="siteinfo_generatorfuelconsumption") <span data-i18n="demo.site_info.fuelconsumption"></span>
+	//- 						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_generatorfuelconsumption" ,name="siteinfo_generatorfuelconsumption")
+	//- 				div(class="modal-footer")
+	//- 					button.adicionarGenerator.hide(type="button", id="siteinfogeneratorinfo_yes_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.addgenerator"></span>
+	//- 					button.hide(type="button", id="siteinfogeneratorinfo_update_btn_modal", class="btn modal-action waves-effect waves-green btn-flat" style="margin-left: 20px !important; width:175px; font-size:12px") <span data-i18n="demo.site_info.updategenerator"></span>
+
+	

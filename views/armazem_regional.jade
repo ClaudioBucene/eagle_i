@@ -1,0 +1,49 @@
+extends layout
+block content
+	.container.seccao.white
+		-if(DataU.nome=="Luis Matine" || DataU.nome=="Hamilton Sitoe" || DataU.nivel_acesso=="admin")
+			.fixed-action-btn.top.fixed-add-bottom
+				a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Request Stock ", class="btn-floating btn-large waves-effect waves-light", href="/armazem/#{Armazem[0]._id}/novo") <i class="material-icons activarVerde">add</i>	
+		if !Armazem[0].items || Armazem[0].items.length==0
+			p.center-align.selmecAzul.bold sem Inventario para mostrar no #{Armazem[0].nome}
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Inventario do #{Armazem[0].nome}
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Artigo
+						th Cod Produto
+						th Disponivel
+						th Proprietario
+						th Catergoria
+						th Historico 
+						
+				tbody(id="myTable")
+					-for(var index =0; index<Armazem[0].items.length; index++)
+						tr.highlight(data-funcionario="#{Armazem[0].items[index]._id}")
+							td #{Armazem[0].items[index].description_item}
+							td #{Armazem[0].items[index].part_number}
+							td #{Armazem[0].items[index].disponivel}
+							td #{Armazem[0].items[index].cliente_name}
+							td #{Armazem[0].items[index].grupo}
+							td 
+								a.pointer(href="/stock_request/history/#{Armazem[0]._id}/#{Armazem[0].items[index].referencia}") <i class="material-icons bold">history</i>
+							
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

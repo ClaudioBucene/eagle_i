@@ -1,0 +1,14 @@
+@media only screen and (max-width: 760px ){
+	
+	
+	#mySidebar{
+		width: 	0 !important;
+
+	}
+#main{
+	width:100% !important;
+	margin-left: 0 !important;
+}
+ 
+	
+	}

@@ -1,0 +1,74 @@
+extends layout
+block content
+	.container.seccao.white
+		.row
+			.col.s12#container.chartjs-stacked-bar(dataa="#{Mensagem}" ,cor="#{backgrnd}", regiao="#{regiao}" style="position: relative; height:70vh; width:75vw !important")
+				canvas#myChart1(style="position: relative; height:70vh; width:75vw !important") 
+				
+
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		//- script(src="https://canvasjs.com/assets/script/canvasjs.min.js")
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+			var texto="Viaturas da regiao "+ $("#container").attr("regiao");
+			let dados1= JSON.parse($("#container").attr("dataa"));
+			console.log(dados1);
+			var ctx1 = document.getElementById("myChart1").getContext('2d');
+			var myChart = new Chart(ctx1, {
+			type: 'horizontalBar',
+			data: {
+			labels: ["Administration", "Call Center", "Data Center", "Finance", "Fleet", "HVAC", "Health & Safety", "Information Technology", "Logistics", "Power", "Procurement", "Telco"],
+			datasets: [{
+			backgroundColor: [
+			getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor()],
+			data: [(dados1.findIndex(x => x._id =="Administration")!=-1? dados1[dados1.findIndex(x => x._id =="Administration")].soma:0), (dados1.findIndex(x => x._id =="Call Center")!=-1? dados1[dados1.findIndex(x => x._id =="Call Center")].soma:0), (dados1.findIndex(x => x._id =="Data Center")!=-1? dados1[dados1.findIndex(x => x._id =="Data Center")].soma:0), (dados1.findIndex(x => x._id =="Finance")!=-1? dados1[dados1.findIndex(x => x._id =="Finance")].soma:0), (dados1.findIndex(x => x._id =="Fleet")!=-1? dados1[dados1.findIndex(x => x._id =="Fleet")].soma:0), (dados1.findIndex(x => x._id =="HVAC")!=-1? dados1[dados1.findIndex(x => x._id =="HVAC")].soma:0), (dados1.findIndex(x => x._id =="Health & Safety")!=-1? dados1[dados1.findIndex(x => x._id =="Health & Safety")].soma:0), (dados1.findIndex(x => x._id =="Information Technology")!=-1? dados1[dados1.findIndex(x => x._id =="Information Technology")].soma:0), (dados1.findIndex(x => x._id =="Logistics")!=-1? dados1[dados1.findIndex(x => x._id =="Logistics")].soma:0), (dados1.findIndex(x => x._id =="Power")!=-1? dados1[dados1.findIndex(x => x._id =="Power")].soma:0), (dados1.findIndex(x => x._id =="Procurement")!=-1? dados1[dados1.findIndex(x => x._id =="Procurement")].soma:0), (dados1.findIndex(x => x._id =="Telco")!=-1? dados1[dados1.findIndex(x => x._id =="Telco")].soma:0)]
+			}]
+			},
+			options: {
+			title: {
+				display: true,
+				text: texto
+				},
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: true
+			},scales:{yAxes:[{ticks:{beginAtZero: true}}]}
+			}
+			});
+			function getRandomColor() {
+			var letters = '0123456789ABCDEF';
+			var color = '#';
+			for (var i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+			}
+
+			var canvas1 = document.getElementById('myChart1');
+			canvas1.onclick = function(evt) {
+			var activePoint = myChart.getElementAtEvent(evt)[0];
+			var data = activePoint._chart.data;
+			var datasetIndex = activePoint._datasetIndex;
+			var label = data.datasets[datasetIndex].label;
+			var value = data.datasets[datasetIndex].data[activePoint._index];
+			var regiao= data.labels[activePoint._index]
+			//- label=label.replace("Estado", '').trim()
+			//- if(regiao!="Maputo Cidade")
+			//- regiao=regiao.replace("Região", '').toLowerCase().trim()
+
+			//- var rule = label+'1'+regiao
+			
+			var linkk= regiao.replace(/\s/g,"_");
+			//- console.log(linkk);
+			window.location.href="/dashboard/enconrt/"+linkk+"/"+$("#container").attr("regiao");
+			};

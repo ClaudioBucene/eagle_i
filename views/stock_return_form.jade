@@ -1,0 +1,146 @@
+extends layout
+block content
+		-if(Armazem.length==0)
+			p.center-align.selmecAzul.bold Caro #{DataU.nome}, nao Possui o inventario para fazer a devolucao
+		-else
+			.seccao.container.white
+				form(id="formulario", method="POST") 
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold Formulario de retorno
+						.row
+							.col.s12.m6.input-field
+								label(for="requested_by") <span data-i18n="demo.stok_request_form.nome"></span>
+								input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="requested_by" ,name="requested_by", readonly value="#{Stock_request? Stock_request[0].requested_by : DataU.nome}")
+							.col.s12.m6
+								label(for="department") <span data-i18n="demo.stok_request_form.departamento"></span> 
+								select.browser-default.browser-default(name="department", id="department", style="font-family:" dados_depart="#{JSON.stringify(Departamento)}")
+									if Stock_requestStock_request
+										-for(var i = 0; i < Departamento.length; i++)
+											if Stock_requestStock_request[0].department == Departamento[i]
+												option(value="#{Departamento[i]}", selected="selected"  data-chefe_d="#{chefes_depart[i]}") #{Departamento[i]}
+											else
+												option(value="#{Departamento[i]}" ) #{provincias[i]}
+									else
+										-for(let i=0; i<AdMagen[0].departamento.length; i++)
+											-if(DataU.departamento == AdMagen[0].departamento[i].nome)
+												option(value="#{AdMagen[0].departamento[i].nome}" , data-cont="#{AdMagen[0].departamento[i]._id}",  data-chefe_d="#{AdMagen[0].departamento[i].chefe_depart}") #{AdMagen[0].departamento[i].nome}
+									//- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+									//- if Stock_requestStock_request
+									//- 	-for(var i = 0; i < Departamento.length; i++)
+									//- 		if Stock_requestStock_request[0].department == Departamento[i]
+									//- 			option(value="#{Departamento[i]}", selected="selected"  data-chefe_d="#{chefes_depart[i]}") #{Departamento[i]}
+									//- 		else
+									//- 			option(value="#{Departamento[i]}" ) #{provincias[i]}
+									//- else
+									//- 	-for(var i = 0; i < Departamento.length; i++)
+									//- 		-if(DataU.departamento==Departamento[i])
+									//- 			option(value="#{Departamento[i]}" data-chefe_d="#{chefes_depart[i]}") #{Departamento[i]} 
+							if Stock_request
+								.col.s12.m6.input-field
+									label(for="date_request") <span data-i18n="demo.stock_request_home.data"></span>
+									input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="date_request" ,name="date_request", readonly value="#{Stock_request[0].date_request}")
+
+						.row
+							.col.s12.m6.hide
+								label(for="company") Empresa
+								select.browser-default.browser-default(name="company", id="company", style="font-family:")
+									if Stock_request
+										if Stock_request[0].company == "Comserv"
+											option(value="Comserv", selected="selected") Comserv
+										else
+											option(value="Vodacom") Vodacom
+									else
+										option(value="Comserv") Comserv
+										option(value="Vodacom") Vodacom
+							.col.s12.m6
+								label(for="request_from") <span data-i18n="demo.stok_request_form.Requesitar_em1"></span>
+								select.browser-default.browser-default(name="request_from", id="request_from", style="font-family:")
+									if Stock_requestStock_request
+										-for(var i = 0; i < Armazem.length; i++)
+											if Stock_requestStock_request[0].nome == Armazem[i]
+												option(value="#{Armazem[i].nome}", selected="selected") #{Armazem[i].nome.indexOf("Armazem")!=-1? "DLA":Armazem[i].nome}
+											else
+												option(value="#{Armazem[i].nome}" data-wh="#{Armazem[i]._id}") #{Armazem[i].nome.indexOf("Armazem")!=-1? "DLA":Armazem[i].nome}
+									else
+										-for(var i = 0; i < Armazem.length; i++)
+											option(value="#{Armazem[i].nome}" data-wh="#{Armazem[i]._id}" data-resp="#{Armazem[i].responsavel[0]}" data-chefe="#{Armazem[i].responsavel}") #{Armazem[i].nome.indexOf("Armazem")!=-1? "DLA":Armazem[i].nome}
+							.col.s12.m6.input-field
+								label(for="Date_required") <span data-i18n="demo.stock_request_home.data"></span>
+								input.preencher( autocomplete="off", type="text", id="Date_required", escollher="#{Esconder}", readonly, value="#{((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())}", style="font-family:")
+							.col.s12.m6.input-field.hide
+								label(for="quote_BS_number") <span data-i18n="demo.stok_request_form.titulo1"></span>
+								input( autocomplete="off", type="text",  style="font-family:;color:#12375c" ,id="quote_BS_number" ,name="quote_BS_number", value="#{Stock_request? Stock_request[0].quote_BS_number : ''}")
+						.row
+							.col.s12.m6.input-field.hide
+								label(for="book_out_to_store") <span data-i18n="demo.stok_request_form.destino"></span>
+								input( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="book_out_to_store" , name="book_out_to_store", readonly value="#{DataU.nome}")
+							.col.s12.m6.input-field
+								label(for="reason") <span data-i18n="demo.stok_request_form.razoes"></span> 
+								input.preencher( autocomplete="off", type="text", id="reason",  value="#{Stock_request ? Stock_request[0].reason:''}", style="font-family:")
+							.col.s12.m6.input-field.hide
+								label(for="chefe_departamento") <span data-i18n="demo.stok_request_form.departamento_chefe"></span>
+								input.preencher( autocomplete="off", type="text", id="chefe_departamento", chefdos="#{JSON.stringify(Armazem[0].responsavel)}" readonly, chefes_depart="#{JSON.stringify(chefes_depart)}" value="#{chefes_depart[0]}", style="font-family:")
+							.col.s12.m6.input-field.hide
+								label(for="responsaveis") <span data-i18n="demo.stok_request_form.armazem_chefe"></span>
+								input.preencher( autocomplete="off", type="text", id="responsaveis", daddos="#{Armazemm}", readonly, value="#{Armazem.length>0? Armazem[0].responsavel[0]:''}", style="font-family:")
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold Artigos
+						-if(Armazem.length>0)
+							.row(class="#{Armazem.length>0? '':'hide'}")
+								.col.s12.m6
+									label(for="items[]") <span data-i18n="demo.stok_request_form.selecionar_item"></span>
+									select.browser-default.pessoas_permitidas.controle_max(name="items[]",  style="font-family:")
+										-if(Armazem.length>0)
+											option(value="" disabled selected selmecVerde) Escolha o artigo
+											-for(let i=0; i<Items.length; i++)
+												option(value="#{Items[i].description_item}" data-referencia="#{Items[i].referencia}" data-seriallized="#{Items[i].serialized}" data-contr="#{Items[i].disponivel}", data-cliente_name="#{Items[i].cliente_name}", data-grupo="#{Items[i].grupo}", data-maxx="#{Items[i].disponivel}") #{Items[i].description_item}
+											-for(let j=0; j<Items_bad.length; j++)
+												option(value="#{Items_bad[j].description_item}" data-referencia="#{Items_bad[j].referencia}" data-seriallized="#{Items_bad[j].serialized}" data-contr="#{Items_bad[j].disponivel}", data-cliente_name="#{Items_bad[j].cliente_name}", data-maxx="#{Items_bad[j].disponivel}") #{Items[j].description_item}
+								.col.s12.m4
+									label(for="status") Estado
+									select.browser-default#estado1(name="status",  style="font-family:")
+										option(value="Bom" ) Bom
+										option(value="Mau") Mau 
+								.col.s12.m6.input-field
+										label(for="quant_item") <span data-i18n="demo.stok_request_form.quantidade"></span>
+										input.quantyy.arranjo(type="number" autocomplete="off", id="quant_item" name="quant_item" min=0 class="quant_item")
+								.col.s9.m4.input-field
+										label(for="serial_number_ret") numero de serie
+										input(type="text" id="serial_number_ret" autocomplete="off", name="serial_number_ret" min=0 class="quant_item")
+								a(class="hide btn-floating btn-large waves-effect waves-light add-field5 right") + 
+							.row
+								.col.s12
+									table.bordered.striped
+										thead
+											tr.selmecAzul
+												th Artigos
+												th <span data-i18n="demo.stok_request_form.quantidade"></span>
+												th
+										tbody(id="myTable_tecnicos_permitidos" style="height:auto !important" )
+					fieldset.no-border
+						-if(Armazem.length>0)
+							.row.buttons-container(class="#{Armazem.length>0? '':'hide'}")
+								if !Stock_request
+									.col.s12.m6.left-button
+										button(type="button", class="btn", id="registar_StReturn") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+									.col.s12.m6.right-button
+										button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+								else
+									.col.s12.center
+										button(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

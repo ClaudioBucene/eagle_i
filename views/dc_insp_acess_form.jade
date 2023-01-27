@@ -1,0 +1,94 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Access control for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12.m6
+						label(for="name") access control
+						select.browser-default(name="name", id="name", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="Power" selected="#{DC.name}"=='Power'? true:false) Power
+							option(value="Equipment" selected="#{DC.name}"=='Equipment'? true:false) Equipment
+							option(value="BSC" selected="#{DC.name}"=='BSC'? true:false) BSC
+					.col.s12.m6
+						label(for="specific") Description
+						select.browser-default(name="specific", id="specific", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="Room A" selected="#{DC.specific}"=='Room A'? true:false) Room A
+							option(value="Room B" selected="#{DC.specific}"=='Room B'? true:false) Room B
+							option(value="Container" selected="#{DC.specific}"=='Container'? true:false) Container
+				.row
+					.col.s12
+						label(for="doors") 
+						h6 Check that all the doors are opening and locking properly
+					.col.s6
+						input.bom(type="radio" id="doors_ok" checked="#{DC.doors}"=='ok'? true:false name="doors"  value="ok")
+						label(for="doors_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="doors_no",  name='doors', checked="#{DC.doors}"=='not ok'?true:false  value="not ok")
+						label(for="doors_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="doors_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="doors_comment",value="#{DC.doors_comment?DC.doors_comment:''}",  identifica="#{DC_insp._id}" ,name="doors_comment")
+					
+				.row
+					.col.s12
+						label(for="biometric_scanner") 
+						h6 Check Biometrics Scanner
+					.col.s6
+						input.bom(type="radio" id="biometric_scanner_ok" name="biometric_scanner" checked="#{DC.biometric_scanner}"=='ok'? true:false value="ok")
+						label(for="biometric_scanner_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="biometric_scanner_no",  name='biometric_scanner', checked="#{DC.biometric_scanner}"=='not ok'? true:false value="not ok")
+						label(for="biometric_scanner_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="biometric_scanner_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,value="#{DC.biometric_scanner_comment? DC.biometric_scanner_comment:''}" id="biometric_scanner_comment" ,name="biometric_scanner_comment")					
+
+
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.name
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_access_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

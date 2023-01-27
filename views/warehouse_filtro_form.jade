@@ -1,0 +1,60 @@
+extends layout
+block content
+	.seccao.container.white
+		form( method="POST", enctype="multipart/form-data" ,action="/armazem/relotorios") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Filtros
+				.row
+					.col.s12.m6.input-field
+						label(for="data_inicio") Data Inicio
+						input.preencher.datepicker( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="data_inicio" ,name="data_inicio")
+					.col.s12.m6.input-field
+						label(for="data_fim") Data fim
+						input.preencher.datepicker( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="data_fim" ,name="data_fim")
+				.row
+					.col.s12.m6
+						label(for="supplier1") <span data-i18n="demo.Stock_request_home_menu.armazem"></span>
+						select.browser-default(name="supplier1", id="supplier1", style="font-family:")
+							if Po_data
+								option(value="#{Po_data[0].cliente_nome}") #{Po_data[0].cliente_nome}
+							else
+								option(value="any" selected selmecVerde) Todos
+								-for(var i = 0; i < Fornecedor.length; i++)
+									option(value="#{Fornecedor[i].nome}" cliente_reff="#{Fornecedor[i]._id}") #{Fornecedor[i].nome}
+					.col.s12.m6
+						label(for="tipo_reporter") Tipo de relatorio
+						select.browser-default(name="tipo_reporter", id="tipo_reporter", style="font-family:")
+							option(disabled selected selmecVerde) selecione 
+							option(value="Book out") Book out
+							option(value="GRV") GRV
+							option(value="Retornado") Returned
+							option(value="Used spares") Spare used
+							option(value="Voda_Hua") Vodacom/Huawei
+
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold			
+				.row.buttons-container
+					if !Po_data
+						.col.s12.m6.left-button
+							button(type="submit", class="btn") Submeter
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

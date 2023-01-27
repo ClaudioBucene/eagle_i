@@ -1,0 +1,86 @@
+mixin form(distritos, provincias, posto)
+	fieldset.no-border.legend-border
+		legend Dados Gerais
+		.row
+			.col.s12.m8.input-field
+				label(for="nome") Nome<span class="red-text">*</span>
+				input.preencher(type="text", name="nome", id="nome", value="#{posto ? posto.nome : ''}")
+
+			.col.s12.m4
+				label(for="ano_fundacao") Ano da fundacao<span class="red-text">*</span>
+				input.datepicker.preencher(type="text", name="ano_fundacao", id="ano_fundacao", value="#{posto ? posto.ano_fundacao.getDate()+'/'+posto.ano_fundacao.getMonth()+'/'+posto.ano_fundacao.getFullYear() : ''}")
+
+		.row
+			.col.s12.m6.input-field
+				label(for="chefe") Chefe<span class="red-text">*</span>
+				input.preencher(type="text", name="chefe", id="chefe", value="#{posto ? posto.chefe : ''}")
+
+	fieldset.no-border.legend-border
+		legend Endereco
+		.row
+			.col.s12.m6
+				label(for="provincia") Provincia
+				select.browser-default(name="provincia", id="provincia")
+					if posto
+						-for(var i = 0; i < provincias.length; i++)
+							if posto.provincia == provincias[i].toLowerCase()
+								option(value="#{provincias[i].toLowerCase()}", selected="selected") #{provincias[i]}
+							else
+								option(value="#{provincias[i].toLowerCase()}") #{provincias[i]}
+					else
+						-for(var i = 0; i < provincias.length; i++)
+							option(value="#{provincias[i].toLowerCase()}") #{provincias[i]}
+		
+			.col.s12.m6
+				label(for="distrito") Distrito
+				select.browser-default(name="distrito", id="distrito")
+					if posto
+						-for(var i = 0; i < distritos[0].length; i++)
+							if posto.distrito == distritos[0][i].toLowerCase()
+								option(value="#{distritos[0][i].toLowerCase()}", selected="selected") #{distritos[0][i]}
+							else
+								option(value="#{distritos[0][i].toLowerCase()}") #{distritos[0][i]}
+					else
+						-for(var i = 0; i < distritos[0].length; i++)
+							option(value="#{distritos[0][i].toLowerCase()}") #{distritos[0][i]}
+		.row
+			.col.s12.m6.input-field
+				label(for="localidade") Localidade
+				input(type="text", name="localidade", id="localidade", value="#{posto ? posto.localidade : ''}")
+			.col.s12.m6.input-field
+				label(for="bairro") Bairro
+				input(type="text", name="bairro", id="bairro", value="#{posto ? posto.bairro : ''}")
+		.row
+			.col.s12.m6.input-field
+				label(for="latitude") Latitude<span class="red-text">*</span>
+				input(type="text", name="latitude", id="latitude", value="#{posto ? posto.latitude : ''}")
+			.col.s12.m6.input-field
+				label(for="longitude") Longitude<span class="red-text">*</span>
+				input(type="text", name="longitude", id="longitude", value="#{posto ? posto.longitude : ''}")
+
+	fieldset.no-border.legend-border
+		legend Contacto
+		.row
+			.col.s12.m6.input-field
+				label(for="telefone_1") Telefone 1
+				input(type="text", id="telefone_1", name="telefone_1", value="#{posto ? posto.telefone_1 : ''}")
+			.col.s12.m6.input-field
+				label(for="telefone_2") Telefone 2
+				input(type="text", id="telefone_2", name="telefone_2", value="#{posto ? posto.telefone_2 : ''}")
+		.row
+			.col.s12.m6.input-field
+				label(for="telefone_3") Telefone 3
+				input(type="text", id="telefone_3", name="telefone_3", value="#{posto ? posto.telefone_3 : ''}")
+			.col.s12.m6.input-field
+				label(for="telefone_4") Telefone 4
+				input(type="text", id="telefone_4", name="telefone_4", value="#{posto ? posto.telefone_4 : ''}")
+		.row
+			.col.s12.m6.input-field
+				label(for="fax") Fax
+				input(type="text", id="fax", name="fax", value="#{posto ? posto.fax : ''}")
+			.col.s12.m6.input-field
+				label(for="email") Email
+				input(type="email", id="email", name="email", value="#{posto ? posto.email : ''}")
+
+							
+							

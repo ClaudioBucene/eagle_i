@@ -1,0 +1,114 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold UPS for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12.m6
+						label(for="name") Ups
+						select.browser-default(name="name", id="name", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="ADC" selected="#{DC.name}"=='ADC'? true:false) ADC
+							option(value="ADC+" selected="#{DC.name}"=='ADC+'? true:false) ADC+
+							option(value="Core NET" selected="#{DC.name}"=='Core NET'? true:false) Core NET
+							option(value="Enterprise" selected="#{DC.name}"=='Enterprise'? true:false) Enterprise
+							option(value="MPESA" selected="#{DC.name}"=='MPESA'? true:false) MPESA
+							option(value="Satellite" selected="#{DC.name}"=='Satellite'? true:false) Satellite
+							option(value="Radio Transmission" selected="#{DC.name}"=='Radio Transmission'? true:false) Radio Transmission
+							option(value="UPS" selected="#{DC.name}"=='UPS'? true:false) UPS
+							
+					.col.s12.m6
+						label(for="specific") Description
+						select.browser-default(name="specific", id="specific", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="A" selected="#{DC.specific}"=='A'? true:false) A
+							option(value="A1" selected="#{DC.specific}"=='A1'? true:false) A1
+							option(value="A2" selected="#{DC.specific}"=='A2'? true:false) A2
+							option(value="A3" selected="#{DC.specific}"=='A3'? true:false) A3
+							option(value="B" selected="#{DC.specific}"=='B'? true:false) B
+							option(value="B1" selected="#{DC.specific}"=='B1'? true:false) B1
+							option(value="B2" selected="#{DC.specific}"=='B2'? true:false) B2
+							option(value="B3" selected="#{DC.specific}"=='B3'? true:false) B3
+							option(value="A5" selected="#{DC.specific}"=='A5'? true:false) A5
+							option(value="LOAD" selected="#{DC.specific}"=='LOAD'? true:false) LOAD
+							
+				.row
+					.input-field.col.s12.m6(style="margin-top:20px")
+						label(for="l1_kw") L1 (KW)
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="l1_kw",value="#{DC.l1_kw?DC.l1_kw:''}",  identifica="#{DC_insp._id}" ,name="l1_kw")
+					.input-field.col.s12.m6(style="margin-top:20px")
+						label(for="l1_A") L1 (A)
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="l1_A",value="#{DC.l1_A?DC.l1_A:''}",  identifica="#{DC_insp._id}" ,name="l1_A")
+					.input-field.col.s12.m6(style="margin-top:20px")
+						label(for="l2_kw") L2 (KW)
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="l2_kw",value="#{DC.l2_kw?DC.l2_kw:''}",  identifica="#{DC_insp._id}" ,name="l2_kw")
+					.input-field.col.s12.m6(style="margin-top:20px")
+						label(for="l2_A") L2 (A)
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="l2_A",value="#{DC.l2_A?DC.l2_A:''}",  identifica="#{DC_insp._id}" ,name="l2_A")
+					.input-field.col.s12.m6(style="margin-top:20px")
+						label(for="l3_kw") L3 (KW)
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="l3_kw",value="#{DC.l3_kw?DC.l3_kw:''}",  identifica="#{DC_insp._id}" ,name="l3_kw")
+
+					
+					
+					.input-field.col.s12.m6(style="margin-top:20px")
+						label(for="l3_A") L3 (A)
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="l3_A",value="#{DC.l3_A?DC.l3_A:''}",  identifica="#{DC_insp._id}" ,name="l3_A")
+				.row
+					.col.s12
+						label(for="battery_bank") 
+						h6 Battery voltage
+					.col.s6
+						input.bom(type="radio" id="battery_bank_ok" checked="#{DC.battery_bank}"=='ok'? true:false name="battery_bank"  value="ok")
+						label(for="battery_bank_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="battery_bank_no",  name='battery_bank', checked="#{DC.battery_bank}"=='not ok'?true:false  value="not ok")
+						label(for="battery_bank_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="battery_bank_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="battery_bank_comment",value="#{DC.battery_bank_comment?DC.battery_bank_comment:''}",  identifica="#{DC_insp._id}" ,name="battery_bank_comment")
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.name
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_ups_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

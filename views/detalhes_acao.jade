@@ -1,0 +1,70 @@
+extends layout
+block content
+	form(id="msform", method="POST", enctype="multipart/form-data")
+		fieldset.no-border.legend-border
+			legend.selmecAzul.bold 
+			.row
+				.col.s12.m6.input-field
+					i.material-icons.prefix.selmecAzul person
+					label(for="motorista") <span data-i18n="demo.inspdiaria_home.matricula"></span>
+					input(id="motorista", autocomplete="off",readonly, type="text", name="motorista", value="#{veiculos[0].matricula}", datainserted="#{veiculos[0]._id}")
+				.col.s12.m6.input-field
+					i.material-icons.prefix.selmecAzul event_available
+					label(for="dattta") <span data-i18n="demo.inspdiaria_home.data_inspecao"></span>
+					input.preencher( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="dattta" ,name="dattta", value="#{veiculos[0].datta}")
+			.row
+				.input-field.col.s12.m6
+						i.material-icons.prefix.selmecAzul insert_invitation
+						label(for="data_acao") <span data-i18n="demo.inspdiaria_form.data_hora"></span>
+						input.preencher(type="text", id="data_acao", readonly,name="data", value="#{veiculos[0].data_acao}")
+				.col.s12.m6.input-field
+					i.material-icons.prefix.selmecAzul person_outline
+					label(for="fleet_man") fleet manager
+					input.preencher( autocomplete="off", type="text", readonly, style="font-family:;color:#12375c" ,id="fleet_man" ,name="fleet_man", value="#{veiculos[0].fleet_man}")
+				.input-field.col.s12.m6.hide
+						i.material-icons.prefix.selmecAzul add_alarm
+						label(for="lembrete") Lembrete
+						input.preencher( autocomplete="off", type="text", readonly, style="color:#12375c" ,id="lembrete" ,name="lembrete", value="#{veiculos[0].lembrete}")
+				.col.s12.m6
+							label(for="tipo_acao") <span data-i18n="demo.inspdiaria_home.tipo_accao"></span>
+							select.browser-default(name="tipo_acao", id="tipo_acao", style="font-family:")
+								if veiculos
+									if veiculos[0].tipo_acao == 'acao_correctiva'
+										option(value="acao_correctiva", selected="selected") Accão Correctiva 
+									else
+										if veiculos[0].tipo_acao == 'ordem_de_servico' 
+											option(value="ordem_de_servico", selected="selected") Ordem de serviço
+										else
+											option(value="recordar_depois", selected="selected") Não definido
+								else
+									option(value="" disabled selected selmecVerde) escolha opção
+									option(value="acao_correctiva") Acção Correctiva
+									option(value="ordem_de_servico") Ordem de serviço
+									option(value="recordar_depois") Recordar Depois
+				.col.s12.m6
+					label  <span data-i18n="demo.inspdiaria_home.problemas"></span>
+					select(multiple)
+						-for(var i=0; i<veiculos[0].problemas.length; i++)
+							option(value="#{veiculos[0].problemas[i]}" selected) #{veiculos[0].problemas[i]}
+				.input-field.col.s12.m8
+						.material-icons.prefix.selmecAzul comment
+						textarea#razao_acao.materialize-textarea(style="font-family:" readonly) #{veiculos[0].razao_acao}
+						label(for="razao_acao") <span data-i18n="demo.inspdiaria_home.razoes"></span>
+			fieldset.no-border
+				.row.buttons-container
+					-if((DataU.nome=="Lino Matandalasse")&&((veiculos[0].observacao=="red")||(veiculos[0].observacao=="orange"))&&(veiculos[0].data_acao!=""))
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="caso_resolvido") resolvido
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_acao") <span data-i18n="demo.utilizador_form.cancelar"></span>
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

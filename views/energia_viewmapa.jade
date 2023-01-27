@@ -1,0 +1,252 @@
+extends layout
+block content
+	.row#detalhesJobcardMapa(dataa = "#{DadosJobcards}")
+	form#ttnumberform(class="col s12")
+		if((Jobcards[0].jobcard_traveldurationms == undefined) && (Jobcards[0].jobcard_estadoactual == "On route") && (Jobcards[0].jobcard_controladorintervenientes[1] == DataU.nome))
+			button(type="button", id="energiamostrarinfoviagem", class="btn modal-action modal-close waves-effect waves-green btn-flat" style="margin-top:20px; font-size:12px") <span data-i18n="demo.manutencao_form.continuarvigem"></span>
+	div#map(style="margin-top:150px")
+	block js
+		script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGI4PphO0TcAodia57tSsJXRSVlTAwNaU&callback=initMap&libraries=&v=weekly")
+		script.
+
+			(function(exports) {
+				"use strict";
+				var markers = [];
+				var dadosjbc = JSON.parse($("#detalhesJobcardMapa").attr("dataa"));
+
+				var latitudesite = parseFloat(dadosjbc[0].geolocationJobcardInfo[0].jobcard_latitude);
+				var longitudesite = parseFloat(dadosjbc[0].geolocationJobcardInfo[0].jobcard_longitude);
+
+				function initMap() {
+					exports.map = new google.maps.Map(document.getElementById("map"), {
+						center: {
+							lat: latitudesite,
+							lng: longitudesite
+						},
+						zoom: 15
+					});
+
+					
+
+					if(dadosjbc[0].geolocationJobcardInfo[1].jobcard_latitude == ""){
+
+						var locations =[];
+						var locationsObjectSite ={};
+						var locationsite = {};
+
+						locationsObjectSite.title = 'Site Location';
+						locationsite.lat = latitudesite;
+						locationsite.lng = longitudesite;
+						locationsObjectSite.location = locationsite;
+						locations.push(locationsObjectSite)
+
+						if(dadosjbc[0].geolocationJobcardInfo.length>2){
+
+							if(dadosjbc[0].geolocationJobcardInfo[2].jobcard_latitude != ""){
+								var locationsObjectArrival ={};
+								var locationArrival = {};
+
+								locationsObjectArrival.title = 'Arrives on site';
+								locationArrival.lat = parseFloat(dadosjbc[0].geolocationJobcardInfo[2].jobcard_latitude);
+								locationArrival.lng = parseFloat(dadosjbc[0].geolocationJobcardInfo[2].jobcard_longitude);
+								locationsObjectArrival.location = locationArrival;
+								locations.push(locationsObjectArrival)
+
+							}
+
+						}
+						
+						if(dadosjbc[0].geolocationJobcardInfo.length>3){
+							if(dadosjbc[0].geolocationJobcardInfo[3].jobcard_latitude != ""){
+								var locationsObjectDeparture ={};
+								var locationDeparture = {};
+
+								locationsObjectDeparture.title = 'Left site';
+								locationDeparture.lat = parseFloat(dadosjbc[0].geolocationJobcardInfo[3].jobcard_latitude);
+								locationDeparture.lng = parseFloat(dadosjbc[0].geolocationJobcardInfo[3].jobcard_longitude);
+								locationsObjectDeparture.location = locationDeparture;
+								locations.push(locationsObjectDeparture)
+
+							}
+						}
+
+						var largeInfowindow = new google.maps.InfoWindow();
+						var bounds = new google.maps.LatLngBounds();
+
+						for(var i = 0; i<locations.length; i++){
+
+							var position = locations[i].location;
+							var title = locations[i].title;
+
+							var marker = new google.maps.Marker({
+								map:map,
+								position:position,
+								title:title,
+								animation:google.maps.Animation.Drop,
+								id:i
+							});
+
+							markers.push(marker);
+
+							bounds.extend(marker.position);
+
+							marker.addListener('click', function(){
+
+								populateInfoWindow(this, largeInfowindow);
+							});
+
+
+						}
+
+						map.fitBounds(bounds);
+
+					}else{
+						
+						var destination = new google.maps.LatLng(latitudesite, longitudesite);
+						var latitudeaccept = parseFloat(dadosjbc[0].geolocationJobcardInfo[1].jobcard_latitude);
+						var longitudeaccept = parseFloat(dadosjbc[0].geolocationJobcardInfo[1].jobcard_longitude);
+						var origin = new google.maps.LatLng(latitudeaccept, longitudeaccept);
+
+						var service = new google.maps.DistanceMatrixService();
+						var directionsService = new google.maps.DirectionsService();
+
+						var directionsRequest = {
+							origin: origin,
+							destination: destination,
+							travelMode: google.maps.DirectionsTravelMode.DRIVING,
+							unitSystem: google.maps.UnitSystem.METRIC
+						};
+
+						directionsService.route(directionsRequest, function(response, status){
+							if (status == google.maps.DirectionsStatus.OK){
+								new google.maps.DirectionsRenderer({
+									map: map,
+									directions: response
+								});
+							}
+							else{
+								$("#error").append("Unable to retrieve your route<br />");
+							}
+						});
+
+						service.getDistanceMatrix({
+							origins: [origin],
+							destinations: [destination],
+							travelMode: google.maps.TravelMode.DRIVING,
+							drivingOptions: {
+								departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
+								trafficModel: 'optimistic'
+							},
+							unitSystem: google.maps.UnitSystem.METRIC,
+							avoidHighways: false,
+							avoidTolls: false
+						}, function(response, status){
+							if(status != 'OK'){
+								console.log("Error was: " + status);
+							}else{
+								
+								var attrjobcard_traveldistance = document.createAttribute('jobcard_traveldistance');
+								attrjobcard_traveldistance.value= response.rows[0].elements[0].distance.text;
+								document.getElementById("mostrarinfoviagem").setAttributeNode(attrjobcard_traveldistance);
+
+								var attr = document.createAttribute('jobcard_travelduration');
+								attr.value=response.rows[0].elements[0].duration.text;
+								document.getElementById("mostrarinfoviagem").setAttributeNode(attr);
+								
+								var attrms = document.createAttribute('jobcard_traveldurationms');
+								attrms.value=response.rows[0].elements[0].duration.value;
+								document.getElementById("mostrarinfoviagem").setAttributeNode(attrms);
+							}
+						});
+
+						var locations =[];
+
+						if(dadosjbc[0].geolocationJobcardInfo.length>2){
+							if(dadosjbc[0].geolocationJobcardInfo[2].jobcard_latitude != ""){
+								var locationsObjectArrival ={};
+								var locationArrival = {};
+								//- console.log('Arrives on site')
+								locationsObjectArrival.title = 'Arrives on site';
+								locationArrival.lat = parseFloat(dadosjbc[0].geolocationJobcardInfo[2].jobcard_latitude);
+								locationArrival.lng = parseFloat(dadosjbc[0].geolocationJobcardInfo[2].jobcard_longitude);
+								locationsObjectArrival.location = locationArrival;
+								locations.push(locationsObjectArrival)
+
+							}
+						}
+
+						if(dadosjbc[0].geolocationJobcardInfo.length>3){
+							if(dadosjbc[0].geolocationJobcardInfo[3].jobcard_latitude != ""){
+								var locationsObjectDeparture ={};
+								var locationDeparture = {};
+
+								locationsObjectDeparture.title = 'Left site';
+								locationDeparture.lat = parseFloat(dadosjbc[0].geolocationJobcardInfo[3].jobcard_latitude);
+								locationDeparture.lng = parseFloat(dadosjbc[0].geolocationJobcardInfo[3].jobcard_longitude);
+								locationsObjectDeparture.location = locationDeparture;
+								locations.push(locationsObjectDeparture)
+
+							}
+						}
+
+						var largeInfowindow = new google.maps.InfoWindow();
+						var bounds = new google.maps.LatLngBounds();
+
+						for(var i = 0; i<locations.length; i++){
+
+							var position = locations[i].location;
+							var title = locations[i].title;
+
+							var marker = new google.maps.Marker({
+								map:map,
+								position:position,
+								title:title,
+								animation:google.maps.Animation.Drop,
+								id:i
+							});
+
+							markers.push(marker);
+
+							bounds.extend(marker.position);
+
+							marker.addListener('click', function(){
+
+								populateInfoWindow(this, largeInfowindow);
+							});
+
+
+						}
+
+						map.fitBounds(bounds);
+					}
+				}
+
+				function populateInfoWindow(marker, infowindow){
+
+					if(infowindow.marker != marker){
+
+						infowindow.marker = marker;
+						infowindow.setContent('<div>' + marker.title + '</div>');
+						infowindow.open(map, marker);
+
+						infowindow.addListener('closeclick', function(){
+
+							infowindow.setMarker(null);
+						});
+					}
+				}
+
+				exports.initMap = initMap;
+			})((this.window = this.window || {}));
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

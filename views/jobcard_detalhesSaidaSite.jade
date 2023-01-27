@@ -1,0 +1,56 @@
+extends layout
+block content
+	if Jobcard
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.workreporte"></span>
+			.row#recolherdados(style="margin-bottom:18px" dadosreferenciajobcard="#{Jobcard._id}" dadosjobtype="#{Jobcard.jobcard_jobtype}" detalhesjobcards="#{DadosJobcard}")
+				-if(Jobcard.jobcard_jobtype == "Callout")
+					.col.s12.m6.input-field#mostrarActionCorr(style="margin-top:22px")
+						label(for="jobcard_remedialaction") <span data-i18n="demo.manutencao_form.remedialaction"></span>
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_remedialaction" ,name="jobcard_remedialaction")
+				.col.s12.m6(style="margin-top:2px")
+					label <span data-i18n="demo.manutencao_form.healthsafety"></span>
+					select.browser-default(name="jobcard_healthsafety", id="jobcard_healthsafety")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Yes") Yes
+						option(value="No") No
+			.row.verrazaohs.hide(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_hsreason") <span data-i18n="demo.manutencao_form.hsreason"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_hsreason" ,name="jobcard_hsreason")
+			-if(Jobcard.jobcard_jobtype == "Callout")
+				button(type="button", id="notifycallcentercallout", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+			-else
+				button(type="button", id="notifycallcenterplanned", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	if Projects
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.workreporte"></span>
+			.row#recolherdados(style="margin-bottom:18px" dadosreferenciaproject="#{Projects._id}" detalhesproject="#{DadosProjects}")
+				.col.s12.m6.input-field#mostrarActionCorr(style="margin-top:22px")
+					label(for="jobcard_remedialaction") <span data-i18n="demo.manutencao_form.remedialaction"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_remedialaction" ,name="jobcard_remedialaction")
+				.col.s12.m6(style="margin-top:2px")
+					label <span data-i18n="demo.manutencao_form.healthsafety"></span>
+					select.browser-default(name="jobcard_healthsafety", id="jobcard_healthsafety")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Yes") Yes
+						option(value="No") No
+			.row.verrazaohs.hide(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:2px")
+					label(for="jobcard_hsreason") <span data-i18n="demo.manutencao_form.hsreason"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_hsreason" ,name="jobcard_hsreason")
+			button(type="button", id="jobcardtecnico_saidasitecallout_project", class="btn modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

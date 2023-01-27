@@ -1,0 +1,51 @@
+extends layout
+block content
+	.container.seccao.white
+		//- .fixed-action-btn.top.fixed-add-bottom
+		//- 		a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Add new inspection ", class="btn-floating btn-large waves-effect waves-light grey", href="#") <i class="material-icons activarVerde">add</i>
+		if !Stock_request || Stock_request.length==0
+			p.center-align.selmecAzul.bold Sem Tecnicos para Mostrar!
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.stock_tecnicos.subordinados"></span>
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.stock_tecnicos.nome"></span>
+						th <span data-i18n="demo.stock_tecnicos.Provincia"></span>
+						th <span data-i18n="demo.stock_tecnicos.regiao"></span>
+						th
+				tbody(id="myTable")
+					-for(var index =0; index<Stock_request.length ; index++)
+						tr.highlight(data-funcionario="#{Stock_request[index]._id}")
+							td #{Stock_request[index].nome}
+							td #{Stock_request[index].provincia_trabalho}
+							td #{Stock_request[index].regiao}
+							td.center-align
+								a.tooltipped.pointer.info(style="margin-left: 20px", data-position="top", data-delay="10", data-tooltip="Ferramentas",href="/stock_request/tecnicos/ferramentasss/#{Stock_request[index]._id}") <img style='width:20px;' src='/img/tools.png'/>
+
+								a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="SST", href="/stock_request/tecnicos/sst/#{Stock_request[index]._id}") <img style='width:30px;' src='/img/safety.png'/>
+
+								a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="IT",href="/stock_request/tecnicos/informatica/#{Stock_request[index]._id}") <img style='width:40px;' src='/img/it.png'/>
+
+								a.pointer.info.tooltipped(style="margin-left: 20px", data-position="top", data-delay="10", data-tooltip="Frota", href="/stock_request/tecnicos/frota/#{Stock_request[index]._id}") <img style='width:25px;' src='/img/tyre.png'/>
+
+								a.pointer.info.tooltipped(style="margin-left: 20px", data-position="top", data-delay="10", data-tooltip="Inventario", href="/stock_request/tecnicos/dla/#{Stock_request[index]._id}") <img style='width:25px;' src='/img/spare__box.png'/>
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

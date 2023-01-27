@@ -1,0 +1,165 @@
+extends layout
+block content
+	.container.seccao.white
+		.row
+			.col.s12#container(dataa="#{veiculosMensal}" cores="#{cores}" regiao="#{regiao}" style="position: relative; height:70vh; width:80vw !important")
+				canvas(id="bar-chart-horizontal"  style="position: relative; height:70vh; width:80vw !important") 
+				
+
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		//- script(src="https://canvasjs.com/assets/script/canvasjs.min.js")
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+			let etiquetas=[];
+			let valores=[];
+			let cores=[];
+			
+			let cor=$("#container").attr("cores")
+			let estado=(cor=="green")? " Bom Estado":((cor=='orange')? "Estado Razoável": "Mau Estado")
+			var texto='Numero de Inspeções feitas em  ' +estado +" da região "+($("#container").attr("regiao").toUpperCase());  
+			let dados=JSON.parse($("#container").attr("dataa"))
+			for(let i=0; i< dados.length; i++){
+			etiquetas.push(dados[i]._id)
+			cores.push(cor)
+			valores.push(dados[i].total)
+			}
+			console.log(dados)
+
+			new Chart(document.getElementById("bar-chart-horizontal"), {
+			type: 'horizontalBar',
+			data: {
+			labels: etiquetas,
+			datasets: [
+			{
+			label: "Inspeções",
+			backgroundColor: cores,
+			data: valores
+			}
+			]
+			},
+			options: {
+			legend: { display: false },
+			responsive: true,
+			title: {
+			display: true,
+			text: texto
+			}
+			}
+			});
+
+			//- let dados=JSON.parse($("#container").attr("dataa"))
+			//- for(let i=0; i< dados.length; i++){
+			//- dados[i].lista=dados[i].lista.sort((a, b) => (a.observacao >b.observacao)? 1 : -1)
+			//- console.log(dados[i].lista);
+			//- }
+			//- 	var barChartData = {
+			//- 	labels: [
+			//- 	"Maputo Cidade"
+			//- 	,
+				
+			//- 	"Região Centro",
+			//- 	"Região Norte",
+			//- 	"Região Sul"
+
+			//- 	],
+			//- 	datasets: [
+			//- 	{
+			//- 	label: "Bom Estado",
+			//- 	backgroundColor: "green",
+			//- 	borderColor: "green",
+			//- 	borderWidth: 1,
+			//- 	data: [dados[0].lista[0].soma, dados[1].lista[0].soma, dados[2].lista[0].soma, dados[3].lista[0].soma]
+			//- 	},
+			//- 	{
+			//- 	label: "Estado Razoável",
+			//- 	backgroundColor:"orange",
+			//- 	borderColor: "orange",
+			//- 	borderWidth: 1,
+			//- 	data: [dados[0].lista[1].soma, dados[1].lista[1].soma, dados[2].lista[1].soma, dados[3].lista[1].soma],
+			//- 	},
+			//- 	{
+			//- 	label: "Mau Estado",
+			//- 	backgroundColor: "red",
+			//- 	borderColor:"red",
+			//- 	borderWidth: 1,
+			//- 	data: [dados[0].lista[2].soma, dados[1].lista[2].soma, dados[2].lista[2].soma, dados[3].lista[2].soma]
+			//- 	}
+			//- 	,
+			//- 	//- {
+			//- 	//- label: "infratores",
+			//- 	//- backgroundColor: "lightblue",
+			//- 	//- borderColor: "blue",
+			//- 	//- borderWidth: 1,
+			//- 	//- data: [4, 7, 3, 6]
+			//- 	//- }
+			//- 	]
+			//- 	};
+
+			//- 	var chartOptions = {
+			//- 	responsive: true,
+			//- 	maintainAspectRatio:false,
+			//- 	legend: {
+			//- 	position: "top"
+			//- 	},
+
+
+			//- 	//- onClick:function(e){
+			//- 	//- //- console.log(this.getElementAtEvent(e))
+			//- 	//- 	var firstPoint = this.getElementAtEvent(e)[0];
+
+			//- 	//- 	if (firstPoint) {
+			//- 	//- 	var label = this.data.labels[firstPoint._index];
+			//- 	//- 	var value = this.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+			//- 	//- 	console.log(this.getDatasetMeta(0).data[0]._model, value)
+			//- 	//- 	}
+			//- 	//- 	},
+			//- 	title: {
+			//- 	display: true,
+			//- 	text: "Estatisticas"
+			//- 	},
+			//- 	scales: {
+			//- 	yAxes: [{
+			//- 	ticks: {
+			//- 	beginAtZero: true
+			//- 	}
+			//- 	}]
+			//- 	}
+			//- 	}
+
+			//- 	window.onload = function() {
+			//- 	var ctx = document.getElementById("canvas").getContext("2d");
+			//- 	window.myBar = new Chart(ctx, {
+			//- 	type: "bar",
+			//- 	event:function(e){console.log(this.getElementAtEvent(e))},
+			//- 	data: barChartData,
+			//- 	options: chartOptions
+			//- 	});
+			//- 	};
+
+			//- 	var canvas1 = document.getElementById('canvas');
+			//- 	//- var myChart = new Chart(canvas1, chartData);
+
+			//- 	canvas1.onclick = function(evt) {
+			//- 	var activePoint = myBar.getElementAtEvent(evt)[0];
+			//- 	var data = activePoint._chart.data;
+			//- 	var datasetIndex = activePoint._datasetIndex;
+			//- 	var label = data.datasets[datasetIndex].label;
+			//- 	var value = data.datasets[datasetIndex].data[activePoint._index];
+			//- 	var regiao= data.labels[activePoint._index]
+			//- 	label=label.replace("Estado", '').trim()
+			//- 	regiao=regiao.replace("Região", '').toLowerCase().trim()
+				
+			//- 	var rule = label+'1'+regiao
+			//- 	console.log(rule);
+			//- 	window.location.href="/inspmensal/detalhes/"+rule
+			//- 	};
+
+

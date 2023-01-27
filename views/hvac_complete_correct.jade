@@ -1,0 +1,64 @@
+extends layout
+block content
+	.container.seccao.white#recolherdados(jobsinprogress = "#{HvacInprogress}", detalhessession = "#{DataU.nome}")
+		// -if(DataU.funcao!="Tecnico")
+			//- .fixed-action-btn.top.fixed-add-bottom
+					//- a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Add new inspection ", class="btn-floating btn-large waves-effect waves-light", href="/climatizacao/novo") <i class="material-icons activarVerde">add</i>
+		if !HvacJobs || ! HvacJobs.length
+			p.center-align.selmecAzul.bold Lista de Manutencao Correctiva
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Tarefas Correctivas Completas
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Cliente
+						th Cód. Tarefa
+						th Local
+						th Tecnico
+						th Prioridade
+						th Acção Correctiva
+						th Data
+						th Data de Registo
+						th Estado
+						
+						th
+				tbody(id="myTable")
+					-for(var index = 0, j=0; index<HvacJobs.length && j<100 ; index++, j++)
+						tr.highlight(data-funcionario="#{HvacJobs[index]._id}", data-nome="#{HvacJobs[index].nome}")
+							td #{HvacJobs[index].cliente ? HvacJobs[index].cliente: HvacJobs[index].jobcard_loggedby}
+							td #{HvacJobs[index].jobcard_cod ? HvacJobs[index].jobcard_cod: HvacJobs[index].jobcard_loggedby}
+							td #{HvacJobs[index].local? HvacJobs[index].local: HvacJobs[index].jobcard_clientenome}
+							td #{HvacJobs[index].tecnico? HvacJobs[index].tecnico: HvacJobs[index].jobcard_tecniconome}
+							td #{HvacJobs[index].prioridade? HvacJobs[index].prioridade: HvacJobs[index].jobcard_priority}
+							-if(HvacJobs[index].remedialaction != undefined && HvacJobs[index].remedialaction != "")
+								td #{HvacJobs[index].remedialaction}
+							-else
+								td ----
+							td #{HvacJobs[index].data_inicio? HvacJobs[index].data_inicio: HvacJobs[index].jobcard_datareporte} 
+							td #{HvacJobs[index].data_criacao? ((HvacJobs[index].data_criacao).getDate()<10? '0'+(HvacJobs[index].data_criacao).getDate():(HvacJobs[index].data_criacao).getDate())+'/'+(((HvacJobs[index].data_criacao).getMonth()+1)<10? ('0'+((HvacJobs[index].data_criacao).getMonth()+1)):((HvacJobs[index].data_criacao).getMonth()+1))+'/'+((HvacJobs[index].data_criacao).getFullYear())+'   '+((HvacJobs[index].data_criacao).getHours()<10? ('0'+(HvacJobs[index].data_criacao).getHours()): (HvacJobs[index].data_criacao).getHours() )+' : '+((HvacJobs[index].data_criacao).getMinutes()<10? ('0'+(HvacJobs[index].data_criacao).getMinutes()):(HvacJobs[index].data_criacao).getMinutes()) : ((HvacJobs[index].data_registojobcard).getDate()<10? '0'+(HvacJobs[index].data_registojobcard).getDate():(HvacJobs[index].data_registojobcard).getDate())+'/'+(((HvacJobs[index].data_registojobcard).getMonth()+1)<10? ('0'+((HvacJobs[index].data_registojobcard).getMonth()+1)):((HvacJobs[index].data_registojobcard).getMonth()+1))+'/'+((HvacJobs[index].data_registojobcard).getFullYear())+'   '+((HvacJobs[index].data_registojobcard).getHours()<10? ('0'+(HvacJobs[index].data_registojobcard).getHours()): (HvacJobs[index].data_registojobcard).getHours() )+' : '+((HvacJobs[index].data_registojobcard).getMinutes()<10? ('0'+(HvacJobs[index].data_registojobcard).getMinutes()):(HvacJobs[index].data_registojobcard).getMinutes())  }
+							td #{HvacJobs[index].status? HvacJobs[index].status: HvacJobs[index].jobcard_ttnumberstatus}
+							td 
+								a.pointer.detalhescsss(style="", labell="#{HvacJobs[index]._id}", labesl="#{HvacJobs[index].viatura}" ) <i class="material-icons activarVerde">info</i>
+								-if(count!=1)	
+									a.pointer.reporters_P(style="", valor="#{HvacJobs[index]._id}", valooo="#{HvacJobs[index].assinatura}" labesl="#{HvacJobs[index].viatura}" ) <i class="material-icons selmecAzul">assignment</i>
+								-if((DataU.departamento_id == "611e45e68cd71c1f48cf45bd" && DataU.funcao == "Manager") || (DataU.departamento_id == "611e45e68cd71c1f48cf45bd" && DataU.funcao == "Commercial"))
+									a.pointer.detalhescsss(style="", labell="#{HvacJobs[index]._id}", href="/climatizacao/mandarmail/#{HvacJobs[index]._id}" ) <i class="material-icons activarVerde">email</i>
+	block js
+		script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGI4PphO0TcAodia57tSsJXRSVlTAwNaU&callback=initMap&libraries=&v=weekly")
+		script.
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

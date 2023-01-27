@@ -1,0 +1,58 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+				a.btn-floating.pointer.activarAzul(data-position="left", data-delay="10", data-tooltip="Add new inspection ", class="btn-floating btn-large waves-effect waves-light", href="/stock_item/novo") <i class="material-icons activarVerde">add</i>
+		if !Stock_item || ! Stock_item.length
+			p.center-align.selmecAzul.bold Vazio!
+		else
+			form(class="col s12"  method="POST" action="/stock_item/buscar"  name="alljobcardspesquisaform")
+				.row
+					.col.s12.m6
+					.col.s12.m6.right.input-field
+						i.material-icons.prefix search
+						label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+						input(type="text", id="pesquisador", autocomplete="off" name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5rem") Lista de artigos
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped.icn1
+				thead
+					tr.selmecAzul
+						th Artigo
+						th Part Number
+						th Proprietario
+						th Quantidade
+						th
+				tbody(id="myTable")
+					-for(var index =0 ; index<Stock_item.length ; index++)
+						tr.highlight(data-funcionario="#{Stock_item[index]._id}", data-nome="#{Stock_item[index].nome}",style="color:#{Stock_item[index].observacao}")
+							td #{Stock_item[index].description_item}
+							td #{Stock_item[index].part_number}
+							td #{Stock_item[index].cliente_name}
+							td #{Stock_item[index].cont}
+							td
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Stock_item[index].marca_modelo} transference", href="/stock_item/detalhes/#{Stock_item[index]._id}") <i class="material-icons activarVerde">info</i>
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit  #{Stock_item[index].nome}", href="/stock_item/editar/#{Stock_item[index]._id}") <i class="material-icons selmecAzul">edit</i>
+					if Stock_item
+						tr.highlight(style="font-family:;color:#12375c")
+							td.center-align
+								if((cont-1)!= -1)
+									a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/stock_item/proximo/#{(cont-1)}") <i class="material-icons selmecAzul">fast_rewind</i>
+							td
+							td
+							td
+							td
+							td.center-align
+								a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/stock_item/proximo/#{(cont+1)}") <i class="material-icons selmecAzul">fast_forward</i>
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

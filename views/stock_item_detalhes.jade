@@ -1,0 +1,92 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.stock_item_form.titulo"></span>
+				.row
+					//- .col.s2.file-field.hide-on-med-and-up
+					//- 	//- .btn-floating.tooltipped.white.pointer#exportar(style="box-shadow:none !important;" data-position="left", data-delay="10", data-tooltip="Exportar Kilometragem", class="btn-floating btn-large waves-effect waves-light")
+					//- 	input(type="file", id="uploadimg",  accept="image/*;capture=camera")
+					//- 	i.material-icons.activarVerde.small.right monochrome_photos
+					//- .col.s10.m6.input-field
+					//- 	label(for="mestsre") <span data-i18n="demo.stock_item_form.codigo_de_barras"></span>
+					//- 	input( autocomplete="off", type="text", id="mestsre", min=0 value="#{Stock_item ? Stock_item[0].scanner:''}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="product_code") Codigo do Produto
+						input( autocomplete="off", type="text", id="product_code", value="#{Stock_item ? Stock_item[0].product_code:''}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="description_item") <span data-i18n="demo.stock_item_form.descricao_item"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="description_item" ,name="description_item", fisher="#{Stock_item[0]._id}" value="#{Stock_item? Stock_item[0].description_item : ''}")
+				.row
+					.col.s12.m6
+							label(for="unit_sale") <span data-i18n="demo.stock_item_form.Unit"></span>
+							select.browser-default(name="unit_sale", id="unit_sale", style="font-family:")
+								option(value="" disabled selected selmecVerde) choose Option
+								option(value="CAIXA" selected="#{Stock_item[0].unit_sale}"=="CAIXA"? true:false) Caixa
+								option(value="UN" selected="#{Stock_item[0].unit_sale}"=="UN"? true:false) UN
+								option(value="KG" selected="#{Stock_item[0].unit_sale}"=="KG"? true:false) Kg
+								option(value="LITRO" selected="#{Stock_item[0].unit_sale}"=="LITRO"? true:false) Litro
+								option(value="METRO" selected="#{Stock_item[0].unit_sale}"=="METRO"? true:false) Metro
+								option(value="ROLO" selected="#{Stock_item[0].unit_sale}"=="ROLO"? true:false) Rolo
+								option(value="PACOTE" selected="#{Stock_item[0].unit_sale}"=="PACOTE"? true:false) Pacote
+					.col.s12.m6
+						label(for="grupo") Categoria
+						select.browser-default(name="grupo", id="grupo", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose Option
+							option(value="DLA" selected="#{Stock_item[0].grupo}"=="DLA"? true:false) DLA
+							option(value="ferramenta" selected="#{Stock_item[0].grupo}"=="ferramenta"? true:false) Ferramenta
+							option(value="Frota" selected="#{Stock_item[0].grupo}"=="Frota"? true:false) Frota
+							option(value="IT" selected="#{Stock_item[0].grupo}"=="IT"? true:false) IT
+							option(value="SST" selected="#{Stock_item[0].grupo}"=="SST"? true:false) SST
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold 
+				.row
+					.col.s12
+						.col.s4
+							label(for="serialized_item") <span data-i18n="demo.stock_item_form.item_serial"></span>
+						.col.s4
+							input.bom(type="radio" id="serialized_item_ok" name="serialized_item" checked="#{Stock_item[0].serialized_item}"=='sim'? true:false  value="sim")
+							label(for="serialized_item_ok") Sim					
+						.col.s4
+							input.mau(type="radio", id="serialized_item_no", checked="#{Stock_item[0].serialized_item}"=='nao'? true:false name='serialized_item', value="nao")
+							label(for="serialized_item_no") Nao
+				
+
+				.row
+					.col.s12.m6
+						label(for="cliente_name") Proprietario
+						select.browser-default.browser-default(name="cliente_name", id="cliente_name")
+							option(value="" disabled selected selmecVerde) choose Option
+							option(value="COMSERV" selected="#{Stock_item[0].cliente_name}"=="COMSERV"? true:false) Comserv
+							option(value="Huawei" selected="#{Stock_item[0].cliente_name}"=="Huawei"? true:false) Huawei
+							option(value="Vodacom" selected="#{Stock_item[0].cliente_name}"=="Vodacom"? true:false) Vodacom
+			fieldset.no-border
+				.row.buttons-container
+					if !Stock_item
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_stock_item") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_stock_item") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script(type="text/javascript" src="/js/DecoderWorker.js")
+		script(type="text/javascript" src="/js/exif.js")
+		script(type="text/javascript" src="/js/BarcodeReader.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

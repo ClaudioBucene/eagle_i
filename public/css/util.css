@@ -1,0 +1,313 @@
+body, html{
+	height: auto;
+	width: auto;
+	font-size: 13px;
+	font-family: Helvetica, Arial, sans-serif;
+	background-color: #fff;
+}
+
+label{
+	color: rgba(0, 0, 0, 0.6) !important;
+}
+
+main {
+	max-width: 100%;
+	max-height: 92%;
+	
+}
+
+.no-padding{
+	padding: 0px !important;
+}
+.principal{
+	min-height: 120px;
+}
+.no-margin{
+	margin: 0px !important;
+}
+
+nav h1, nav span{
+	color: #12375c;
+	font-size: 1em;
+	margin:  0 0 0 10px !important;
+	padding: 0 0 0 0 !important;
+}
+
+.bold{
+	font-weight: bold;
+}
+
+footer{
+	position: absolute;
+	bottom: 0px;
+}
+
+.counter{
+	display: inline-block;
+	min-width: 40px;
+	min-height: 20px;
+	max-height: 40px;
+	text-align: center;
+	border-radius: 100%;
+	top: 5px;
+	position: relative;
+}
+
+.counter-provincia{
+	background-color: #E1E3E6;
+}
+
+.counter-distrito{
+	background-color: #C6C6C6;
+}
+
+.counter span{
+	position: relative;
+    top: -3px;
+}
+
+.generic-counter{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	border-radius: 100%;
+	position: relative;
+	background-color: #C6C6C6;
+}
+
+.generic-counter span{
+	position: relative;
+	top: 10px;
+}
+
+
+.highlight:hover{
+	background-color: #E1E3E6 !important;
+}
+
+.parent-width{
+	width: 100%;
+}
+
+.parent-height{
+	height: 100%;
+}
+
+.no-border{
+	border: none !important;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+fieldset.legend-border > legend{
+	border-bottom: 5px solid #9db50d !important;
+	display: block;
+	width: 100%;
+}
+
+.verde-policial{
+	color: #12375c;
+}
+
+.verde-policial-bg{
+	background-color: #12375c !important;
+}
+
+.seccao{
+	margin-top: 20px;
+	padding: 50px 10px;
+}
+.seccao1{
+	margin-top: 20px;
+	/*padding: 50px 10px;*/
+}
+.fill-parent{
+	width: 100%;
+	height: 100%;
+}
+
+a.block-menu, a.block-menu:active, a.block-menu:hover, a.block-menu:link, a.block-menu:visited{
+	color: black;
+	border: none !important;
+}
+
+.block-menu{
+	border-radius: 50px;
+	display: table;
+	width: 100%;
+	height: 200px;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7), -5px -5px 10px rgba(0, 0, 0, 0.7);
+}
+
+.lista-postos, .lista-postos, .lista-postos:active, .lista-postos:hover, .lista-postos:link, .lista-postos:visited{
+	margin: 5px;
+	padding-left: 20px; 
+	height: 3em;
+	display: block;
+	color: black;
+}
+
+.lista-postos span{
+	position: relative;
+	top: 15px;
+}
+
+.lista-postos:hover{
+	background-color: #E5E6E7;
+}
+
+.block-menu figure{
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+}
+
+.block-menu i{
+	font-size:120px !important;
+	transition: font-size 0.9s;
+}
+ 
+.block-menu figure figcaption{
+	font-size: 18px;
+	position: relative;
+	top: 10px;
+	display: block;
+	width: 100%;
+	text-align: center;
+	transition: font-size 0.9s, top 0.9s, letter-spacing 1.5s;
+}
+
+.search-box #search, .search-box #search:focus{
+	border: none !important;
+	box-shadow: none !important;
+	width: calc(100% - 35px);
+	height: 20px;
+	padding: 0px !important;
+	margin:  0px !important;
+	position: relative;
+	bottom: 8px;
+	vertical-align: baseline;
+}
+
+.search-box *{
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	box-shadow: none !important;
+	border: none !important;
+	color: black;
+}
+
+.search-box button i{
+	font-size: 26px;
+	position: relative;
+	bottom: 10px;
+	color: #488D78;
+}
+
+.search-box button{	
+	height: 40px !important;
+	position: relative;
+	bottom: 10px;
+	background-color: #F5F6F7 !important;
+}
+
+.search-box{
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	height: 50px !important;
+	position: relative;
+	top: 5px;
+	background-color: #F5F6F7;
+}
+
+@media screen and (min-width: 601px){
+	.block-menu-margin-left{
+		margin-left: 30px !important;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.buttons-container {
+		text-align: center;
+	}
+
+	.buttons-container .left-button{
+		margin-bottom: 40px; 
+	}
+
+	html, body{font-size: 12px;}
+}
+
+@media screen and (min-width: 601px){
+	.buttons-container .left-button{
+		text-align: right;
+	}
+}
+
+[disabled]{
+	background-color: rgba(209, 209, 209, 0.3) !important;
+	color: black !important;
+}
+
+
+
+/* ***************************************************************counter incidentes******************************************** */
+
+
+#time{font-size: 1em !important;
+	font-weight:3px;
+	color:transparent;
+	font-size:2vw;
+	text-align:center;
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #777;
+	/* width:100%; */
+	display:block;
+	font-variant: small-caps;
+	margin-top:10vh
+	
+}
+  
+ #time > span
+    {
+	font-variant: small-caps;
+    /* font-weight: 900;  */
+    /* font-size: 3em !important; */
+	
+	
+	
+
+	
+}
+
+.circless {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: 2px solid #488D78;
+	line-height:50px;
+	text-align:center;
+	font-size: 10px;
+  }
+
+  
+	  @media screen and (max-width:600px){
+		.safetyy{ width: 7vw;
+	  }
+	  
+  }
+
+  @media screen and (min-width:601px){
+	.safetyy{ width: 5vw;
+	}
+
+  }
+
+
+
+
+/* *****************************************************************fim counter*************************************************** */

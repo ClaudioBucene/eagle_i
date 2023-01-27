@@ -1,0 +1,31 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Importacao de site info
+				.row
+					.col.s12.m4.input-field
+						span Comprovativo
+						input.preencher(type="file", id="comprovativo", name="comprovativo",autocomplete="off")
+			fieldset.no-border
+				.row.buttons-container
+					.col.s12.m6.left-button
+						button(type="button", class="btn",  id="importorxtaxaoSinto") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+					.col.s12.m6.right-button
+						button(type="button", class="btn red", id="voltar_util") <span data-i18n="demo.utilizador_form.cancelar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,44 @@
+mixin modals()
+	div(id="yes_no_modal", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="yes_no_title_modal")
+			p(id="yes_no_content_modal")
+		
+		div(class="modal-footer")
+			button(type="button", class="btn red modal-action modal-close waves-effect waves-green btn-flat", style="margin-left: 20px !important") Nao
+			button(type="button", id="yes_btn_modal", class="btn green modal-action modal-close waves-effect waves-green btn-flat") Sim
+			
+		
+
+
+	div(id="msg_modal", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			h4(id="msg_title_modal")
+			p(id="msg_content_modal")
+		
+		div(class="modal-footer")
+			button(type="button", class="btn modal-action activarAzul modal-close waves-effect waves-green btn-flat", id="ok_btn_modal") OK
+
+	div(id="msg_modal_2", class="modal", style="width: 60% !important")
+		div(class="modal-content")
+			p(id="msg_content_modal_2")
+		
+		div(class="modal-footer")
+			button(type="button", class="btn modal-action modal-close activarAzul waves-effect waves-green btn-flat", id="ok_btn_modal") OK
+
+
+	$('.perfil').click(function(){
+		$('#msg_title_modal').html('Mensagem de sistema')
+		$('#msg_content_modal').html('Perfil Em desenvolvimento')
+		$('#msg_content_modal').openModal();
+		$('#ok_btn_modal').click(function(){
+			;
+		})
+	})
+
+	$('.perfil').click(function(){
+				$('#msg_title_modal').html('Campos Nao Preenchidos')
+					$('#msg_content_modal').html('O campo correspondente a  nao foi preenchido. Por favor preencha-o');
+					$("#perfil_modal").openModal();
+					return;
+				})

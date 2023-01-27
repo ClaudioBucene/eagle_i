@@ -1,0 +1,39 @@
+extends layout
+block content
+	if Jobcards
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.comments"></span>
+			.row#recolherdados(style="margin-bottom:0px" dadosreferenciajobcard="#{Jobcards[0]._id}" dadosjobtype="#{Jobcards[0].jobcard_jobtype}" dadosjobttnumberstatus="#{Jobcards[0].ttnumber_status}")
+				.col.s12.m6.input-field
+					label(for="jobcard_callcentercomments" style="font-size:15px") <span data-i18n="demo.ttnumber_form.comments"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_callcentercomments" ,name="jobcard_callcentercomments")
+				.col.s12.m6(style="margin-top:2px")
+					label(style="margin-left:0.2rem;") <span data-i18n="demo.ttnumber_form.importance"></span>
+					select.browser-default(name="importance_level", id="importance_level", style="font-family:")
+						option(value="" disabled selected selmecVerde) Escolha uma opção
+						option(value="Baixa") Baixa
+						option(value="Media") Média
+						option(value="Alta") Alta
+			button(type="button", id="jobcardcallcentercomments_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat" style="margin-top:20px; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	if Projects
+		form#ttnumberform(class="col s12")
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.comments"></span>
+			.row#recolherdados(style="margin-bottom:0px" dadosreferenciaproject="#{Projects[0]._id}" dadosjobttnumberstatus="#{Projects[0].ttnumber_status}")
+				.col.s12.m6.input-field
+					label(for="jobcard_callcentercomments" style="font-size:15px") <span data-i18n="demo.ttnumber_form.comments"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_callcentercomments" ,name="jobcard_callcentercomments")
+			button(type="button", id="jobcardcallcentercommentsproject_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat" style="margin-top:20px; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

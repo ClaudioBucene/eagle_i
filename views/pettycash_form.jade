@@ -1,0 +1,243 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="post", style="color:#12375c;")
+			ul(id="progressbar")
+				li(class="active")  <span class="hide-on-small-only"><span data-i18n="demo.pettycash_home.dados_gerais"></span></span> <span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/dados.png">
+				li <span class="hide-on-small-only"><span data-i18n="demo.pettycash_home.transactioninfo"></span></span> <span class="hide-on-med-and-up"> <img class="hide-on-med-and-up" src="/img/transactioninfo.png" style="width:31px">
+				if Pettycash
+					li <span class="hide-on-small-only"><span data-i18n="demo.pettycash_home.audittrail"></span></span> <span class="hide-on-med-and-up"> <img class="hide-on-med-and-up" src="/img/audittrail.png" style="width:31px">
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.pettycash_home.dados_gerais"></span>
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						i.material-icons.prefix.selmecAzul person
+						label(for="user_code") <span data-i18n="demo.utilizador_form.code"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="user_code" ,name="user_code", value="#{Pettycash? Pettycash[0].pettycashuser_code:DataU.user_code}")
+					.input-field.col.s12.m6(style="margin-top:2px")
+						i.material-icons.prefix.selmecAzul person
+						label(for="pettycash_nome") <span data-i18n="demo.pettycash_home.nome"></span>
+						input(id="pettycash_nome", autocomplete="off",readonly, type="text", name="pettycash_nome", value="#{Pettycash? Pettycash[0].pettycashuser_nome:DataU.nome}")
+				.row(style="margin-bottom:0px")
+					//- .input-field.col.s12.m6(style="margin-top:2px")
+					//- 	i.material-icons.prefix.selmecAzul location_on
+					//- 	label(for="pettycash_region") <span data-i18n="demo.pettycash_home.region"></span>
+					//- 	input(type="text", id="pettycash_region", readonly, name="pettycash_region", value="#{DataU.regiao}")
+					.input-field.col.s12.m6(style="margin-top:2px")
+						i.material-icons.prefix.selmecAzul date_range
+						label(for="pettycash_creationdate") <span data-i18n="demo.pettycash_home.creationdate"></span>
+						input(type="text", id="pettycash_creationdate", readonly, name="pettycash_creationdate", value="#{Pettycash? Pettycash[0].pettycash_data : ((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())}")
+					.input-field.col.s12.m6(style="margin-top:2px")
+						i.material-icons.prefix.selmecAzul date_range
+						label(for="pettycash_financialyear") <span data-i18n="demo.pettycash_home.financialyear"></span>
+						input(type="text", id="pettycash_financialyear", readonly,name="pettycash_financialyear", value="#{Pettycash ? Pettycash[0].pettycash_anoFiscal:FinancialYear}")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.pettycash_home.transactioninfo"></span>
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="pettycash_date") <span data-i18n="demo.pettycash_home.date"></span>
+						input.datepicker(autocomplete="off", type="text", id="pettycash_date", style="font-family:;color:#12375c", name="pettycash_date", value="#{Pettycash ? Pettycash[0].pettycash_purchase[0].purchase_date:''}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="pettycash_description") <span data-i18n="demo.pettycash_home.description"></span>
+						input(autocomplete="off", type="text", id="pettycash_description", style="font-family:;color:#12375c", name="pettycash_description", value="#{Pettycash ? Pettycash[0].pettycash_purchase[0].purchase_description:''}")
+				.row(style="margin-bottom:0px")
+					if !Pettycash
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="pettycash_value") <span data-i18n="demo.pettycash_home.value"></span>
+							input(autocomplete="off", type="number", id="pettycash_value", step="0.01", style="font-family:;color:#12375c", name="pettycash_value")
+					else
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="pettycash_value") <span data-i18n="demo.pettycash_home.value"></span>
+							input(autocomplete="off", type="text", readonly, id="pettycash_value1", style="font-family:;color:#12375c", name="pettycash_value", value="#{Pettycash[0].pettycash_purchase[0].purchase_value}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="pettycash_supplier") <span data-i18n="demo.pettycash_home.supplier"></span>
+						input(autocomplete="off", type="text", id="pettycash_supplier", style="font-family:;color:#12375c", name="pettycash_supplier", value="#{Pettycash ? Pettycash[0].pettycash_purchase[0].purchase_supplier:''}")
+				.row(style="margin-bottom:0px")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="pettycash_docno") <span data-i18n="demo.pettycash_home.docno"></span>
+						input(autocomplete="off", type="text", id="pettycash_docno", style="font-family:;color:#12375c", name="pettycash_docno", value="#{Pettycash ? Pettycash[0].pettycash_purchase[0].purchase_docno:''}")
+					.col.s12.m6.input-field(style="margin-top:2px")
+						label(for="pettycash_comments") <span data-i18n="demo.pettycash_home.comment"></span>
+						input(autocomplete="off", type="text", id="pettycash_comments", style="font-family:;color:#12375c", name="pettycash_comments", value="#{Pettycash ? Pettycash[0].pettycash_purchase[0].purchase_comments:''}")
+				if !Pettycash
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							<span data-i18n="demo.pettycash_home.imagem"></span>
+							input(type="file", id="pettycash_imagem", name="pettycash_imagem",autocomplete="off", multiple)
+							table
+								tbody#mostrarpettycash_imagem.mostrarpettycash_imagem
+				else
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field
+							-if(Pettycash[0].pettycash_purchase[0].purchase_imagem.length!=0)
+								-for( let i=0;i<(Pettycash[0].pettycash_purchase[0].purchase_imagem.length); i++)
+									img.verimagem(style="width:100px", src="#{Pettycash[0].pettycash_purchase[0].purchase_imagem[i]}")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Pettycash
+					input#captarPettycash(type="submit", name="submit", class="submit action-button", value="Save", saldodisponivel="#{SaldoDisponivel}",dadosPettyCash="#{DadosPettyCash}")
+				else
+					input(type="button", name="next", class="next action-button", value="Next >>")
+			if Pettycash	
+				fieldset
+					h2(class="fs-title") <span data-i18n="demo.pettycash_home.audittrail"></span>
+					table.responsive-table.bordered.striped
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.pettycash_home.responsavel"></span>
+								th <span data-i18n="demo.pettycash_home.accao"></span>
+								th <span data-i18n="demo.pettycash_home.data"></span>
+						tbody(id="myTable")
+							-for(var index = 0; index< Pettycash[0].pettycash_audittrail.length; index++)
+								tr.highlight(style="font-family:;color:#12375c")
+									td #{Pettycash[0].pettycash_audittrail[index].audittrail_username}
+									td #{Pettycash[0].pettycash_audittrail[index].auditrail_action}
+									td #{Pettycash[0].pettycash_audittrail[index].auditrail_date}
+					input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					-var nome_apelidosplit = Pettycash[0].pettycashuser_nome.split(" ");
+					-var nome_apelido_range = nome_apelidosplit[0] + "_" +nome_apelidosplit[1] + "/range";
+					if((DataU.nome == "Amancio Mazivila") || (DataU.nome == "Luis Brazuna") || (DataU.nivel_acesso == "admin"))
+						if(Pettycash[0].pettycash_verify.length == 1)
+							input.refusepettycash(type="button", name="refusepettycash1", class="submit action-button", value="Refuse", dataref="#{Pettycash[0]._id}" detalhescaminho="#{nome_apelido_range}" debitovalue="#{Pettycash[0].pettycash_debito}")
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+
+				let dados = $("#verificar").attr("data");
+				if(dados == "vazio"){
+
+					if( ($("input[name='carrocaria']:checked").val() == "not ok" && $("#razaoCarrocaria").val().length == 0) || ($("input[name='pneus']:checked").val() == "not ok" && $("#razaoPneus").val().length == 0) || ($("input[name='pressao']:checked").val() == "not ok" && $("#razaoPressao").val().length == 0) || ($("input[name='porcas']:checked").val() == "not ok" && $("#razaoPorcas").val().length == 0) || ($("input[name='vidros']:checked").val() == "not ok" && $("#razaoVidros").val().length == 0) || ($("input[name='carrocaria']:checked").val() == "not ok" && $("#razaoCarrocaria").val().length == 0) || ($("input[name='luzes']:checked").val() == "not ok" && $("#razaoLuzes").val().length == 0) || ($("input[name='nivel']:checked").val() == "not ok" && $("#razaoNivel").val().length == 0) || ($("input[name='travoes']:checked").val() == "not ok" && $("#razaoTravoes").val().length == 0)){
+							$('#msg_title_modal').html('Campo Não Preenchido')
+							$('#msg_content_modal').html('Por favor seleccione as razões');
+							$('#msg_modal').openModal();
+					}
+					else{
+						if(animating) return false;
+						animating = true;
+						current_fs = $(this).parent();
+						next_fs = $(this).parent().next();
+
+						//activate next step on progressbar using the index of next_fs
+						$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+						//show the next fieldset
+						next_fs.show(); 
+						//hide the current fieldset with style
+						current_fs.animate({opacity: 0}, {
+						step: function(now, mx) {
+						//as the opacity of current_fs reduces to 0 - stored in "now"
+						//1. scale current_fs down to 80%
+						scale = 1 - (1 - now) * 0.2;
+						//2. bring next_fs from the right(50%)
+						left = (now * 50)+"%";
+						//3. increase opacity of next_fs to 1 as it moves in
+						opacity = 1 - now;
+						current_fs.css({
+						'transform': 'scale('+scale+')',
+						'position': 'relative'
+						});
+						next_fs.css({'left': left, 'opacity': opacity});
+						}, 
+						duration: 800, 
+						complete: function(){
+						current_fs.hide();
+						animating = false;
+						}, 
+						//this comes from the custom easing plugin
+						easing: 'easeInOutBack'
+						});
+					}
+				
+				}else{
+					if(animating) return false;
+					animating = true;
+					current_fs = $(this).parent();
+					next_fs = $(this).parent().next();
+
+					//activate next step on progressbar using the index of next_fs
+					$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+					//show the next fieldset
+					next_fs.show(); 
+					//hide the current fieldset with style
+					current_fs.animate({opacity: 0}, {
+					step: function(now, mx) {
+					//as the opacity of current_fs reduces to 0 - stored in "now"
+					//1. scale current_fs down to 80%
+					scale = 1 - (1 - now) * 0.2;
+					//2. bring next_fs from the right(50%)
+					left = (now * 50)+"%";
+					//3. increase opacity of next_fs to 1 as it moves in
+					opacity = 1 - now;
+					current_fs.css({
+					'transform': 'scale('+scale+')',
+					'position': 'relative'
+					});
+					next_fs.css({'left': left, 'opacity': opacity});
+					}, 
+					duration: 800, 
+					complete: function(){
+					current_fs.hide();
+					animating = false;
+					}, 
+					//this comes from the custom easing plugin
+					easing: 'easeInOutBack'
+					});
+				}
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("financasId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

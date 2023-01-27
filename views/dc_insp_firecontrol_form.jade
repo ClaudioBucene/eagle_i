@@ -1,0 +1,156 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Fire Panel for #{DC_insp.site_number} - #{DC_insp.site_name}
+				.row
+					.col.s12.m6
+						label(for="name") Fire Panel
+						select.browser-default(name="name", id="name", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="Power" selected="#{DC.name}"=='Power'? true:false) Power
+							option(value="Equipment" selected="#{DC.name}"=='Equipment'? true:false) Equipment
+							option(value="BSC" selected="#{DC.name}"=='BSC'? true:false) BSC
+					.col.s12.m6
+						label(for="specific") Description
+						select.browser-default(name="specific", id="specific", style="font-family:")
+							option(value="" disabled selected selmecVerde) choose option
+							option(value="Room A" selected="#{DC.specific}"=='Room A'? true:false) Room A
+							option(value="Room B" selected="#{DC.specific}"=='Room B'? true:false) Room B
+							option(value="Container" selected="#{DC.specific}"=='Container'? true:false) Container
+				.row
+					.col.s12
+						label(for="fire_damper_led") 
+						h6 1.Check all fire damper LED's are green and in the open position
+					.col.s6
+						input.bom(type="radio" id="fire_damper_led_ok" checked="#{DC.fire_damper_led}"=='ok'? true:false name="fire_damper_led"  value="ok")
+						label(for="fire_damper_led_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="fire_damper_led_no",  name='fire_damper_led', checked="#{DC.fire_damper_led}"=='not ok'?true:false  value="not ok")
+						label(for="fire_damper_led_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="fire_damper_led_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="fire_damper_led_comment",value="#{DC.fire_damper_led_comment?DC.fire_damper_led_comment:''}",  identifica="#{DC_insp._id}" ,name="fire_damper_led_comment")
+				.row
+					.col.s12
+						label(for="fire_status_manual") 
+						h6 2.Check fire system status manual when entering 
+					.col.s6
+						input.bom(type="radio" id="fire_status_manual_ok" checked="#{DC.fire_status_manual}"=='ok'? true:false name="fire_status_manual"  value="ok")
+						label(for="fire_status_manual_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="fire_status_manual_no",  name='fire_status_manual', checked="#{DC.fire_status_manual}"=='not ok'?true:false  value="not ok")
+						label(for="fire_status_manual_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="fire_status_manual_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="fire_status_manual_comment",value="#{DC.fire_status_manual_comment?DC.fire_status_manual_comment:''}",  identifica="#{DC_insp._id}" ,name="fire_status_manual_comment")
+				.row
+					.col.s12
+						label(for="break_glass_pannel") 
+						h6 3.Visual check on Break Glass Panel – no tampering has taken place
+					.col.s6
+						input.bom(type="radio" id="break_glass_pannel_ok" checked="#{DC.break_glass_pannel}"=='ok'? true:false name="break_glass_pannel"  value="ok")
+						label(for="break_glass_pannel_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="break_glass_pannel_no",  name='break_glass_pannel', checked="#{DC.break_glass_pannel}"=='not ok'?true:false  value="not ok")
+						label(for="break_glass_pannel_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="break_glass_pannel_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="break_glass_pannel_comment",value="#{DC.break_glass_pannel_comment?DC.break_glass_pannel_comment:''}",  identifica="#{DC_insp._id}" ,name="break_glass_pannel_comment")
+				.row
+					.col.s12
+						label(for="vessel_level") 
+						h6 4.Check vessels levels (manometers on acceptable levels) 
+					.col.s6
+						input.bom(type="radio" id="vessel_level_ok" checked="#{DC.vessel_level}"=='ok'? true:false name="vessel_level"  value="ok")
+						label(for="vessel_level_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="vessel_level_no",  name='vessel_level', checked="#{DC.vessel_level}"=='not ok'?true:false  value="not ok")
+						label(for="vessel_level_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="vessel_level_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="vessel_level_comment",value="#{DC.vessel_level_comment?DC.vessel_level_comment:''}",  identifica="#{DC_insp._id}" ,name="vessel_level_comment")
+				.row
+					.col.s12
+						label(for="alarm_on_fire") 
+						h6 5.Check that all alarms are clear on fire system control 
+					.col.s6
+						input.bom(type="radio" id="alarm_on_fire_ok" checked="#{DC.alarm_on_fire}"=='ok'? true:false name="alarm_on_fire"  value="ok")
+						label(for="alarm_on_fire_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="alarm_on_fire_no",  name='alarm_on_fire', checked="#{DC.alarm_on_fire}"=='not ok'?true:false  value="not ok")
+						label(for="alarm_on_fire_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="alarm_on_fire_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="alarm_on_fire_comment",value="#{DC.alarm_on_fire_comment?DC.alarm_on_fire_comment:''}",  identifica="#{DC_insp._id}" ,name="alarm_on_fire_comment")
+				.row
+					.col.s12
+						label(for="nozzles") 
+						h6 6.Check all nozzles are fitted away from obstructions or barriers that could prevent adequate distribution of mixing of the gas.
+					.col.s6
+						input.bom(type="radio" id="nozzles_ok" checked="#{DC.nozzles}"=='ok'? true:false name="nozzles"  value="ok")
+						label(for="nozzles_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="nozzles_no",  name='nozzles', checked="#{DC.nozzles}"=='not ok'?true:false  value="not ok")
+						label(for="nozzles_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="nozzles_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nozzles_comment",value="#{DC.nozzles_comment?DC.nozzles_comment:''}",  identifica="#{DC_insp._id}" ,name="nozzles_comment")
+				.row
+					.col.s12
+						label(for="pipes_nozzle") 
+						h6 7.Check all pipes and nozzles are adequately braced against the reaction to the discharge
+					.col.s6
+						input.bom(type="radio" id="pipes_nozzle_ok" checked="#{DC.pipes_nozzle}"=='ok'? true:false name="pipes_nozzle"  value="ok")
+						label(for="pipes_nozzle_ok") OK					
+					.col.s6
+						input.mau(type="radio", id="pipes_nozzle_no",  name='pipes_nozzle', checked="#{DC.pipes_nozzle}"=='not ok'?true:false  value="not ok")
+						label(for="pipes_nozzle_no") Not OK
+					.input-field.col.s12(style="margin-top:20px")
+						label(for="pipes_nozzle_comment") Comments
+						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="pipes_nozzle_comment",value="#{DC.pipes_nozzle_comment?DC.pipes_nozzle_comment:''}",  identifica="#{DC_insp._id}" ,name="pipes_nozzle_comment")
+			fieldset.no-border
+				.row.buttons-container
+					if !DC.name
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_dc_firecontrol_checklist") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+//- 			name
+//- description_item
+//- category
+//- unit_sale
+//- serialized_item
+//- comserv_stock
+//- cliente_name
+//- product_code
+//- group
+//- subcategory
+//- list_price
+//- list_date_price
+//- handling_fee
+//- load_time
+
+
+

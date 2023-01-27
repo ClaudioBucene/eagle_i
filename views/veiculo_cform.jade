@@ -1,0 +1,105 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST", enctype="multipart/form-data")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Registo de Viatura
+				.row
+					.col.s12.m6.input-field
+						label(for="marca") Marca
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="marca" ,name="marca", value="#{Veiculos? Veiculos[0].marca : ''}")
+
+					.col.s12.m6.input-field
+						label(for="modelo") Modelo
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="modelo" ,name="modelo", value="#{Veiculos? Veiculos[0].modelo : ''}")
+				.row
+					.col.s12.m6.input-field
+						label(for="matricula") Matricula
+						input( type="text", data-mask="SSS 000 SS", id="matricula", name="matricula", value="#{Veiculos? Veiculos[0].matricula : ''}")
+					.col.s12.m6.input-field
+						label(for="ano_aquisicao") Ano Aquisicao
+						input.preencher( autocomplete="off", type="text", data-mask="0000", style="font-family:;color:#12375c" ,id="ano_aquisicao" ,name="ano_aquisicao", value="#{Veiculos? Veiculos[0].ano_aquisicao : ''}")
+				.row
+					.col.s12.m6
+							label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+							select.browser-default(name="regiao", id="regiao", style="font-family:")
+								if Veiculos
+									if Veiculos[0].regiao == 'sul'
+										option(value="sul", selected="selected") Sul
+									else
+										if Veiculos[0].regiao == 'centro' 
+											option(value="centro", selected="selected") Centro
+										else
+											if Veiculos[0].regiao == 'centro'
+												option(value="centro", selected="selected", style="color:red !important;") Centro
+											else
+												option(value="norte", selected="selected") Não definido
+								else
+									option(value="" disabled selected selmecVerde) choose Option
+									option(value="sul") Sul
+									option(value="centro") Centro
+									option(value="norte") Norte
+									option(value="maputo") Maputo
+					.col.s12.m6.input-field
+						label(for="kilometragem") kilometragem
+						input.preencher( autocomplete="off", type="text" id="kilometragem" name="kilometragem" value="#{Veiculos ? Veiculos[0].kilometragem : ''}", style="font-family:")
+					.col.s12.m6
+						label(for="provincia") <span data-i18n="demo.utilizador_form.provincia"></span>
+						select.browser-default.browser-default(name="provincia", id="provincia", style="font-family:")
+							if Veiculos
+								-for(var i = 0; i < provincias.length; i++)
+									if Veiculos[0].provincia == provincias[i]
+										option(value="#{provincias[i]}", selected="selected") #{provincias[i]}
+									else
+										option(value="#{provincias[i]}") #{provincias[i]}
+							else
+								-for(var i = 0; i < provincias.length; i++)
+									option(value="#{provincias[i]}") #{provincias[i]}
+					//- .col.s12.m6.input-field
+					//- 	label(for="profissao") <span data-i18n="demo.utilizador_form.supervisor"></span>
+					//- 	input.preencher( autocomplete="off", type="text" id="nome_supervisor" name="nome_supervisor" value="#{Veiculos ? Veiculos[0].nome_supervisor : ''}", style="font-family:")
+			fieldset.no-border
+				.row.buttons-container
+					if !Veiculos
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_novoVeiculo") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_novoVeiculo") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							butoon#voltar_Viaturas(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			//- setInterval(function(){document.getElementById("utilizadorId").className="activarAzul"}, 50);
+			//- setTimeout(function(){
+			//- if(window.innerWidth<600){
+			//- document.getElementById("mySidebar").style.width = "0";
+			//- document.getElementById("main").style.marginLeft= "0";
+			//- document.getElementById("main").style.width="100%";
+			//- document.getElementById("main").style.marginBottom="0";}
+			//- }, 50);
+
+			//- document.ready(function(){function mes(){
+			//- var novoo;
+			//- var ms= new Date()
+			//- if((ms.getMonth()+1)<10)
+				//- novoo='0'+ms
+				//- return novoo;}
+			//- else{
+			//- novoo=''+(ms.getMonth()+1);
+			//- return novoo;
+			//- }
+			//- }})
+
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

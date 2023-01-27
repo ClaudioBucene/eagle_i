@@ -1,0 +1,95 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST", enctype="multipart/form-data") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.veiculo"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="requested_by") <span data-i18n="demo.Po_home.requisitado_por"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="requested_by" ,name="requested_by" readonly,  value="#{DataU.nome}", data-sete="#{Forncedorres}")
+					.col.s12.m6
+						label(for="matricula_service") <span data-i18n="demo.utilizador_form.matricula"></span>
+						select.browser-default(name="matricula_service", id="matricula_service", style="font-family:")
+							option(value="" disabled selected selmecVerde) escolha opção
+							-for(var i = 0; i < Oficina.length; i++)
+								option(value="#{Oficina[i].matricula}") #{Oficina[i].matricula}
+				.row
+					.col.s12.m6.input-field
+						label(for="marca") <span data-i18n="demo.utilizador_form.marca"></span>
+						input( autocomplete="off", readonly, type="text", placeholder="....." style="font-family:;color:#12375c" ,id="marca" ,name="marca")
+					.col.s12.m6.input-field
+						label(for="modelo") <span data-i18n="demo.utilizador_form.modelo"></span>
+						input( autocomplete="off", type="text", readonly,placeholder=".....", style="font-family:;color:#12375c" ,id="modelo" ,  name="modelo")
+				.row
+					.col.s12.m6.input-field
+						label(for="quilometragem") <span data-i18n="demo.utilizador_form.kilometros"></span>
+						input(autocomplete="off",  type="text", readonly,placeholder=".....", style="font-family:;color:#12375c" ,id="quilometragem" , name="quilometragem")
+					.col.s12.m6.input-field
+						label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+						input( autocomplete="off", type="text", readonly, placeholder=".....", style="font-family:;color:#12375c" ,id="regiao" , name="regiao")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.servico"></span>
+				.row
+					.col.s12.m6
+						label(for="supplier_service") <span data-i18n="demo.po_form.fornecedor"></span>
+						select.browser-default(name="supplier_service", id="supplier_service", style="font-family:")
+							-for(var i = 0; i < Fornecedor.length; i++)
+								option(value="#{Fornecedor[i].cliente_nome}" cliente_reff="#{Fornecedor[i]._id}") #{Fornecedor[i].cliente_nome}
+					.col.s12.m6
+						label(for="type_service") <span data-i18n="demo.po_form.tipo_servico"></span>
+						select.browser-default(name="type_service", id="type_service", style="font-family:")
+							option(value="" disabled selected selmecVerde) Escolha opcao
+							option(value="A") A (A ≤ 25,000.00 MT)
+							option(value="B") B (25,000.00 MT < B ≤ 75,000.00 MT)
+							option(value="C") C (75,000.00 MT < C ≤ 100,000.00 MT)
+							option(value="D") D (D > 100,000.00MT)
+				.row.multi-field-wrapper.col.s12
+					.multi-fields.col.s12
+						.multi-field.col.s12
+							.col.s10.m6
+								label(for="problema") <span data-i18n="demo.inspdiaria_home.problemas"></span> 
+								input( autocomplete="off", type="text", id="problema")
+					a(class="btn-floating btn-large waves-effect waves-light add-field6 right") +
+				.row
+					.col.s12
+						table.responsive-table.bordered.striped(style="height:auto !important")
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.po_form.descricao"></span>
+									th 
+							tbody(id="myTable_tecnicos_permitidos", style="height:auto !important")
+
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.po_form.ficheiro"></span>
+				.row
+					.col.s12.m4.input-field
+						span Quotation
+						input(type="file", id="primeiro_ficheiro", name="primeiro_ficheiro",autocomplete="off")
+					
+			fieldset.no-border
+				.row.buttons-container
+					if !Po_data
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_car_service") <span data-i18n="demo.utilizador_form.enviar_po"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_Po") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

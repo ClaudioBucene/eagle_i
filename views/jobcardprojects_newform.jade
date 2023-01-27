@@ -1,0 +1,421 @@
+extends layout
+block content
+	form#ttnumberform(style="margin-bottom:0px; height:550px" name="ttnumbercalloutform")
+		h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.criartarefa"></span>
+		.row#recolherdados(style="margin-top:-40px; margin-bottom:0px" detalhesclientessite="#{SiteCliente}" detalhessiteinfo="#{SiteInfo}" detalhesprojectos="#{DadosProjectos}" detalhesjobcards="#{DadosJobcards}" detalhesjobcardscallout="#{DadosJobcardCallout}" detalhesclientes="#{DadosClientes}" detalhesCausa="#{DadosCausa}" detalhesdepartamento="#{DadosDepartamento}")
+			console.log(DadosClientes)
+			.col.s12.m6(style="margin-top:6px")
+				label <span data-i18n="demo.manutencao_form.departamento"></span>
+				select.browser-default(name="departamento", id="departamento")
+					option(value="" disabled selected) Escolha a opção
+					-if(DataU.funcao=="Manager" || DataU.funcao=="Commercial")
+						-for(let i=0; i<AdMagen[0].departamento.length; i++)
+							-if(DataU.departamento_id==AdMagen[0].departamento[i]._id)
+								option(value="#{AdMagen[0].departamento[i].nome}" , data-cont="#{AdMagen[0].departamento[i]._id}") #{AdMagen[0].departamento[i].nome}
+					-else
+						-for(let i=0; i<AdMagen[0].departamento.length; i++)
+							option(value="#{AdMagen[0].departamento[i].nome}" , data-cont="#{AdMagen[0].departamento[i]._id}") #{AdMagen[0].departamento[i].nome}
+			.input-field.col.s12.m6(style="margin-top:22px")
+				label(for="jobcard_projectnumber") <span data-i18n="demo.ttnumber_form.projectnumber"></span>
+				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_projectnumber" ,name="jobcard_projectnumber")
+		.row#formulariotelco.hide
+			.row(style="margin-bottom:0px") 
+				.col.s12.m6(style="margin-top:5px")
+					label(for="jobcard_clienteidprojects") <span data-i18n="demo.ttnumber_form.cliente"></span>
+					select.browser-default(name="jobcard_clienteidprojects", id="jobcard_clienteidprojects" detalhessiteinfo="#{SiteInfo}")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<ClientesTelco.length; i++)
+							option(value="#{ClientesTelco[i]._id}") #{ClientesTelco[i].cliente_nome}
+
+				.input-field.col.s10.m6.jobcard_siteidselect(style="margin-top:19px")
+					select(name="jobcard_siteidselect", id="jobcard_siteidselect" multiple)
+						option(value="" disabled selected) Escolha a opção
+					label(for="jobcard_siteidselect") Site
+				.col.s2.hide-on-med-and-up.jobcard_siteidselect(style="margin-top:22px")
+					img(class="hide-on-med-and-up" src="/img/okk.png")
+				.input-field.col.s12.m6.jobcard_siteidinput.hide(style="margin-top:19px")
+					label(for="jobcard_siteidinput") Site
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_siteidinput" ,name="jobcard_siteidinput")
+
+				//-.row(style="margin-bottom:0px")
+				//- .col.s10.m6.jobcard_siteidselect(style="margin-top:3px")
+				//- 	label(for="jobcard_siteidselectttnumber") Site
+				//- 	select.browser-default(name="jobcard_siteidselectttnumber", id="jobcard_siteidselectttnumber")
+				//- 		option(value="" disabled selected) Escolha a opção
+				//- .col.s2.hide-on-med-and-up.jobcard_siteidselect.hide(style="margin-top:22px")
+				//- 	img(class="hide-on-med-and-up" src="/img/okk.png")
+				//- .input-field.col.s12.m6.jobcard_siteidinput.hide(style="margin-top:19px")
+				//- 	label(for="jobcard_siteidinputttnumber") Site
+				//- 	input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_siteidinputttnumber", name="jobcard_siteidinputttnumber")
+			.row(style="margin-bottom:0px")
+				.input-field.col.s10.m6(style="margin-top:22px")
+					select(name="jobcard_call", id="jobcard_call")
+						option#terceiro(value="" disabled) Escolha a opção
+						option(value="Project" selected) Project
+					label Call
+				.col.s2.hide-on-med-and-up(style="margin-top:22px")
+					img(class="hide-on-med-and-up" src="/img/okk.png")
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+					select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<Usuarios.length; i++)
+							option(value="#{Usuarios[i]._id}") #{Usuarios[i].nome}
+			//- .row(style="margin-bottom:0px")
+			//- 	.input-field.col.s10.m6.jobcard_jobinfoselect.hide(style="margin-top:22px")
+			//- 		select(name="jobcard_jobinfoselect", id="jobcard_jobinfoselect" multiple)
+			//- 			option(value="" disabled selected) Escolha a opção
+			//- 		label <span data-i18n="demo.manutencao_form.jobinfo"></span>
+			//- 	.input-field.col.s12.m6.jobcard_jobinfoinput(style="margin-top:22px")
+			//- 		label(for="jobcard_jobinfoinput") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+			//- 		input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfoinput" ,name="jobcard_jobinfoinput")
+			//- 	.col.s12.m6(style="margin-top:6px")
+			//- 		label(for="jobcard_priority") <span data-i18n="demo.ttnumber_form.prioridade"></span>
+			//- 		select.browser-default(name="jobcard_priority", id="jobcard_priority")
+			//- 			option(value="" disabled selected) Escolha a opção
+			//- 			option(value="Alta") Alta
+			//- 			option(value="Media") Média
+			//- 			option(value="Baixa") Baixa
+
+			.row(style="margin-bottom:0px")
+				.input-field.col.s12.m6(style="margin-top:3px")
+					label(for="jobcard_jobinfo") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfo" ,name="jobcard_jobinfo")
+				.input-field.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_datacreated") <span data-i18n="demo.manutencao_form.datacreated"></span>
+					input.datepicker( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="jobcard_datacreated" ,name="jobcard_datacreated")
+					//- input( autocomplete="on", type="text", style="font-family:;color:#12375c" ,id="jobcard_datacreated" , readonly,name="jobcard_datacreated" ,value="#{((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())}")
+
+
+			//- .row#jobcard_reportnmcoperator(style="margin-bottom:0px")
+			//- 	.input-field.col.s12.m6(style="margin-top:7px")
+			//- 		label(for="jobcard_reportnmcoperator") <span data-i18n="demo.manutencao_form.reportnmcoperator"></span>
+			//- 		input( autocomplete="on", type="text", style="font-family:;color:#12375c" ,id="jobcard_reportnmcoperator" ,name="jobcard_reportnmcoperator")
+			//- 	.input-field.col.s12.m6(style="margin-top:6px")
+			//- 		label(for="jobcard_datareporte") <span data-i18n="demo.manutencao_form.datareporte"></span>
+			//- 		input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_datareporte" ,name="jobcard_datareporte", value = "#{DataRelatada}", readonly)
+			//- .row(style="margin-bottom:0px")
+			//- 	.input-field.col.s12.m6(style="margin-top:6px")
+			//- 		label(for="jobcard_horareporte") <span data-i18n="demo.manutencao_form.horareporte"></span>
+			//- 		input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_horareporte" ,name="jobcard_horareporte", value = "#{HoraRelatada}", readonly)
+			button(type="button", id="createnewttnumber_project", class="btn modal-action waves-effect waves-green btn-flat" style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.create"></span>
+		.row#formulariohvac.hide
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.ttnumber_form.criartarefa"></span>
+				.row
+					.col.s12.m6
+						label(for="jobcard_clienteid") <span data-i18n="demo.ttnumber_form.cliente"></span>
+						select.browser-default(name="cliente_hvac", id="cliente_hvac")
+							option(value="" disabled selected) Escolha a opção
+							-for(var i=0; i<Clientes.length; i++)
+								option(value="#{Clientes[i].nome_cliente}", data-cont="#{Clientes[i]._id}") #{Clientes[i].nome_cliente}
+							option(value="Novo") Novo
+					.col.s12.m6
+						label(for="filial") Filial
+						select.browser-default(name="filial", id="filial")
+							option(value="" disabled selected) Escolha a opção
+					.col.s12.m6
+						label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+						select.browser-default(name="regiao", id="regiao", style="font-family:" disabled)
+							option(value="" disabled selected) Escolha a opção
+							-for(let i=0; i<AdMagen[0].regiao.length; i++)
+								option(value="#{AdMagen[0].regiao[i].nome}", data-cont="#{AdMagen[0].regiao[i]._id}" ) #{AdMagen[0].regiao[i].nome}
+					.col.s12.m6
+						label <span data-i18n="demo.utilizador_form.provincia"></span>
+						select.browser-default.browser-default(name="provincia_trabalho", id="provincia_trabalho", style="font-family:")
+							option(value="" disabled selected) Escolha a opção
+							-for(let i=0; i<AdMagen[0].provincia.length; i++)
+								option(value="#{AdMagen[0].provincia[i].nome}", data-cont="#{AdMagen[0].provincia[i]._id}") #{AdMagen[0].provincia[i].nome}
+					.input-field.col.s12.m6
+						label(for="local") Local
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c" makhapa="#{Clientes1}" placeholder='',readonly, id="local", name="local")
+					.col.s12.m6
+						label(for="pessoa_contacto") Pessoa de Contacto
+						select.browser-default(name="pessoa_contacto", id="pessoa_contacto")
+							option(value="" disabled selected) Escolha a opção
+			fieldset.no-border.legend-border.avacseccao
+				legend.selmecAzul.bold <span data-i18n="demo.ttnumber_form.equipe"></span>
+				.row
+					.col.s12.m6
+						label(for="tecnico") Equipe Tecnica
+						select.browser-default(name="tecnico", id="tecnico", style="font-family:")
+							option(value="" disabled selected) Escolha a opção
+					
+							-if(DataU.nivel_acesso=="admin" || DataU.funcao=="Call Center" || DataU.funcao=="Back Office")
+								-for(let i=0; i<tecnicos.length; i++)	
+									option(value="#{tecnicos[i].nome}", data-cont="#{tecnicos[i]._id}") #{tecnicos[i].nome}
+							-else
+								-for(let i=0; i<HvacUsers.length; i++)
+									option(value="#{HvacUsers[i].nome}", data-cont="#{HvacUsers[i]._id}") #{HvacUsers[i].nome}
+
+					.col.s12.m6
+						label Matricula da viatura
+						select.browser-default.browser-default(name="viatura", id="viatura", style="font-family:")
+							option(value="" disabled selected) Escolha a opção
+								
+							-if(DataU.nivel_acesso=="admin" || DataU.funcao=="Call Center" || DataU.funcao=="Back Office")
+								-for(let i=0; i<viacturasAdmin.length; i++)	
+									option(value="#{viacturasAdmin[i].matricula}") #{viacturasAdmin[i].matricula}
+							-else
+								-for(let i=0; i<Viaturas.length; i++)
+									option(value="#{Viaturas[i].matricula}") #{Viaturas[i].matricula}
+					//- .col.s12.m6(style="margin-top:2px")
+					//- 	label(for="jobcard_priority1") <span data-i18n="demo.ttnumber_form.prioridade"></span>
+					//- 	select.browser-default(name="jobcard_priority1", id="jobcard_priority1")
+					//- 		option(value="" disabled selected) Escolha a opção
+					//- 		option(value="Alta") Alta
+					//- 		option(value="Media") Média
+					//- 		option(value="Baixa") Baixa
+					//- .input-field.col.s12.m6
+					//- 	label(for="data") Data prevista
+					//- 	input.datepicker(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="data", name="data")  
+					.input-field.col.s12.m6
+						label(for="razao") Motivo
+						input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="razao", name="razao")
+					.input-field.col.s12.m6
+						label(for="data") Data prevista
+						input.datepicker(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="data", name="data")  
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.ttnumber_form.assistent"></span>
+			.row.multi-field-wrapper.col.s12
+					.multi-fields.col.s12
+						.multi-field.col.s12.m6
+							.col.s10
+								label(for="pessoas_permitidas[]") Assistentes
+								select.browser-default.pessoas_permitidas(name="pessoas_permitidas[]",  style="font-family:")
+									option(value="" disabled selected selmecVerde) choose Option
+									-if(DataU.nivel_acesso=="admin" || DataU.funcao=="Call Center" || DataU.funcao=="Back Office")
+										-for(let i=0; i<tecnicos.length; i++)	
+											option(value="#{tecnicos[i].nome}", data-cont="#{tecnicos[i]._id}") #{tecnicos[i].nome}
+									-else
+										-for(let i=0; i<HvacUsers.length; i++)
+											option(value="#{HvacUsers[i].nome}", data-cont="#{HvacUsers[i]._id}") #{HvacUsers[i].nome}
+					a(class="btn-floating btn-large waves-effect waves-light add-field12 right") +
+			.row
+				.col.s12
+					table.responsive-table.bordered.striped(style="height:auto !important")
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.Armazem_form.tecnicos_locados"></span>
+								th
+						tbody(id="myTable_tecnicos_permitidos" style="height:auto !important")
+				//- fieldset.no-border
+				//- 		.row.buttons-container
+				//- 			.col.s12.center
+				//- 				butoon#criacaoandepto(type="button", class="btn waves-efect waves-light activarAzul") Criar
+		
+			button(type="button", id="createnewhvac_project", class="btn modal-action waves-effect waves-green btn-flat" style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.create"></span>
+		
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+	//- form#ttnumberform(style="margin-bottom:0px; height:550px")
+	//- 	h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.projectsh3"></span>
+	//- 	.row#recolherdados(style="margin-top:-40px; margin-bottom:0px" detalhesclientessite="#{SiteCliente}" detalhessiteinfo="#{SiteInfo}" detalhesprojectos="#{DadosProjectos}" detalhesclientes="#{DadosClientes}")
+	//- 		.input-field.col.s12.m6(style="margin-top:22px")
+	//- 			label(for="jobcard_projectnumber") <span data-i18n="demo.ttnumber_form.projectnumber"></span>
+	//- 			input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_projectnumber" ,name="jobcard_projectnumber")
+	//- 		.col.s12.m6(style="margin-top:5px")
+	//- 			label(for="jobcard_clienteidprojects") <span data-i18n="demo.ttnumber_form.cliente"></span>
+	//- 			select.browser-default(name="jobcard_clienteidprojects", id="jobcard_clienteidprojects")
+	//- 				option(value="" disabled selected) Escolha a opção
+	//- 				-for(var i=0; i<Clientes.length; i++)
+	//- 					option(value="#{Clientes[i]._id}") #{Clientes[i].cliente_nome}
+	//- 	.row(style="margin-bottom:0px")
+	//- 		.input-field.col.s10.m6(style="margin-top:22px")
+	//- 			select(name="jobcard_call", id="jobcard_call")
+	//- 				option#terceiro(value="" disabled) Escolha a opção
+	//- 				option(value="Project" selected) Project
+	//- 			label Call
+	//- 		.col.s2.hide-on-med-and-up(style="margin-top:22px")
+	//- 			img(class="hide-on-med-and-up" src="/img/okk.png")
+	//- 		.col.s12.m6(style="margin-top:6px")
+	//- 			label <span data-i18n="demo.manutencao_form.departamento"></span>
+	//- 			select.browser-default(name="jobcard_departamento", id="jobcard_departamento")
+	//- 				option(value="" disabled selected id="quarto") Escolha a opção
+	//- 				-for(let i=0; i<AdMagen[0].departamento.length; i++)
+	//- 					option(value="#{AdMagen[0].departamento[i].nome}" , data-cont="#{AdMagen[0].departamento[i]._id}") #{AdMagen[0].departamento[i].nome}
+	//- 	.row(style="margin-bottom:18px")
+	//- 		.input-field.col.s10.m6.jobcard_siteidselect(style="margin-top:19px")
+	//- 			select(name="jobcard_siteidselect", id="jobcard_siteidselect" multiple)
+	//- 				option(value="" disabled selected) Escolha a opção
+	//- 			label(for="jobcard_siteidselect") Site
+	//- 		.col.s2.hide-on-med-and-up.jobcard_siteidselect(style="margin-top:22px")
+	//- 			img(class="hide-on-med-and-up" src="/img/okk.png")
+	//- 		.input-field.col.s12.m6.jobcard_siteidinput.hide(style="margin-top:19px")
+	//- 			label(for="jobcard_siteidinput") Site
+	//- 			input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_siteidinput" ,name="jobcard_siteidinput")
+	//- 		.col.s12.m6(style="margin-top:2px")
+	//- 			label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+	//- 			select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+	//- 				option(value="" disabled selected) Escolha a opção
+	//- 				-for(var i=0; i<Usuarios.length; i++)
+	//- 					option(value="#{Usuarios[i]._id}") #{Usuarios[i].nome}
+	//- 	.row(style="margin-bottom:0px")
+	//- 		.input-field.col.s12.m6(style="margin-top:3px")
+	//- 			label(for="jobcard_jobinfo") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+	//- 			input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfo" ,name="jobcard_jobinfo")
+	//- 		.input-field.col.s12.m6(style="margin-top:2px")
+	//- 			label(for="jobcard_datacreated") <span data-i18n="demo.manutencao_form.datacreated"></span>
+	//- 			input.datepicker( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="jobcard_datacreated" ,name="jobcard_datacreated")
+	//- 			//- input( autocomplete="on", type="text", style="font-family:;color:#12375c" ,id="jobcard_datacreated" , readonly,name="jobcard_datacreated" ,value="#{((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())}")
+	//- 	button(type="button", id="createnewttnumber_project", class="btn modal-action waves-effect waves-green btn-flat" style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.create"></span>
+	//- block js
+	//- 	script(type="text/javascript" src="/js/jquery.mask.js")
+	//- 	script.
+	//- 		function autocomplete(inp, arr) {
+	//- 			/*the autocomplete function takes two arguments, the text field element and an array of possible autocompleted values:*/
+	//- 			var currentFocus;
+
+	//- 			/*execute a function when someone writes in the text field:*/
+	//- 			inp.addEventListener("input", function(e) {
+	//- 				var a, b, i, val = this.value;
+
+	//- 				/*close any already open lists of autocompleted values*/
+	//- 				closeAllLists();
+
+	//- 				if (!val) { return false;}
+
+	//- 				currentFocus = -1;
+
+	//- 				/*create a DIV element that will contain the items (values):*/
+	//- 				a = document.createElement("DIV");
+	//- 				a.setAttribute("id", this.id + "autocomplete-list");
+	//- 				a.setAttribute("class", "autocomplete-items");
+
+	//- 				/*append the DIV element as a child of the autocomplete container:*/
+	//- 				this.parentNode.appendChild(a);
+
+	//- 				/*for each item in the array...*/
+	//- 				for (i = 0; i < arr.length; i++) {
+
+	//- 					/*check if the item starts with the same letters as the text field value:*/
+	//- 					if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
+	//- 						/*create a DIV element for each matching element:*/
+	//- 						b = document.createElement("DIV");
+
+	//- 						/*make the matching letters bold:*/
+	//- 						b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+	//- 						b.innerHTML += arr[i].substr(val.length);
+	//- 						/*insert a input field that will hold the current array item's value:*/
+	//- 						b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+
+	//- 						/*execute a function when someone clicks on the item value (DIV element):*/
+	//- 						b.addEventListener("click", function(e) {
+
+	//- 							/*insert the value for the autocomplete text field:*/
+	//- 							inp.value = this.getElementsByTagName("input")[0].value;
+
+	//- 							/*close the list of autocompleted values,
+	//- 							(or any other open lists of autocompleted values:*/
+	//- 							closeAllLists();
+	//- 						});
+
+	//- 						a.appendChild(b);
+	//- 					}
+	//- 				}
+	//- 			});
+
+	//- 			/*execute a function presses a key on the keyboard:*/
+	//- 			inp.addEventListener("keydown", function(e) {
+	//- 				var x = document.getElementById(this.id + "autocomplete-list");
+
+	//- 				if (x) x = x.getElementsByTagName("div");
+
+	//- 				if (e.keyCode == 40) {
+	//- 					/*If the arrow DOWN key is pressed,
+	//- 					increase the currentFocus variable:*/
+	//- 					currentFocus++;
+
+	//- 					/*and and make the current item more visible:*/
+	//- 					addActive(x);
+	//- 				} else 
+	//- 					if (e.keyCode == 38) { //up
+	//- 						/*If the arrow UP key is pressed,
+	//- 						decrease the currentFocus variable:*/
+	//- 						currentFocus--;
+
+	//- 						/*and and make the current item more visible:*/
+	//- 						addActive(x);
+
+	//- 					} else 
+	//- 						if (e.keyCode == 13) {
+	//- 							/*If the ENTER key is pressed, prevent the form from being submitted,*/
+	//- 							e.preventDefault();
+	//- 							if (currentFocus > -1) {
+	//- 								/*and simulate a click on the "active" item:*/
+	//- 								if (x) x[currentFocus].click();
+	//- 							}
+	//- 						}
+	//- 			});
+
+	//- 			function addActive(x) {
+	//- 				/*a function to classify an item as "active":*/
+	//- 				if (!x) return false;
+
+	//- 				/*start by removing the "active" class on all items:*/
+	//- 				removeActive(x);
+
+	//- 				if (currentFocus >= x.length) currentFocus = 0;
+	//- 				if (currentFocus < 0) currentFocus = (x.length - 1);
+	//- 				/*add class "autocomplete-active":*/
+	//- 				x[currentFocus].classList.add("autocomplete-active");
+	//- 			}
+
+	//- 			function removeActive(x) {
+	//- 				/*a function to remove the "active" class from all autocomplete items:*/
+	//- 				for (var i = 0; i < x.length; i++) {
+	//- 					x[i].classList.remove("autocomplete-active");
+	//- 				}
+	//- 			}
+
+	//- 			function closeAllLists(elmnt) {
+	//- 				/*close all autocomplete lists in the document,
+	//- 				except the one passed as an argument:*/
+	//- 				var x = document.getElementsByClassName("autocomplete-items");
+
+	//- 				for (var i = 0; i < x.length; i++) {
+
+	//- 					if (elmnt != x[i] && elmnt != inp) {
+	//- 						x[i].parentNode.removeChild(x[i]);
+	//- 					}
+	//- 				}
+	//- 			}
+
+	//- 			/*execute a function when someone clicks in the document:*/
+	//- 			document.addEventListener("click", function (e) {
+	//- 				closeAllLists(e.target);
+	//- 			});
+	//- 		}
+
+	//- 		var reasonsJobcardArray = ["AC Mains Failure", "Rectifier System", "Rectifier Module", "Generator Low Fuel", "Generator Abnormal", "Generator Running", "High Temperature", "Battery Low", "Door Switch Intruder", "Motion Detector","FAN Stalled", "Smoke Detector","Site Down"];
+
+	//- 		/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+	//- 		autocomplete(document.getElementById("jobcard_jobinfo"), reasonsJobcardArray);
+
+	//- 		setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+	//- 		setTimeout(function(){
+				
+	//- 		if(window.innerWidth<780){
+	//- 		document.getElementById("mySidebar").style.width = "0";
+	//- 		document.getElementById("main").style.marginLeft= "0";
+	//- 		document.getElementById("main").style.width="100%";
+	//- 		document.getElementById("main").style.marginBottom="0";
+	//- 		document.getElementByClassName("capitalize").style.class="pequeno";
+	//- 		}
+	//- 		}, 50);

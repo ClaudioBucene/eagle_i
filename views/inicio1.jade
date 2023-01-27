@@ -1,0 +1,282 @@
+extends layout
+block content
+	//- img(src="/img/banner.jpeg", style="width:100%")
+	h5.center Dashboard #{((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())}
+	.grid
+		article#viaturassa(dataa2="#{Viaturas}")
+			canvas#myChart2(style=" text-align:center !important; padding-top:1em")
+			.text
+				p.center.bold(style="font-size:1em") Viaturas
+				hr
+				.col.s6(style="font-size:.9em") 
+					p Operacional <br/> <span class="bolas_dashboard green"><a class="pointer" href="/dashboard/viaturas/operacional", style="color:white">#{Viat.findIndex(x=>x._id=="Activo")!=-1?Viat[Viat.findIndex(x=>x._id=="Activo")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em") 
+					p.right Parque <br/> <span class="bolas_dashboard orange right"><a class="pointer" href="/dashboard/viaturas/parque" style="color:white">#{Viat.findIndex(x=>x._id=="Parque")!=-1?Viat[Viat.findIndex(x=>x._id=="Parque")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em")
+					p Oficina <br/> <span class="bolas_dashboard red"><a class="pointer" href="/dashboard/viaturas/oficina", style="color:white">#{Viat.findIndex(x=>x._id=="Oficina")!=-1?Viat[Viat.findIndex(x=>x._id=="Oficina")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em") 
+					p.right Total <br/> <span class="bolas_dashboard grey right"><a class="pointer" style="color:white">#{Viat.reduce((ac, x)=> {return ac+x.soma},0)}</a></span>
+		article#inspecoes(dataa1="#{Inspecao}")
+			canvas#myChart1(style=" text-align:center !important; padding-top:1em")
+			.text
+				p.center.bold(style="font-size:1em") Inspecçao de Viatura
+				hr
+				.col.s6(style="font-size:.9em") 
+					p Bom <br/> <span class="bolas_dashboard green"><a class="pointer" href="/dashboard/inspecoes/green", style="color:white">#{Insp.findIndex(x=>x._id=="green")!=-1?Insp[Insp.findIndex(x=>x._id=="green")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em") 
+					p.right Razoavel <br/> <span class="bolas_dashboard orange right"><a class="pointer" href="/dashboard/inspecoes/orange", style="color:white">#{Insp.findIndex(x=>x._id=="orange")!=-1?Insp[Insp.findIndex(x=>x._id=="orange")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em") 
+					p Mau <br/> <span class="bolas_dashboard red"><a class="pointer" href="/dashboard/inspecoes/red" style="color:white">#{Insp.findIndex(x=>x._id=="red")!=-1?Insp[Insp.findIndex(x=>x._id=="red")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em") 
+					p.right Total <br/> <span class="bolas_dashboard grey right"><a class="pointer" style="color:white">#{Insp.reduce((ac, x)=> {return ac+x.soma},0)}</a></span>
+		article#Transferenciass(dataa3="#{Transferenciasa}")
+			canvas#myChart3(style=" text-align:center !important; padding-top:1em")
+			.text
+				p.center.bold(style="font-size:1em") Transferencias
+				hr
+				.col.s6(style="font-size:.9em") 
+					p Aprovadas <br/> <span class="bolas_dashboard green"><a class="pointer" href="/dashboard/transferencias/aprovados", style="color:white">#{Transff.findIndex(x=>x._id=="Aprovado")!=-1?Transff[Transff.findIndex(x=>x._id=="Aprovado")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em") 
+					p.right Pendentes <br/> <span class="bolas_dashboard orange right"><a class="pointer" href="/dashboard/transferencias/pendentes" style="color:white">#{Transff.findIndex(x=>x._id=="Pendente")!=-1?Transff[Transff.findIndex(x=>x._id=="Pendente")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em") 
+					p Reprovadas <br/> <span class="bolas_dashboard red"><a class="pointer" href="/dashboard/transferencias/reprovados" style="color:white">#{Transff.findIndex(x=>x._id=="Reprovado")!=-1?Transff[Transff.findIndex(x=>x._id=="Reprovado")].soma: '0'}</a></span>
+				.col.s6(style="font-size:.9em") 
+					p.right Total <br/> <span class="bolas_dashboard grey right"><a class="pointer"  style="color:white">#{Transff.reduce((ac, x)=> {return ac+x.soma},0)}</a></span>
+		-if(false)
+			article
+				canvas#myChart4(style=" text-align:center !important; padding-top:1em")
+				.text
+					p.center.bold(style="font-size:1em") Purchase Order
+					hr
+					.col.s6(style="font-size:.9em") 
+						p Pendentes <br/> <span class="bolas_dashboard green"><a class="pointer" style="color:white">18</a></span>
+					.col.s6(style="font-size:.9em") 
+						p.right Aprovadas <br/> <span class="bolas_dashboard orange right"><a class="pointer" style="color:white">01</a></span>
+					.col.s6(style="font-size:.9em") 
+						p Finalizadas <br/> <span class="bolas_dashboard red"><a class="pointer" style="color:white">03</a></span>
+					.col.s6(style="font-size:.9em") 
+						p.right Total <br/> <span class="bolas_dashboard grey right"><a class="pointer" style="color:white">124</a></span>
+			article
+				canvas#myChart5(style=" text-align:center !important; padding-top:1em")
+				.text
+					p.center.bold(style="font-size:1em") Manutencao Correctiva
+					hr
+					.col.s6(style="font-size:.9em") 
+						p Pendentes <br/> <span class="bolas_dashboard green"><a class="pointer" style="color:white">18</a></span>
+					.col.s6(style="font-size:.9em") 
+						p.right Aprovadas <br/> <span class="bolas_dashboard orange right"><a class="pointer" style="color:white">01</a></span>
+					.col.s6(style="font-size:.9em") 
+						p Finalizadas <br/> <span class="bolas_dashboard red"><a class="pointer" style="color:white">03</a></span>
+					.col.s6(style="font-size:.9em") 
+						p.right Total <br/> <span class="bolas_dashboard grey right"><a class="pointer" style="color:white">124</a></span>
+			article
+				canvas#myChart6(style=" text-align:center !important; padding-top:1em")
+				.text
+					p.center.bold(style="font-size:1em") Manutencao Preventiva
+					hr
+					.col.s6(style="font-size:.9em") 
+						p Pendentes <br/> <span class="bolas_dashboard green"><a class="pointer" style="color:white">18</a></span>
+					.col.s6(style="font-size:.9em") 
+						p.right Aprovadas <br/> <span class="bolas_dashboard orange right"><a class="pointer" style="color:white">01</a></span>
+					.col.s6(style="font-size:.9em") 
+						p Finalizadas <br/> <span class="bolas_dashboard red"><a class="pointer" style="color:white">03</a></span>
+					.col.s6(style="font-size:.9em") 
+						p.right Total <br/> <span class="bolas_dashboard grey right"><a class="pointer" style="color:white">124</a></span>
+			article
+				canvas#myChart7(style=" text-align:center !important; padding-top:1em")
+				.text
+					p.center.bold(style="font-size:1em") Transferencias
+					hr
+					.col.s6(style="font-size:.9em") 
+						p Pendentes <br/> <span class="bolas_dashboard green"><a class="pointer" style="color:white">18</a></span>
+					.col.s6(style="font-size:.9em") 
+						p.right Aprovadas <br/> <span class="bolas_dashboard orange right"><a class="pointer" style="color:white">01</a></span>
+					.col.s6(style="font-size:.9em") 
+						p Finalizadas <br/> <span class="bolas_dashboard red"><a class="pointer" style="color:white">03</a></span>
+					.col.s6(style="font-size:.9em") 
+						p.right Total <br/> <span class="bolas_dashboard grey right"><a class="pointer" style="color:white">124</a></span>
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+			//- ************************************************************inicio***************************************************************
+			let dados1=JSON.parse($("#inspecoes").attr("dataa1"))
+		
+			var ctx1 = document.getElementById("myChart1").getContext('2d');
+			var myChart = new Chart(ctx1, {
+			type: 'doughnut',
+			data: {
+			labels: ["red", "Orange", "green"],
+			datasets: [{
+			backgroundColor: [
+			"red",
+			"orange",
+			"green"
+			],
+			data: [(dados1.findIndex(x => x._id =="red")!=-1? dados1[dados1.findIndex(x => x._id =="red")].soma:0), (dados1.findIndex(x => x._id =="orange")!=-1? dados1[dados1.findIndex(x => x._id =="orange")].soma:0), (dados1.findIndex(x => x._id =="green")!=-1? dados1[dados1.findIndex(x => x._id =="green")].soma:0)]
+			}]
+			},
+			options: {
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: false
+			}
+			}
+			});
+			//- *****************************************************************************fim *****************************************************************
+
+			
+			let dados2=JSON.parse($("#viaturassa").attr("dataa2"))
+			var ctx2 = document.getElementById("myChart2").getContext('2d');
+			var myChart = new Chart(ctx2, {
+			type: 'pie',
+			data: {
+			labels: ["Oficina", "Parque", "Operacional"],
+			datasets: [{
+			backgroundColor: [
+			"red",
+			"orange",
+			"green"
+			],
+			data: [(dados2.findIndex(x => x._id =="Oficina")!=-1? dados2[dados2.findIndex(x => x._id =="Oficina")].soma:0), (dados2.findIndex(x => x._id =="Parque")!=-1? dados2[dados2.findIndex(x => x._id =="Parque")].soma:0), (dados2.findIndex(x => x._id =="Activo")!=-1? dados2[dados2.findIndex(x => x._id =="Activo")].soma:0)]
+			}]
+			},
+			options: {
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: true
+			}
+			}
+			});
+
+			let dados3=JSON.parse($("#Transferenciass").attr("dataa3"))
+			var ctx3 = document.getElementById("myChart3").getContext('2d');
+			var myChart = new Chart(ctx3, {
+			type: 'doughnut',
+			data: {
+			labels: ["Reprovadas", "Pendentes", "Aprovadas"],
+			datasets: [{
+			backgroundColor: [
+			"red",
+			"orange",
+			"green"
+			],
+			data:[(dados3.findIndex(x => x._id =="Reprovado")!=-1? dados3[dados3.findIndex(x => x._id =="Reprovado")].soma:0), (dados3.findIndex(x => x._id =="Pendente")!=-1? dados3[dados3.findIndex(x => x._id =="Pendente")].soma:0), (dados3.findIndex(x => x._id =="Aprovado")!=-1? dados3[dados3.findIndex(x => x._id =="Aprovado")].soma:0)]
+			}]
+			},
+			options: {
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: false
+			}
+			}
+			});
+
+			var ctx4 = document.getElementById("myChart4").getContext('2d');
+			var myChart = new Chart(ctx4, {
+			type: 'pie',
+			data: {
+			labels: ["red", "Orange", "green"],
+			datasets: [{
+			backgroundColor: [
+			"red",
+			"orange",
+			"green"
+			],
+			data: [12, 19, 3]
+			}]
+			},
+			options: {
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: false
+			}
+			}
+			});
+
+			var ctx5 = document.getElementById("myChart5").getContext('2d');
+			var myChart = new Chart(ctx5, {
+			type: 'line',
+			data: {
+			labels: ["red", "Orange", "green"],
+			datasets: [{
+			backgroundColor: [
+			"red",
+			"orange",
+			"green"
+			],
+			data: [12, 19, 3]
+			}]
+			},
+			options: {
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: false
+			}
+			}
+			});
+
+			var ctx6 = document.getElementById("myChart6").getContext('2d');
+			var myChart = new Chart(ctx6, {
+			type: 'radar',
+			data: {
+			labels: ["red", "Orange", "green"],
+			datasets: [{
+			backgroundColor: [
+			"red",
+			"orange",
+			"green"
+			],
+			data: [12, 19, 3]
+			}]
+			},
+			options: {
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: false
+			}
+			}
+			});
+
+			var ctx7 = document.getElementById("myChart7").getContext('2d');
+			var myChart = new Chart(ctx7, {
+			type: 'bar',
+			data: {
+			labels: ["Reprovados", "Pendentes", "Aprovadas"],
+			datasets: [{
+			backgroundColor: [
+			"red",
+			"orange",
+			"green"
+			],
+			data: [12, 19, 3]
+			}]
+			},
+			options: {
+			legend: {
+			display: false
+			},
+			tooltips: {
+			enabled: false
+			}
+			}
+			});

@@ -1,0 +1,370 @@
+extends layout
+block content
+	h3(class="fs-title selmecAzul center" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.analiseRisco.analise_risco"></span>
+	form#formulario2(style="margin:0px; color:#12375c;" dataref="#{ref}")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk1"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk1ok" name="jobcard_risk1"  value="ok")
+					label(for="jobcard_risk1ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk1notok", name='jobcard_risk1', value="not ok")
+					label(for="jobcard_risk1notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk1na", name='jobcard_risk1', value="na")
+					label(for="jobcard_risk1na") N/A
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk2"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk2dok" name="jobcard_risk2"  value="ok")
+					label(for="jobcard_risk2dok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk2notok", name='jobcard_risk2', value="not ok")
+					label(for="jobcard_risk2notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk2na", name='jobcard_risk2', value="na")
+					label(for="jobcard_risk2na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk3"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk3ok" name="jobcard_risk3"  value="ok")
+					label(for="jobcard_risk3ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk3notok", name='jobcard_risk3', value="not ok")
+					label(for="jobcard_risk3notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk3na", name='jobcard_risk3', value="na")
+					label(for="jobcard_risk3na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk4"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk4ok" name="jobcard_risk4"  value="ok")
+					label(for="jobcard_risk4ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk4notok", name='jobcard_risk4', value="not ok")
+					label(for="jobcard_risk4notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk4na", name='jobcard_risk4', value="na")
+					label(for="jobcard_risk4na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk5"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk5ok" name="jobcard_risk5"  value="ok")
+					label(for="jobcard_risk5ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk5notok", name='jobcard_risk5', value="not ok")
+					label(for="jobcard_risk5notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk5na", name='jobcard_risk5', value="na")
+					label(for="jobcard_risk5na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk6"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk6ok" name="jobcard_risk6"  value="ok")
+					label(for="jobcard_risk6ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk6notok", name='jobcard_risk6', value="not ok")
+					label(for="jobcard_risk6notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk6na", name='jobcard_risk6', value="na")
+					label(for="jobcard_risk6na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk7"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk7ok" name="jobcard_risk7"  value="ok")
+					label(for="jobcard_risk7ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk7notok", name='jobcard_risk7', value="not ok")
+					label(for="jobcard_risk7notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk7na", name='jobcard_risk7', value="na")
+					label(for="jobcard_risk7na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk8"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk8ok" name="jobcard_risk8"  value="ok")
+					label(for="jobcard_risk8ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk8notok", name='jobcard_risk8', value="not ok")
+					label(for="jobcard_risk8notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk8na", name='jobcard_risk8', value="na")
+					label(for="jobcard_risk8na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk9"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk9ok" name="jobcard_risk9"  value="ok")
+					label(for="jobcard_risk9ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk9notok", name='jobcard_risk9', value="not ok")
+					label(for="jobcard_risk9notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk9na", name='jobcard_risk9', value="na")
+					label(for="jobcard_risk9na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk10"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk10ok" name="jobcard_risk10"  value="ok")
+					label(for="jobcard_risk10ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk10notok", name='jobcard_risk10', value="not ok")
+					label(for="jobcard_risk10notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk10na", name='jobcard_risk10', value="na")
+					label(for="jobcard_risk10na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk11"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk11ok" name="jobcard_risk11"  value="ok")
+					label(for="jobcard_risk11ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk11notok", name='jobcard_risk11', value="not ok")
+					label(for="jobcard_risk11notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk11na", name='jobcard_risk11', value="na")
+					label(for="jobcard_risk11na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk12"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk12ok" name="jobcard_risk12"  value="ok")
+					label(for="jobcard_risk12ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk12notok", name='jobcard_risk12', value="not ok")
+					label(for="jobcard_risk12notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk12na", name='jobcard_risk12', value="na")
+					label(for="jobcard_risk12na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk13"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk13ok" name="jobcard_risk13"  value="ok")
+					label(for="jobcard_risk13ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk13notok", name='jobcard_risk13', value="not ok")
+					label(for="jobcard_risk13notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk13na", name='jobcard_risk13', value="na")
+					label(for="jobcard_risk13na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk14"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk14ok" name="jobcard_risk14"  value="ok")
+					label(for="jobcard_risk14ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk14notok", name='jobcard_risk14', value="not ok")
+					label(for="jobcard_risk14notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk14na", name='jobcard_risk14', value="na")
+					label(for="jobcard_risk14na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk15"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk15ok" name="jobcard_risk15"  value="ok")
+					label(for="jobcard_risk15ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk15notok", name='jobcard_risk15', value="not ok")
+					label(for="jobcard_risk15notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk15na", name='jobcard_risk15', value="na")
+					label(for="jobcard_risk15na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk16"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk16ok" name="jobcard_risk16"  value="ok")
+					label(for="jobcard_risk16ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk16notok", name='jobcard_risk16', value="not ok")
+					label(for="jobcard_risk16notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk16na", name='jobcard_risk16', value="na")
+					label(for="jobcard_risk16na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk17"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk17ok" name="jobcard_risk17"  value="ok")
+					label(for="jobcard_risk17ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk17notok", name='jobcard_risk17', value="not ok")
+					label(for="jobcard_risk17notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk17na", name='jobcard_risk17', value="na")
+					label(for="jobcard_risk17na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk18"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk18ok" name="jobcard_risk18"  value="ok")
+					label(for="jobcard_risk18ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk18notok", name='jobcard_risk18', value="not ok")
+					label(for="jobcard_risk18notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk18na", name='jobcard_risk18', value="na")
+					label(for="jobcard_risk18na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.risk19"></span>
+			.row(style="margin-bottom:20px")
+				.col.s5.m3
+					input.bom(type="radio" id="jobcard_risk19ok" name="jobcard_risk19"  value="ok")
+					label(for="jobcard_risk19ok") Sim
+				.col.s5.m3
+					input.mau(type="radio", id="jobcard_risk19notok", name='jobcard_risk19', value="not ok")
+					label(for="jobcard_risk19notok") Nao
+				.col.s5.m3
+					input.moderado(type="radio", id="jobcard_risk19na", name='jobcard_risk19', value="na")
+					label(for="jobcard_risk19na") N/A
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", name="next", class="next action-button", value="Next >>")
+		fieldset(style="padding:0px")
+			h3(class="fs-title") <span data-i18n="demo.analiseRisco.commentario"></span>
+			.row(style="margin-bottom:20px")
+				.col.s12.m12.input-field
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_radiocomments" ,name="jobcard_radiocomments")
+			input(type="button", name="previous", class="previous action-button", value="<< Prev")
+			input(type="button", id="jobcaranaliserisco_yes_btn", datajobtype="#{Jobcards.jobcard_jobtype}", class="action-button" value="Save")
+
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

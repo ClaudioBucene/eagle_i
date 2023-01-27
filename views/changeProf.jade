@@ -1,0 +1,58 @@
+doctype html
+html
+	head
+		title= title
+		meta(name="author", content="Helio baseMatchesProperty(path, srcValue)")
+		meta(name="generator", content="Jade")
+		meta(name="application name", content="gestao  de viaturas")
+		meta(name="description", content="Aplicacao para gestao de inspecao de viaturas")
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(http-equiv="default-style", content="text/css")
+		link(rel="stylesheet", type="text/css", href="/css/style.css")
+		link(rel="stylesheet", type="text/css", href="/css/login.css")
+		script(type="text/javascript", src="/js/jquery-2.1.1.min.js")
+		script(type="text/javascript", src="/js/materialize.min.js")
+	body.policia-background-color
+			.row.valign-wrapper
+				.col.s12.m10.l8.offset-m1.offset-l2.valign
+					.container
+						.row.white.shadow.round-border
+							.col.s10.m10.l10.offset-m1.offset-l1.offset-s1
+								.row.center-align
+									.col.s12.m12.l12
+										img(src="/img/profile8.png", style="width: 200px; height: auto; margin-top: 20px;")
+									
+										form(name="formulario", autocomplete="off", action="/change", method="POST", id="formulario")
+											.col.s12
+												span(style="font-weight:bold; color: #12375c")  Hi #{greeting.nome}, Please Change your password!
+											.col.s12.m10.l10.offset-l1
+												.col.s12.m12.l12.input-field
+													i.login-form-icon(class="material-icons prefix") account_circle
+													label.login-form-text(for="username") Username
+													input(type="text", id="username", name="username" value="#{greeting.username}", readonly)
+											.col.s12.m10.l10.offset-l1
+												.col.s12.m12.l12.input-field
+													i.login-form-icon(class="material-icons prefix") vpn_key
+													label.login-form-text(for="senha") Type new Password
+													input(type="password", id="senha", name="senha")
+											.col.s12.m10.l10.offset-l1
+												.col.s12.m12.l12.input-field
+													i.login-form-icon(class="material-icons prefix") vpn_key
+													label.login-form-text(for="confirmacaoo") Confirm your password
+													input(type="password", id="confirmacaoo", name="confirmacaoo")
+											if (err)
+												.row
+													.col.s12
+														span.red-text(style="font-weight:bold") #{message}
+											fieldset(style="border:none")
+												.row
+													.col.s12.m12.l12.center-align
+														button#updatepwd(style="background-color: rgba(18,55,92,1) !important", type="submit", class="btn waves-effect waves-light", name="action")
+															| Define
+															i(class="material-icons right") send
+
+		script(type="text/javascript", src="/js/jquery-1.12.3.min.js")
+		script(type="text/javascript", src="/js/bin/materialize.min.js")
+		script(type="text/javascript").
+			$('.formulario').css('height', $( window ).height());

@@ -1,0 +1,67 @@
+extends layout
+block content
+	.container(style="padding-top:35px")
+		.row
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.maintenance"></span>
+		form#alljobcardspesquisaform(class="col s12"  method="POST" onsubmit="return validateFormJobcards()" name="alljobcardspesquisaform")
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisadorsite") <span> Pesquisar manutenção</span>
+					input(type="text", id="pesquisadorsite", name="pesquisadorsite", style="border-bottom:none !important;")
+		-if(DataU.funcao == "admin" || DataU.funcao == "Project")
+			.col.m3.s6
+				.card.hover-reveal.personalised#verTabsSiteInfo
+					.card-image.waves-block
+						img.icn(src="/img/siteinfo.png" style="width:70px" )
+					.card-content
+						h6.bold <span data-i18n="demo.manutencao_form.siteinfo"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#verTabsTTNumber
+				.card-image.waves-block
+					img.icn(src="/img/corrective.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.manutencao_form.correctivemaint"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#verTabsPreventiveMaintenance
+				.card-image.waves-block
+					img.icn(src="/img/preventive.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.manutencao_form.preventivemaint"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#verTabsProjects
+				.card-image.waves-block
+					img.icn(src="/img/projects.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.manutencao_form.projects"></span>
+		-if(DataU.funcao == "admin")
+			.col.m3.s6
+				.card.hover-reveal.personalised#verTabsReportes
+					.card-image.waves-block
+						img.icn(src="/img/report2.png" style="width:70px" data-activates='dropdown2')
+					.card-content
+						h6.bold <span data-i18n="demo.manutencao_form.reports"></span>
+		
+
+		block js
+			script(type="text/javascript" src="/js/jquery.mask.js")
+			script.
+
+				function validateFormJobcards() {
+					var pesquisadorsite = document.forms["alljobcardspesquisaform"]["pesquisadorsite"].value;
+					if(pesquisadorsite != ""){
+						document.getElementById("alljobcardspesquisaform").action = "/manutencao/alljobcardshomepesquisa";
+					}
+				}
+				
+				setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";
+				document.getElementByClassName("capitalize").style.class="pequeno";
+				}
+				}, 50);

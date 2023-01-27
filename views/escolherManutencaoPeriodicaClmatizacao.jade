@@ -1,0 +1,32 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="post", style="color:#12375c;")
+			fieldset#recolherdados(detalhessession="#{NomeSession}")
+				h1(class="fs-title") <span data-i18n="demo.escolhermanuntencao_form.disclosure"></span> 
+				h2(class="fs-title" style="text-transform:none") <span data-i18n="demo.escolhermanuntencao_form.pergunta1"></span>
+				.row#recolhernome(detalhessession="#{NomeSession}")
+					.col.s5
+						input.bom(type="radio" id="pergunta1yes" name="pergunta1c"  value="gerador")
+						label(for="pergunta1yes") Gerador				
+					.col.s5
+						input.mau(type="radio", id="pergunta1no", name='pergunta1c', value="airCon")
+						label(for="pergunta1no") Ar Condicionado
+				input(type="button", name="next", class="next action-button", value="Next >>" data-user-new="#{Projects}")
+
+
+				input#verAnexo.hide(type="button", name="next", class="next action-button", value="Next >>")
+
+	block js
+		script.
+
+			setInterval(function(){document.getElementById("inqueritoId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

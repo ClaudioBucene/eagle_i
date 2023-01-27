@@ -1,0 +1,50 @@
+extends layout
+block content
+	div(id="map" class="map", lattt="#{lattt}", lonnn="#{lonnn}")
+
+	block js
+		script(src="/dist/leaflet.js")
+		script(src="/dist/leaflet-routing-machine.js")
+		script(src="/dist/Control.Geocoder.js")
+		script(src="/dist/config.js")
+		//- script( src="index.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+			setTimeout(function(){
+			var map = L.map('map');
+
+			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+			}).addTo(map);
+			var lattt= parseFloat(document.getElementById("map").getAttribute("lattt"));
+			var lonnn= parseFloat(document.getElementById("map").getAttribute("lonnn"))
+
+			var control = L.Routing.control(L.extend(window.lrmConfig, {
+			waypoints: [
+			L.latLng(lattt, lonnn),
+			L.latLng(-25.971479,32.579684)
+			],
+			geocoder: L.Control.Geocoder.nominatim(),
+			routeWhileDragging: true,
+			reverseWaypoints: true,
+			showAlternatives: true,
+			language:'pt-PT',
+
+			altLineOptions: {
+			styles: [
+			{color: 'black', opacity: 0.15, weight: 9},
+			{color: 'white', opacity: 0.8, weight: 6},
+			{color: 'blue', opacity: 0.5, weight: 2}
+			],
+
+			}
+			})).addTo(map);
+
+			L.Routing.errorControl(control).addTo(map); }, 1000)

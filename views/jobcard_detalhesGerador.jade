@@ -1,0 +1,169 @@
+extends layout
+block content
+	if JobcardDetalhes
+		.row
+			-if(JobcardDetalhes.jobcard_jobtype == "Callout")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/detalhesJobcardCallOut/#{JobcardDetalhes._id}") <i class=" activarAzul material-icons">reply</i>
+			-else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/detalhesJobcardPlanned/#{JobcardDetalhes._id}") <i class=" activarAzul material-icons">reply</i>
+		form#ttnumberform
+			h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.gerador"></span>
+			.row#recolherdados(style="margin-top:-30px; margin-bottom:0px" dadosreferenciajobcard="#{JobcardDetalhes._id}" dadosjobtype = "#{JobcardDetalhes.jobcard_jobtype}" detalhescall="#{JSON.stringify(JobcardDetalhes.jobcard_call)}")
+				.col.s12.m6(style="margin-top:15px")
+					-var mobfixArray = ["Mobile", "Fixed"];
+					label(for="jobcard_generatormobilefixed") <span data-i18n="demo.manutencao_form.generatormobilefixed"></span>
+					select.browser-default(name="jobcard_generatormobilefixed", id="jobcard_generatormobilefixed")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<mobfixArray.length; i++)
+							-if(JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_generatormobilefixed == mobfixArray[i])
+								option(value="#{mobfixArray[i]}" selected) #{mobfixArray[i]}
+							-else
+								option(value="#{mobfixArray[i]}") #{mobfixArray[i]}
+				-if(JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_generatormobilefixed == "Fixed")			
+					.col.s12.m6(style="margin-top:15px")
+						label(for="jobcard_generator") <span data-i18n="demo.manutencao_form.gerador"></span>
+						select.browser-default(name="jobcard_generator", id="jobcard_generator")
+							option(value="" disabled selected) Escolha a opção
+							-for(var i=0; i<SiteInfo[0].siteinfo_generatorArray.length; i++)
+								-if(JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_generator == SiteInfo[0].siteinfo_generatorArray[i]._id)
+									option(value="#{SiteInfo[0].siteinfo_generatorArray[i]._id}" selected) #{SiteInfo[0].siteinfo_generatorArray[i].siteinfo_generatortype}
+								-else
+									option(value="#{SiteInfo[0].siteinfo_generatorArray[i]._id}") #{SiteInfo[0].siteinfo_generatorArray[i].siteinfo_generatortype}
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:13px")
+					label(for="jobcard_previousgeneratorhrs") <span data-i18n="demo.manutencao_form.previousgeneratorhrs"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_previousgeneratorhrs" ,name="jobcard_previousgeneratorhrs" readonly value="#{JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_previousgeneratorhrs}")
+				.col.s12.m6.input-field(style="margin-top:13px")
+					label(for="jobcard_currentgeneratorhours") <span data-i18n="demo.manutencao_form.currentgeneratorhours"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_currentgeneratorhours" ,name="jobcard_currentgeneratorhours" value="#{JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_currentgeneratorhours}" readonly)
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_previousrefuelhrs") <span data-i18n="demo.manutencao_form.previousrefuelhrs"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_previousrefuelhrs" ,name="jobcard_previousrefuelhrs" readonly ,value="#{JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_previousrefuelhrs}")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_generatorrefuel") <span data-i18n="demo.manutencao_form.generatorrefuel"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_generatorrefuel" ,name="jobcard_generatorrefuel" value="#{JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_generatorrefuel}" readonly)
+			.row(style="margin-bottom:0px")
+				.col.s12.m6.input-field(style="margin-top:3px")
+					label(for="jobcard_priceperliter") <span data-i18n="demo.manutencao_form.priceperliter"></span>
+					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_priceperliter" ,name="jobcard_priceperliter" value="#{JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_priceperliter}" readonly)
+				.col.s12.m6(style="margin-top:2px")
+					-var refuelreasonArray = ["Normal", "Diesel Stolen"];
+					label <span data-i18n="demo.manutencao_form.refuelreason"></span>
+					select.browser-default(name="jobcard_refuelreason", id="jobcard_refuelreason")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<refuelreasonArray.length; i++)
+							-if(JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_refuelreason == refuelreasonArray[i])
+								option(value="#{refuelreasonArray[i]}" selected) #{refuelreasonArray[i]}
+							-else
+								option(value="#{refuelreasonArray[i]}") #{refuelreasonArray[i]}
+			.row(style="margin-bottom:0px")
+				.col.s12.m6(style="margin-top:2px")
+					-var dscArray = ["Yes", "No"];
+					label <span data-i18n="demo.manutencao_form.dsc"></span>
+					select.browser-default(name="jobcard_dsc", id="jobcard_dsc")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<dscArray.length; i++)
+							-if(JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_dsc == dscArray[i])
+								option(value="#{dscArray[i]}" selected) #{dscArray[i]}
+							-else
+								option(value="#{dscArray[i]}") #{dscArray[i]}
+				.col.s12.m6(style="margin-top:0px")
+					-var generatorbeenservicedArray = ["Yes", "No"];
+					label <span data-i18n="demo.manutencao_form.generatorbeenserviced"></span>
+					select.browser-default(name="jobcard_generatorbeenserviced", id="jobcard_generatorbeenserviced")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<generatorbeenservicedArray.length; i++)
+							-if(JobcardDetalhes.generatorArrayJobcard[posicao].jobcard_generatorbeenserviced == generatorbeenservicedArray[i])
+								option(value="#{generatorbeenservicedArray[i]}" selected) #{generatorbeenservicedArray[i]}
+							-else
+								option(value="#{generatorbeenservicedArray[i]}") #{generatorbeenservicedArray[i]}
+	else
+		.row
+			-if(Jobcard.jobcard_jobtype == "Callout")
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/ttnumberhome/inprogress") <i class=" activarAzul material-icons">reply</i>
+			-else
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/preventativemaint/inprogress") <i class=" activarAzul material-icons">reply</i>
+		if(SiteInfo.length == 0)
+			p.center-align.selmecAzul.bold <span data-i18n="demo.manutencao_form.seminfogeradores"></span>
+		else
+			if(SiteInfo[0].siteinfo_generatorArray.length == 0)
+				p.center-align.selmecAzul.bold <span data-i18n="demo.manutencao_form.seminfogeradores"></span>
+			else
+				form#ttnumberform
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.gerador"></span>
+					.row#recolherdados(style="margin-top:-30px; margin-bottom:0px" detalhessiteinfo="#{DadosSiteInfo}" dadosreferenciajobcard="#{Jobcard._id}" dadosjobtype = "#{Jobcard.jobcard_jobtype}" detalhescall="#{JSON.stringify(Jobcard.jobcard_call)}")
+						.col.s12.m6(style="margin-top:15px")
+							label(for="jobcard_generatormobilefixed") <span data-i18n="demo.manutencao_form.generatormobilefixed"></span>
+							select.browser-default(name="jobcard_generatormobilefixed", id="jobcard_generatormobilefixed")
+								option(value="" disabled selected) Escolha a opção
+								option(value="Mobile") Móvel
+								option(value="Fixed") Fixo
+						.col.s12.m6.mostrargerador(style="margin-top:15px")
+							label(for="jobcard_generator") <span data-i18n="demo.manutencao_form.gerador"></span>
+							select.browser-default(name="jobcard_generator", id="jobcard_generator")
+								option(value="" disabled selected) Escolha a opção
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:13px")
+							label(for="jobcard_previousgeneratorhrs") <span data-i18n="demo.manutencao_form.previousgeneratorhrs"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_previousgeneratorhrs" ,name="jobcard_previousgeneratorhrs" readonly)
+						.col.s12.m6.input-field(style="margin-top:13px")
+							label(for="jobcard_currentgeneratorhours") <span data-i18n="demo.manutencao_form.currentgeneratorhours"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_currentgeneratorhours" ,name="jobcard_currentgeneratorhours")
+					.row(style="margin-bottom:0px")
+						.col.s11.m5.input-field(style="margin-top:3px")
+							label(for="jobcard_previousrefuelhrs") <span data-i18n="demo.manutencao_form.previousrefuelhrs"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_previousrefuelhrs" ,name="jobcard_previousrefuelhrs" readonly)
+						.col.s1.m1
+							a.pointer.resetgenerator(style="color:green",data-position="top", data-delay="10", data-tooltip="Reset generator hours") <i class="material-icons selmecAzul", style ="margin-top:15px; margin-left: -30px">replay</i>
+						.col.s12.m6.input-field(style="margin-top:3px")
+							label(for="jobcard_generatorrefuel") <span data-i18n="demo.manutencao_form.generatorrefuel"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_generatorrefuel" ,name="jobcard_generatorrefuel")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:3px")
+							label(for="jobcard_generatorruntimehours") <span data-i18n="demo.manutencao_form.generatorruntime"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_generatorruntimehours" ,name="jobcard_generatorruntimehours" readonly)
+						.col.s12.m6.input-field(style="margin-top:3px")
+							label(for="jobcard_priceperliter") <span data-i18n="demo.manutencao_form.priceperliter"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_priceperliter" ,name="jobcard_priceperliter")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label <span data-i18n="demo.manutencao_form.refuelreason"></span>
+							select.browser-default(name="jobcard_refuelreason", id="jobcard_refuelreason")
+								option(value="" disabled selected) Escolha a opção
+								option(value="Normal") Normal
+								option(value="Diesel Stolen") Diesel Stolen
+								option(value="No EDM") No EDM
+								option(value="Meter Faulty") Meter Faulty
+						.col.s12.m6(style="margin-top:0px")
+							label <span data-i18n="demo.manutencao_form.dsc"></span>
+							select.browser-default(name="jobcard_dsc", id="jobcard_dsc")
+								option(value="" disabled selected) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label <span data-i18n="demo.manutencao_form.generatorbeenserviced"></span>
+							select.browser-default(name="jobcard_generatorbeenserviced", id="jobcard_generatorbeenserviced")
+								option(value="" disabled selected) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+					button(type="button", id="jobcardgenerator_yes_btn", class="btn modal-action waves-effect waves-green btn-flat", style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

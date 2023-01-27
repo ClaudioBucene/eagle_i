@@ -1,0 +1,599 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="POST", action="", style="color:#12375c;", enctype="multipart/form-data")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.mast_form.mastro"></span>
+				h2(class="fs-title") <span data-i18n="demo.mast_form.pergunta1"></span>
+				.row
+					.row(id="aw_light")
+						if Site
+							if Site[0].mast.aw_light=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="aw_lightok" name="aw_light" checked value="ok")
+									label(for="aw_lightok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="aw_lightnotok", name='aw_light', value="not ok")
+									label(for="aw_lightnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="aw_lightna", name='aw_light', value="na")
+									label(for="aw_lightna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aw_light_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+									input(id="aw_light_comment", autocomplete="off", type="text", name="aw_light_comment", value="#{Site? Site[0].mast.aw_light_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].mast.aw_light_image.length!=0)
+										-for(let i=0;i<Site[0].mast.aw_light_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].mast.aw_light_image[i]}")						
+							else
+								if Site[0].mast.aw_light=="not ok"
+									.col.s12
+										span.
+										
+									.col.s4.m3
+										input.bom(type="radio" id="aw_lightok" name="aw_light"  value="ok")
+										label(for="aw_lightok") ok					
+									.col.s4.m3
+										input.mau(type="radio", id="aw_lightnotok", name='aw_light', checked value="not ok")
+										label(for="aw_lightnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="aw_lightna", name='aw_light', value="na")
+										label(for="aw_lightna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="aw_light_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+										input(id="aw_light_comment", autocomplete="off", type="text", name="aw_light_comment", value="#{Site? Site[0].mast.aw_light_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].mast.aw_light_image.length!=0)
+											-for(let i=0;i<Site[0].mast.aw_light_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].mast.aw_light_image[i]}")
+								else
+									.col.s12
+										span.
+										
+									.col.s4.m3
+										input.bom(type="radio" id="aw_lightok" name="aw_light"  value="ok")
+										label(for="aw_lightok") ok					
+									.col.s4.m3
+										input.mau(type="radio", id="aw_lightnotok", name='aw_light', value="not ok")
+										label(for="aw_lightnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="aw_lightna", name='aw_light', checked, value="na")
+										label(for="aw_lightna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="aw_lightok" name="aw_light"  value="ok")
+								label(for="aw_lightok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="aw_lightnotok", name='aw_light', value="not ok")
+								label(for="aw_lightnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="aw_lightna", name='aw_light', value="na")
+								label(for="aw_lightna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="aw_light_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+								input(id="aw_light_comment", autocomplete="off", type="text", name="aw_light_comment", value="#{Site? Site[0].aw_light_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.mast_form.imagem"></span>
+								input.preencher(type="file", id="aw_light_image", name="aw_light_image",autocomplete="off", value="#{Site ? Site[0].aw_light_image:''}", multiple)
+								table
+									tbody#mast1.mast1
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.mast_form.mastro"></span>
+				h2(class="fs-title") <span data-i18n="demo.mast_form.pergunta2"></span>
+				.row
+					.row(id="aw_light_db_fitting")
+						if Site
+							if Site[0].mast.aw_light_db_fitting=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="aw_light_db_fittingok" name="aw_light_db_fitting" checked value="ok")
+									label(for="aw_light_db_fittingok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="aw_light_db_fittingnotok", name='aw_light_db_fitting', value="not ok")
+									label(for="aw_light_db_fittingnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="aw_light_db_fittingna", name='aw_light_db_fitting', value="na")
+									label(for="aw_light_db_fittingna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="aw_light_db_fitting_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+									input(id="aw_light_db_fitting_comment", autocomplete="off", type="text", name="aw_light_db_fitting_comment", value="#{Site? Site[0].mast.aw_light_db_fitting_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].mast.aw_light_db_fitting_image.length!=0)
+										-for(let i=0;i<Site[0].mast.aw_light_db_fitting_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].mast.aw_light_db_fitting_image[i]}")
+							else
+								if Site[0].mast.aw_light_db_fitting=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="aw_light_db_fittingok" name="aw_light_db_fitting"  value="ok")
+										label(for="aw_light_db_fittingok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="aw_light_db_fittingnotok", name='aw_light_db_fitting', checked value="not ok")
+										label(for="aw_light_db_fittingnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="aw_light_db_fittingna", name='aw_light_db_fitting', value="na")
+										label(for="aw_light_db_fittingna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="aw_light_db_fitting_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+										input(id="aw_light_db_fitting_comment", autocomplete="off", type="text", name="aw_light_db_fitting_comment", value="#{Site? Site[0].mast.aw_light_db_fitting_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].mast.aw_light_db_fitting_image.length!=0)
+											-for(let i=0;i<Site[0].mast.aw_light_db_fitting_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].mast.aw_light_db_fitting_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="aw_light_db_fittingok" name="aw_light_db_fitting"  value="ok")
+										label(for="aw_light_db_fittingok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="aw_light_db_fittingnotok", name='aw_light_db_fitting', value="not ok")
+										label(for="aw_light_db_fittingnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="aw_light_db_fittingna", name='aw_light_db_fitting', checked, value="na")
+										label(for="aw_light_db_fittingna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="aw_light_db_fittingok" name="aw_light_db_fitting"  value="ok")
+								label(for="aw_light_db_fittingok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="aw_light_db_fittingnotok", name='aw_light_db_fitting', value="not ok")
+								label(for="aw_light_db_fittingnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="aw_light_db_fittingna", name='aw_light_db_fitting', value="na")
+								label(for="aw_light_db_fittingna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="aw_light_db_fitting_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+								input(id="aw_light_db_fitting_comment", autocomplete="off", type="text", name="aw_light_db_fitting_comment", value="#{Site? Site[0].aw_light_db_fitting_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.mast_form.imagem"></span>
+								input.preencher(type="file", id="aw_light_db_fitting_image", name="aw_light_db_fitting_image",autocomplete="off", multiple)
+								table
+									tbody#mast2.mast2
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.mast_form.mastro"></span>
+				h2(class="fs-title") <span data-i18n="demo.mast_form.pergunta3"></span>
+				.row
+					.row(id="tower_inspection")
+						if Site
+							if Site[0].mast.tower_inspection=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="tower_inspectionok" name="tower_inspection" checked value="ok")
+									label(for="tower_inspectionok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="tower_inspectionnotok", name='tower_inspection', value="not ok")
+									label(for="tower_inspectionnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="tower_inspectionna", name='tower_inspection', value="na")
+									label(for="tower_inspectionna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="tower_inspection_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+									input(id="tower_inspection_comment", autocomplete="off", type="text", name="tower_inspection_comment", value="#{Site? Site[0].mast.tower_inspection_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].mast.tower_inspection_image.length!=0)
+										-for(let i=0;i<Site[0].mast.tower_inspection_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].mast.tower_inspection_image[i]}")
+							else
+								if Site[0].mast.tower_inspection=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="tower_inspectionok" name="tower_inspection"  value="ok")
+										label(for="tower_inspectionok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="tower_inspectionnotok", name='tower_inspection', checked value="not ok")
+										label(for="tower_inspectionnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="tower_inspectionna", name='tower_inspection', value="na")
+										label(for="tower_inspectionna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="tower_inspection_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+										input(id="tower_inspection_comment", autocomplete="off", type="text", name="tower_inspection_comment", value="#{Site? Site[0].mast.tower_inspection_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].mast.tower_inspection_image.length!=0)
+											-for(let i=0;i<Site[0].mast.tower_inspection_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].mast.tower_inspection_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="tower_inspectionok" name="tower_inspection"  value="ok")
+										label(for="tower_inspectionok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="tower_inspectionnotok", name='tower_inspection', value="not ok")
+										label(for="tower_inspectionnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="tower_inspectionna", name='tower_inspection', checked, value="na")
+										label(for="tower_inspectionna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="tower_inspectionok" name="tower_inspection"  value="ok")
+								label(for="tower_inspectionok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="tower_inspectionnotok", name='tower_inspection', value="not ok")
+								label(for="tower_inspectionnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="tower_inspectionna", name='tower_inspection', value="na")
+								label(for="tower_inspectionna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="tower_inspection_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+								input(id="tower_inspection_comment", autocomplete="off", type="text", name="tower_inspection_comment", value="#{Site? Site[0].tower_inspection_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.mast_form.imagem"></span>
+								input.preencher(type="file", id="tower_inspection_image", name="tower_inspection_image",autocomplete="off", multiple)
+								table
+									tbody#mast3.mast3
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.mast_form.mastro"></span>
+				h2(class="fs-title") <span data-i18n="demo.mast_form.pergunta4"></span>
+				.row
+					.row(id="paint_tower")
+						if Site
+							if Site[0].mast.paint_tower=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="paint_towerok" name="paint_tower" checked value="ok")
+									label(for="paint_towerok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="paint_towernotok", name='paint_tower', value="not ok")
+									label(for="paint_towernotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="paint_towerna", name='paint_tower', value="na")
+									label(for="paint_towerna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="paint_tower_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+									input(id="paint_tower_comment", autocomplete="off", type="text", name="paint_tower_comment", value="#{Site? Site[0].mast.paint_tower_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].mast.paint_tower_image.length!=0)
+										-for(let i=0;i<Site[0].mast.paint_tower_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].mast.paint_tower_image[i]}")
+							else
+								if Site[0].mast.paint_tower=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="paint_towerok" name="paint_tower"  value="ok")
+										label(for="paint_towerok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="paint_towernotok", name='paint_tower', checked value="not ok")
+										label(for="paint_towernotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="paint_towerna", name='paint_tower', value="na")
+										label(for="paint_towerna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="paint_tower_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+										input(id="paint_tower_comment", autocomplete="off", type="text", name="paint_tower_comment", value="#{Site? Site[0].mast.paint_tower_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].mast.paint_tower_image.length!=0)
+											-for(let i=0;i<Site[0].mast.paint_tower_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].mast.paint_tower_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="paint_towerok" name="paint_tower"  value="ok")
+										label(for="paint_towerok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="paint_towernotok", name='paint_tower', value="not ok")
+										label(for="paint_towernotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="paint_towerna", name='paint_tower', checked, value="na")
+										label(for="paint_towerna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="paint_towerok" name="paint_tower"  value="ok")
+								label(for="paint_towerok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="paint_towernotok", name='paint_tower', value="not ok")
+								label(for="paint_towernotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="paint_towerna", name='paint_tower', value="na")
+								label(for="paint_towerna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="paint_tower_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+								input(id="paint_tower_comment", autocomplete="off", type="text", name="paint_tower_image", value="#{Site? Site[0].paint_tower_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.mast_form.imagem"></span>
+								input.preencher(type="file", id="paint_tower_image", name="paint_tower_image",autocomplete="off", multiple)
+								table
+									tbody#mast4.mast4
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.mast_form.mastro"></span>
+				h2(class="fs-title") <span data-i18n="demo.mast_form.pergunta5"></span>
+				.row
+					.row(id="visual_inpection_trans_radio")
+						if Site
+							if Site[0].mast.visual_inpection_trans_radio=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="visual_inpection_trans_radiook" name="visual_inpection_trans_radio" checked value="ok")
+									label(for="visual_inpection_trans_radiook") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="visual_inpection_trans_radionotok", name='visual_inpection_trans_radio', value="not ok")
+									label(for="visual_inpection_trans_radionotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="visual_inpection_trans_radiona", name='visual_inpection_trans_radio', value="na")
+									label(for="visual_inpection_trans_radiona") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="visual_inpection_trans_radio_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+									input(id="visual_inpection_trans_radio_comment", autocomplete="off", type="text", name="visual_inpection_trans_radio_comment", value="#{Site? Site[0].mast.visual_inpection_trans_radio_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].mast.visual_inpection_trans_radio_image.length!=0)
+										-for(let i=0;i<Site[0].mast.visual_inpection_trans_radio_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].mast.visual_inpection_trans_radio_image[i]}")
+							else
+								if Site[0].mast.visual_inpection_trans_radio=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="visual_inpection_trans_radiook" name="visual_inpection_trans_radio"  value="ok")
+										label(for="visual_inpection_trans_radiook") ok
+									.col.s4.m3
+										input.mau(type="radio", id="visual_inpection_trans_radionotok", name='visual_inpection_trans_radio', checked value="not ok")
+										label(for="visual_inpection_trans_radionotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="visual_inpection_trans_radiona", name='visual_inpection_trans_radio', value="na")
+										label(for="visual_inpection_trans_radiona") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="visual_inpection_trans_radio_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+										input(id="visual_inpection_trans_radio_comment", autocomplete="off", type="text", name="visual_inpection_trans_radio_comment", value="#{Site? Site[0].mast.visual_inpection_trans_radio_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].mast.visual_inpection_trans_radio_image.length!=0)
+											-for(let i=0;i<Site[0].mast.visual_inpection_trans_radio_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].mast.visual_inpection_trans_radio_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="visual_inpection_trans_radiook" name="visual_inpection_trans_radio"  value="ok")
+										label(for="visual_inpection_trans_radiook") ok
+									.col.s4.m3
+										input.mau(type="radio", id="visual_inpection_trans_radionotok", name='visual_inpection_trans_radio', value="not ok")
+										label(for="visual_inpection_trans_radionotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="visual_inpection_trans_radiona", name='visual_inpection_trans_radio', checked, value="na")
+										label(for="visual_inpection_trans_radiona") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="visual_inpection_trans_radiook" name="visual_inpection_trans_radio"  value="ok")
+								label(for="visual_inpection_trans_radiook") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="visual_inpection_trans_radionotok", name='visual_inpection_trans_radio', value="not ok")
+								label(for="visual_inpection_trans_radionotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="visual_inpection_trans_radiona", name='visual_inpection_trans_radio', value="na")
+								label(for="visual_inpection_trans_radiona") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="visual_inpection_trans_radio_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+								input(id="visual_inpection_trans_radio_comment", autocomplete="off", type="text", name="visual_inpection_trans_radio_comment", value="#{Site? Site[0].visual_inpection_trans_radio_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.mast_form.imagem"></span>
+								input.preencher(type="file", id="visual_inpection_trans_radio_image", name="visual_inpection_trans_radio_image",autocomplete="off", multiple)
+								table
+									tbody#mast5.mast5
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.mast_form.mastro"></span>
+				h2(class="fs-title") <span data-i18n="demo.mast_form.pergunta6"></span>
+				.row(id="tower_specification")
+					if Site
+						if Site[0].mast.tower_specification=="ok"
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="tower_specificationok" name="tower_specification"   checked value="ok")
+								label(for="tower_specificationok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="tower_specificationnotok", name='tower_specification', value="not ok")
+								label(for="tower_specificationnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="tower_specificationna", name='tower_specification', value="na")
+								label(for="tower_specificationna") N/A
+							.input-field.col.s12(style="text-align: left !important")
+								label(for="tower_specification_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+								input(id="tower_specification_comment", autocomplete="off", type="text", name="tower_specification_comment", value="#{Site? Site[0].mast.tower_specification_comment:''}")
+							.col.s12.m6.input-field
+								-if(Site[0].mast.tower_specification_image.length!=0)
+									-for(let i=0;i<Site[0].mast.tower_specification_image.length; i++)
+										img.verimagem(style="width:100px", src="#{Site[0].mast.tower_specification_image[i]}")
+						else
+							if Site[0].mast.tower_specification=="not ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="tower_specificationok" name="tower_specification"  value="ok")
+									label(for="tower_specificationok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="tower_specificationnotok", name='tower_specification', checked value="not ok")
+									label(for="tower_specificationnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="tower_specificationna", name='tower_specification', value="na")
+									label(for="tower_specificationna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="tower_specification_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+									input(id="tower_specification_comment", autocomplete="off", type="text", name="tower_specification_comment", value="#{Site[0].mast.tower_specification_comment}")
+								.col.s12.m6.input-field
+									-if(Site[0].mast.tower_specification_image.length!=0)
+										-for(let i=0;i<Site[0].mast.tower_specification_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].mast.tower_specification_image[i]}")
+							else
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="tower_specificationok" name="tower_specification"  value="ok")
+									label(for="tower_specificationok") ok
+								.col.s4.m3
+									input.mau(type="radio", id="tower_specificationnotok", name='tower_specification', value="not ok")
+									label(for="tower_specificationnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="tower_specificationna", name='tower_specification', checked, value="na")
+									label(for="tower_specificationna") N/A
+					else
+						.col.s12
+							span.
+								
+						.col.s4.m3
+							input.bom(type="radio" id="tower_specificationok" name="tower_specification"  value="ok")
+							label(for="tower_specificationok") ok					
+						.col.s4.m3
+							input.mau(type="radio", id="tower_specificationnotok", name='tower_specification', value="not ok")
+							label(for="tower_specificationnotok") not ok
+						.col.s4.m3
+							input.moderado(type="radio", id="tower_specificationna", name='tower_specification', value="na")
+							label(for="tower_specificationna") N/A
+						.input-field.col.s12.m6(style="text-align: left !important")
+							label(for="tower_specification_comment") <span data-i18n="demo.mast_form.comentarios"></span>
+							input(id="tower_specification_comment", autocomplete="off", type="text", name="tower_specification_comment", value="#{Site? Site[0].tower_specification_comment:''}")
+						.col.s12.m6.input-field
+							<span data-i18n="demo.mast_form.imagem"></span>
+							input.preencher(type="file", id="tower_specification_image", name="tower_specification_image",autocomplete="off", multiple)
+							table
+								tbody#mast6.mast6
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Site
+					input#captarMast(type="submit", dataref="#{referencia._id}", numSite= "#{referencia.siteNumber}", nomesessiondetalhes= "#{DataU.nome}",name="submit", class="submit action-button", value="Save")
+				else
+					if Site[0].airCond.fan_blade
+						input#captarMastDetalhes(type="button", name="next", dataref="#{op}", class="next action-button", value="Next >>")
+		
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

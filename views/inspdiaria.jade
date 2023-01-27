@@ -1,0 +1,995 @@
+extends layout
+block content
+	.row
+		div(class="fixed-action-btn horizontal fixed-add-bottom")
+			a.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/inspdiaria") <i class=" activarAzul material-icons">reply</i>
+		form(id="msform", method="post", style="color:#12375c;")
+			ul(id="progressbar")
+				li.inspdiariaIcon(class="active" style="user-select:none")  <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.dados_gerais"></span></span> <span class="hide-on-med-only"> <img class="hide-on-med-and-up" style="width:20px" src="/img/dados.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.carrocaria"></span></span> <span class="large"> <img class="hide-on-med-and-up" style="width:30px" src="/img/body.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.roda"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:23px" src="/img/wheels.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.vidros"></span> </span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/mirrorr.png">
+				li.inspdiariaIcon(style="user-select:none")  <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.luzes"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/lights.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.motor"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/engine.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.camera"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/camera.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.secutr"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:20px" src="/img/imagg3.png">
+				//- li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only"> Bowser</span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:20px" src="/img/trailer.png">
+			fieldset
+				h2(class="fs-title selmecAzul") <span data-i18n="demo.inspdiaria_form.dados_gerais"></span>
+					.row#verificar(data = "#{v1}")
+						.input-field.col.s12.m6(oninput="this.className = ''")
+							i.material-icons.prefix.selmecAzul person
+							label(for="motorista") <span data-i18n="demo.inspdiaria_form.motorista"></span>
+							input(id="motorista", autocomplete="off",readonly, type="text", name="motorista", value="#{veiculos? veiculos[0].motorista:DataU.nome}")
+						.input-field.col.s12.m6(oninput="this.className = ''")
+							i.material-icons.prefix.selmecAzul note
+							label(for="Matricula") <span data-i18n="demo.inspdiaria_form.matricula"></span>
+							input.preencher(type="text", id="matricula", readonly,name="Matricula", value="#{veiculos ? veiculos[0].matricula:DataU.matricula}")
+						.input-field.col.s12.m6
+							i.material-icons.prefix.selmecAzul network_check
+							label(for="kilometragem") <span data-i18n="demo.inspdiaria_form.kilometros"></span>
+							input.preencher(type="text", id="kilometragem",  name="kilometragem", value="#{veiculos ? veiculos[0].kilometragem: DataU.kilometragem}")
+						.input-field.col.s12.m6
+							i.material-icons.prefix.selmecAzul date_range
+							label(for="datta") <span data-i18n="demo.inspdiaria_form.data_hora"></span>
+							input.preencher(type="text", id="datta", readonly,name="data", value="#{veiculos? veiculos[0].datta : ((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours()<10? ('0'+(new Date()).getHours()): (new Date()).getHours() )+' : '+((new Date()).getMinutes()<10? ('0'+(new Date()).getMinutes()):(new Date()).getMinutes())}")
+				input.hide(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.carrocaria"></span>
+				.row
+
+					.row(id="carrocaria")
+						if veiculos
+							if veiculos[0].carrocaria=="ok"
+								.col.s2
+									label(for="carrocaria") <span data-i18n="demo.inspdiaria_form.carrocaria"></span>
+								.col.s5
+									input.bom(type="radio" id="carrocariaok" name="carrocaria", checked="#{veiculos[0].carrocaria}"=="ok"? true:false, value="ok")
+									label(for="carrocariaok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input.mau(type="radio", id="carrocarianotok", name='carrocaria', value="not ok")
+									label(for="carrocarianotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="carrocaria") <span data-i18n="demo.inspdiaria_form.carrocaria"></span>
+								.col.s5
+									input.bom(type="radio" id="carrocariaok" name="carrocaria"  value="ok")
+									label(for="carrocariaok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input.mau(type="radio", id="carrocarianotok", name='carrocaria',checked="#{veiculos[0].carrocaria}"=="not ok"? true:false, value="not ok")
+									label(for="carrocarianotok") not ok
+								if veiculos[0].razaoCarrocari.length>0
+									.col.s12#carrocariaRazao(style="")
+										select(multiple	)
+											option(value="" disabled	selected) ver defeitos
+											-for(var i=0; i<veiculos[0].razaoCarrocari.length; i++)
+												option(value="#{veiculos[0].razaoCarrocari[i]}" selected) #{veiculos[0].razaoCarrocari[i]}
+
+						else
+							.col.s2
+								label(for="carrocaria") <span data-i18n="demo.inspdiaria_form.carrocaria"></span>
+							.col.s5
+								input.bom(type="radio" id="carrocariaok" name="carrocaria"  value="ok")
+								label(for="carrocariaok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input.mau(type="radio", id="carrocarianotok", name='carrocaria', value="not ok")
+								label(for="carrocarianotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#carrocariaRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoCarrocaria", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Parachoque Frontal") Parachoque Frontal
+										option(value="Parachoque Traseiro") Parachoque Traseiro
+										option(value="Porta esquerda") Porta esquerda
+										option(value="Porta direita") Porta direita
+										option(value="capo") capo
+										option(value="canopy") Canopy
+										option(value="grelha") grelha
+								.col.s10.ingles.hide(style="border:none !important") 
+									select(id="razaoCarrocaria", multiple) 
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Parachoque Frontal") Front Bumper
+										option(value="Parachoque Traseiro") Rear Bumper
+										option(value="Porta esquerda") Left Door
+										option(value="Porta direita") Right Door
+										option(value="capo") Bonnet
+										option(value="canopy") Canopy
+										option(value="grelha") Grill
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="bowser")
+						if veiculos
+							if veiculos[0].dieselbowser
+								if veiculos[0].dieselbowser == "sim"
+									.col.s2
+										label(for="bowser") Bowser*</span>
+									.col.s5
+										input.bom(type="radio" id="bowseryes", checked="#{veiculos[0].dieselbowser}"=="sim"? true:false, name="dbowser" value="sim")
+										label.bom(for="bowseryes") <i class="small material-icons" style="color:grey">thumb_up</i>					
+									.col.s5
+										input(type="radio" id="bowserno" name='dbowser' value="nao")
+										label(for="bowserno") <i class="small material-icons" style="color:grey">thumb_down</i>
+								else
+									.col.s2
+										label(for="bowser") Bowser*</span>
+									.col.s5
+										input.bom(type="radio" id="bowseryes"  name="dbowser" value="sim")
+										label.bom(for="bowseryes") <i class="small material-icons" style="color:grey">thumb_up</i>					
+									.col.s5
+										input(type="radio" id="bowserno", checked="#{veiculos[0].dieselbowser}"=="nao"? true:false, name='dbowser' value="nao")
+										label(for="bowserno") <i class="small material-icons" style="color:grey">thumb_down</i>
+						else
+							.col.s2
+								label(for="bowser") Bowser*</span>
+							.col.s5
+								input.bom(type="radio" id="bowseryes"  name="dbowser" value="sim")
+								label.bom(for="bowseryes") Sim					
+							.col.s5
+								input(type="radio" id="bowserno", name='dbowser' value="nao")
+								label(for="bowserno") Não
+					if ((veiculos) && (veiculos[0].dieselbowser) && (veiculos[0].dieselbowser == "sim"))
+						.row(id="bola_reboque")
+							if veiculos[0].bolareboque
+								if veiculos[0].bolareboque=="ok"
+									.col.s2
+										label(for="bolareboque") Bola de Reboque
+									.col.s5
+										input.bom(type="radio" id="bolareboqueok" name="bolareboque", checked="#{veiculos[0].bolareboque}"=="ok"? true:false, value="ok")
+										label(for="bolareboqueok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+									.col.s5
+										input.mau(type="radio", id="bolareboquenotok", name='bolareboque', value="not ok")
+										label(for="bolareboquenotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								else
+									.col.s2
+										label(for="bolareboque") Bola de Reboque
+									.col.s5
+										input.bom(type="radio" id="bolareboqueok" name="bolareboque"  value="ok")
+										label(for="bolareboqueok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+									.col.s5
+										input.mau(type="radio", id="bolareboquenotok", name='bolareboque',checked="#{veiculos[0].bolareboque}"=="not ok"? true:false, value="not ok")
+										label(for="bolareboquenotok") <i class="small material-icons" style="color:red">thumb_down</i>
+									if veiculos[0].razaobolareboque.length>0
+										.col.s12#bolareboqueRazao(style="border:none !important")
+											select(multiple	)
+												option(value="" disabled	selected) ver defeitos
+												-for(var i=0; i<veiculos[0].razaobolareboque.length; i++)
+													option(value="#{veiculos[0].razaobolareboque[i]}" selected) #{veiculos[0].razaobolareboque[i].replace(/[\[\]'"]+/g,'')}
+					else
+						.row(id="bola_reboque" class="hide")
+							.col.s2
+								label(for="bolareboque") Bola de Reboque
+							.col.s5
+								input.bom(type="radio" id="bolareboqueok" name="bolareboque"  value="ok")
+								label(for="bolareboqueok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input.mau(type="radio", id="bolareboquenotok", name='bolareboque', value="not ok")
+								label(for="bolareboquenotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#bolareboqueRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaobolareboque", multiple, value)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Bola Gasta") Bola Gasta
+								.col.s10.ingles.hide(style="border:none !important") 
+									select(id="razaobolareboque", multiple, value) 
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Bola Gasta") Worn Ball
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.roda"></span>
+				.row
+					.row(id="pneus")
+						if veiculos
+							if veiculos[0].pneus=="ok"
+								.col.s2
+									label(for="pneus") <span data-i18n="demo.inspdiaria_form.pneus"></span>
+								.col.s5
+									input.bom(type="radio" id="pneusok" , checked="#{veiculos[0].pneus}"=="ok"? true:false, name="pneus" value="ok")
+									label(for="pneusok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="pneusnotok" name='pneus' value="not ok")
+									label(for="pneusnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="pneus") <span data-i18n="demo.inspdiaria_form.pneus"></span><span class="red-text"> </span>
+								.col.s5
+									input.bom(type="radio" id="pneusok"  name="pneus" value="ok")
+									label(for="pneusok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="pneusnotok" , checked="#{veiculos[0].pneus}"=="not ok"? true:false, name='pneus' value="not ok")
+									label(for="pneusnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								-if(veiculos[0].razaoPneus.length>0)
+									.col.s12#pneusRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<veiculos[0].razaoPneus.length; i++)
+												option(value="#{veiculos[0].razaoPneus[i]}" selected) #{veiculos[0].razaoPneus[i]}
+						else
+							.col.s2
+								label(for="pneus") <span data-i18n="demo.inspdiaria_form.pneus"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="pneusok"  name="pneus" value="ok")
+								label(for="pneusok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="pneusnotok" name='pneus' value="not ok")
+								label(for="pneusnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#pneusRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoPneus", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Pneu Frontal esquerdo") Frontal esquerdo
+										option(value="Pneu Frontal direito") Frontal direito
+										option(value="Pneu Traseiro esquerdo") Traseiro esquerdo
+										option(value="Pneu Traseiro direito") Traseiro direito
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoPneus", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Pneu Frontal esquerdo") Front left
+										option(value="Pneu Frontal direito") Front Right
+										option(value="Pneu Traseiro esquerdo") Rear Left
+										option(value="Pneu Traseiro direito") Rear right
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+
+					.row(id="pressao")
+						if veiculos
+							if veiculos[0].pressao=="ok"
+								.col.s2
+									label(for="pressao") <span data-i18n="demo.inspdiaria_form.pressao"></span>
+								.col.s5
+									input.bom(type="radio" id="pressaook" , checked="#{veiculos[0].pressao}"=="ok"? true:false, name="pressao" value="ok")
+									label(for="pressaook") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="pressaonotok" name='pressao' value="not ok")
+									label(for="pressaonotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="pressao") <span data-i18n="demo.inspdiaria_form.pressao"></span>
+								.col.s5
+									input.bom(type="radio" id="pressaook"  name="pressao" value="ok")
+									label(for="pressaook") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="pressaonotok" , checked="#{veiculos[0].pressao}"=="not ok"? true:false, name='pressao' value="not ok")
+									label(for="pressaonotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								if(veiculos[0].razaoPressao.length>0)
+									.col.s12#pressaoRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<veiculos[0].razaoPressao.length; i++)
+												option(value="#{veiculos[0].razaoPressao[i]}" selected) #{veiculos[0].razaoPressao[i]}
+						else
+							.col.s2
+								label(for="pressao") <span data-i18n="demo.inspdiaria_form.pressao"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="pressaook"  name="pressao" value="ok")
+								label(for="pressaook") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="pressaonotok" name='pressao' value="not ok")
+								label(for="pressaonotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#pressaoRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoPressao", multiple, value)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Pressao Frontal esquerdo" ) Frontal esquerdo
+										option(value="Pressao Frontal direito" ) Frontal direito
+										option(value="Pressao Traseiro esquerdo" ) Traseiro esquerdo
+										option(value="Traseiro direito") Traseiro direito
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoPressao", multiple, value)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Pressao Frontal esquerdo") Front left
+										option(value="Pressao Frontal direito") Front Right
+										option(value="Pressao Traseiro esquerdo") Rear Left
+										option(value="Pressao Traseiro direito") Rear right
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+
+					.row(id="porcas")
+						if veiculos
+							if veiculos[0].porcas=="ok"
+								.col.s2
+									label(for="porcas") <span data-i18n="demo.inspdiaria_form.porcas"></span>
+								.col.s5
+									input.bom(type="radio" id="porcasok" , checked="#{veiculos[0].porcas}"=="ok"? true:false, name="porcas" value="ok")
+									label(for="porcasok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="porcasnotok" name='porcas' value="not ok")
+									label(for="porcasnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="porcas") <span data-i18n="demo.inspdiaria_form.porcas"></span>
+								.col.s5
+									input.bom(type="radio" id="porcasok" name="porcas" value="ok")
+									label(for="porcasok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="porcasnotok" , checked="#{veiculos[0].porcas}"=="not ok"? true:false, name='porcas' value="not ok")
+									label(for="porcasnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								-if(veiculos[0].razaoPorcas.length>0)
+									.col.s12#porcasRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<veiculos[0].razaoPorcas.length; i++)
+												option(value="#{veiculos[0].razaoPorcas[i]}" selected) #{veiculos[0].razaoPorcas[i]}
+						else
+							.col.s2
+								label(for="porcas") <span data-i18n="demo.inspdiaria_form.porcas"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="porcasok" name="porcas" value="ok")
+								label(for="porcasok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="porcasnotok" name='porcas' value="not ok")
+								label(for="porcasnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#porcasRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoPorcas", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Porcas Frontal esquerdo") Frontal esquerdo
+										option(value="Porcas Frontal direito") Frontal direito
+										option(value="Porcas Traseiro esquerdo") Traseiro esquerdo
+										option(value="Porcas Traseiro direito") Traseiro direito
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoPorcas", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Porcas Frontal esquerdo") Front left
+										option(value="Porcas Frontal direito") Front Right
+										option(value="Porcas Traseiro esquerdo") Rear Left
+										option(value="Porcas Traseiro direito") Rear right
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="travoes")
+						if veiculos
+							if veiculos[0].travoes=="ok"
+								.col.s2
+									label(for="travoes") <span data-i18n="demo.inspdiaria_form.travao"></span>
+								.col.s5
+									input.bom(type="radio" id="travoesok" , checked="#{veiculos[0].travoes}"=="ok"? true:false, name="travoes" value="ok")
+									label.bom(for="travoesok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="travoesnotok" name='parabrisa' value="not ok")
+									label(for="travoesnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="travoes") <span data-i18n="demo.inspdiaria_form.travao"></span>
+								.col.s5
+									input.bom(type="radio" id="travoesok"  name="travoes" value="ok")
+									label.bom(for="travoesok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="travoesnotok" , checked="#{veiculos[0].travoes}"=="not ok"? true:false, name='travoes' value="not ok")
+									label(for="travoesnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								-if(veiculos[0].razaoTravoes.length>0)
+									.col.s12#travoesRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<veiculos[0].razaoTravoes.length; i++)
+												option(value="#{veiculos[0].razaoTravoes[i]}" selected) #{veiculos[0].razaoTravoes[i]}
+						else
+							.col.s2
+								label(for="travoes") <span data-i18n="demo.inspdiaria_form.travao"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="travoesok"  name="travoes" value="ok")
+								label.bom(for="travoesok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="travoesnotok"  name='travoes' value="not ok")
+								label(for="travoesnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#travoesRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoTravoes", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Travão") Travão
+										option(value="Travão de estacionamento") Travão de estacionamento
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoTravoes", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Travão") Brake
+										option(value="Travão de estacionamento") Parking brake
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+								
+				input.hide(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input.hide(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.vidros"></span>
+				.row
+					.row(id="vidros")
+						if veiculos
+							if veiculos[0].vidros=="ok"
+								.col.s12.m2
+									label(for="vidros")<span data-i18n="demo.inspdiaria_form.vidros"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="vidrosok" , checked="#{veiculos[0].vidros}"=="ok"? true:false, name="vidros" value="ok")
+									label.bom(for="vidrosok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s6.m5
+									input(type="radio" id="vidrosnotok" name='vidros' value="not ok")
+									label(for="vidrosnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s12.m2
+									label(for="vidros") <span data-i18n="demo.inspdiaria_form.vidros"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="vidrosok" name="vidros" value="ok")
+									label.bom(for="vidrosok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s6.m5
+									input(type="radio" id="vidrosnotok" , checked="#{veiculos[0].vidros}"=="not ok"? true:false name='vidros' value="not ok")
+									label(for="vidrosnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								-if(veiculos[0].razaoVidros.length>0)
+									.col.s12#vidrosRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<veiculos[0].razaoVidros.length; i++)
+												option(value="#{veiculos[0].razaoVidros[i]}" selected) #{veiculos[0].razaoVidros[i]}
+						else
+							.col.s12.m2
+								label(for="vidros") <span data-i18n="demo.inspdiaria_form.vidros"></span>
+							.col.s6.m5
+								input.bom(type="radio" id="vidrosok"  name="vidros" value="ok")
+								label.bom(for="vidrosok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s6.m5
+								input(type="radio" id="vidrosnotok" name='vidros' value="not ok")
+								label(for="vidrosnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#vidrosRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoVidros", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Vidro Frontal") Vidro Frontal
+										option(value="Vidro Traseiro") Vidro Traseiro
+										option(value="Vidro Lateral esquerdo") Vidro Lateral esquerdo
+										option(value="Vidro Lateral direito") Vidro Lateral direito
+										option(value="Espelho esquerdo") Espelho esquerdo
+										option(value="Espelho direito") Espelho direito
+										option(value="Espelho Interno") Espelho Interno
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoVidros", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Vidro Frontal") Front Glass
+										option(value="Vidro Traseiro") Rear Glass
+										option(value="Vidro Lateral esquerdo") Left Glass
+										option(value="Vidro Lateral direito") Right Glass
+										option(value="Espelho esquerdo") Left Mirror
+										option(value="Espelho direito") Right Mirror
+										option(value="Espelho Interno") Rearview Mirror
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="limpa_parabrisas")
+						if veiculos
+							if veiculos[0].limpa_parabrisas=="ok"
+								.col.s12.m2
+									label(for="limpa_parabrisas") <span data-i18n="demo.inspdiaria_form.limpa_parabrisa"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="limpa_parabrisasok" , checked="#{veiculos[0].limpa_parabrisas}"=="ok"? true:false, name="limpa_parabrisas" value="ok")
+									label.bom(for="limpa_parabrisasok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s6.m5
+									input(type="radio" id="limpa_parabrisasnotok" name='limpa_parabrisas' value="not ok")
+									label(for="limpa_parabrisasnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s12.m2
+									label(for="limpa_parabrisas") <span data-i18n="demo.inspdiaria_form.limpa_parabrisa"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="limpa_parabrisasok" name="limpa_parabrisas" value="ok")
+									label.bom(for="limpa_parabrisasok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s6.m5
+									input(type="radio" id="limpa_parabrisasnotok" , checked="#{veiculos[0].limpa_parabrisas}"=="not ok"? true:false, name='limpa_parabrisas' value="not ok")
+									label(for="limpa_parabrisasnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+						else
+							.col.s12.m2
+								label(for="limpa_parabrisas") <span data-i18n="demo.inspdiaria_form.limpa_parabrisa"></span>
+							.col.s6.m5
+								input.bom(type="radio" id="limpa_parabrisasok"  name="limpa_parabrisas" value="ok")
+								label.bom(for="limpa_parabrisasok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s6.m5
+								input(type="radio" id="limpa_parabrisasnotok" name='limpa_parabrisas' value="not ok")
+								label(for="limpa_parabrisasnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+				input.hide(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input.hide(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+				.row
+					.row(id="luzes")
+						if veiculos
+							if veiculos[0].luzes=="ok"
+								.col.s2
+									label(for="luzes") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+								.col.s5
+									input.bom(type="radio" id="luzesok" , checked="#{veiculos[0].luzes}"=="ok"? true:false, name="luzes" value="ok")
+									label.bom(for="luzesok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="luzesnotok" name='luzes' value="not ok")
+									label(for="luzesnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="luzes") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+								.col.s5
+									input.bom(type="radio" id="luzesok" name="luzes" value="ok")
+									label.bom(for="luzesok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="luzesnotok" , checked="#{veiculos[0].luzes}"=="not ok"? true:false, name='luzes' value="not ok")
+									label(for="luzesnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								-if(veiculos[0].razaoLuzes.length>0)
+									.col.s12#luzesParte(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<veiculos[0].razaoLuzes.length; i++)
+												option(value="#{veiculos[0].razaoLuzes[i]}" selected) #{veiculos[0].razaoLuzes[i]}
+						else
+							.col.s2
+								label(for="luzes") <span data-i18n="demo.inspdiaria_form.luzes"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="luzesok"  name="luzes" value="ok")
+								label.bom(for="luzesok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="luzesnotok" name='luzes' value="not ok")
+								label(for="luzesnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#luzesParte.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoLuzes", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Farol frontal esquerdo") Frontal esquerdo
+										option(value="Farol frontal direito") Frontal direito
+										option(value="Indicador frontal esquerdo") Indicador frontal esquerdo
+										option(value="Indicador frontal direito") Indicador frontal direito
+										option(value="Indicador lateral esquerdo") Indicador lateral esquerdo
+										option(value="Indicador lateral direito") Indicador lateral direito
+										option(value="Farol traseiro esquerdo") Farol traseiro esquerdo
+										option(value="Farol traseiro direito") Farol traseiro esquerdo
+										option(value="Farol Rachado") Farol Rachado
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoLuzes", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Farol frontal esquerdo") Front Left Light
+										option(value="Farol frontal direito") Front Right Light
+										option(value="Indicador frontal esquerdo") Front left indicator
+										option(value="Indicador frontal direito") Front right indicator
+										option(value="Indicador lateral esquerdo") Left side indicator
+										option(value="Indicador lateral direito") Right side indicator
+										option(value="Farol traseiro esquerdo") Rear left Lights
+										option(value="Farol traseiro direito") Rear Right Lights
+										option(value="Farol Rachado") Farol Rachado
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+				input.hide(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input.hide(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.motor"></span>
+				.row
+					.row(id="nivel")
+						if veiculos
+							if veiculos[0].nivel=="ok"
+								.col.s2
+									label(for="nivel") <span data-i18n="demo.inspdiaria_form.oleo"></span>
+								.col.s5
+									input.bom(type="radio" id="nivelok" , checked="#{veiculos[0].nivel}"=="ok"? true:false, name="nivel" value="ok")
+									label.bom(for="nivelok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="nivelnotok" name='nivel' value="not ok")
+									label(for="nivelnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="nivel") <span data-i18n="demo.inspdiaria_form.oleo"></span>
+								.col.s5
+									input.bom(type="radio" id="nivelok" name="nivel" value="ok")
+									label.bom(for="nivelok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="nivelnotok" , checked="#{veiculos[0].nivel}"=="not ok"? true:false, name='nivel' value="not ok")
+									label(for="nivelnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								-if(veiculos[0].razaoNivel.length>0)
+									.col.s12#nivelPartescol(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<veiculos[0].razaoNivel.length; i++)
+												option(value="#{veiculos[0].razaoNivel[i]}" selected) #{veiculos[0].razaoNivel[i]}
+						else
+							.col.s2
+								label(for="nivel") <span data-i18n="demo.inspdiaria_form.oleo"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="nivelok"  name="nivel" value="ok")
+								label.bom(for="nivelok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="nivelnotok" name='nivel' value="not ok")
+								label(for="nivelnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#nivelPartescol.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoNivel", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Oleo de travao") Oleo de travao
+										option(value="Oleo do motor") Oleo do motor
+										option(value="agua do radiador") Água do radiador
+										option(value="agua de limpa-brisa") Água de limpa-brisa 
+										option(value="Refrigeração") Refrigeração
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoNivel", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Oleo de travao") Brake fluid
+										option(value="Oleo do motor") Engine oil
+										option(value="agua do radiador") Radiator water
+										option(value="agua de limpa-brisa") Wiper water 
+										option(value="Refrigeração") Cooling
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+				.row(id="Waning_engine")
+						if veiculos
+							if veiculos[0].Waning_engine=="ok"
+								.col.s12.m2
+									label(for="Waning_engine") <span data-i18n="demo.inspdiaria_form.travao"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="Waning_engineok" , checked="#{veiculos[0].Waning_engine}"=="ok"? true:false, name="Waning_engine" value="ok")
+									label.bom(for="Waning_engineok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s6.m5
+									input(type="radio" id="Waning_enginenotok" name='parabrisa' value="not ok")
+									label(for="Waning_enginenotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="Waning_engine") Motor
+								.col.s5
+									input.bom(type="radio" id="Waning_engineok"  name="Waning_engine" value="ok")
+									label.bom(for="Waning_engineok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="Waning_enginenotok" , checked="#{veiculos[0].Waning_engine}"=="not ok"? true:false, name='Waning_engine' value="not ok")
+									label(for="Waning_enginenotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+						else
+							.col.s2
+								label(for="Waning_engine") Motor<span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="Waning_engineok"  name="Waning_engine" value="ok")
+								label.bom(for="Waning_engineok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="Waning_enginenotok"  name='Waning_engine' value="not ok")
+								label(for="Waning_enginenotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+				input.hide(type="button", name="previous", class="previous action-button", value="<<Prev")
+				input.hide(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+					h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.camera"></span>
+					.row
+						.row(id="camera")
+							if veiculos
+								if veiculos[0].camera=="ok"
+									.col.s12.m2
+										label(for="camera") <span data-i18n="demo.inspdiaria_form.camera"></span>
+									.col.s6.m5
+										input.bom(type="radio" id="cameraok" , checked="#{veiculos[0].camera}"=="ok"? true:false, name="camera" value="ok")
+										label(for="cameraok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+									.col.s6.m5
+										input(type="radio" id="cameranotok" name='camera' value="not ok")
+										label(for="cameranotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								else
+									.col.s12.m2
+										label(for="camera") <span data-i18n="demo.inspdiaria_form.camera"></span>
+									.col.s6.m5
+										input.bom(type="radio" id="cameraok"  name="camera" value="ok")
+										label(for="cameraok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+									.col.s6.m5
+										input(type="radio" id="cameranotok" , checked="#{veiculos[0].camera}"=="not ok"? true:false, name='camera' value="not ok")
+										label(for="cameranotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+									-if(veiculos[0].razaoCamera.length>0)
+										.col.s12#cameraRazao(style="border:none !important")
+											select(multiple)
+												-for(var i=0; i<veiculos[0].razaoCamera.length; i++)
+													option(value="#{veiculos[0].razaoCamera[i]}" selected) #{veiculos[0].razaoCamera[i]}
+							else
+								.col.s12.m2
+									label(for="camera") <span data-i18n="demo.inspdiaria_form.camera"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="cameraok"  name="camera" value="ok")
+									label(for="cameraok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s6.m5
+									input(type="radio" id="cameranotok" name='camera' value="not ok")
+									label(for="cameranotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								.row#cameraRazao.hide
+									.col.s10.ptgues.hide(style="border:none !important")
+										select(id="razaoCamera", multiple, value)
+											option(value="" disabled selected ) Selecione a(s) Parte(s)
+											option(value="Camera Frontal" ) Frontal
+											option(value="Camera Traseira") Traseira
+											option(value="mensagem de erro na Camera") Mensagem de Erro
+									.col.s10.ingles.hide(style="border:none !important")
+										select(id="razaoCamera", multiple, value)
+											option(value="" disabled selected ) Select the Part(s)
+											option(value="Camera Frontal" ) Front
+											option(value="Camera Traseira") Rear
+											option(value="mensagem de erro na camera") Message Error
+									.col.s2
+										img(class="hide-on-med-and-up" src="/img/okk.png")
+						.row(id="handsfree")
+							if veiculos
+								if veiculos[0].handsfree=="ok"
+									.col.s12.m2
+										label(for="handsfree") <span data-i18n="demo.inspdiaria_form.maoslivres"></span>
+									.col.s6.m5
+										input.bom(type="radio" id="handsfreeok" , checked="#{veiculos[0].handsfree}"=="ok"? true:false, name="handsfree" value="ok")
+										label(for="handsfreeok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+									.col.s6.m5
+										input(type="radio" id="handsfreenotok" name='handsfree' value="not ok")
+										label(for="handsfreenotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								else
+									.col.s12.m2
+										label(for="handsfree") <span data-i18n="demo.inspdiaria_form.maoslivres"></span>
+									.col.s6.m5
+										input.bom(type="radio" id="handsfreeok"  name="handsfree" value="ok")
+										label(for="handsfreeok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+									.col.s6.m5
+										input(type="radio" id="handsfreenotok" , checked="#{veiculos[0].handsfree}"=="not ok"? true:false, name='handsfree' value="not ok")
+										label(for="handsfreenotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s12.m2
+									label(for="handsfree") <span data-i18n="demo.inspdiaria_form.maoslivres"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="handsfreeok"  name="handsfree" value="ok")
+									label(for="handsfreeok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s6.m5
+									input(type="radio" id="handsfreenotok" name='handsfree' value="not ok")
+									label(for="handsfreenotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.secutr"></span>
+				.row
+					.row(id="extintor")
+						if veiculos
+							if veiculos[0].extintor=="ok"
+								.col.s2
+									label(for="extintor") <span data-i18n="demo.inspdiaria_form.extintor"></span>
+								.col.s5
+									input.bom(type="radio" id="extintorok" , checked="#{veiculos[0].extintor}"=="ok"? true:false, name="extintor" value="ok")
+									label(for="extintorok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="extintornotok" name='extintor' value="not ok")
+									label(for="extintornotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="extintor") <span data-i18n="demo.inspdiaria_form.extintor"></span><span class="red-text"> </span>
+								.col.s5
+									input.bom(type="radio" id="extintorok"  name="extintor" value="ok")
+									label(for="extintorok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="extintornotok" , checked="#{veiculos[0].extintor}"=="not ok"? true:false, name='extintor' value="not ok")
+									label(for="extintornotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								.col.s12#extintorRazao(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<veiculos[0].razaoextintor.length; i++)
+											option(value="#{veiculos[0].razaoextintor[i]}" selected) #{veiculos[0].razaoextintor[i]}
+						else
+							.col.s2
+								label(for="extintor") <span data-i18n="demo.inspdiaria_form.extintor"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="extintorok"  name="extintor" value="ok")
+								label(for="extintorok") <i class="small material-icons" style="color:grey">thumb_up</i>	
+							.col.s5
+								input(type="radio" id="extintornotok" name='extintor' value="not ok")
+								label(for="extintornotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#validade.hide
+								.input-field.col.s12.m6(style="margin-top:20px") 
+									label(for="validadeextintor") <span data-i18n="demo.ttnumber_form.validade"></span>
+									input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="validadeextintor" ,name="validadeextintor")
+							.row#extintorRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoextintor", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Extintor Expirou") Expirou
+										option(value="Nao Existe Extintor") Nao existe
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoextintor", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Extintor Expirou") Expired
+										option(value="Nao Existe Extintor") Does not Exist
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+
+					.row(id="socorros")
+						if veiculos
+							if veiculos[0].socorros=="ok"
+								.col.s2
+									label(for="socorros") <span data-i18n="demo.inspdiaria_form.socorros"></span>
+								.col.s5
+									input.bom(type="radio" id="socorrosok" , checked="#{veiculos[0].socorros}"=="ok"? true:false, name="socorros" value="ok")
+									label(for="socorrosok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="socorrosnotok" name='socorros' value="not ok")
+									label(for="socorrosnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="socorros") <span data-i18n="demo.inspdiaria_form.socorros"></span>
+								.col.s5
+									input.bom(type="radio" id="socorrosok"  name="socorros" value="ok")
+									label(for="socorrosok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="socorrosnotok" , checked="#{veiculos[0].socorros}"=="not ok"? true:false, name='socorros' value="not ok")
+									label(for="socorrosnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								.col.s12#socorrosRazao(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<veiculos[0].razaosocorros.length; i++)
+											option(value="#{veiculos[0].razaosocorros[i]}" selected) #{veiculos[0].razaosocorros[i]}
+						else
+							.col.s2
+								label(for="socorros") <span data-i18n="demo.inspdiaria_form.socorros"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="socorrosok"  name="socorros" value="ok")
+								label(for="socorrosok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="socorrosnotok" name='socorros' value="not ok")
+								label(for="socorrosnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#socorrosRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaosocorros", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="primeiros socorros Expirou") Expirou
+										option(value="Nao Existe primeiros socorros") Nao existe
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaosocorros", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="primeiros socorros Expirou") Expired
+										option(value="Nao Existe primeiros socorros") Does not Exist
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+
+					.row(id="cintoSeg")
+						if veiculos
+							if veiculos[0].cintoSeg=="ok"
+								.col.s2
+									label(for="cintoSeg") <span data-i18n="demo.inspdiaria_form.cintoSeg"></span>
+								.col.s5
+									input.bom(type="radio" id="cintoSegok" , checked="#{veiculos[0].cintoSeg}"=="ok"? true:false, name="cintoSeg" value="ok")
+									label(for="cintoSegok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="cintoSegnotok" name='cintoSeg' value="not ok")
+									label(for="cintoSegnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							else
+								.col.s2
+									label(for="cintoSeg") <span data-i18n="demo.inspdiaria_form.cintoSeg"></span>
+								.col.s5
+									input.bom(type="radio" id="cintoSegok" name="cintoSeg" value="ok")
+									label(for="cintoSegok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+								.col.s5
+									input(type="radio" id="cintoSegnotok" , checked="#{veiculos[0].cintoSeg}"=="not ok"? true:false, name='cintoSeg' value="not ok")
+									label(for="cintoSegnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+								.col.s12#cintoSegRazao(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<veiculos[0].razaocintoSeg.length; i++)
+											option(value="#{veiculos[0].razaocintoSeg[i]}" selected) #{veiculos[0].razaocintoSeg[i]}
+						else
+							.col.s2
+								label(for="cintoSeg") <span data-i18n="demo.inspdiaria_form.cintoSeg"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="cintoSegok" name="cintoSeg" value="ok")
+								label(for="cintoSegok") <i class="small material-icons" style="color:grey">thumb_up</i>					
+							.col.s5
+								input(type="radio" id="cintoSegnotok" name='cintoSeg' value="not ok")
+								label(for="cintoSegnotok") <i class="small material-icons" style="color:grey">thumb_down</i>
+							.row#cintoSegRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaocintoSeg", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Cinto Estragado") Estragado
+										option(value="Nao Existe Cinto") Nao existe
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaocintoSeg", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Cinto Estragado") Broken
+										option(value="Nao Existe Cinto") Does not Exist
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+								
+					input.hide(type="button", name="previous", class="previous action-button", value="<< Prev")
+					input.hide(type="button", name="next", class="next action-button", value="Next >>")
+					input.hide(type="button", name="previous", class="previous action-button", value="<< Prev")
+					if !veiculos
+						input#captar(type="submit", name="submit", class="submit action-button", value="Guardar")
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+			
+			$(".next").click(function(){ 
+			
+
+
+				if(animating) return false;
+				animating = true;
+				current_fs = $(this).parent();
+				next_fs = $(this).parent().next();
+
+				//activate next step on progressbar using the index of next_fs
+				$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+				//show the next fieldset
+				next_fs.show(); 
+				//hide the current fieldset with style
+				current_fs.animate({opacity: 0}, {
+				step: function(now, mx) {
+				//as the opacity of current_fs reduces to 0 - stored in "now"
+				//1. scale current_fs down to 80%
+				scale = 1 - (1 - now) * 0.2;
+				//2. bring next_fs from the right(50%)
+				left = (now * 50)+"%";
+				//3. increase opacity of next_fs to 1 as it moves in
+				opacity = 1 - now;
+				current_fs.css({
+				'transform': 'scale('+scale+')',
+				'position': 'relative'
+				});
+				next_fs.css({'left': left, 'opacity': opacity});
+				}, 
+				duration: 800, 
+				complete: function(){
+				current_fs.hide();
+				animating = false;
+				}, 
+				//this comes from the custom easing plugin
+				easing: 'easeInOutBack'
+				});
+				
+			});
+
+			$(".inspdiariaIcon").click(function(e){
+			e.preventDefault();
+			$("#progressbar li:not(:first)").removeClass("active");
+
+			$("fieldset").hide();
+
+			// if(animating) return false;
+			// animating = true;
+			var maximo= $(this).index(".inspdiariaIcon");
+
+		
+			for(var i=0; i<maximo; i++){
+			$("#progressbar li").eq((i+1)).addClass("active");
+			console.log("happme************")
+			}
+
+			console.log(maximo);
+			$("fieldset").eq(maximo).show()
+
+
+
+			})
+
+			$(".previous").click(function(){
+			//- let current_fs, next_fs, previous_fs; //fieldsets
+			//- let left, opacity, scale; //fieldset properties which we will animate
+			//- let animating; //flag to prevent quick multi-click glitches
+
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			//- $(".inspdiariaIcon").click(function(e){
+			//- if(animating) return false;
+			//- animating = true;
+
+			//- console.log($(this).index(".inspdiariaIcon"));
+
+			//- })
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setTimeout(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

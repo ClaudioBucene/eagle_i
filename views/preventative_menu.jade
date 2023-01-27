@@ -1,0 +1,234 @@
+extends layout
+block content
+	.container(style="padding-top:20px")
+		if(Jobcards[0].jobcardsignage === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.signageModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/signageicon.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.signage"></span>
+		if(Jobcards[0].jobcardcontainer === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.containerModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/containerr.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.container"></span>
+		if(Jobcards[0].jobcardmast === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.mastModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/mast.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.mast"></span>
+		if(Jobcards[0].jobcardcleaning === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.cleaningModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/cleanning.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.cleaning"></span>
+		if(Jobcards[0].jobcardlocks === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.locksModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/security.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.locks"></span>
+		if(Jobcards[0].jobcardenvironmental === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.environmentalModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/environmental.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.environmental"></span>
+		if(Jobcards[0].jobcardfallarrest === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.fallarrestModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/fallarrest.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.fallarrest"></span>
+		if(Jobcards[0].jobcardgeneratorinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.generatorinfojobcardModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/generator.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.generator"></span>
+		if(Jobcards[0].jobcardedBoardinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.edBoardModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/edb.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.edBoard"></span>
+		if(Jobcards[0].jobcardelectricalinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.electricalModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/electrical.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.electrical"></span>
+		if(Jobcards[0].jobcardrectifierinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.rectifierModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/rectifier.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.rectifier"></span>
+		if(Jobcards[0].jobcardbatterybanksinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.batterybanksModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/batterybanks.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.batterybanks"></span>
+		if(Jobcards[0].jobcardaircondinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.aircondModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/acond.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.aircond"></span>
+		if(Jobcards[0].jobcardantennasinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.antennasModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/antenna.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.antennas"></span>
+		if(Jobcards[0].jobcardeainfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.eainfoModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/acond.png" style="width:100px" )
+					.card-content
+						h6.bold EA Info
+		if(Jobcards[0].jobcardtxinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.txinfoModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/mast.png" style="width:100px" )
+					.card-content
+						h6.bold TX Info
+		if(Jobcards[0].jobcardvsatinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.vsatinfoModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/vsat.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.vsatinfo"></span>
+		if(Jobcards[0].jobcardphotoinfo.length == 0 || Jobcards[0].jobcardphotoinfo.length > 0)
+			.col.m4.s6
+				.card.hover-reveal.personalised.photoModal(dataref="#{Jobcards[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/photo.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.photo"></span>
+		if(Jobcards[0].jobcardconcernsinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.concernsModal(dataref="#{Jobcards[0]._id}" )
+					.card-image.waves-block
+						img.icn(src="/img/concern.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.concerns"></span>
+	.row.center
+		input.voltaraomenuprev(type="button", name="submit", class="submit action-button", value="Back" style="width:180px")
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

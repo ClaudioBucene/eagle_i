@@ -1,0 +1,40 @@
+extends layout
+block content
+	.container.seccao.white
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.inspdiaria_home.historico"></span>
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th <span data-i18n="demo.inspdiaria_home.motorista"></span>
+						th <span data-i18n="demo.inspdiaria_home.matricula"></span>
+						th <span data-i18n="demo.inspdiaria_home.data_hora"></span>
+						th
+				tbody(id="myTable")
+					-for(var index = (veiculos.length-1), j=0; index>=0  ; index--)
+						tr.highlight(data-funcionario="#{veiculos[index]._id}", data-nome="#{veiculos[index].nome}",style="color:#{veiculos[index].observacao}")
+							td #{veiculos[index].motorista}
+							td #{veiculos[index].matricula}
+							td #{veiculos[index].datta}
+							td
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Detalhes da Inspecção #{veiculos[index].motorista}", href="/inspdiaria/detalhes_acaoo/#{veiculos[index]._id}") <i class="material-icons activarVerde">info</i>
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);
+
+			

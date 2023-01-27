@@ -1,0 +1,207 @@
+extends layout
+block content
+	form
+		ul(id="progressbar")
+			li.center.inspdiariaIcon(class="active" style="user-select:none")  <span class="hide-on-med-and-down"><span data-i18n="demo.inspdiaria_form.dados_gerais"></span></span> <span class="hide-on-large-only"> <img class="hide-on-med-and-up" style="width:20px" src="/img/dados.png">
+			li.center.inspdiariaIcon#pcinfo(style="user-select:none", pessoacontacto = "#{Pessoacontacto}") <span class="hide-on-med-and-down">Contacto</span> <span class="large"> <img class="hide-on-large-only" style="width:30px" src="/img/dados.png">
+		fieldset.no-border.legend-border
+			-if(Cliente[0].filial.length != 0)
+				legend.selmecAzul.bold Detalhes da Filial #{Cliente[0].filial[Posicao].nome}
+				.row
+					.input-field.col.s12.m6
+						label(for="nome_cliente") Nome do Cliente
+						input.preencher(autocomplete="off", type="text", idioty="#{Cliente[0]._id}", style="font-family:;color:#12375c" ,id="nome_cliente", readonly, value="#{Cliente[0].nome_cliente}",name="nome_cliente")
+					.input-field.col.s12.m6
+						label(for="filial_nome") Filial
+						input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="filial_nome", name="filial_nome", value="#{Cliente[0].filial[Posicao].nome}")
+				.row
+					.col.s12.m6
+						label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+						select.browser-default(name="regiao", id="regiao", style="font-family:")
+							option(value="" disabled selected) Escolha a opção
+							-for(var index = 0; index < AdMagen[0].regiao.length; index++)
+								-if(AdMagen[0].regiao[index].nome == Cliente[0].filial[Posicao].regiao)
+									option(value="#{Cliente[0].regiao}" selected) #{Cliente[0].filial[Posicao].regiao}
+								-else
+									option(value="#{AdMagen[0].regiao[index].nome}") #{AdMagen[0].regiao[index].nome}
+					.col.s12.m6
+						label <span data-i18n="demo.utilizador_form.provincia"></span>
+						select.browser-default.browser-default(name="provincia", id="provincia", style="font-family:")
+							option(value="" disabled selected) Escolha a opção
+							-for(var index = 0; index < AdMagen[0].provincia.length; index++)
+								-if(AdMagen[0].provincia[index].nome == Cliente[0].filial[Posicao].provincia)
+									option(value="#{Cliente[0].filial[Posicao].provincia}" selected) #{Cliente[0].filial[Posicao].provincia}
+								-else
+									option(value="#{AdMagen[0].provincia[index].nome}") #{AdMagen[0].provincia[index].nome}
+				.row
+					.input-field.col.s12.m6
+						label(for="rua") Rua/Avenida
+						input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="rua", name="rua", value="#{Cliente[0].filial[Posicao].rua}")
+					.input-field.col.s12.m6
+						label(for="numero") Numero
+						input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="numero", name="numero", value="#{Cliente[0].filial[Posicao].numero}")
+				.row
+					.input-field.col.s12.m6
+						label(for="bairro") Bairro
+						input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="bairro", name="bairro", value="#{Cliente[0].filial[Posicao].bairro}")
+				.row.hide
+					.input-field.col.s12.m6
+						label(for="lat") Latitude
+						input.preencher(autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="lat", name="lat", value= "#{Cliente[0].filial[Posicao].lat}")
+					.input-field.col.s12.m6
+						label(for="long") Longitude
+						input.preencher(autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="long", name="long", value= "#{Cliente[0].filial[Posicao].long}")
+		fieldset
+			h2(class="fs-title selmecAzul center") Pessoa de Contacto
+			.row#tabelaaaa(style="margin-top:10px")
+				.input-field.col.s12.m6
+					label(for="pessoacontacto_nome") Nome
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="pessoacontacto_nome", name="pessoacontacto_nome", class="pessoacontacto_nome")
+				.input-field.col.s12.m6
+					label(for="pessoacontacto_telefone") Telefone
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="pessoacontacto_telefone", name="pessoacontacto_telefone", class="pessoacontacto_telefone")
+				.input-field.col.s12.m6
+					label(for="pessoacontacto_email") Email
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="pessoacontacto_email", name="pessoacontacto_email", class="pessoacontacto_email")
+				a(class="btn-floating btn-large waves-effect waves-light add-pessoa-contacto-editar right") +
+			table.responsive-table.bordered.striped.icn1
+				thead#myTable_pessoas_contacto-edit
+					tr.selmecAzul
+						th Nome
+						th Telefone
+						th Email
+						th
+				-for(var index =0; index<Cliente[0].pessoa_contactoArray.length ; index++)
+					-for(var j =0; j<Cliente[0].filial.length; j++)
+						-if(Cliente[0].pessoa_contactoArray[index].filial_nome == Cliente[0].filial[j].nome)
+							tr.highlight
+								td #{Cliente[0].pessoa_contactoArray[index].pessoacontacto_nome}
+								td #{Cliente[0].pessoa_contactoArray[index].pessoacontacto_telefone}
+								td #{Cliente[0].pessoa_contactoArray[index].pessoacontacto_email}
+								td(class="material-icons pointer center-align delete_po1") delete_forever
+			.row.buttons-container(style="margin-top:22px")
+				.col.s12.center
+					//- input#criarFilialHvac(type="button", name="submit", class="submit action-button submit action-button", value="Ad. Filial", detalhessession="#{DataU.nome}", signal = "#{Signal}" ,detalhesCliente = "#{Cliente[0]._id}", detalhesFilial = "#{Cliente[0].filial[Posicao]._id}", numerofiliais = "#{Cliente[0].filial.length}")
+					input#updateFilialHvac(type="button", name="submit", filinome = "#{Cliente[0].filial[Posicao].nome}" ,pessoacontacto = "#{Cliente[0].pessoa_contactoArray}" ,class="submit action-button submit action-button", value="Actualizar", detalhessession="#{DataU.nome}", index = "#{Posicao}" ,detalhesCliente = "#{Cliente[0]._id}", detalhesFilial = "#{Cliente[0].filial[Posicao]._id}", numerofiliais = "#{Cliente[0].filial.length}")
+	block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+			
+			$(".next").click(function(){ 
+			
+
+
+				if(animating) return false;
+				animating = true;
+				current_fs = $(this).parent();
+				next_fs = $(this).parent().next();
+
+				//activate next step on progressbar using the index of next_fs
+				$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+				//show the next fieldset
+				next_fs.show(); 
+				//hide the current fieldset with style
+				current_fs.animate({opacity: 0}, {
+				step: function(now, mx) {
+				//as the opacity of current_fs reduces to 0 - stored in "now"
+				//1. scale current_fs down to 80%
+				scale = 1 - (1 - now) * 0.2;
+				//2. bring next_fs from the right(50%)
+				left = (now * 50)+"%";
+				//3. increase opacity of next_fs to 1 as it moves in
+				opacity = 1 - now;
+				current_fs.css({
+				'transform': 'scale('+scale+')',
+				'position': 'relative'
+				});
+				next_fs.css({'left': left, 'opacity': opacity});
+				}, 
+				duration: 800, 
+				complete: function(){
+				current_fs.hide();
+				animating = false;
+				}, 
+				//this comes from the custom easing plugin
+				easing: 'easeInOutBack'
+				});
+				
+			});
+
+			$("fieldset:not(:first)").hide();
+
+			$(".inspdiariaIcon").click(function(e){
+			e.preventDefault();
+			$("#progressbar li:not(:first)").removeClass("active");
+
+			$("fieldset").hide();
+
+			// if(animating) return false;
+			// animating = true;
+			var maximo= $(this).index(".inspdiariaIcon");
+
+		
+			for(var i=0; i<maximo; i++){
+			$("#progressbar li").eq((i+1)).addClass("active");
+			console.log("happme************")
+			}
+
+			console.log(maximo);
+			$("fieldset").eq(maximo).show()
+
+
+
+			})
+
+			$(".previous").click(function(){
+			//- let current_fs, next_fs, previous_fs; //fieldsets
+			//- let left, opacity, scale; //fieldset properties which we will animate
+			//- let animating; //flag to prevent quick multi-click glitches
+
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<800){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

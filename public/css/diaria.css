@@ -1,0 +1,659 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+/*basic reset*/
+* {margin: 0; padding: 0;}
+
+html {
+	height: inherit;
+	width:inherit;
+	/*Image only BG fallback*/
+	
+	/*background = gradient + image pattern combo*/
+	/*background: 
+		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));*/
+}
+
+body {
+	font-family: montserrat, arial, verdana !important;
+}
+/*form styles*/
+#msform {
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+
+#formulario1 {
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+	font-size: 12px !important;
+}
+
+#formulario2 {
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+	font-size: 12px !important;
+}
+
+#ttnumberform {
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+	font-size: 12px !important;
+}
+
+/*#msform 
+*/fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	/*box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);*/
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: auto;
+	margin:auto;
+	
+	/*stacking fieldsets above each other*/
+	position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type), #formulario1 fieldset:not(:first-of-type), #formulario2 fieldset:not(:first-of-type){
+	display: none;
+}
+inputs
+#msform, #msform textarea, #formulario1, #formulario1 textarea, #formulario2, #formulario2 textarea{
+	padding: 15px;
+	/*border: 1px solid #ccc;*/
+	border-radius: 3px;
+	/*margin-bottom: 10px;*/
+	width: 100%;
+	/*box-sizing: border-box;*/
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 16px;
+}
+/*buttons*/
+
+.action-button {
+	width: 100px;
+	background: #12375c;
+	font-weight: bold;
+	color: #a1c861;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+.action-button:hover, .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+#ttnumberform .btn{
+	width: 122px;
+	background: #12375c;
+	font-weight: bold;
+	color: #a1c861;
+	border: 0 none;
+	border-radius: 3px;
+	cursor: pointer;
+	padding: 0px 5px 0px 5px;
+	/*margin: 10px 5px;*/
+	/*height: 40px;*/
+}
+
+
+#ttnumberform .btn:hover, #ttnumberform .btn:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+#ttnumberform .row {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px; }
+
+  .jobcardtecnicoform .btn{
+	width: 122px;
+	background: #12375c;
+	font-weight: bold;
+	color: #a1c861;
+	border: 0 none;
+	border-radius: 3px;
+	cursor: pointer;
+	padding: 0px 5px 0px 5px;
+	/*margin: 10px 5px;*/
+	/*height: 40px;*/
+}
+
+
+.jobcardtecnicoform .btn:hover, .jobcardtecnicoform .btn:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+.jobcardtecnicoform .row {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px; }
+
+#msform .action-button, #formulario1 .action-button, #formulario2 .action-button{
+	width: 100px;
+	background: #12375c;
+	font-weight: bold;
+	color: #a1c861;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+#msform .action-button:hover, #formulario1 .action-button:hover, #formulario2 .action-button:hover, #msform .action-button:focus, #formulario1 .action-button:focus, #formulario2 .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar,  #progressbar1, #progressbar2{
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li, #progressbar1 li, #progressbar2 li{
+	list-style-type: none;
+	font-weight: bold;
+	color: #12375c;
+	text-transform: uppercase;
+	font-size: 11px;
+	width: 12.28%;
+	float: left;
+	position: relative;
+}
+
+#progressbar li:before, #progressbar1 li:before, #progressbar2 li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after, #progressbar1 li:after, #progressbar2 li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	/*z-index: -1; put it behind the numbers*/
+}
+#progressbar li:first-child:after, #progressbar1 li:first-child:after, #progressbar2 li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar1 li.active:before, #progressbar2 li.active:before,  #progressbar li.active:after, #progressbar1 li.active:after, #progressbar2 li.active:after{
+	background: #12375c;
+	color: #a1c861 !important;
+	font-weight:bold;
+}
+
+.containerMan{
+	/*width: 800px;*/
+	margin: 0 auto;
+	color:#a1c861;
+}
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	width:285px !important;
+}
+
+#tabsmanutencao {
+	width: 100% !important;
+}
+ul.tabs li{
+	background: #ffff;
+	color: #12375c;
+	display: inline-block;
+	padding: 5px;
+	cursor: pointer;
+}
+
+ul.tabs li.currentMan{
+	background: #12375c;
+	color: #a1c861;
+}
+
+ul.tabs li.currentMan a{
+	/*background: #12375c;*/
+	color: #a1c861;
+}
+
+.tab-content{
+	display: none;
+	background: #12375c !important; 
+	padding: 15px;
+}
+
+.tab-content.currentMan{
+	display: inherit;
+	/*background: #12375c;*/
+}
+
+#chartdiv  {
+  width: 100%;
+  height: 400px;
+  font-size: 11px;
+}
+
+
+
+/*//==================================================magnific imagem++++++++++++++++++++++++++++++++*/
+
+
+@media only screen and (min-width:992px){
+
+@media only screen and (max-height: 700px ){
+	tbody {
+  display:block;
+  height:200px !important;
+  overflow:auto;
+}
+
+
+
+}
+@media only screen and (min-height: 710px ){
+	tbody {
+  display:block;
+  height:500px;
+  overflow:auto;
+}
+}
+
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+thead {
+  width: calc( 100% - 1em )
+}
+
+body {
+	overflow:hidden !important;
+}
+}
+
+
+
+.input-field label {
+  pointer-events: auto !important;
+}
+
+
+
+
+
+/****************************************************************************************************aument     */
+
+.personalised {
+  box-shadow: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.personalised .card-image {
+  text-align: center;
+  color: #a1c861;
+}
+
+.personalised .card-image i {
+  font-size: 100px;
+  transition: all 0.5s ease-in-out;
+}
+
+.personalised .card-content {
+  text-align: center;
+  padding-top: 10px;
+  transition: all 0.9s ease-in-out;
+}
+
+.personalised .separator {
+  width: 50%;
+  margin-top: 20px;
+
+}
+
+.personalised:hover .card-image i {
+  transform: scale(1.3);
+  color: #a1c861;
+
+}
+
+.personalised:hover .card-image img {
+  transform: scale(1.3);
+  color: #a1c861;
+ /*-webkit-filter: opacity(1.9) drop-shadow(green);*/
+  filter: invert(0.4) sepia(1) saturate(7.5) hue-rotate(90deg) brightness(0.78)
+}
+.personalised .card-image img {
+  display:inline;
+  width:50%;
+  font-size: 100px;
+  transition: all 0.5s ease-in-out;
+}
+
+
+.personalised:hover .card-content {
+  color: #a1c861;
+  font-weight:bold;
+   /*transform: scale(1.3);*/
+}
+
+
+
+
+@media only screen and (max-width:600px){
+
+	.icn {
+	width:40px !important;
+}
+.icn1{
+	font-size: 9px;
+}
+.reducao_botao{
+	width:50px !important;
+	font-size:6px ;
+	text-align: left !important;
+}
+
+}
+
+#loading {
+	background: #ffffff;
+	color: #666666;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 5000;
+	top: 0;
+	left: 0;
+	float: left;
+	text-align: center;
+	padding-top: 25%;
+	opacity: .80;
+  }
+
+  .loading1 {
+    margin: 0 auto;
+    height: 64px;
+    width: 64px;
+    animation: rotate1 0.4s infinite linear;
+    border: 5px solid green;
+    border-right-color: transparent;
+    border-radius: 50%;
+}
+@keyframes rotate1 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.apply-shake {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+#formulario2 select option, #formulario2 select{
+	font-size: 1rem;
+}
+
+#ttnumberform select option, #ttnumberform select, .dropdown-content li > a, .dropdown-content li > span{
+	font-size: 1rem;
+}
+#map { position:absolute; top:121px; bottom:0; width:100%; height:787px}
+
+
+
+/* Aumento de perfil do recurso humano */
+
+@media only screen and (min-width:992px){
+
+	@media only screen and (max-height: 700px ){
+		.perfil_mestre {
+	  display:block;
+	  height:200px !important;
+	  overflow:auto;
+	}
+	}
+	@media only screen and (min-height: 710px ){
+		.perfil_mestre {
+	  display:block;
+	  height:500px;
+	  overflow:auto;
+	}
+	
+	}
+	
+	
+	}
+	
+	@media only screen and (max-width: 600px ){
+	.circle {
+	  width:90px ;
+	}
+	}
+	/******************disable border-bottom on inpuit***************/
+	input{
+		/* border-bottom: none !important; */
+	}
+	
+	.perfil_mestre  input{
+		font-style:italic !important;
+	}
+	
+	@media only screen and (max-width: 600px ){
+	.perfil_mestre {
+	  display:block;
+	  height:200px !important;
+	  overflow:auto;
+	}
+	
+	label, input {
+		font-size:11px !important;
+	}
+	
+	.circle {
+	  width:100px ;
+	  height:100px;
+	}
+	legend {
+		font-size:11px;
+	}
+	
+	.pettycash  tbody, .pettycash thead{
+		font-size:11px;
+	
+	}
+	
+	
+	}
+	
+	@media only screen and (min-width: 601px ){
+	.circle {
+	  width:200px ;
+	  height:200px;
+	}
+	legend {
+		font-size:14px; 
+		font-style:italic;
+	}
+	}
+	
+	.pettycash {
+		height:100px !important;
+	}
+
+
+	.autocomplete {
+	  /*the container must be positioned relative:*/
+	  position: relative;
+	  display: inline-block;
+	}
+
+	.autocomplete-items {
+	  position: absolute;
+	  border: 1px solid #d4d4d4;
+	  border-bottom: none;
+	  border-top: none;
+	  z-index: 99;
+	  /*position the autocomplete items to be the same width as the container:*/
+	  top: 100%;
+	  left: 0;
+	  right: 0;
+	}
+
+	.autocomplete-items div {
+	  padding: 10px;
+	  cursor: pointer;
+	  background-color: #fff;
+	  border-bottom: 1px solid #d4d4d4;
+	}
+	.autocomplete-items div:hover {
+	  /*when hovering an item:*/
+	  background-color: #e9e9e9;
+	}
+	.autocomplete-active {
+	  /*when navigating through the items using the arrow keys:*/
+	  background-color: DodgerBlue !important;
+	  color: #ffffff;
+	}
+
+
+/* fim aumento de perfil do recurso humano */
+
+
+/**************************************Inicio de Dashboard*****************************************/
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	grid-gap: 15px;
+	align-items: stretch;
+  }
+  
+  .grid > article {
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  .grid .text {
+	padding: 20px;
+  }
+  
+  
+  span.bolas_dashboard {
+	background: red;
+	border-radius: 1.2em;
+	-moz-border-radius: 1.2em;
+	-webkit-border-radius: 1.2em;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 1.6em;
+	margin-right: 5px;
+	text-align: center;
+	width: 2.4em; 
+	margin-bottom: 1em;
+  }
+  
+  /************************************fim de Dashboard******************************************/
+
+  .exampleSearch {
+  width: 250px;
+  margin: 50px;
+  display: block;
+}
+
+
+/****************************************playing with signature**************************************************************/
+
+
+@media only screen and (min-width: 800px){
+	.wrapper234 {
+position: relative; 
+height:30vh !important; 
+width:65vw !important;
+}
+
+.signature-pad {
+ position: relative; 
+height:30vh !important; 
+width:65vw !important;
+}
+
+}
+
+@media only screen and (max-width: 800px){
+	.wrapper234 {
+position: relative; 
+height:30vh !important; 
+width:70vw !important;
+display:flex !important;
+justify-content: center !important;
+
+}
+
+.signature-pad {
+ position: relative; 
+height:29.5vh !important; 
+width:70vw !important;
+}
+
+}
+
+

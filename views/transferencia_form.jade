@@ -1,0 +1,614 @@
+
+extends layout
+block content
+	.row
+		form(id="msform", method="post", style="color:#12375c;")
+			ul(id="progressbar")
+				li(class="active")  <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.dados_gerais"></span></span> <span class="hide-on-med-only"> <img class="hide-on-med-and-up" style="width:20px" src="/img/dados.png">
+				li <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.carrocaria"></span></span> <span class="large"> <img class="hide-on-med-and-up" style="width:30px" src="/img/body.png">
+				li  <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.roda"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:23px" src="/img/wheels.png">
+				li <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.vidros"></span> </span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/mirrorr.png">
+				li  <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.luzes"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/lights.png">
+				li <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.motor"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/engine.png">
+				li <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.camera"></span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/camera.png">
+			fieldset
+				h2(class="fs-title selmecAzul") <span data-i18n="demo.inspdiaria_form.dados_gerais"></span>
+				.row
+					.row
+						.input-field.col.s12.m4
+							i.material-icons.prefix.selmecAzul person
+							label(for="motorista") <span data-i18n="demo.inspdiaria_form.de"></span>
+							input.preencher(id="motorista", type="text",  readonly, name="motorista", value="#{Transferencias ? Transferencias[0].motorista:DataU.nome}")
+						.input-field.col.s12.m4
+							i.material-icons.prefix.selmecAzul note
+							label(for="Matricula") <span data-i18n="demo.inspdiaria_form.matricula"></span>
+							input.preencher(type="text", id="matricula", readonly, name="Matricula",style="arial", value="#{Transferencias ? Transferencias[0].matricula:DataU.matricula}")
+						.input-field.col.s12.m4
+							i.material-icons.prefix.selmecAzul date_range
+							label.selmecAzul(for="data_transferencia") <span data-i18n="demo.inspdiaria_form.data_hora"></span>
+							input.preencher(type="text", id="data_transferencia", readonly,name="data", value="#{Transferencias? Transferencias[0].data_transferencia : (new Date()).getDate()+'/'+((new Date()).getMonth()+1)+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours())+' : '+((new Date()).getMinutes())}")
+					.row
+						.input-field.col.s12.m3
+							i.material-icons.prefix
+							label(for="marca_modelo") <span data-i18n="demo.inspdiaria_form.marca_modelo"></span>
+							input.preencher(id="marca_modelo", type="text", name="marca_modelo", readonly,style="arial",value="#{Transferencias ? Transferencias[0].marca_modelo:DataU.marca+' - '+DataU.modelo}")
+						.input-field.col.s12.m3
+							i.material-icons.prefix
+							label(for="supervisor") Line Manager
+							input.preencher(type="text",  id="supervisor", name="supervisor", readonly, value="#{Transferencias ? Transferencias[0].nome_supervisor:DataU.nome_supervisor}")
+						.col.s12.m3
+							label(for="provincia_trabalho") <span data-i18n="demo.inspdiaria_form.para"></span>
+							select.browser-default(name="nome_receptor", id="nome_receptor", style="font-family:")
+								if Transferencias
+									option(value="#{Transferencias[0].nome_receptor}", selected="selected") #{Transferencias[0].nome_receptor}
+								else
+									-for(var i = 0; i < datta.length; i++)
+										option(value="#{datta[i].nome}") #{datta[i].nome}
+						.input-field.col.s12.m3
+							i.material-icons.prefix.selmecAzul network_check
+							label(for="quilometragem") <span data-i18n="demo.inspdiaria_form.kilometros"></span>
+							input.preencher(type="text", id="quilometragem",  name="quilometragem", value="#{Transferencias ? Transferencias[0].quilometragem: DataU.kilometragem}")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.carrocaria"></span>
+				.row
+
+					.row(id="carrocaria")
+						if Transferencias
+							if Transferencias[0].carrocaria=="ok"
+								.col.s2
+									label(for="carrocaria") <span data-i18n="demo.inspdiaria_form.carrocaria"></span>
+								.col.s5
+									input.bom(type="radio" id="carrocariaok" name="carrocaria" checked value="ok")
+									label(for="carrocariaok") ok					
+								.col.s5
+									input.mau(type="radio", id="carrocarianotok", name='carrocaria', value="not ok")
+									label(for="carrocarianotok") not ok
+							else
+								.col.s4
+									label(for="carrocaria") <span data-i18n="demo.inspdiaria_form.carrocaria"></span>
+								.col.s4
+									input.bom(type="radio" id="carrocariaok" name="carrocaria"  value="ok")
+									label(for="carrocariaok") ok					
+								.col.s4
+									input.mau(type="radio", id="carrocarianotok", name='carrocaria',checked="#{Transferencias[0].carrocaria}"=="not ok"? true:false, value="not ok")
+									label(for="carrocarianotok") not ok
+								.col.s12#carrocariaRazao(style="")
+									select(multiple	)
+										option(value="" disabled	selected) check Damages
+										-for(var i=0; i<Transferencias[0].razaoCarrocari.length; i++)
+											option(value="#{Transferencias[0].razaoCarrocari[i]}" selected) #{Transferencias[0].razaoCarrocari[i]}
+										//- option(value="parachoqueTraseiro") Parachoque Traseiro
+										//- option(value="portaEsquerda") Porta esquerda
+										//- option(value="portaDireita") Porta direita
+										//- option(value="capo") Capô
+										//- option(value="canopy") canopy
+										
+										//- option(value="grelha") Grelha
+
+						else
+							.col.s2
+								label(for="carrocaria") <span data-i18n="demo.inspdiaria_form.carrocaria"></span>							
+							.col.s5
+								input.bom(type="radio" id="carrocariaok" name="carrocaria"  value="ok")
+								label(for="carrocariaok") ok					
+							.col.s5
+								input.mau(type="radio", id="carrocarianotok", name='carrocaria', value="not ok")
+								label(for="carrocarianotok") not ok
+							.row#carrocariaRazao.hide
+								.col.s10(style="border:none !important")
+									select(id="razaoCarrocaria", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Parachoque Frontal") Front Bumper
+										option(value="Parachoque Traseiro") Rear Bumper
+										option(value="Porta esquerda") Left Door
+										option(value="Porta direita") Right Door
+										option(value="capo") Bonnet
+										option(value="canopy") canopy
+										option(value="grelha") Grill
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.roda"></span>
+				.row
+					.row(id="pneus")
+						if Transferencias
+							if Transferencias[0].pneus=="ok"
+								.col.s2
+									label(for="pneus") <span data-i18n="demo.inspdiaria_form.pneus"></span>
+								.col.s5
+									input.bom(type="radio" id="pneusok" checked name="pneus" value="ok")
+									label(for="pneusok") ok					
+								.col.s5
+									input(type="radio" id="pneusnotok" name='pneus' value="not ok")
+									label(for="pneusnotok") not ok
+							else
+								.col.s2
+									label(for="pneus") <span data-i18n="demo.inspdiaria_form.pneus"></span>
+								.col.s5
+									input.bom(type="radio" id="pneusok"  name="pneus" value="ok")
+									label(for="pneusok") ok					
+								.col.s5
+									input(type="radio" id="pneusnotok" checked="#{Transferencias[0].pneus}"=="not ok"? true:false, name='pneus' value="not ok")
+									label(for="pneusnotok") not ok
+								.col.s12#pneusRazao(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<Transferencias[0].razaoPneus.length; i++)
+											option(value="#{Transferencias[0].razaoPneus[i]}" selected) #{Transferencias[0].razaoPneus[i]}
+						else
+							.col.s2
+								label(for="pneus") <span data-i18n="demo.inspdiaria_form.pneus"></span>
+							.col.s5
+								input.bom(type="radio" id="pneusok"  name="pneus" value="ok")
+								label(for="pneusok") ok					
+							.col.s5
+								input(type="radio" id="pneusnotok" name='pneus' value="not ok")
+								label(for="pneusnotok") not ok
+							.row#pneusRazao.hide
+								.col.s10(style="border:none !important")
+									select(id="razaoPneus", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Frontal esquerdo") Front Left
+										option(value="Frontal direito") Front Right
+										option(value="Traseiro esquerdo") Rear Left
+										option(value="Traseiro direito") Rear Right
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+
+					.row(id="pressao")
+						if Transferencias
+							if Transferencias[0].pressao=="ok"
+								.col.s2
+									label(for="pressao") <span data-i18n="demo.inspdiaria_form.pressao"></span>
+								.col.s5
+									input.bom(type="radio" id="pressaook" checked name="pressao" value="ok")
+									label(for="pressaook") ok					
+								.col.s5
+									input(type="radio" id="pressaonotok" name='pressao' value="not ok")
+									label(for="pressaonotok") not ok
+							else
+								.col.s2
+									label(for="pressao") <span data-i18n="demo.inspdiaria_form.pressao"></span>
+								.col.s5
+									input.bom(type="radio" id="pressaook"  name="pressao" value="ok")
+									label(for="pressaook") ok					
+								.col.s5
+									input(type="radio" id="pressaonotok" checked="#{Transferencias[0].pressao}"=="not ok"? true:false, name='pressao' value="not ok")
+									label(for="pressaonotok") not ok
+								.col.s12#pressaoRazao(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<Transferencias[0].razaoPressao.length; i++)
+											option(value="#{Transferencias[0].razaoPressao[i]}" selected) #{Transferencias[0].razaoPressao[i]}
+						else
+							.col.s2
+								label(for="pressao") <span data-i18n="demo.inspdiaria_form.pressao"></span>
+							.col.s5
+								input.bom(type="radio" id="pressaook"  name="pressao" value="ok")
+								label(for="pressaook") ok					
+							.col.s5
+								input(type="radio" id="pressaonotok" name='pressao' value="not ok")
+								label(for="pressaonotok") not ok
+							.row#pressaoRazao.hide
+								.col.s10(style="border:none !important")
+									select(id="razaoPressao", multiple, value)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Frontal esquerdo" ) Front left
+										option(value="Frontal direito" ) Front right
+										option(value="Traseiro esquerdo" ) Rear left
+										option(value="Traseiro direito") Rear right
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+
+					.row(id="porcas")
+						if Transferencias
+							if Transferencias[0].porcas=="ok"
+								.col.s2
+									label(for="porcas") <span data-i18n="demo.inspdiaria_form.porcas"></span>
+								.col.s5
+									input.bom(type="radio" id="porcasok" checked name="porcas" value="ok")
+									label(for="porcasok") ok					
+								.col.s5
+									input(type="radio" id="porcasnotok" name='porcas' value="not ok")
+									label(for="porcasnotok") not ok
+							else
+								.col.s2
+									label(for="porcas") <span data-i18n="demo.inspdiaria_form.porcas"></span>
+								.col.s5
+									input.bom(type="radio" id="porcasok" name="porcas" value="ok")
+									label(for="porcasok") ok					
+								.col.s5
+									input(type="radio" id="porcasnotok" checked="#{Transferencias[0].porcas}"=="not ok"? true:false, name='porcas' value="not ok")
+									label(for="porcasnotok") not ok
+								.col.s12#porcasRazao(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<Transferencias[0].razaoPorcas.length; i++)
+											option(value="#{Transferencias[0].razaoPorcas[i]}" selected) #{Transferencias[0].razaoPorcas[i]}
+						else
+							.col.s2
+								label(for="porcas") <span data-i18n="demo.inspdiaria_form.porcas"></span>
+							.col.s5
+								input.bom(type="radio" id="porcasok" name="porcas" value="ok")
+								label(for="porcasok") ok					
+							.col.s5
+								input(type="radio" id="porcasnotok" name='porcas' value="not ok")
+								label(for="porcasnotok") not ok
+							.row#porcasRazao.hide
+								.col.s10(style="border:none !important")
+									select(id="razaoPorcas", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Frontal esquerdo") Front Left
+										option(value="Frontal direito") Front Right
+										option(value="Traseiro esquerdo") Rear Left
+										option(value="Traseiro direito") Rear Right
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.vidros"></span>
+				.row
+					.row(id="vidros")
+						if Transferencias
+							if Transferencias[0].vidros=="ok"
+								.col.s12.m2
+									label(for="vidros") <span data-i18n="demo.inspdiaria_form.vidros"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="vidrosok" checked name="vidros" value="ok")
+									label.bom(for="vidrosok") ok					
+								.col.s6.m5
+									input(type="radio" id="vidrosnotok" name='vidros' value="not ok")
+									label(for="vidrosnotok") not ok
+							else
+								.col.s12.m2
+									label(for="vidros") <span data-i18n="demo.inspdiaria_form.vidros"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="vidrosok" name="vidros" value="ok")
+									label.bom(for="vidrosok") ok					
+								.col.s6.m5
+									input(type="radio" id="vidrosnotok" checked="#{Transferencias[0].vidros}"=="not ok"? true:false, name='vidros' value="not ok")
+									label(for="vidrosnotok") not ok
+								.col.s12#vidrosRazao(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<Transferencias[0].razaoVidros.length; i++)
+											option(value="#{Transferencias[0].razaoVidros[i]}" selected) #{Transferencias[0].razaoVidros[i]}
+						else
+							.col.s12.m2
+								label(for="vidros") <span data-i18n="demo.inspdiaria_form.vidros"></span>
+							.col.s6.m5
+								input.bom(type="radio" id="vidrosok"  name="vidros" value="ok")
+								label.bom(for="vidrosok") ok					
+							.col.s6.m5
+								input(type="radio" id="vidrosnotok" name='vidros' value="not ok")
+								label(for="vidrosnotok") not ok
+							.row#vidrosRazao.hide
+								.col.s10(style="border:none !important")
+									select(id="razaoVidros", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Vidro Frontal") Front Glass
+										option(value="Vidro Traseiro") Rear Glass
+										option(value="Vidro Lateral esquerdo") Left Glass
+										option(value="Vidro Lateral direito") Right Glass
+										option(value="Espelho esquerdo") Left Mirror
+										option(value="Espelho direito") Right Mirror
+										option(value="Espelho Interno") Rearview Mirror
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+				.row
+					.row(id="luzes")
+						if Transferencias
+							if Transferencias[0].luzes=="ok"
+								.col.s2
+									label(for="luzes") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+								.col.s5
+									input.bom(type="radio" id="luzesok" checked name="luzes" value="ok")
+									label.bom(for="luzesok") ok					
+								.col.s5
+									input(type="radio" id="luzesnotok" name='luzes' value="not ok")
+									label(for="luzesnotok") not ok
+							else
+								.col.s2
+									label(for="luzes") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+								.col.s5
+									input.bom(type="radio" id="luzesok" name="luzes" value="ok")
+									label.bom(for="luzesok") ok					
+								.col.s5
+									input(type="radio" id="luzesnotok" checked="#{Transferencias[0].luzes}"=="not ok"? true:false, name='luzes' value="not ok")
+									label(for="luzesnotok") not ok
+								.col.s12#luzesParte(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<Transferencias[0].razaoLuzes.length; i++)
+											option(value="#{Transferencias[0].razaoLuzes[i]}" selected) #{Transferencias[0].razaoLuzes[i]}
+						else
+							.col.s2
+								label(for="luzes") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+							.col.s5
+								input.bom(type="radio" id="luzesok"  name="luzes" value="ok")
+								label.bom(for="luzesok") ok					
+							.col.s5
+								input(type="radio" id="luzesnotok" name='luzes' value="not ok")
+								label(for="luzesnotok") not ok
+							.row#luzesParte.hide
+								.col.s10(style="border:none !important")
+									select(id="razaoLuzes", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Farol frontal esquerdo") Frontal Left light
+										option(value="Farol frontal direito")  Frontal Right light
+										option(value="Indicador frontal esquerdo") Front left indicator 
+										option(value="Indicador frontal direito") Front right indocator
+										option(value="Indicador lateral esquerdo") Left side indicator
+										option(value="Indicador lateral direito") Right side indocator
+										option(value="Farol traseiro esquerdo") Rear left Lights
+										option(value="Farol traseiro direito") Rear Right Lights
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") <span data-i18n="demo.inspdiaria_form.motor"></span>
+				.row
+					.row(id="nivel")
+						if Transferencias
+							if Transferencias[0].nivel=="ok"
+								.col.s12.m2
+									label(for="nivel") <span data-i18n="demo.inspdiaria_form.oleo"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="nivelok" checked name="nivel" value="ok")
+									label.bom(for="nivelok") ok					
+								.col.s6.m5
+									input(type="radio" id="nivelnotok" name='nivel' value="not ok")
+									label(for="nivelnotok") not ok
+							else
+								.col.s12.m2
+									label(for="nivel") <span data-i18n="demo.inspdiaria_form.oleo"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="nivelok" name="nivel" value="ok")
+									label.bom(for="nivelok") ok					
+								.col.s6.m5
+									input(type="radio" id="nivelnotok" checked="#{Transferencias[0].nivel}"=="not ok"? true:false, name='nivel' value="not ok")
+									label(for="nivelnotok") not ok
+								.col.s12#nivelPartescol(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<Transferencias[0].razaoNivel.length; i++)
+											option(value="#{Transferencias[0].razaoNivel[i]}" selected) #{Transferencias[0].razaoNivel[i]}
+						else
+							.col.s12.m2
+								label(for="nivel") <span data-i18n="demo.inspdiaria_form.oleo"></span>
+							.col.s6.m5
+								input.bom(type="radio" id="nivelok"  name="nivel" value="ok")
+								label.bom(for="nivelok") ok					
+							.col.s6.m5
+								input(type="radio" id="nivelnotok" name='nivel' value="not ok")
+								label(for="nivelnotok") not ok
+							.row#nivelPartescol.hide
+								.col.s10(style="border:none !important")
+									select(id="razaoNivel", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Oleo de travao") Brake fluid
+										option(value="Oleo do motor") Engine oil
+										option(value="Água do radiador") Radiator water 
+										option(value="Água de limpa-brisa") Wiper water 
+										option(value="Refrigeração") Cooling
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+				.row(id="travoes")
+						if Transferencias
+							if Transferencias[0].travoes=="ok"
+								.col.s12.m2
+									label(for="travoes") <span data-i18n="demo.inspdiaria_form.travao"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="travoesok" checked name="travoes" value="ok")
+									label.bom(for="travoesok") ok					
+								.col.s6.m5
+									input(type="radio" id="travoesnotok" name='parabrisa' value="not ok")
+									label(for="travoesnotok") not ok
+							else
+								.col.s12.m2
+									label(for="travoes") <span data-i18n="demo.inspdiaria_form.travao"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="travoesok"  name="travoes" value="ok")
+									label.bom(for="travoesok") ok					
+								.col.s6.m5
+									input(type="radio" id="travoesnotok" checked="#{Transferencias[0].travoes}"=="not ok"? true:false, name='travoes' value="not ok")
+									label(for="travoesnotok") not ok
+								.col.s12#travoesRazao(style="border:none !important")
+									select(multiple)
+										-for(var i=0; i<Transferencias[0].razaoTravoes.length; i++)
+											option(value="#{Transferencias[0].razaoTravoes[i]}" selected) #{Transferencias[0].razaoTravoes[i]}
+						else
+							.col.s12.m2
+								label(for="travoes") <span data-i18n="demo.inspdiaria_form.travao"></span>
+							.col.s6.m5
+								input.bom(type="radio" id="travoesok"  name="travoes" value="ok")
+								label.bom(for="travoesok") ok					
+							.col.s6.m5
+								input(type="radio" id="travoesnotok"  name='travoes' value="not ok")
+								label(for="travoesnotok") not ok
+							.row#travoesRazao.hide
+								.col.s10(style="border:none !important")
+									select(id="razaoTravoes", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Travão") Brake
+										option(value="Travão de estacionamento") Parking brake
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+				input(type="button", name="previous", class="previous action-button", value="<<Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+					h2(class="fs-title") Camera
+					.row
+						.row(id="camera")
+							if Transferencias
+								if Transferencias[0].camera=="ok"
+									.col.s12.m2
+										label(for="camera") Camera<span class="red-text"> </span>
+									.col.s6.m5
+										input.bom(type="radio" id="cameraok" checked name="camera" value="ok")
+										label(for="cameraok") ok					
+									.col.s6.m5
+										input(type="radio" id="cameranotok" name='camera' value="not ok")
+										label(for="cameranotok") not ok
+								else
+									.col.s12.m2
+										label(for="camera") Camera<span class="red-text"> </span>
+									.col.s6.m5
+										input.bom(type="radio" id="cameraok"  name="camera" value="ok")
+										label(for="cameraok") ok					
+									.col.s12.m5
+										input(type="radio" id="cameranotok" checked="#{Transferencias[0].camera}"=="not ok"? true:false, name='camera' value="not ok")
+										label(for="cameranotok") not ok
+									.col.s12#cameraRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Transferencias[0].razaoCamera.length; i++)
+												option(value="#{Transferencias[0].razaoCamera[i]}" selected) #{Transferencias[0].razaoCamera[i]}
+							else
+								.col.s12.m2
+									label(for="camera") Camera<span class="red-text"> </span>
+								.col.s6.m5
+									input.bom(type="radio" id="cameraok"  name="camera" value="ok")
+									label(for="cameraok") ok					
+								.col.s6.m5
+									input(type="radio" id="cameranotok" name='camera' value="not ok")
+									label(for="cameranotok") not ok
+								.row#cameraRazao.hide
+									.col.s10(style="border:none !important")
+										select(id="razaoCamera", multiple, value)
+											option(value="" disabled selected ) Select the Part(s)
+											option(value="Frontal" ) Front 
+											option(value="Traseiro") Rear
+											option(value"mensagem de erro") Error message
+									.col.s2
+										img(class="hide-on-med-and-up" src="/img/okk.png")
+						.row(id="handsfree")
+							if Transferencias
+								if Transferencias[0].handsfree=="ok"
+									.col.s12.m2
+										label(for="handsfree") <span data-i18n="demo.inspdiaria_form.maoslivres"></span>
+									.col.s6.m5
+										input.bom(type="radio" id="handsfreeok" checked name="handsfree" value="ok")
+										label(for="handsfreeok") ok					
+									.col.s6.m5
+										input(type="radio" id="handsfreenotok" name='handsfree' value="not ok")
+										label(for="handsfreenotok") not ok
+								else
+									.col.s12.m2
+										label(for="handsfree") <span data-i18n="demo.inspdiaria_form.maoslivres"></span>
+									.col.s6.m5
+										input.bom(type="radio" id="handsfreeok"  name="handsfree" value="ok")
+										label(for="handsfreeok") ok					
+									.col.s6.m5
+										input(type="radio" id="handsfreenotok" checked="#{Transferencias[0].handsfree}"=="not ok"? true:false name='handsfree' value="not ok")
+										label(for="handsfreenotok") not ok
+							else
+								.col.s12.m2
+									label(for="handsfree") <span data-i18n="demo.inspdiaria_form.maoslivres"></span>
+								.col.s6.m5
+									input.bom(type="radio" id="handsfreeok"  name="handsfree" value="ok")
+									label(for="handsfreeok") ok					
+								.col.s6.m5
+									input(type="radio" id="handsfreenotok" name='handsfree' value="not ok")
+									label(for="handsfreenotok") not ok
+					input(type="button", name="previous", class="previous action-button", value="<< Prev")
+					if !Transferencias
+						input#captarTransferencia(type="submit", name="submit", class="submit action-button", value="Save")
+
+			
+
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);

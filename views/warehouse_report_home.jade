@@ -1,0 +1,95 @@
+extends layout
+block content
+	.container.seccao.white
+		-if(Stock_rst.length>0)
+			.fixed-action-btn.top.fixed-add-bottom
+					a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+					ul(id="extrair")
+						li
+							a.btn-floating.pointer.activarAzul#xtrairi_relatorio(data-position="left", data-delay="10", data-tooltip="Registar nova transferencia ", class="btn-floating btn-large waves-effect waves-light", valor="#{pacote}") <i class="material-icons activarVerde">file_download</i>
+		if !Stock_rst || !Stock_rst.length
+			p.center-align.selmecAzul.bold Empty!
+		else
+			if(type=="Voda_Hua")
+				.row
+					.col.s12.m6
+					.col.s12.m6.right.input-field
+						i.material-icons.prefix search
+						label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+						input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") #{till}
+				fieldset.no-border.legend-border
+							legend.selmecAzul.bold
+				table.responsive-table.bordered.striped
+					thead
+						tr.selmecAzul
+							th Nome tecnico
+							th Site
+							th TTNumber
+							// th Regiao
+							th Tipo
+							th Proprietario
+							th Quantidade
+							th Part Number
+							th Serie Novo 
+							// th Serie antigo 
+							th Data Uso
+							th Descricao 
+							// th Armazem
+					tbody(id="myTable")
+						-for(var index =0; index<Stock_rst.length; index++)
+							tr.highlight(data-funcionario="#{Stock_rst[index]._id}")
+								td #{Stock_rst[index].tecnico}
+								td #{Stock_rst[index].site}
+								td #{Stock_rst[index].ttnumber}
+								//- td #{Stock_rst[index].regiao}
+								td #{Stock_rst[index].tipo}
+								td #{Stock_rst[index].propretario}
+								td #{Stock_rst[index].quantidade}
+								td #{Stock_rst[index].part_number}
+								td #{Stock_rst[index].serial}
+								//- td #{Stock_rst[index].serialAntigo}
+								td #{Stock_rst[index].data}
+								td #{Stock_rst[index].descricao}
+								// td #{Stock_rst[index].armazem}
+								//- td #{((Stock_rst[index].data).getDate()<10? '0'+(Stock_rst[index].data).getDate():(Stock_rst[index].data).getDate())+'/'+(((Stock_rst[index].data).getMonth()+1)<10? ('0'+((Stock_rst[index].data).getMonth()+1)):((Stock_rst[index].data).getMonth()+1))+'/'+((Stock_rst[index].data).getFullYear())+'   '+((Stock_rst[index].data).getHours()<10? ('0'+(Stock_rst[index].data).getHours()): (Stock_rst[index].data).getHours() )+' : '+((Stock_rst[index].data).getMinutes()<10? ('0'+(Stock_rst[index].data).getMinutes()):(Stock_rst[index].data).getMinutes())}
+			else
+				.row
+					.col.s12.m6
+					.col.s12.m6.right.input-field
+						i.material-icons.prefix search
+						label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+						input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") #{till}
+				fieldset.no-border.legend-border
+							legend.selmecAzul.bold
+				table.responsive-table.bordered.striped
+					thead
+						tr.selmecAzul
+							th Descricao
+							th De
+							th Para
+							th Quantidade
+							th Proprietario
+							th Data
+					tbody(id="myTable")
+						-for(var index =0; index<Stock_rst.length; index++)
+							tr.highlight(data-funcionario="#{Stock_rst[index]._id}")
+								td #{Stock_rst[index].nome_item}
+								td #{ Stock_rst[index].request_from}
+								td #{Stock_rst[index].beneficiario}
+								td #{Stock_rst[index].quantidade}
+								td #{Stock_rst[index].cliente_name}
+								td #{((Stock_rst[index].data).getDate()<10? '0'+(Stock_rst[index].data).getDate():(Stock_rst[index].data).getDate())+'/'+(((Stock_rst[index].data).getMonth()+1)<10? ('0'+((Stock_rst[index].data).getMonth()+1)):((Stock_rst[index].data).getMonth()+1))+'/'+((Stock_rst[index].data).getFullYear())+'   '+((Stock_rst[index].data).getHours()<10? ('0'+(Stock_rst[index].data).getHours()): (Stock_rst[index].data).getHours() )+' : '+((Stock_rst[index].data).getMinutes()<10? ('0'+(Stock_rst[index].data).getMinutes()):(Stock_rst[index].data).getMinutes())}
+																	
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

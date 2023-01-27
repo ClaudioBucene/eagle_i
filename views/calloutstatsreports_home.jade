@@ -1,0 +1,109 @@
+extends layout
+block content
+	.row(style="margin-top:15px;margin-bottom: 0px !important;")
+		-if(CalloutStatsHistory.length>0)
+			.row
+				.fixed-action-btn.top.fixed-add-bottom
+					a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+					ul(id="extraircalloutstatsreport")
+						li
+							a.btn-floating.pointer.activarAzul#extraircalloutstatsreport(data-position="left", data-delay="10", data-tooltip="Export Callout Stats", class="btn-floating btn-large waves-effect waves-light", valor="#{pacote}") <i class="material-icons activarVerde">file_download</i>
+		.row
+			if(CalloutStatsHistory.length == 0)
+				p.center-align.selmecAzul.bold <span data-i18n="demo.ttnumber_form.seminfo"></span>
+			else
+				.row
+					.col.s12.m6
+					.col.s12.m6.right.input-field
+						i.material-icons.prefix search
+						label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+						input(type="text", id="pesquisador", name="pesquisador", valor="#{pacote}", style="border-bottom:none !important;")
+				h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.calloutreports"></span>
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold
+				table.responsive-table.bordered.striped#myTable
+					thead
+						tr.selmecAzul
+							th Site
+							th Cliente
+							th <span data-i18n="demo.manutencao_form.maintenancedate"></span>
+							-if(CalloutStatsHistory[0].jobcard_departamentoid!="611e45e68cd71c1f48cf45bd")	
+								th TTNumber
+							th Trabalho
+							th <span data-i18n="demo.manutencao_form.estadotrabalho"></span>
+							th Tempo De Resposta
+							th <span data-i18n="demo.manutencao_form.reasonreportsform"></span>
+							th <span data-i18n="demo.manutencao_form.tecniconome1"></span>
+							-if(CalloutStatsHistory[0].jobcard_departamentoid!="611e45e68cd71c1f48cf45bd")
+								th Line Manager
+							th Call Center
+							th <span data-i18n="demo.manutencao_form.regiao"></span>
+							th 
+
+					tbody(id="myTableUser1")
+						-for(var index = 0; index < CalloutStatsHistory.length; index++)
+							tr.highlight(style="font-family:;color:#12375c")
+								td #{CalloutStatsHistory[index].jobcard_site}
+								td #{CalloutStatsHistory[index].jobcard_clientenome}
+								-if(CalloutStatsHistory[0].jobcard_departamentoid=="611e45e68cd71c1f48cf45bd")
+									-if(CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getDate() < 10)
+										- var day = "0"+CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getDate()
+									-else
+										- var day = CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getDate()
+									-if(CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getMonth() < 10)
+										- var month = "0"+(CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getMonth()+1)
+									-else
+										- var month = (CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getMonth()+1)
+									- var year = CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getFullYear()
+									-if(CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getHours() < 10)
+										- var hours = "0"+CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getHours()
+									-else
+										- var hours = CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getHours()
+									-if(CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getMinutes() < 10)
+										- var minutes = "0"+CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getMinutes()
+									-else
+										- var minutes = CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getMinutes()
+									-if(CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getSeconds() < 10)
+										-var seconds = "0"+CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getSeconds()
+									-else
+										-var seconds = CalloutStatsHistory[index].data_ultimaactualizacaojobcard.getSeconds()
+									td #{day}/#{month}/#{year}, #{hours}:#{minutes}:#{seconds}
+								-else
+									td #{CalloutStatsHistory[index].jobcard_sitearrivaldate}
+									td #{CalloutStatsHistory[index].jobcard_ttnumber}
+								td #{CalloutStatsHistory[index].ttnumber_status}
+								td #{CalloutStatsHistory[index].jobcard_estadoactual}
+								-if ((CalloutStatsHistory[index].jobcard_responsetime) == null)
+										td ----
+								-else
+									if((CalloutStatsHistory[index].jobcard_responsedays) > 1)
+										td #{CalloutStatsHistory[index].jobcard_responsedays} dias e #{CalloutStatsHistory[index].jobcard_responsetime} hrs
+									else if((CalloutStatsHistory[index].jobcard_responsedays) == 1)
+										td #{CalloutStatsHistory[index].jobcard_responsedays} dia e #{CalloutStatsHistory[index].jobcard_responsetime} hrs
+									else
+										td #{CalloutStatsHistory[index].jobcard_responsetime} hrs
+								-if(CalloutStatsHistory[index].jobcard_departamentoid=="611e45e68cd71c1f48cf45bd")
+									td #{CalloutStatsHistory[index].jobcard_hsreason}
+								-else
+									td #{CalloutStatsHistory[index].jobcard_jobinfo}
+								td #{CalloutStatsHistory[index].jobcard_tecniconome}
+								-if(CalloutStatsHistory[index].jobcard_departamentoid!="611e45e68cd71c1f48cf45bd")
+									td #{CalloutStatsHistory[index].jobcard_linemanager}
+								td #{CalloutStatsHistory[index].jobcard_loggedby}
+								td #{CalloutStatsHistory[index].jobcard_regiao}
+								td.center-align
+									a.tooltipped.pointer.info(style="margin-left: 25px", data-position="top", data-delay="10", href="/manutencao/detalhesJobcardCallOut/#{CalloutStatsHistory[index]._id}", data-tooltip="Details of maintenance") <i class="material-icons activarVerde">info</i>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

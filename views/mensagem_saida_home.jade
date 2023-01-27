@@ -1,0 +1,36 @@
+extends layout
+block content
+	.seccao.container.white
+		div(class="fixed-action-btn horizontal fixed-add-bottom")
+			a.tooltipped.verde-policial-bg(data-position="left", data-delay="10", data-tooltip="compor uma mensagem", class="btn-floating btn-large waves-effect waves-light", href="/mensagem/novo") <i class="material-icons">add</i>
+		if !Mensagem || Mensagem.length==0
+			.center-align.selmecAzul.bold( style="font-family:") A caixa de Saída está Vazia !
+		else
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Caixa de Saída 
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Destinatário
+						th Assunto
+						th Data de Envio
+						th 
+				tbody
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					-for(var index = (Mensagem.length-1); index >=0; index--)
+						tr.highlight(data-caso="#{Mensagem[index]._id}",style="font-family:;color:#12375c")
+							td #{Mensagem[index].destinatario}
+							td #{Mensagem[index].assunto}
+							td #{Mensagem[index].dataenv.getDate()+'/'+(Mensagem[index].dataenv.getMonth()+1)+'/'+Mensagem[index].dataenv.getFullYear()+' às '+Mensagem[index].dataenv.getHours()+':'+Mensagem[index].dataenv.getMinutes()}
+							td.center-align
+								a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Ler mensagem enviada para #{Mensagem[index].destinatario}", href="/mensagem/detalhes_s/#{Mensagem[index]._id}") <i class="material-icons activarVerde">remove_red_eye</i>
+		block js
+		script.
+			setInterval(function(){document.getElementById("mensagemId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);

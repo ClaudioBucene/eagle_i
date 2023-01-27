@@ -1,0 +1,65 @@
+extends layout
+block content
+	.container.seccao.white
+		.fixed-action-btn.top.fixed-add-bottom
+					a(class="btn-floating btn-large activarAzul ") <i class="large material-icons activarVerde">menu</i>
+					ul(id="extrair")
+						li
+							a.btn-floating.pointer.activarAzul#xtrairi_relatorio_dos_itenn(data-position="left", data-delay="10", data-tooltip="Registar nova transferencia ", class="btn-floating btn-large waves-effect waves-light", valor="#{pacote}") <i class="material-icons activarVerde">file_download</i>
+		.fixed-action-btn.top.fixed-add-bottom
+		if !Armazens || !Armazens.length
+			p.center-align.selmecAzul.bold No serialized item to show!
+		else
+			form(class="col s12"  method="POST" action="/armazem/ratreio/buscar"  name="alljobcardspesquisaform")
+				.row
+					.col.s12.m6
+					.col.s12.m6.right.input-field
+						i.material-icons.prefix search
+						label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+						input(type="text", id="pesquisador", autocomplete="off" name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.Stock_request_home_menu.moviment"></span>
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped.icn1
+				thead
+					tr.selmecAzul
+						th P.Number
+						th Descricao
+						th S.Number
+						th Alocado
+						th Data
+						th Status
+						th 
+				tbody(id="myTable")
+					-for(var index =0; index<Armazens.length ; index++)
+						tr.highlight(data-funcionario="#{Armazens[index]._id}", data-nome="#{Armazens[index].nome}",style="color:#{Armazens[index].observacao}")
+							td #{Armazens[index].part_number}
+							td #{Armazens[index].description}
+							td #{Armazens[index].serial_number}
+							td #{Armazens[index].local_actual[Armazens[index].local_actual.length-1]}
+							td #{((Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getDate()<10? '0'+(Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getDate():(Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getDate())+'/'+(((Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getMonth()+1)<10? ('0'+((Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getMonth()+1)):((Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getMonth()+1))+'/'+((Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getFullYear())+'   '+((Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getHours()<10? ('0'+(Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getHours()): (Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getHours() )+' : '+((Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getMinutes()<10? ('0'+(Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getMinutes()):(Armazens[index].datas_local_actual[Armazens[index].datas_local_actual.length-1]).getMinutes())}
+							td #{Armazens[index].status}
+							td.center-align
+								a.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Armazens[index].nome}", href="/armazem/rastreio_items/#{Armazens[index]._id}") <i class="material-icons activarVerde">info</i>
+					if Armazens
+						tr.highlight(style="font-family:;color:#12375c")
+							td.center-align
+								if((cont-1)!= -1)
+									a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/armazem/rastreioj/proximo/#{(cont-1)}") <i class="material-icons selmecAzul">fast_rewind</i>
+							td
+							td
+							td
+							td
+							td.center-align
+								a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Próximo" href="/armazem/rastreioj/proximo/#{(cont+1)}") <i class="material-icons selmecAzul">fast_forward</i>
+								
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

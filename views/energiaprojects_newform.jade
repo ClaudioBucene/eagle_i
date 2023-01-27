@@ -1,0 +1,198 @@
+extends layout
+block content
+	form#ttnumberform(style="margin-bottom:0px; height:550px")
+		h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.projectsh3"></span>
+		.row#recolherdados(style="margin-top:-40px; margin-bottom:0px" detalhesclientessite="#{SiteCliente}" detalhessiteinfo="#{SiteInfo}" detalhesprojectos="#{DadosProjectos}" detalhesclientes="#{DadosClientes}")
+			.input-field.col.s12.m6(style="margin-top:22px")
+				label(for="jobcard_projectnumber") <span data-i18n="demo.ttnumber_form.projectnumber"></span>
+				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_projectnumber" ,name="jobcard_projectnumber")
+			.col.s12.m6(style="margin-top:5px")
+				label(for="jobcard_clienteidprojects") <span data-i18n="demo.ttnumber_form.cliente"></span>
+				select.browser-default(name="jobcard_clienteidprojects", id="jobcard_clienteidprojects")
+					option(value="" disabled selected) Escolha a opção
+					-for(var i=0; i<Clientes.length; i++)
+						option(value="#{Clientes[i]._id}") #{Clientes[i].cliente_nome}
+		.row(style="margin-bottom:0px")
+			.input-field.col.s10.m6(style="margin-top:22px")
+				select(name="jobcard_call", id="jobcard_call")
+					option#terceiro(value="" disabled) Escolha a opção
+					option(value="Project" selected) Project
+				label Call
+			.col.s2.hide-on-med-and-up(style="margin-top:22px")
+				img(class="hide-on-med-and-up" src="/img/okk.png")
+			.col.s12.m6(style="margin-top:6px")
+				label <span data-i18n="demo.manutencao_form.departamento"></span>
+				select.browser-default(name="jobcard_departamento", id="jobcard_departamento")
+					option(value="" disabled selected id="quarto") Escolha a opção
+					-for(let i=0; i<AdMagen[0].departamento.length; i++)
+						option(value="#{AdMagen[0].departamento[i].nome}" , data-cont="#{AdMagen[0].departamento[i]._id}") #{AdMagen[0].departamento[i].nome}
+		.row(style="margin-bottom:18px")
+			.input-field.col.s10.m6.jobcard_siteidselect(style="margin-top:19px")
+				select(name="jobcard_siteidselect", id="jobcard_siteidselect" multiple)
+					option(value="" disabled selected) Escolha a opção
+				label(for="jobcard_siteidselect") Site
+			.col.s2.hide-on-med-and-up.jobcard_siteidselect(style="margin-top:22px")
+				img(class="hide-on-med-and-up" src="/img/okk.png")
+			.input-field.col.s12.m6.jobcard_siteidinput.hide(style="margin-top:19px")
+				label(for="jobcard_siteidinput") Site
+				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_siteidinput" ,name="jobcard_siteidinput")
+			.col.s12.m6(style="margin-top:2px")
+				label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+				select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+					option(value="" disabled selected) Escolha a opção
+					-for(var i=0; i<Usuarios.length; i++)
+						option(value="#{Usuarios[i]._id}") #{Usuarios[i].nome}
+		.row(style="margin-bottom:0px")
+			.input-field.col.s12.m6(style="margin-top:3px")
+				label(for="jobcard_jobinfo") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfo" ,name="jobcard_jobinfo")
+			.input-field.col.s12.m6(style="margin-top:2px")
+				label(for="jobcard_datacreated") <span data-i18n="demo.manutencao_form.datacreated"></span>
+				input.datepicker( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="jobcard_datacreated" ,name="jobcard_datacreated")
+				//- input( autocomplete="on", type="text", style="font-family:;color:#12375c" ,id="jobcard_datacreated" , readonly,name="jobcard_datacreated" ,value="#{((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())}")
+		button(type="button", id="createnewenergia_project", class="btn modal-action waves-effect waves-green btn-flat" style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.create"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			function autocomplete(inp, arr) {
+				/*the autocomplete function takes two arguments, the text field element and an array of possible autocompleted values:*/
+				var currentFocus;
+
+				/*execute a function when someone writes in the text field:*/
+				inp.addEventListener("input", function(e) {
+					var a, b, i, val = this.value;
+
+					/*close any already open lists of autocompleted values*/
+					closeAllLists();
+
+					if (!val) { return false;}
+
+					currentFocus = -1;
+
+					/*create a DIV element that will contain the items (values):*/
+					a = document.createElement("DIV");
+					a.setAttribute("id", this.id + "autocomplete-list");
+					a.setAttribute("class", "autocomplete-items");
+
+					/*append the DIV element as a child of the autocomplete container:*/
+					this.parentNode.appendChild(a);
+
+					/*for each item in the array...*/
+					for (i = 0; i < arr.length; i++) {
+
+						/*check if the item starts with the same letters as the text field value:*/
+						if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
+							/*create a DIV element for each matching element:*/
+							b = document.createElement("DIV");
+
+							/*make the matching letters bold:*/
+							b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+							b.innerHTML += arr[i].substr(val.length);
+							/*insert a input field that will hold the current array item's value:*/
+							b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+
+							/*execute a function when someone clicks on the item value (DIV element):*/
+							b.addEventListener("click", function(e) {
+
+								/*insert the value for the autocomplete text field:*/
+								inp.value = this.getElementsByTagName("input")[0].value;
+
+								/*close the list of autocompleted values,
+								(or any other open lists of autocompleted values:*/
+								closeAllLists();
+							});
+
+							a.appendChild(b);
+						}
+					}
+				});
+
+				/*execute a function presses a key on the keyboard:*/
+				inp.addEventListener("keydown", function(e) {
+					var x = document.getElementById(this.id + "autocomplete-list");
+
+					if (x) x = x.getElementsByTagName("div");
+
+					if (e.keyCode == 40) {
+						/*If the arrow DOWN key is pressed,
+						increase the currentFocus variable:*/
+						currentFocus++;
+
+						/*and and make the current item more visible:*/
+						addActive(x);
+					} else 
+						if (e.keyCode == 38) { //up
+							/*If the arrow UP key is pressed,
+							decrease the currentFocus variable:*/
+							currentFocus--;
+
+							/*and and make the current item more visible:*/
+							addActive(x);
+
+						} else 
+							if (e.keyCode == 13) {
+								/*If the ENTER key is pressed, prevent the form from being submitted,*/
+								e.preventDefault();
+								if (currentFocus > -1) {
+									/*and simulate a click on the "active" item:*/
+									if (x) x[currentFocus].click();
+								}
+							}
+				});
+
+				function addActive(x) {
+					/*a function to classify an item as "active":*/
+					if (!x) return false;
+
+					/*start by removing the "active" class on all items:*/
+					removeActive(x);
+
+					if (currentFocus >= x.length) currentFocus = 0;
+					if (currentFocus < 0) currentFocus = (x.length - 1);
+					/*add class "autocomplete-active":*/
+					x[currentFocus].classList.add("autocomplete-active");
+				}
+
+				function removeActive(x) {
+					/*a function to remove the "active" class from all autocomplete items:*/
+					for (var i = 0; i < x.length; i++) {
+						x[i].classList.remove("autocomplete-active");
+					}
+				}
+
+				function closeAllLists(elmnt) {
+					/*close all autocomplete lists in the document,
+					except the one passed as an argument:*/
+					var x = document.getElementsByClassName("autocomplete-items");
+
+					for (var i = 0; i < x.length; i++) {
+
+						if (elmnt != x[i] && elmnt != inp) {
+							x[i].parentNode.removeChild(x[i]);
+						}
+					}
+				}
+
+				/*execute a function when someone clicks in the document:*/
+				document.addEventListener("click", function (e) {
+					closeAllLists(e.target);
+				});
+			}
+
+			var reasonsJobcardArray = ["AC Mains Failure", "Rectifier System", "Rectifier Module", "Generator Low Fuel", "Generator Abnormal", "Generator Running", "High Temperature", "Battery Low", "Door Switch Intruder", "Motion Detector","FAN Stalled", "Smoke Detector","Site Down"];
+
+			/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+			autocomplete(document.getElementById("jobcard_jobinfo"), reasonsJobcardArray);
+
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

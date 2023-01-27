@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
+            p {
+                margin: 0;
+                /*text-indent: 10ch;*/
+            }
+
+            p.espacamento{
+                line-height: 60px;
+            }
+
+            table#tablequest {
+                width: 100%;
+            }
+
+            table#tablequest td{
+                /*border: 1px solid #dddddd;*/
+                text-align: left;
+                padding: 2px;
+                vertical-align: middle;
+                /*width: 5px;*/
+            }
+
+            table#tablequest tr{
+                height: 20px;
+            }
+
+            .signature {
+                border: 0;
+                border-bottom: 1px solid #000;
+                width: 300px;
+            }
+
+            .pagebreak { page-break-before: always; }
+
+
+        </style>
+    </head>
+    <body>
+        <div style="text-align: right; margin-top: -10px">
+            <img src = "http://localhost:4000/img/logo.png" style="width:250px;"/>
+        </div>
+        <div>
+            <h4 class="center">DISCLOSURE OF PERSONAL INTERESTS</h4>
+        </div>
+        <div>
+            <p style="line-height: 50px;">Kindly complete the questions below:</p>
+            <table id="tablequest" style="margin-bottom: 170px;">
+                <tr>
+                    <td style="width: 510px;">1. Are you a Director or employee of any other company?</td>
+                    <% if(Respostas[0].pergunta1 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta1yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta1yes" value="No" >
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta1no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta1no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td style="width: 510px;">2. Are you a member of any close corporation?</td>
+                    <% if(Respostas[0].pergunta2 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta2yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta2yes" value="No">
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta2no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta2no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td style="width: 510px;">3. Are you involved in any partnership, trust, consortium or other business structure?</td>
+                    <% if(Respostas[0].pergunta3 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta3yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta3yes" value="No">
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta3no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta3no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <b>Details:</b><i><%= Respostas[0].pergunta3details%></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 510px;">4. Do you have shareholding in any private, public or publicly listed company?</td>
+                    <% if(Respostas[0].pergunta4 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta4yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta4yes" value="No">
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta4no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta4no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td style="width: 510px;">5. Do any of the companies or entities listed in 1-4 above have (or may in the forseseeable future acquire) an interest in any contract with the Company or any of its Subsidiary companies?</td>
+                    <% if(Respostas[0].pergunta5 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta5yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta5yes" value="No">
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta5no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta5no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <b>Company Name:</b> <i><%= Respostas[0].pergunta5details%></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 510px;">6. Other than in 5 above, do you or a Related Person have a material interest, whether directly or indirectly, in any contract with the Company or any of its Subsidiary companies, whether currently or to be entered into?</td>
+                    <% if(Respostas[0].pergunta6 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta6yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta6yes" value="No">
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta6no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta6no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <b>Details:</b><i><%= Respostas[0].pergunta6details%></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 510px;">7. Does any of your friends or Immediate Family have or will they be benefitting materially, either directly or indirectly, from any contract entered into with the Company or any of its Subsidiary companies or any other contract related thereto?</td>
+                    <% if(Respostas[0].pergunta7 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta7yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta7yes" value="No">
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta7no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta7no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <b>Details:</b><i><%= Respostas[0].pergunta7details%></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 510px;">8. Have you ever received, or are you currently receiving, any benefits, in whatever manner or form, or gifts from any person or entity with which the Company has a business relationship, agreement or other dealings?</td>
+                    <% if(Respostas[0].pergunta8 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta8yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta8yes" value="No">
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta8no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta8no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <b>Details:</b><i><%= Respostas[0].pergunta8details%></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 510px;">9. Are you or any member of your Family, involved in or benefiting from, any entity that operate in a similar industry than that of the Company, or entity operating in an industry complimentary to such an industry ?</td>
+                    <% if(Respostas[0].pergunta9 == "Yes") { %>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta9yes" value="Yes" checked>
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta9yes" value="No">
+                            <label for="no">No</label>
+                        </td>
+                    <% }else{%>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta9no" value="Yes">
+                            <label for="yes">Yes</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="pergunta9no" value="No" checked>
+                            <label for="no">No</label>
+                        </td>
+                    <% }%>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <b>Details:</b><i><%= Respostas[0].pergunta9details%></i>
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-bottom: 100px;">
+                <p style="margin-top: 40px;line-height: 30px">I confirm that the above information is true and correct as at the date of signature hereof.</p>
+                <p style="line-height: 25px;">I further understand that the duty to disclose is a continuous one, and as such I further undertake forthwith to advise the Company of any changes as they arise in the context of points 1 to 8 above in order to comply with the provisions of the Act.</p>
+            </div>
+            <div style="margin-bottom: 50px">
+                <label>Signature:</label><input type="text" class="signature" />
+                <label style="margin-left: 75px">Date: <u><%= Respostas[0].data%></u> </label>
+            </div>
+            <div style="margin-bottom: 210px">
+                <p style="line-height: 25px;"><u>Definitions:</u></p>
+                <p style="word-spacing: 3px; line-height: 25px;">The <b>Company-</b> <u><%= Respostas[0].company%></u> </p>
+                <p style="word-spacing: 3px; line-height: 25px;"><b>Subsidiary -</b> wholly owned subsidiaries, subsidiaries, associates and joint ventures </p>
+                <p style="word-spacing: 3px; line-height: 25px;"><b>Immediate Family  -</b> a person’s spouse or partner in a relationship similar to marriage, or a person separated by no more than two degrees of natural or adopted consanguinity or affinity </p>
+                <p style="word-spacing: 3px; line-height: 25px;"><b>Related Person   -</b> an employee’s spouse and children, parent, cousin or sibling </p>
+                <p style="word-spacing: 3px; line-height: 25px;"><b>Director-</b> includes prescribed officer, member of the executive or member of a committee serving a Board of Directors </p>
+            </div>
+            <div class="pagebreak">
+                <h4 class="center">ANNEXURE A</h4>
+            </div>
+            <div style="margin-bottom: 100px">
+                <table>
+                    <tr>
+                        <td>COMPANY NAME:</td><td><%= Respostas[0].anexo.companyname%></td>
+                    </tr>
+                    <tr>
+                        <td>COMPANY REGISTRATION NUMBER:</td><td><%= Respostas[0].anexo.companyresgistnum%></td>
+                    </tr>
+                    <tr>
+                        <td>SURNAME:</td><td><%= Respostas[0].anexo.surname%></td>
+                    </tr>
+                    <tr>
+                        <td>FORNAMES:</td><td><%= Respostas[0].anexo.fornames%></td>
+                    </tr>
+                    <tr>
+                        <td>RESIDENTIAL ADDRESS:</td><td><%= Respostas[0].anexo.residentialadd%></td>
+                    </tr>
+                    <tr>
+                        <td>BUSINESS ADDRESS:</td><td><%= Respostas[0].anexo.businessadd%></td>
+                    </tr>
+                    <tr>
+                        <td>POSTAL ADDRESS:</td><td><%= Respostas[0].anexo.postaladd%></td>
+                    </tr>
+                    <tr>
+                        <td>NATIONALITY (IF NOT RSA):</td><td><%= Respostas[0].anexo.nationality%></td>
+                    </tr>
+                    <tr>
+                        <td>DATE OF BIRTH:</td><td><%= Respostas[0].anexo.datebirth%></td>
+                    </tr>
+                    <tr>
+                        <td>IDENTIFICATION OF PASSPORT NUMBER:</td><td><%= Respostas[0].anexo.passportnum%></td>
+                    </tr>
+                    <tr>
+                        <td>OCCUPATION</td><td><%= Respostas[0].anexo.occupation%></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin-bottom: 50px;">
+                <p>I hereby inform you that I am to be regarded as interested in any contract to be made with any of the following, the nature and extent of my interest being set out below.</p>
+            </div>
+            <div>
+                <p  style="line-height: 70px;">Signed:<input type="text" class="signature" /></p>
+                <p>Date: <u><%= Respostas[0].data%></u> </p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,115 @@
+extends layout
+block content
+	form
+		fieldset.no-border.legend-border
+			//-legend.selmecAzul.bold Criacao de tarefa
+			.row
+				legend.selmecAzul.bold Criacao de tarefa
+				.col.s12.m6
+					label(for="departamento") <span data-i18n="demo.utilizador_form.departamento"></span> 
+					select.browser-default(id="departamento", name="departamento")
+						-for(let i=0; i<AdMagen[0].departamento.length; i++)
+							-if(DataU.departamento_id==AdMagen[0].departamento[i]._id)
+								option(value="#{AdMagen[0].departamento[i].nome}" , data-cont="#{AdMagen[0].departamento[i]._id}", selected) #{AdMagen[0].departamento[i].nome}
+				.col.s12.m6
+					label(for="jobcard_clienteid") <span data-i18n="demo.ttnumber_form.cliente"></span>
+					select.browser-default(name="cliente_hvac", id="cliente_hvac")
+						option(value="" disabled selected) Escolha a opção
+						-for(var i=0; i<Clientes.length; i++)
+							option(value="#{Clientes[i].nome_cliente}", data-cont="#{Clientes[i]._id}") #{Clientes[i].nome_cliente}
+						option(value="Novo") Novo
+				.col.s12.m6
+					label(for="filial") Filial
+					select.browser-default(name="filial", id="filial")
+						option(value="" disabled selected) Escolha a opção
+				.col.s12.m6
+					label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+					select.browser-default(name="regiao", id="regiao", style="font-family:" disabled)
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<AdMagen[0].regiao.length; i++)
+							option(value="#{AdMagen[0].regiao[i].nome}", data-cont="#{AdMagen[0].regiao[i]._id}" ) #{AdMagen[0].regiao[i].nome}
+				.col.s12.m6
+					label <span data-i18n="demo.utilizador_form.provincia"></span>
+					select.browser-default.browser-default(name="provincia_trabalho", id="provincia_trabalho", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<AdMagen[0].provincia.length; i++)
+							option(value="#{AdMagen[0].provincia[i].nome}", data-cont="#{AdMagen[0].provincia[i]._id}") #{AdMagen[0].provincia[i].nome}
+				.input-field.col.s12.m6
+					label(for="local") Local
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" makhapa="#{Clientes1}" placeholder='',readonly, id="local", name="local")
+				.col.s12.m6
+					label(for="pessoa_contacto") Pessoa de Contacto
+					select.browser-default(name="pessoa_contacto", id="pessoa_contacto")
+						option(value="" disabled selected) Escolha a opção
+		fieldset.no-border.legend-border.avacseccao
+			legend.selmecAzul.bold Equipe
+			.row
+				.col.s12.m6
+					label(for="tecnico") Equipe Tecnica
+					select.browser-default(name="tecnico", id="tecnico", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<HvacUsers.length; i++)
+							option(value="#{HvacUsers[i].nome}", data-cont="#{HvacUsers[i]._id}") #{HvacUsers[i].nome}
+				.col.s12.m6
+					label Matricula da viatura
+					select.browser-default.browser-default(name="viatura", id="viatura", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<Viaturas.length; i++)
+							option(value="#{Viaturas[i].matricula}") #{Viaturas[i].matricula}
+				//- .col.s12.m6(style="margin-top:2px")
+				//- 	label(for="tipo_trabalho") Tipo de trabalho
+				//- 	select.browser-default(name="tipo_trabalho", id="tipo_trabalho")
+				//- 		option(value="" disabled selected) Escolha a opção
+				//- 		option(value="Correctiva") Correctiva
+				//- 		option(value="Preventiva") Preventiva
+				//- 		option(value="Projecto") Projecto
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_priority") <span data-i18n="demo.ttnumber_form.prioridade"></span>
+					select.browser-default(name="jobcard_priority", id="jobcard_priority")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Alta") Alta
+						option(value="Media") Média
+						option(value="Baixa") Baixa
+				.input-field.col.s12.m6
+					label(for="data") Data prevista
+					input.datepicker(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="data", name="data")  
+				.input-field.col.s12.m6
+					label(for="razao") Motivo
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="razao", name="razao")
+		fieldset.no-border.legend-border
+			legend.selmecAzul.bold Assistentes
+			.row.multi-field-wrapper.col.s12
+				.multi-fields.col.s12
+					.multi-field.col.s12.m6
+						.col.s10
+							label(for="pessoas_permitidas[]") Assistentes
+							select.browser-default.pessoas_permitidas(name="pessoas_permitidas[]",  style="font-family:")
+								option(value="" disabled selected selmecVerde) choose Option
+								-for(let i=0; i<HvacUsers.length; i++)
+									option(value="#{HvacUsers[i].nome}" data-referencia="#{HvacUsers[i]._id}") #{HvacUsers[i].nome}
+				a(class="btn-floating btn-large waves-effect waves-light add-field12 right") +
+			.row
+				.col.s12
+					table.responsive-table.bordered.striped(style="height:auto !important")
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.Armazem_form.tecnicos_locados"></span>
+								th
+						tbody(id="myTable_tecnicos_permitidos" style="height:auto !important")
+		fieldset.no-border
+				.row.buttons-container
+					.col.s12.center
+						butoon#criacaoandepto(type="button", class="btn waves-efect waves-light activarAzul") Criar
+	
+	block js
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

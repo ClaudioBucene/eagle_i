@@ -1,0 +1,35 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.utilizador_form.regiao"></span>
+				.row
+					.col.s12.m6.input-field
+						label(for="nome") <span data-i18n="demo.utilizador_form.regiao"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome", idioty="#{Depp._id}" ,name="nome", value="#{Depp? Depp.nome : ''}")
+					.col.s12.m6.input-field
+						label(for="regional_manager") Line Manager
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="regional_manager" ,name="regional_manager", value="#{Depp? Depp.regional_manager : ''}")
+			fieldset.no-border
+				.row.buttons-container
+					if !Usuarios
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="editar_sisadm_rigeon") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="voltar_util") <span data-i18n="demo.utilizador_form.cancelar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setTimeout(function(){document.getElementById("adminsession").className="activarAzul"}, 100);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

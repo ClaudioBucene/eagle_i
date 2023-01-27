@@ -1,0 +1,55 @@
+extends layout
+block content
+	.container.white
+		-var valores=contactos
+		form(id="mensagemmmm", method="post", style="color:#12375c")
+			fieldset.no-border.legend-border
+				if !Mensagem
+					legend(style="color:#12375c; font-size:24px", class="capitalize") Composição Da Mensagem
+				else
+					legend(style="color:#12375c; font-size:24px", class="capitalize") Detalhes da Mensagem Enviada
+				.row
+					.col.s12.m6
+						label(for="destinatario") Destinatário<span class="red-text">*</span>
+						select.browser-default.browser-default(name="destinatario", id="destinatario", style="font-family:; color:#12375c")
+							if Mensagem
+								option(value="#{Mensagem[0].destinatario}", selected="selected") #{Mensagem[0].destinatario}
+							else
+								option(value="" disabled selected) Escolha o Destinatário
+								-for(var i = 0; i < valores.length; i++)
+									option(value="#{valores[i]}") #{valores[i]}
+					.input-field.col.s12.m6
+						label(for="Matricula") Assunto
+						input(type="text", id="assunto", autocomplete="off", style="font-family:; color:#12375c", name="assunto",  value="#{Mensagem? Mensagem[0].assunto:''}")
+				.row
+					.input-field.col.s12
+						.material-icons.prefix mode_edit
+						textarea#icon_prefix2.materialize-textarea(style="font-family:; color:#12375c" ) #{Mensagem? Mensagem[0].conteudo: ''}
+						if Mensagem
+							label(for="icon_prefix2") Mensagem Enviada
+						else
+							label(for="icon_prefix2") Escreva sua Mensagem
+					//- .input-field.col.s12.m6
+					//- 		.file-wrapper
+					//- 			i.material-icons.prefix attach_file
+					//- 			input.file-path(type="file")
+				.row(style="margin-top:7px !important")
+					if !Mensagem
+						.col.s12.m6.center(style="margin-bottom: 10px;")
+							button#enviar(type="button", class="btn center waves-efect waves-light") Enviar
+						.col.s12.m6.center
+							button#cancelar_mensagem(type="button", class="btn waves-efect waves-light red") cancelar
+					else
+						.col.s12.center
+							butoon#marcarLida(type="button", class="btn waves-efect waves-light activarAzul") << Voltar
+		block js
+		script.
+			setInterval(function(){document.getElementById("mensagemId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";}
+			}, 50);
+		

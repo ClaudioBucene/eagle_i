@@ -1,0 +1,190 @@
+extends layout
+block content
+	.container.hr_classe
+		ul.tabs
+			li(class="tab-link current col s3" data-tab="tab-1") Maputo
+			li(class="tab-link col s3" data-tab="tab-2") Sul
+			li(class="tab-link col s3" data-tab="tab-3") Centro
+			li(class="tab-link col s3" data-tab="tab-4") Norte
+
+		.col.s12(id="tab-1" class="tab-contents current")
+			.seccao.container.white
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					if (DataU.nivel_acesso =="admin")
+						a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="add new user", class="btn-floating btn-large waves-effect waves-light", href="/utilizador/novo") <i class=" activarAzul material-icons">add</i>
+				if !Usuarios || !Usuarios.length || Usuarios.length == 1
+					p.center-align.selmecAzul.bold Empty!
+				else
+					.row
+						.col.s12.m6
+						.col.s12.m6.right.input-field
+							i.material-icons.prefix.activarVerde search
+							label(for="pesquisadoruser") <span data-i18n="demo.pesquisar"></span>
+							input(type="text", id="pesquisadoruser", name="pesquisadoruser", style="border-bottom:none !important;")
+							.col.s6.file-field.input-field.hide
+								.btn-floating.tooltipped.white.pointer#exportar(style="box-shadow:none !important;" data-position="left", data-delay="10", data-tooltip="Exportar Kilometragem", class="btn-floating btn-large waves-effect waves-light")
+								input(type="file", id="upexcel",  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+								i.material-icons.activarVerde.small file_upload 
+								<span class="hide-on-small-only"> Carregar</span>
+
+					h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.utilizador_home.lista"></span>
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					table.responsive-table.bordered.striped
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.utilizador_home.nome"></span>
+								th <span data-i18n="demo.utilizador_home.area"></span>
+								th <span data-i18n="demo.utilizador_form.matricula"></span> 
+								th <span data-i18n="demo.utilizador_form.supervisor"></span>
+								th 
+						tbody(id="myTableUser")
+							-for(var index = 0; index < Usuarios.length; index++)
+								tr.highlight(data-caso="#{Usuarios[index]._id}", data-nome="#{Usuarios[index].nome}",style="font-family:;color:#12375c")
+									td #{Usuarios[index].nome}
+									td #{Usuarios[index].provincia_trabalho}
+									td #{Usuarios[index].matricula}
+									td #{Usuarios[index].nome_supervisor}
+									td.center-align
+										if (DataU.nivel_acesso=="admin")
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Usuarios[index].nome}", href="/utilizador/detalhes/#{Usuarios[index]._id}") <i class="material-icons activarVerde">info</i>
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit  #{Usuarios[index].nome}", href="/utilizador/editar/#{Usuarios[index]._id}") <i class="material-icons selmecAzul">edit</i>
+		
+		.col.s12(id="tab-2" class="tab-contents")
+			.seccao.container.white
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					if (DataU.nivel_acesso =="admin")
+						a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="add new user", class="btn-floating btn-large waves-effect waves-light", href="/utilizador/novo") <i class=" activarAzul material-icons">add</i>
+				if !Usuarios || !Usuarios.length || Usuarios.length == 1
+					p.center-align.selmecAzul.bold Empty!
+				else
+					.row
+						.col.s12.m6
+						.col.s12.m6.right.input-field
+							i.material-icons.prefix.activarVerde search
+							label(for="pesquisadoruser") <span data-i18n="demo.pesquisar"></span>
+							input(type="text", id="pesquisadoruser", name="pesquisadoruser", style="border-bottom:none !important;")
+							.col.s6.file-field.input-field.hide
+								.btn-floating.tooltipped.white.pointer#exportar(style="box-shadow:none !important;" data-position="left", data-delay="10", data-tooltip="Exportar Kilometragem", class="btn-floating btn-large waves-effect waves-light")
+								input(type="file", id="upexcel",  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+								i.material-icons.activarVerde.small file_upload 
+								<span class="hide-on-small-only"> Carregar</span>
+
+					h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.utilizador_home.lista"></span>
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					table.responsive-table.bordered.striped
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.utilizador_home.nome"></span>
+								th <span data-i18n="demo.utilizador_home.area"></span>
+								th <span data-i18n="demo.utilizador_form.matricula"></span> 
+								th <span data-i18n="demo.utilizador_form.supervisor"></span>
+								th 
+						tbody(id="myTableUser")
+							-for(var index = 0; index < Usuarios.length; index++)
+								tr.highlight(data-caso="#{Usuarios[index]._id}", data-nome="#{Usuarios[index].nome}",style="font-family:;color:#12375c")
+									td #{Usuarios[index].nome}
+									td #{Usuarios[index].provincia_trabalho}
+									td #{Usuarios[index].matricula}
+									td #{Usuarios[index].nome_supervisor}
+									td.center-align
+										if (DataU.nivel_acesso=="admin")
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Usuarios[index].nome}", href="/utilizador/detalhes/#{Usuarios[index]._id}") <i class="material-icons activarVerde">info</i>
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit  #{Usuarios[index].nome}", href="/utilizador/editar/#{Usuarios[index]._id}") <i class="material-icons selmecAzul">edit</i>
+
+		.col.s12(id="tab-3" class="tab-contents")
+			.seccao.container.white
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					if (DataU.nivel_acesso =="admin")
+						a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="add new user", class="btn-floating btn-large waves-effect waves-light", href="/utilizador/novo") <i class=" activarAzul material-icons">add</i>
+				if !Usuarios || !Usuarios.length || Usuarios.length == 1
+					p.center-align.selmecAzul.bold Empty!
+				else
+					.row
+						.col.s12.m6
+						.col.s12.m6.right.input-field
+							i.material-icons.prefix.activarVerde search
+							label(for="pesquisadoruser") <span data-i18n="demo.pesquisar"></span>
+							input(type="text", id="pesquisadoruser", name="pesquisadoruser", style="border-bottom:none !important;")
+							.col.s6.file-field.input-field.hide
+								.btn-floating.tooltipped.white.pointer#exportar(style="box-shadow:none !important;" data-position="left", data-delay="10", data-tooltip="Exportar Kilometragem", class="btn-floating btn-large waves-effect waves-light")
+								input(type="file", id="upexcel",  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+								i.material-icons.activarVerde.small file_upload 
+								<span class="hide-on-small-only"> Carregar</span>
+
+					h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.utilizador_home.lista"></span>
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					table.responsive-table.bordered.striped
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.utilizador_home.nome"></span>
+								th <span data-i18n="demo.utilizador_home.area"></span>
+								th <span data-i18n="demo.utilizador_form.matricula"></span> 
+								th <span data-i18n="demo.utilizador_form.supervisor"></span>
+								th 
+						tbody(id="myTableUser")
+							-for(var index = 0; index < Usuarios.length; index++)
+								tr.highlight(data-caso="#{Usuarios[index]._id}", data-nome="#{Usuarios[index].nome}",style="font-family:;color:#12375c")
+									td #{Usuarios[index].nome}
+									td #{Usuarios[index].provincia_trabalho}
+									td #{Usuarios[index].matricula}
+									td #{Usuarios[index].nome_supervisor}
+									td.center-align
+										if (DataU.nivel_acesso=="admin")
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Usuarios[index].nome}", href="/utilizador/detalhes/#{Usuarios[index]._id}") <i class="material-icons activarVerde">info</i>
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit  #{Usuarios[index].nome}", href="/utilizador/editar/#{Usuarios[index]._id}") <i class="material-icons selmecAzul">edit</i>
+			
+		.col.s12(id="tab-4" class="tab-contents")
+			.seccao.container.white
+				div(class="fixed-action-btn horizontal fixed-add-bottom")
+					if (DataU.nivel_acesso =="admin")
+						a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="add new user", class="btn-floating btn-large waves-effect waves-light", href="/utilizador/novo") <i class=" activarAzul material-icons">add</i>
+				if !Usuarios || !Usuarios.length || Usuarios.length == 1
+					p.center-align.selmecAzul.bold Empty!
+				else
+					.row
+						.col.s12.m6
+						.col.s12.m6.right.input-field
+							i.material-icons.prefix.activarVerde search
+							label(for="pesquisadoruser") <span data-i18n="demo.pesquisar"></span>
+							input(type="text", id="pesquisadoruser", name="pesquisadoruser", style="border-bottom:none !important;")
+							.col.s6.file-field.input-field.hide
+								.btn-floating.tooltipped.white.pointer#exportar(style="box-shadow:none !important;" data-position="left", data-delay="10", data-tooltip="Exportar Kilometragem", class="btn-floating btn-large waves-effect waves-light")
+								input(type="file", id="upexcel",  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+								i.material-icons.activarVerde.small file_upload 
+								<span class="hide-on-small-only"> Carregar</span>
+
+					h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.utilizador_home.lista"></span>
+					fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+					table.responsive-table.bordered.striped
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.utilizador_home.nome"></span>
+								th <span data-i18n="demo.utilizador_home.area"></span>
+								th <span data-i18n="demo.utilizador_form.matricula"></span> 
+								th <span data-i18n="demo.utilizador_form.supervisor"></span>
+								th 
+						tbody(id="myTableUser")
+							-for(var index = 0; index < Usuarios.length; index++)
+								tr.highlight(data-caso="#{Usuarios[index]._id}", data-nome="#{Usuarios[index].nome}",style="font-family:;color:#12375c")
+									td #{Usuarios[index].nome}
+									td #{Usuarios[index].provincia_trabalho}
+									td #{Usuarios[index].matricula}
+									td #{Usuarios[index].nome_supervisor}
+									td.center-align
+										if (DataU.nivel_acesso=="admin")
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="Details of #{Usuarios[index].nome}", href="/utilizador/detalhes/#{Usuarios[index]._id}") <i class="material-icons activarVerde">info</i>
+											a.tooltipped.pointer.info(style="margin-left: 15px", data-position="top", data-delay="10", data-tooltip="edit  #{Usuarios[index].nome}", href="/utilizador/editar/#{Usuarios[index]._id}") <i class="material-icons selmecAzul">edit</i>
+	block js
+		script.
+			setInterval(function(){document.getElementById("human_resource").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

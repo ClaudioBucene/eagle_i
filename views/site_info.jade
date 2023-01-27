@@ -1,0 +1,831 @@
+extends layout
+block content
+	.row
+		div(class="fixed-action-btn horizontal fixed-add-bottom")
+				a.tooltipped.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/manutencao/siteinfohome") <i class=" activarAzul material-icons">reply</i>
+		form(id="formulario2", method="POST" enctype="multipart/form-data")
+			ul(id="progressbar2" style="margin-bottom:0px; margin-top:-30px")
+				li.siteinfoIcon(class="active" style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.site_info.sitedetails"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/siteinfo.png" style="width:20px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.site_info.gerador"></span></span><span class="hide-on-med-only"> <img class="hide-on-med-and-up" src="/img/generator1.png" style="width:20px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.site_info.ac"></span></span><span class="hide-on-med-only"><img class="hide-on-med-and-up" src="/img/ac.png" style="width:30px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.site_info.rectifier"></span></span><span class="hide-on-med-only"><img class="hide-on-med-and-up" src="/img/rectifier.png" style="width:20px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.site_info.seguranca"></span></span><span class="hide-on-med-only"><img class="hide-on-med-and-up" src="/img/security.png" style="width:25px">
+				li.siteinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.site_info.electricity"></span></span><span class="hide-on-med-only"><img class="hide-on-med-and-up" src="/img/electricity.png" style="width:25px">
+				if Siteinfos
+					li.siteinfoIcon(style="user-select:none") <span class="hide-on-small-only"><span data-i18n="demo.manutencao_form.audittrail"></span></span> <span class="hide-on-med-and-up"> <img class="hide-on-med-and-up" src="/img/audittrail.png" style="width:20px">
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:20px") <span data-i18n="demo.site_info.sitedetails"></span>
+				if Siteinfos
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_cod") <span data-i18n="demo.site_info.code"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_cod" ,name="siteinfo_cod", readonly, value="#{Siteinfos[0].siteinfo_cod}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_sitename") <span data-i18n="demo.site_info.sitename"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_sitename" ,name="siteinfo_sitename", readonly, value="#{Siteinfos[0].siteinfo_sitename}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_sitenum") <span data-i18n="demo.site_info.sitenum"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_sitenum" ,name="siteinfo_sitenum", readonly, value="#{Siteinfos[0].siteinfo_sitenum}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.typesite"></span>
+							select.browser-default(name="siteinfo_typesite", id="siteinfo_typesite", style="font-family:")
+								-if(Siteinfos[0].siteinfo_typesite == "")
+									option(value="" disabled selected selmecVerde) No option selected
+								-else
+									option(value="#{Siteinfos[0].siteinfo_typesite}" selected) #{Siteinfos[0].siteinfo_typesite}
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_phasenum") <span data-i18n="demo.site_info.phasenum"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_phasenum" ,name="siteinfo_phasenum", readonly, value="#{Siteinfos[0].siteinfo_phasenum}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_siteclassif") <span data-i18n="demo.site_info.siteclassif"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_siteclassif" ,name="siteinfo_siteclassif", readonly, value="#{Siteinfos[0].siteinfo_siteclassif}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_radiotec") <span data-i18n="demo.site_info.radiotec"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_radiotec" ,name="siteinfo_radiotec", readonly, value="#{Siteinfos[0].siteinfo_radiotec}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.maintoff"></span>
+							select.browser-default(name="siteinfo_maintoffid", id="siteinfo_maintoffid", style="font-family:")
+								-if(Siteinfos[0].siteinfo_maintoff == "")
+									option(value="" disabled selected selmecVerde) No option selected
+								-else
+									option(value="#{Siteinfos[0].siteinfo_maintoffid}" selected) #{Siteinfos[0].siteinfo_maintoff}
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_techcontactnum") <span data-i18n="demo.site_info.techcontactnum"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_techcontactnum" ,name="siteinfo_techcontactnum", readonly, value="#{Siteinfos[0].siteinfo_techcontactnum}")
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.site_info.location"></span>
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.regiao"></span>
+							select.browser-default(name="siteinfo_regiao", id="siteinfo_regiao", onchange="countryChange(this)", style="font-family:")
+								-if(Siteinfos[0].siteinfo_regiao == "")
+									option(value="" disabled selected selmecVerde) No option selected
+								-else
+									option(value="#{Siteinfos[0].siteinfo_regiao}" selected) #{Siteinfos[0].siteinfo_regiao}
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.area"></span>
+							select.browser-default(name="siteinfo_area", id="siteinfo_area", style="font-family:")
+								-if(Siteinfos[0].siteinfo_area == "")
+									option(value="" disabled selected selmecVerde) No option selected
+								-else
+									option(value="#{Siteinfos[0].siteinfo_area}" selected) #{Siteinfos[0].siteinfo_area}
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.regiaoselmec"></span>
+							select.browser-default(name="siteinfo_regiaoselmec", id="siteinfo_regiaoselmec", style="font-family:")
+								-if(Siteinfos[0].siteinfo_regiaoselmec == "")
+									option(value="" disabled selected selmecVerde) No option selected
+								-else
+									option(value="#{Siteinfos[0].siteinfo_regiaoselmec}" selected) #{Siteinfos[0].siteinfo_regiaoselmec}
+						-if(Siteinfos[0].siteinfo_gps.length == 0)
+							.col.s12.m6.input-field(style="margin-top:22px")
+								label(for="siteinfo_gpslatitude") Latitude
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_gpslatitude" ,name="siteinfo_gpslatitude", value="")
+						-else
+							.col.s12.m6.input-field(style="margin-top:22px")
+								label(for="siteinfo_gpslatitude") Latitude
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_gpslatitude" ,name="siteinfo_gpslatitude", value="#{Siteinfos? Siteinfos[0].siteinfo_gps[0].siteinfo_gpslatitude:''}")
+					.row(style="margin-bottom:0px")
+						-if(Siteinfos[0].siteinfo_gps.length == 0)
+							.col.s12.m6.input-field(style="margin-top:2px")
+								label(for="siteinfo_gpslongitude") Longitude
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_gpslongitude" ,name="siteinfo_gpslongitude", value="")
+						-else
+							.col.s12.m6.input-field(style="margin-top:2px")
+								label(for="siteinfo_gpslongitude") Longitude
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_gpslongitude" ,name="siteinfo_gpslongitude", value="#{Siteinfos? Siteinfos[0].siteinfo_gps[0].siteinfo_gpslongitude:''}")
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.site_info.activity"></span>
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.client"></span>
+							select.browser-default(name="siteinfo_clientid", id="siteinfo_clientid", style="font-family:")
+								-if(Siteinfos[0].siteinfo_client == "")
+									option(value="" disabled selected selmecVerde) No option selected
+								-else
+									option(value="#{Siteinfos[0].siteinfo_clientid}" selected) #{Siteinfos[0].siteinfo_client}
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_planmaintdate") <span data-i18n="demo.site_info.planmaintdate"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_planmaintdate" ,name="siteinfo_planmaintdate", readonly, value="#{Siteinfos[0].siteinfo_planmaintdate}")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_siteonairdate") <span data-i18n="demo.site_info.siteonairdate"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_siteonairdate" ,name="siteinfo_siteonairdate", readonly, value="#{Siteinfos[0].siteinfo_siteonairdate}")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_siteannoucdate") <span data-i18n="demo.site_info.siteannoucdate"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_siteannoucdate" ,name="siteinfo_siteannoucdate", readonly, value="#{Siteinfos[0].siteinfo_siteannoucdate}")
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") BTS
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") Twin BTS
+							select.browser-default(name="siteinfo_twinbts", id="siteinfo_twinbts", style="font-family:")
+								-if(Siteinfos[0].siteinfo_twinbts == "")
+									option(value="" disabled selected selmecVerde) No option selected
+								-else
+									option(value="#{Siteinfos[0].siteinfo_twinbts}" selected) #{Siteinfos[0].siteinfo_twinbts}
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.btslinkedsite"></span>
+							select.browser-default(name="siteinfo_btslinkedsite", id="siteinfo_btslinkedsite", style="font-family:")
+								-if(Siteinfos[0].siteinfo_btslinkedsite == "")
+									option(value="" disabled selected selmecVerde) No option selected
+								-else
+									option(value="#{Siteinfos[0].siteinfo_btslinkedsite}" selected) #{Siteinfos[0].siteinfo_btslinkedsite}
+				else
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_sitename") <span data-i18n="demo.site_info.sitename"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_sitename" ,name="siteinfo_sitename")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_sitenum") <span data-i18n="demo.site_info.sitenum"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_sitenum" ,name="siteinfo_sitenum")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.typesite"></span>
+							select.browser-default(name="siteinfo_typesite", id="siteinfo_typesite")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="All in One") All in One
+								option(value="Bsc") Bsc
+								option(value="Greenfield") Greenfield
+								option(value="Greenfield Outdoor") Greenfield Outdoor
+								option(value="Indoor Base Station") Indoor Base Station
+								option(value="Island") Island
+								option(value="Lampost") Lampost
+								option(value="Last Mille") Last Mille
+								option(value="Micro") Micro
+								option(value="Mobile-Cow") Mobile-Cow
+								option(value="Outdoor") Outdoor
+								option(value="Repeater") Repeater
+								option(value="Rooftop") Rooftop
+								option(value="Site Sharing") Site Sharing
+								option(value="Street Layer") Street Layer
+								option(value="TPM Shared") TPM Shared
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_phasenum") <span data-i18n="demo.site_info.phasenum"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_phasenum" ,name="siteinfo_phasenum")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_siteclassif") <span data-i18n="demo.site_info.siteclassif"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_siteclassif" ,name="siteinfo_siteclassif")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_radiotec") <span data-i18n="demo.site_info.radiotec"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_radiotec" ,name="siteinfo_radiotec")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6#contain2(detalhestecnico="#{Usuarios1}" style="margin-top:2px")
+							label <span data-i18n="demo.site_info.maintoff"></span>
+							select.browser-default(name="siteinfo_maintoffid", id="siteinfo_maintoffid", style="font-family:")
+								option(value="" disabled selected) Escolha a opção
+								-for(var i=0; i<Usuarios.length; i++)
+									if(Usuarios[i].nome != "administrador")
+										option(value="#{Usuarios[i]._id}") #{Usuarios[i].nome}
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_techcontactnum") <span data-i18n="demo.site_info.techcontactnum"></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_techcontactnum" ,name="siteinfo_techcontactnum", readonly)
+					h3(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.site_info.location"></span>
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.regiao"></span>
+							select.browser-default(name="siteinfo_regiao", id="siteinfo_regiao", onchange="countryChange(this)", style="font-family:")
+								option(value="" disabled selected) Escolha a opção
+								option(value="Maputo Cidade") Maputo Cidade
+								option(value="Maputo Provincia") Maputo Provincia
+								option(value="Gaza") Gaza
+								option(value="Inhambane") Inhambane
+								option(value="Manica") Manica
+								option(value="Sofala") Sofala
+								option(value="Tete") Tete
+								option(value="Zambezia") Zambezia
+								option(value="Nampula") Nampula
+								option(value="Niassa") Niassa
+								option(value="Cabo Delgado") Cabo Delgado
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.area"></span>
+							select.browser-default(name="siteinfo_area", id="siteinfo_area", style="font-family:")
+								option(value="" disabled selected) Escolha a opção
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.regiaoselmec"></span>
+							select.browser-default(name="siteinfo_regiaoselmec", id="siteinfo_regiaoselmec", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Sul") South
+								option(value="Centro") Central
+								option(value="Norte") North
+								option(value="Maputo") Maputo
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_gpslatitude") Latitude
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_gpslatitude" ,name="siteinfo_gpslatitude")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_gpslongitude") Longitude
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_gpslongitude" ,name="siteinfo_gpslongitude")
+					h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.site_info.activity"></span>
+					.row(style="margin-bottom:0px")
+						.col.s12.m6#contain3(detalhesclientes="#{Clientes1}" style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.client"></span>
+							select.browser-default(name="siteinfo_clientid", id="siteinfo_clientid", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								-for(var i=0; i<Clientes.length; i++)
+									option(value="#{Clientes[i]._id}") #{Clientes[i].cliente_nome}
+						.col.s12.m6.input-field(style="margin-top:22px")
+							label(for="siteinfo_planmaintdate") <span data-i18n="demo.site_info.planmaintdate"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_planmaintdate" ,name="siteinfo_planmaintdate")
+					.row(style="margin-bottom:0px")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_siteonairdate") <span data-i18n="demo.site_info.siteonairdate"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_siteonairdate" ,name="siteinfo_siteonairdate")
+						.col.s12.m6.input-field(style="margin-top:2px")
+							label(for="siteinfo_siteannoucdate") <span data-i18n="demo.site_info.siteannoucdate"></span>
+							input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_siteannoucdate" ,name="siteinfo_siteannoucdate")
+					//- .row
+					//- 	.col.s12.m6.input-field
+					//- 		label(for="siteinfo_pacdate" style="font-size:15px") <span data-i18n="demo.site_info.pacdate"></span>
+					//- 		input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_pacdate" ,name="siteinfo_pacdate")
+					h3(class="fs-title selmecAzul" style="margin-top:15px; margin-bottom:20px; border-bottom: 5px solid #a1c861 !important;") BTS
+					.row(style="margin-bottom:0px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") Twin BTS
+							select.browser-default(name="siteinfo_twinbts", id="siteinfo_twinbts", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								option(value="Yes") Yes
+								option(value="No") No
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n="demo.site_info.btslinkedsite"></span>
+							select.browser-default(name="siteinfo_btslinkedsite", id="siteinfo_btslinkedsite", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha a opção
+								-for(var i=0; i<Siteinfo.length; i++)
+									option(value="#{Siteinfo[i].siteinfo_sitenum}") #{Siteinfo[i].siteinfo_sitenum}
+				//- input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.site_info.gerador"></span>
+				if Siteinfos
+					-if(Siteinfos[0].siteinfo_generatorArray.length == 0)
+						.row
+							.col.s2.hide-on-small-only
+								label(for="siteinfo_generator") <span data-i18n="demo.site_info.geradorinst"></span>
+							.col.s5.m3(style="margin-left:37px")
+								input.bom(type="radio" name="siteinfo_generator" value="Yes" disabled="disabled")
+								label(for="siteinfo_generatoryes") <span data-i18n=demo.site_info.sim></span>
+							.col.s5.m3
+								input.bom(type="radio" name="siteinfo_generator" value="No" checked)
+								label(for="siteinfo_generatorno") <span data-i18n=demo.site_info.nao></span>
+					-else
+						.row
+							table.responsive-table.bordered.striped
+								thead
+									tr.selmecAzul
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.generatortype></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.generatortype1></span></span>
+										th <span class="hide-on-small-only"><span data-i18n="demo.site_info.modelno"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.modelno1></span></span>
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.enginecapacity></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.enginecapacity1></span></span>
+										th <span class="hide-on-small-only"><span data-i18n="demo.site_info.fuelconsumption"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.fuelconsumption1></span></span>
+										th
+								tbody
+									-for(var index = 0; index < Siteinfos[0].siteinfo_generatorArray.length; index++)
+										tr.highlight(style="font-family:;color:#12375c")
+											td #{Siteinfos[0].siteinfo_generatorArray[index].siteinfo_generatortype}
+											td #{Siteinfos[0].siteinfo_generatorArray[index].siteinfo_generatormodelno}
+											td #{Siteinfos[0].siteinfo_generatorArray[index].siteinfo_generatorenginecapacity}
+											td #{Siteinfos[0].siteinfo_generatorArray[index].siteinfo_generatorfuelconsumption}
+											td
+												a.tooltipped.pointer.mostrardetalhesGeradoresSiteInfo(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Siteinfos[0]._id}", data-array-new="#{Siteinfos[0].siteinfo_generatorArray[index]._id}", data-tooltip="Generator details", dadosSiteInfo = "#{JSON.stringify(Siteinfos[0].siteinfo_generatorArray[index])}") <i class="material-icons activarVerde">info</i>
+				else
+					.row
+						.col.s2.hide-on-small-only
+							label(for="siteinfo_generator") <span data-i18n="demo.site_info.geradorinst"></span>
+						.col.s5.m3
+							input.bom(type="radio" id="siteinfo_generatoryes" name="siteinfo_generator" value="Yes")
+							label(for="siteinfo_generatoryes") <span data-i18n=demo.site_info.sim></span>
+						.col.s5.m3
+							input.bom(type="radio" id="siteinfo_generatorno" name="siteinfo_generator" value="No")
+							label(for="siteinfo_generatorno") <span data-i18n=demo.site_info.nao></span>
+						.row.mostrartabelaGeradores.hide
+							table.m.responsive-table.bordered.striped(style="/*margin-left:-46px*/")
+								thead
+									tr.selmecAzul
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.generatortype></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.generatortype1></span></span>
+										th <span class="hide-on-small-only"><span data-i18n="demo.site_info.modelno"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.modelno1></span></span>
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.enginecapacity></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.enginecapacity1></span></span>
+										th <span class="hide-on-small-only"><span data-i18n="demo.site_info.fuelconsumption"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.fuelconsumption1></span></span>
+										th
+								tbody#mostrarTabelaGenerator.mostrarTabelaGenerator
+				//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				a.mostrarSiteInfoGeneratorInfo.hide(class="waves-effect waves-light action-button hide-on-med-and-up" style="width:51px; font-size:15px") Add	
+				a.mostrarSiteInfoGeneratorInfo.hide(class="waves-effect waves-light action-button hide-on-small-only" style="width:162px; font-size:15px") <span data-i18n="demo.site_info.addgenerator"></span>
+				//- input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px")  <span data-i18n="demo.site_info.ac"></span>
+				if Siteinfos
+					-if(Siteinfos[0].siteinfo_acArray.length == 0)
+						.row
+							.col.s3.hide-on-small-only
+								label(for="siteinfo_ac") <span data-i18n="demo.site_info.acinst"></span>
+							.col.s5.m3
+								input.bom(type="radio" name="siteinfo_ac" value="Yes" disabled="disabled")
+								label(for="siteinfo_acyes") <span data-i18n=demo.site_info.sim></span>
+							.col.s5.m3
+								input.bom(type="radio" name="siteinfo_ac" value="No" checked)
+								label(for="siteinfo_acno") <span data-i18n=demo.site_info.nao></span>
+					-else
+						.row
+							table.responsive-table.bordered.striped
+								thead
+									tr.selmecAzul
+										th <span class="hide-on-small-only"><span data-i18n="demo.site_info.acnumber"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.acnumber1></span></span>
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.actype></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.actype1></span></span>
+										th <span data-i18n=demo.site_info.acmanufacturer></span>
+										th <span data-i18n="demo.site_info.acmodel"></span>
+										th
+								tbody
+									-for(var index = 0; index < Siteinfos[0].siteinfo_acArray.length; index++)
+										tr.highlight(style="font-family:;color:#12375c")
+											td #{Siteinfos[0].siteinfo_acArray[index].siteinfo_acnumber}
+											td #{Siteinfos[0].siteinfo_acArray[index].siteinfo_actype}
+											td #{Siteinfos[0].siteinfo_acArray[index].siteinfo_acmanufacturer}
+											td #{Siteinfos[0].siteinfo_acArray[index].siteinfo_acmodel}
+											td
+												a.tooltipped.pointer.mostrardetalhesACSiteInfo(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Siteinfos[0]._id}", data-array-new="#{Siteinfos[0].siteinfo_acArray[index]._id}", data-tooltip="AC details", dadosSiteInfo = "#{JSON.stringify(Siteinfos[0].siteinfo_acArray[index])}") <i class="material-icons activarVerde">info</i>
+				else
+					.row
+						.col.s3.hide-on-small-only
+							label(for="siteinfo_ac") <span data-i18n="demo.site_info.acinst"></span>
+						.col.s5.m3
+							input.bom(type="radio" id="siteinfo_acyes" name="siteinfo_ac" value="Yes")
+							label(for="siteinfo_acyes") <span data-i18n=demo.site_info.sim></span>
+						.col.s5.m3
+							input.bom(type="radio" id="siteinfo_acno" name="siteinfo_ac" value="No")
+							label(for="siteinfo_acno") <span data-i18n=demo.site_info.nao></span>
+					.row.mostrartabelaAC.hide
+						table.m.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span class="hide-on-small-only"><span data-i18n="demo.site_info.acnumber"></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.acnumber1></span></span>
+									th <span class="hide-on-small-only"><span data-i18n=demo.site_info.actype></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.actype1></span></span>
+									th <span data-i18n=demo.site_info.acmanufacturer></span>
+									th <span data-i18n="demo.site_info.acmodel"></span>
+									th BTU
+									th
+							tbody#mostrarTabelaAc.mostrarTabelaAc
+				//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				a.mostrarSiteInfoACInfo.hide(class="waves-effect waves-light action-button hide-on-med-and-up" style="width:51px; font-size:15px") Add
+				a.mostrarSiteInfoACInfo.hide(class="waves-effect waves-light action-button hide-on-small-only" style="width:142px; font-size:15px") <span data-i18n=demo.site_info.addac></span>
+				//- input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.site_info.rectifier"></span>
+				if Siteinfos
+					-if(Siteinfos[0].siteinfo_rectcabArray.length == 0)
+						.row
+							.col.s3.hide-on-small-only
+								label(for="siteinfo_rectifiercabinnet") <span data-i18n="demo.site_info.rectifiercabinnetinst"></span>
+							.col.s5.m3
+								input.bom(type="radio" id="siteinfo_rectifiercabinnetyes" name="siteinfo_rectifiercabinnet" value="yes" disabled="disabled")
+								label(for="siteinfo_rectifiercabinnetyes") <span data-i18n=demo.site_info.sim></span>
+							.col.s5.m3
+								input.bom(type="radio" id="siteinfo_rectifiercabinnetno" name="siteinfo_rectifiercabinnet" value="no" checked)
+								label(for="siteinfo_rectifiercabinnetno") <span data-i18n=demo.site_info.nao></span>
+					-else
+						.row.mostrartabelaRectCab
+							table.responsive-table.bordered.striped
+								thead
+									tr.selmecAzul
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.rectcabcabinetnumber></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.rectcabcabinetnumber1></span></span>
+										th <span data-i18n=demo.site_info.rectcabtype></span>
+										th <span data-i18n=demo.site_info.rectcabinputtype></span>
+										th <span data-i18n=demo.site_info.rectcabnobatteries></span>
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.rectcabbatterycapac></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.rectcabbatterycapac1></span></span>
+										th
+								tbody
+									-for(var index = 0; index < Siteinfos[0].siteinfo_rectcabArray.length; index++)
+										tr.highlight(style="font-family:;color:#12375c")
+											td #{Siteinfos[0].siteinfo_rectcabArray[index].siteinfo_rectcabcabinetnumber}
+											td #{Siteinfos[0].siteinfo_rectcabArray[index].siteinfo_rectcabtype}
+											td #{Siteinfos[0].siteinfo_rectcabArray[index].siteinfo_rectcabinputtype}
+											td #{Siteinfos[0].siteinfo_rectcabArray[index].siteinfo_rectcabnobatteries}
+											td #{Siteinfos[0].siteinfo_rectcabArray[index].siteinfo_rectcabbatterycapac}
+											td
+												a.tooltipped.pointer.mostrardetalhesRectifierSiteInfo(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Siteinfos[0]._id}", data-array-new="#{Siteinfos[0].siteinfo_rectcabArray[index]._id}", data-tooltip="Rectifier details", dadosSiteInfo = "#{JSON.stringify(Siteinfos[0].siteinfo_rectcabArray[index])}") <i class="material-icons activarVerde">info</i>
+				else
+					.row
+						.col.s3.hide-on-small-only
+							label(for="siteinfo_rectifiercabinnet") <span data-i18n="demo.site_info.rectifiercabinnetinst"></span>
+						.col.s5.m3
+							input.bom(type="radio" id="siteinfo_rectifiercabinnetyes" name="siteinfo_rectifiercabinnet" value="Yes")
+							label(for="siteinfo_rectifiercabinnetyes") <span data-i18n=demo.site_info.sim></span>
+						.col.s5.m3
+							input.bom(type="radio" id="siteinfo_rectifiercabinnetno" name="siteinfo_rectifiercabinnet" value="No")
+							label(for="siteinfo_rectifiercabinnetno") <span data-i18n=demo.site_info.nao></span>
+					.row.mostrartabelaRectCab.hide
+						table.m.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span class="hide-on-small-only"><span data-i18n=demo.site_info.rectcabcabinetnumber></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.rectcabcabinetnumber1></span></span>
+									th <span data-i18n=demo.site_info.rectcabtype></span>
+									th <span data-i18n=demo.site_info.rectcabinputtype></span>
+									th <span data-i18n=demo.site_info.rectcabnobatteries></span>
+									th <span class="hide-on-small-only"><span data-i18n=demo.site_info.rectcabbatterycapac></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.rectcabbatterycapac1></span></span>
+									th
+							tbody#mostrartabelaRectGab.mostrartabelaRectGab
+				//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				a.mostrarSiteInfoRectifierInfo.hide(class="waves-effect waves-light action-button hide-on-med-and-up" style="width:51px;font-size:15px") Add
+				a.mostrarSiteInfoRectifierInfo.hide(class="waves-effect waves-light action-button hide-on-small-only" style="width:172px;font-size:15px") <span data-i18n=demo.site_info.addrectcab></span>
+				//- input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.site_info.seguranca"></span>
+				if Siteinfos
+					-if(Siteinfos[0].siteinfo_fencing == "yes")
+						.row
+							.col.s6.m4
+								label(for="siteinfo_fencing") <span data-i18n="demo.site_info.fencinginst"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_fencingyes" name="siteinfo_fencing" value="yes" checked)
+								label(for="siteinfo_fencingyes") <span data-i18n=demo.site_info.sim></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_fencingno" name="siteinfo_fencing" value="no" disabled="disabled")
+								label(for="siteinfo_fencingno") <span data-i18n=demo.site_info.nao></span>
+					-else
+						.row
+							.col.s6.m4
+								label(for="siteinfo_fencing") <span data-i18n="demo.site_info.fencinginst"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_fencingyes" name="siteinfo_fencing" value="yes" disabled="disabled")
+								label(for="siteinfo_fencingyes") <span data-i18n=demo.site_info.sim></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_fencingno" name="siteinfo_fencing" value="no" checked)
+								label(for="siteinfo_fencingno") <span data-i18n=demo.site_info.nao></span>
+					-if(Siteinfos[0].siteinfo_fencingelectrified == "yes")
+						.row
+							.col.s6.m4
+								label(for="siteinfo_fencingelectrified") <span data-i18n="demo.site_info.fencingelectrified"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_fencingelectrifiedyes" name="siteinfo_fencingelectrified" value="yes" checked)
+								label(for="siteinfo_fencingelectrifiedyes") <span data-i18n=demo.site_info.sim></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_fencingelectrifiedno" name="siteinfo_fencingelectrified" value="no" disabled="disabled")
+								label(for="siteinfo_fencingelectrifiedno") <span data-i18n=demo.site_info.nao></span>
+					-else
+						.row
+							.col.s6.m4
+								label(for="siteinfo_fencingelectrified") <span data-i18n="demo.site_info.fencingelectrified"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_fencingelectrifiedyes" name="siteinfo_fencingelectrified" value="yes" disabled="disabled")
+								label(for="siteinfo_fencingelectrifiedyes") <span data-i18n=demo.site_info.sim></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_fencingelectrifiedno" name="siteinfo_fencingelectrified" value="no" checked)
+								label(for="siteinfo_fencingelectrifiedno") <span data-i18n=demo.site_info.nao></span>
+					-if(Siteinfos[0].siteinfo_guardsite == "No")
+						.row
+							.col.s6.m4
+								label(for="siteinfo_guardsite") <span data-i18n="demo.site_info.guardsite"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_guardsiteyes" name="siteinfo_guardsite" value="Yes" disabled="disabled")
+								label(for="siteinfo_guardsiteyes") <span data-i18n=demo.site_info.sim></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_guardsiteno" name="siteinfo_guardsite" value="No" checked)
+								label(for="siteinfo_guardsiteno") <span data-i18n=demo.site_info.nao></span>
+					-if(Siteinfos[0].siteinfo_securityArray.length != 0)
+						.row
+							.col.s6.m4
+								label(for="siteinfo_guardsite") <span data-i18n="demo.site_info.guardsite"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_guardsiteyes" name="siteinfo_guardsite" value="Yes" checked)
+								label(for="siteinfo_guardsiteyes") <span data-i18n=demo.site_info.sim></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_guardsiteno" name="siteinfo_guardsite" value="No" disabled="disabled")
+								label(for="siteinfo_guardsiteno") <span data-i18n=demo.site_info.nao></span>
+						.row.mostrartabelaSeguranca
+							table.responsive-table.bordered.striped
+								thead
+									tr.selmecAzul
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.secguardname></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.secguardname1></span></span>
+										th <span class="hide-on-small-only"><span data-i18n=demo.site_info.secbinumber></span></span><span class="hide-on-med-and-up"><span data-i18n=demo.site_info.secbinumber1></span></span>
+										th NIB
+										th <span data-i18n=demo.site_info.secvalue></span>
+										th
+								tbody
+									-for(var index = 0; index < Siteinfos[0].siteinfo_securityArray.length; index++)
+										tr.highlight(style="font-family:;color:#12375c")
+											td #{Siteinfos[0].siteinfo_securityArray[index].siteinfo_secguardname}
+											td #{Siteinfos[0].siteinfo_securityArray[index].siteinfo_secbinumber}
+											td #{Siteinfos[0].siteinfo_securityArray[index].siteinfo_secnib}
+											td #{Siteinfos[0].siteinfo_securityArray[index].siteinfo_secvalue}
+											td
+												a.tooltipped.pointer.mostrardetalhesGuardaSiteInfo(style="margin-left: 25px", data-position="top", data-delay="10", data-user-new="#{Siteinfos[0]._id}", data-array-new="#{Siteinfos[0].siteinfo_securityArray[index]._id}", data-tooltip="Guard details", dadosSiteInfo = "#{JSON.stringify(Siteinfos[0].siteinfo_securityArray[index])}") <i class="material-icons activarVerde">info</i>
+				else
+					.row
+						.col.s6.m4
+							label(for="siteinfo_fencing") <span data-i18n="demo.site_info.fencinginst"></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_fencingyes" name="siteinfo_fencing" value="yes")
+							label(for="siteinfo_fencingyes") <span data-i18n=demo.site_info.sim></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_fencingno" name="siteinfo_fencing" value="no")
+							label(for="siteinfo_fencingno") <span data-i18n=demo.site_info.nao></span>
+					.row
+						.col.s6.m4
+							label(for="siteinfo_fencingelectrified") <span data-i18n="demo.site_info.fencingelectrified"></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_fencingelectrifiedyes" name="siteinfo_fencingelectrified" value="yes")
+							label(for="siteinfo_fencingelectrifiedyes") <span data-i18n=demo.site_info.sim></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_fencingelectrifiedno" name="siteinfo_fencingelectrified" value="no")
+							label(for="siteinfo_fencingelectrifiedno") <span data-i18n=demo.site_info.nao></span>
+					.row
+						.col.s6.m4
+							label(for="siteinfo_guardsite") <span data-i18n="demo.site_info.guardsite"></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_guardsiteyes" name="siteinfo_guardsite" value="Yes")
+							label(for="siteinfo_guardsiteyes") <span data-i18n=demo.site_info.sim></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_guardsiteno" name="siteinfo_guardsite" value="No")
+							label(for="siteinfo_guardsiteno") <span data-i18n=demo.site_info.nao></span>
+					.row.mostrartabelaSeguranca.hide
+						table.m.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n=demo.site_info.secguardname></span>
+									th <span data-i18n=demo.site_info.secbinumber></span>
+									th NIB
+									th <span data-i18n=demo.site_info.secvalue></span>
+									th
+							tbody#mostrartabelaSecurity.mostrartabelaSecurity
+				//- input(type="button", name="previous", class="previous action-button ", value="<< Prev")
+				a.mostrarSiteInfoGuardaInfo.hide(class="waves-effect waves-light action-button hide-on-med-and-up" style="width:51px; font-size:15px") Add
+				a.mostrarSiteInfoGuardaInfo.hide(class="waves-effect waves-light action-button hide-on-small-only" style="width:172px; font-size:15px") <span data-i18n=demo.site_info.addsecurity></span>
+				//- input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px")
+				h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:15px") <span data-i18n="demo.site_info.electricity"></span>
+				if Siteinfos
+					-if(Siteinfos[0].siteinfo_elecsupptype == "ac")
+						.row
+							.col.s6.m4
+								label(for="siteinfo_elecsupptype") <span data-i18n="demo.site_info.elecsupptype"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_elecsupptypeac" name="siteinfo_elecsupptype" value="ac" checked)
+								label(for="siteinfo_elecsupptypeac") AC
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_elecsupptypedc" name="siteinfo_elecsupptype" value="dc" disabled="disabled")
+								label(for="siteinfo_elecsupptypedc") DC
+					-else
+						.row
+							.col.s6.m4
+								label(for="siteinfo_elecsupptype") <span data-i18n="demo.site_info.elecsupptype"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_elecsupptypeac" name="siteinfo_elecsupptype" value="ac" disabled="disabled")
+								label(for="siteinfo_elecsupptypeac") AC
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_elecsupptypedc" name="siteinfo_elecsupptype" value="dc" checked)
+								label(for="siteinfo_elecsupptypedc") DC
+					-if(Siteinfos[0].siteinfo_electype == "single phase")
+						.row
+							.col.s6.m4
+								label(for="siteinfo_electype") <span data-i18n="demo.site_info.electype"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_electypesingle" name="siteinfo_electype" value="single phase" checked)
+								label(for="siteinfo_electypesingle") <span data-i18n=demo.site_info.electypesingle></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_electypethree" name="siteinfo_electype" value="three phase" disabled="disabled")
+								label(for="siteinfo_electypethree") <span data-i18n=demo.site_info.electypethree></span>
+					-else
+						.row
+							.col.s6.m4
+								label(for="siteinfo_electype") <span data-i18n="demo.site_info.electype"></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_electypesingle" name="siteinfo_electype" value="single phase" disabled="disabled")
+								label(for="siteinfo_electypesingle") <span data-i18n=demo.site_info.electypesingle></span>
+							.col.s3.m3
+								input.bom(type="radio" id="siteinfo_electypethree" name="siteinfo_electype" value="three phase" checked)
+								label(for="siteinfo_electypethree") <span data-i18n=demo.site_info.electypethree></span>
+					.row(style="margin-bottom:10px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.elecpayment></span>
+							select.browser-default(name="siteinfo_elecpayment", id="siteinfo_elecpayment", style="font-family:")
+								option(value="#{Siteinfos[0].siteinfo_elecpayment}" selected) #{Siteinfos[0].siteinfo_elecpayment}
+						-if(Siteinfos[0].siteinfo_elecpayment == "EDM Prepaid/Credelec")
+							.col.s12.m6.input-field(style="margin-top:22px")
+								label(for="siteinfo_credelec") <span data-i18n=demo.site_info.credelec></span>
+								input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_credelec" ,name="siteinfo_credelec", value="#{Siteinfos? Siteinfos[0].siteinfo_credelec : ' '}")
+				else
+					.row
+						.col.s6.m4
+							label(for="siteinfo_elecsupptype") <span data-i18n="demo.site_info.elecsupptype"></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_elecsupptypeac" name="siteinfo_elecsupptype" value="ac")
+							label(for="siteinfo_elecsupptypeac") AC
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_elecsupptypedc" name="siteinfo_elecsupptype" value="dc")
+							label(for="siteinfo_elecsupptypedc") DC
+					.row
+						.col.s6.m4
+							label(for="siteinfo_electype") <span data-i18n="demo.site_info.electype"></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_electypesingle" name="siteinfo_electype" value="single phase")
+							label(for="siteinfo_electypesingle") <span data-i18n=demo.site_info.electypesingle></span>
+						.col.s3.m3
+							input.bom(type="radio" id="siteinfo_electypethree" name="siteinfo_electype" value="three phase")
+							label(for="siteinfo_electypethree") <span data-i18n=demo.site_info.electypethree></span>
+					.row(style="margin-bottom:10px")
+						.col.s12.m6(style="margin-top:2px")
+							label(style="margin-left:0.2rem;") <span data-i18n=demo.site_info.elecpayment></span>
+							select.browser-default(name="siteinfo_elecpayment", id="siteinfo_elecpayment", style="font-family:")
+								option(value="" disabled selected selmecVerde) Escolha uma opção
+								option(value="EDM Fixed") EDM Fixed
+								option(value="EDM Prepaid/Credelec") EDM Prepaid/Credelec
+								option(value="Landlord") Landlord
+						.col.s12.m6.input-field#inputcredelec.hide(style="margin-top:22px")
+							label(for="siteinfo_credelec") <span data-i18n=demo.site_info.credelec></span>
+							input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="siteinfo_credelec" ,name="siteinfo_credelec")
+				//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Siteinfos
+					input#captarSiteInfo(type="button", name="submit", class="submit action-button", value="Save", detalhessession="#{DataU.nome}")
+				-else
+					//- input(type="button", name="next", class="next action-button", value="Next >>")
+			if Siteinfos
+				fieldset(style="padding:25px;")
+					h2(class="fs-title selmecAzul" style="margin-top:5px; margin-bottom:30px") <span data-i18n="demo.manutencao_form.audittrail"></span>
+					.row
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th <span data-i18n="demo.manutencao_form.responsavel"></span>
+									th <span data-i18n="demo.manutencao_form.accao"></span>
+									th <span data-i18n="demo.manutencao_form.planneddate1"></span>
+							tbody
+								-for(var index = 0; index < Siteinfos[0].siteinfo_audittrail.length; index++)
+									tr.highlight(style="font-family:;color:#12375c")
+										td #{Siteinfos[0].siteinfo_audittrail[index].siteinfo_audittrailname}
+										td #{Siteinfos[0].siteinfo_audittrail[index].siteinfo_audittrailaction}
+										td #{Siteinfos[0].siteinfo_audittrail[index].siteinfo_audittraildate}
+					//- input(type="button", name="previous", class="previous action-button", value="<< Prev")
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".siteinfoIcon").click(function(e){
+			e.preventDefault();
+			$("#progressbar2 li:not(:first)").removeClass("active");
+
+			$("fieldset").hide();
+
+			// if(animating) return false;
+			// animating = true;
+			var maximo= $(this).index(".siteinfoIcon");
+
+		
+			for(var i=0; i<maximo; i++){
+			$("#progressbar2 li").eq((i+1)).addClass("active");
+			console.log("happme************")
+			}
+
+			console.log(maximo);
+			$("fieldset").eq(maximo).show()
+			})
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			//- document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+			var listaprovincia = new Array(11) ;
+			listaprovincia["empty"] = ["Provincia"]; 
+			listaprovincia["Maputo Cidade"] = ["KaMpfumo", "Nlhamankulu", "KaMaxaquene", "KaMavota", "KaMubukwana", "KaTembe", "KaNyaka"];
+			listaprovincia["Maputo Provincia"] = ["Boane", "Magude", "Manhiça", "Marracuene", "Matutuíne", "Moamba", "Namaacha"];
+			listaprovincia["Gaza"] = ["Bilene Macia", "Chibuto", "Chicualacuala", "Chigubo", "Chókwè", "Guijá", "Mabalane", "Manjacaze", "Massangena", "Massingir", "Xai-Xai"];
+			listaprovincia["Inhambane"] = ["Funhalouro", "Govuro", "Homoíne", "Inhambane", "Inharrime", "Inhassoro", "Jangamo", "Mabote", "Massinga", "Morrumbene", "Panda", "Vilanculos", "Zavala"];
+			listaprovincia["Manica"] = ["Bárue", "Gondola", "Guro", "Macate", "Machaze", "Macossa", "Manica", "Mossurize", "Sussundenga", "Tambara", "Vanduzi"];
+			listaprovincia["Sofala"] = ["Búzi", "Caia", "Chemba", "Cheringoma", "Chibabava", "Dondo", "Gorongosa", "Machanga", "Maringué", "Marromeu", "Muanza", "Nhamatanda"];
+			listaprovincia["Tete"] = ["Angónia", "Cahora-Bassa", "Changara", "Chifunde", "Chiuta", "Dôa", "Macanga", "Magoé", "Marara", "Marávia", "Moatize", "Mutarara", "Tsangano", "Zumbo"];
+			listaprovincia["Zambezia"] = ["Alto Molócue", "Chinde", "Derre", "Gilé", "Gurué", "Ile", "Inhassunge", "Luabo", "Lugela", "Maganja da Costa", "Milange", "Mocuba", "Mocubela", "Molumbo", "Mopeia", "Morrumbala", "Mulevala", "Namacurra", "Namarroi", "Nicoadala", "Pebane", "Quelimane"];
+			listaprovincia["Nampula"] = ["Angoche", "Eráti", "Ilha de Moçambique", "Lalaua", "Larde", "Liúpo", "Malema", "Meconta", "Mecubúri", "Memba", "Mogincual", "Mogovolas", "Moma", "Monapo", "Mossuril", "Muecate", "Murrupula", "Nacala-a-Velha", "Nacarôa", "Nampula", "Ribaué"];
+			listaprovincia["Niassa"] = ["Cuamba", "Lago", "Lichinga", "Majune", "Mandimba", "Marrupa", "Maúa", "Mavago", "Mecanhelas", "Mecula", "Metarica", "Muembe", "N'gauma", "Nipepe", "Sanga"];
+			listaprovincia["Cabo Delgado"] = ["Ancuabe", "Balama", "Chiúre", "Ibo", "Macomia", "Mecufi", "Meluco", "Metuge", "Mocímboa da Praia", "Montepuez", "Mueda", "Muidumbe", "Namuno", "Nangade", "Palma", "Pemba Metuge", "Quissanga"];
+
+			function countryChange(selectObj) { 
+			
+				// get the index of the selected option 
+				var idx = selectObj.selectedIndex; 
+				
+				// get the value of the selected option 
+				var which = selectObj.options[idx].value; 
+				
+				// use the selected option value to retrieve the list of items from the countryLists array 
+				var cList = listaprovincia[which]; 
+				
+				// get the country select element via its known id 
+				var cSelect = document.getElementById("siteinfo_area"); 
+				
+				// remove the current options from the country select 
+				var len=cSelect.options.length; 
+				
+				while (cSelect.options.length > 0) { 
+				cSelect.remove(0); 
+				} 
+
+				var newOption; 
+				// create new options 
+				for (var i=0; i<cList.length; i++) { 
+
+					newOption = document.createElement("option"); 
+					
+					newOption.value = cList[i];  // assumes option string and value are the same 
+					newOption.text=cList[i]; 
+					
+					cSelect.appendChild(newOption);
+					 //- console.log(cSelect); 
+					//- // add the new option 
+					//- try { 
+					//- 	cSelect.add(newOption);  // this will fail in DOM browsers but is needed for IE 
+					//- } 
+					//- catch (e) { 
+					//- 	
+					//- } 
+				}
+
+				
+			}

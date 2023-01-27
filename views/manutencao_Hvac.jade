@@ -1,0 +1,39 @@
+extends layout
+block content
+	.container(style="padding-top:35px")
+		.row
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") <span data-i18n="demo.manutencao_form.maintenance"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#verttHvaccoret
+				.card-image.waves-block
+					img.icn(src="/img/corrective.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.manutencao_form.correctivemaint"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#verttHvacprev
+				.card-image.waves-block
+					img.icn(src="/img/preventive.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.manutencao_form.preventivemaint"></span>
+		.col.m3.s6
+			.card.hover-reveal.personalised#verHvacprojects
+				.card-image.waves-block
+					img.icn(src="/img/projects.png" style="width:70px" data-activates='dropdown2')
+				.card-content
+					h6.bold <span data-i18n="demo.manutencao_form.projects"></span>
+		
+		
+		block js
+			script(type="text/javascript" src="/js/jquery.mask.js")
+			script.
+				
+				setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<780){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";
+				document.getElementByClassName("capitalize").style.class="pequeno";
+				}
+				}, 50);

@@ -1,0 +1,871 @@
+extends layout
+block content
+	.row
+		div(class="fixed-action-btn horizontal fixed-add-bottom")
+			a.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back" ,class="btn-floating btn-large waves-effect waves-light" href="/inspdiaria") <i class=" activarAzul material-icons">reply</i>
+		form(id="msform", method="post", style="color:#12375c;")
+			ul(id="progressbar")
+				li.inspdiariaIcon(class="active"  style="user-select:none"  id = "databowser" Bowsers="#{bowsers}" insp="#{Inspensao}" Bowsers1="#{bowsers1}" size="#{tamanho}")  <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.dados_gerais"></span></span> <span class="hide-on-med-only"> <img class="hide-on-med-and-up" style="width:20px" src="/img/dados.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only">Rodas</span> <span class="large"> <img class="hide-on-med-and-up" style="width:30px" src="/img/wheels.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only">Luzes</span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:23px" src="/img/lights.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only">Sistema de Abastecimento </span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/gas.png">
+				li.inspdiariaIcon(style="user-select:none")  <span class="hide-on-small-only">Sistema de Engate</span></span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/hook.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only">Molas de Suspensão</span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/suspension.png">
+				li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only">Folgas no Cubo</span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:25px" src="/img/folga.png">
+			fieldset
+				h2(class="fs-title selmecAzul") <span data-i18n="demo.inspdiaria_form.dados_gerais"></span>
+					.row#verificar(data = "#{v1}")
+						.row
+							.col.s12.m6
+								.input-field(oninput="this.className = ''")
+									i.material-icons.prefix.selmecAzul person
+									label(for="motorista") <span data-i18n="demo.inspdiaria_form.motorista"></span>
+									input(id="motorista", autocomplete="off",readonly, type="text", name="motorista", value="#{Bowser? Bowser[0].responsavel:DataU.nome}")
+							.col.s12.m6
+								label <span data-i18n="demo.inspdiaria_form.matricula"></span>
+								if(!Bowser)
+									select.browser-default(name="matriculadb", id="matriculadb")
+										option(value="" disabled selected) Escolha a opção
+										-for(var i=0; i<bowsers.length; i++)
+											option(value="#{bowsers[i].matricula}", data-cont="#{bowsers[i]._id}") #{bowsers[i].matricula}
+								else
+									select.browser-default(name="matriculadb", id="matriculadb")
+										option(value="#{Bowser[0].matricula}", data-cont="#{Bowser[0]._id}") #{Bowser[0].matricula}
+						.row
+							.input-field.col.s12.m6
+								if(!Bowser)
+									i.material-icons.prefix.selmecAzul rv_hookup
+									label(for="dieselbowser") Diesel Bowser
+									input.preencher(type="text", id="dieselbowser",  name="dieselbowser", value="#{veiculos ? veiculos[0].kilometragem: 0}")
+								else
+									i.material-icons.prefix.selmecAzul rv_hookup
+									label(for="dieselbowser") Diesel Bowser
+									input.preencher(type="text", id="dieselbowser",  name="dieselbowser", value="#{Bowser ? Bowser[0].dieselbowser: 0}")
+							.input-field.col.s12.m6
+								i.material-icons.prefix.selmecAzul date_range
+								if(!Bowser)
+									label(for="datta") <span data-i18n="demo.inspdiaria_form.data_hora"></span>
+									input.preencher(type="text", id="datta", readonly,name="data", value="#{veiculos? veiculos[0].datta : ((new Date()).getDate()<10? '0'+(new Date()).getDate():(new Date()).getDate())+'/'+(((new Date()).getMonth()+1)<10? ('0'+((new Date()).getMonth()+1)):((new Date()).getMonth()+1))+'/'+((new Date()).getFullYear())+'   '+((new Date()).getHours()<10? ('0'+(new Date()).getHours()): (new Date()).getHours() )+' : '+((new Date()).getMinutes()<10? ('0'+(new Date()).getMinutes()):(new Date()).getMinutes())}")
+								else
+									label(for="datta") <span data-i18n="demo.inspdiaria_form.data_hora"></span>
+									input.preencher(type="text", id="datta", readonly,name="data", value="#{Bowser[0].data_inspencao1}")
+				input.hide(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h2(class="fs-title") Rodas
+				.row
+					.row(id="rodas")
+						if Bowser
+							if Bowser[0].pneus=="ok"
+								.col.s2
+									label(for="pneusdb") Pneus </span>
+								.col.s5
+									input.bom(type="radio" id="pneudbok" name="pneusdb", checked="#{Bowser[0].pneus}"=="ok"? true:false, value="ok")
+									label(for="pneudbok") ok					
+								.col.s5
+									input.mau(type="radio", id="pneudbnotok", name='pneusdb', value="not ok")
+									label(for="pneudbnotok") not ok
+							else
+								.col.s2
+									label(for="pneusdb") Pneus </span>
+								.col.s5
+									input.bom(type="radio" id="pneudbok" name="pneusdb"  value="ok")
+									label(for="pneudbok") ok					
+								.col.s5
+									input.mau(type="radio", id="pneudbnotok", name='pneusdb',checked="#{Bowser[0].pneus}"=="not ok"? true:false, value="not ok")
+									label(for="pneudbnotok") not ok
+								if Bowser[0].razaoPneus.length>0
+									.col.s12#pneusdbRazao(style="")
+										select(multiple	)
+											option(value="" disabled	selected) ver defeitos
+											-for(var i=0; i<Bowser[0].razaoPneus.length; i++)
+												option(value="#{Bowser[0].razaoPneus[i]}" selected) #{Bowser[0].razaoPneus[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="pneusdb") <span data-i18n="demo.inspdiaria_form.pneus"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="pneudbok" name="pneusdb"  value="ok")
+								label(for="pneudbok") ok					
+							.col.s5
+								input.mau(type="radio", id="pneudbnotok", name='pneusdb', value="not ok")
+								label(for="pneudbnotok") not ok
+							.row#pneusdbRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaopneusdb", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Pneus Gastos") Pneus Gastos
+										option(value="Baixa Pressao") Baixa Pressao
+								.col.s10.ingles.hide(style="border:none !important") 
+									select(id="razaopneusdb", multiple) 
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Pneus Gastos") Worn tires
+										option(value="Baixa Pressao") Low pressure
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="jantesdb")
+						if Bowser
+							if Bowser[0].jantes=="ok"
+								.col.s2
+									label(for="jantesdb") Jantes
+								.col.s5
+									input.bom(type="radio" id="jantesdbok" , checked="#{Bowser[0].jantes}"=="ok"? true:false, name="jantesdb" value="ok")
+									label(for="jantesdbok") ok					
+								.col.s5
+									input(type="radio" id="jantesdbnotok" name='jantesdb' value="not ok")
+									label(for="jantesdbnotok") not ok
+							else
+								.col.s2
+									label(for="jantesdb") Jantes
+								.col.s5
+									input.bom(type="radio" id="jantesdbok"  name="jantesdb" value="ok")
+									label(for="jantesdbok") ok					
+								.col.s5
+									input(type="radio" id="jantesdbnotok" , checked="#{Bowser[0].jantes}"=="not ok"? true:false, name='jantesdb' value="not ok")
+									label(for="jantesdbnotok") not ok
+								if(Bowser[0].razaoJantes.length>0)
+									.col.s12#pressaoRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoJantes.length; i++)
+												option(value="#{Bowser[0].razaoJantes[i]}" selected) #{Bowser[0].razaoJantes[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="jantesdb") Jantes <span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="jantesdbok"  name="jantesdb" value="ok")
+								label(for="jantesdbok") ok					
+							.col.s5
+								input(type="radio" id="jantesdbnotok" name='jantesdb' value="not ok")
+								label(for="jantesdbnotok") not ok
+							.row#jantesRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoJantes", multiple, value)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Empenada" ) Empenada
+										option(value="Rachada" ) Rachada
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoJantes", multiple, value)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Empenada" ) Warped
+										option(value="Rachada" ) Cracked
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="porcasdb")
+						if Bowser
+							if Bowser[0].porcas=="ok"
+								.col.s2
+									label(for="porcasdb") <span data-i18n="demo.inspdiaria_form.porcas"></span>
+								.col.s5
+									input.bom(type="radio" id="porcasdbok" , checked="#{Bowser[0].porcas}"=="ok"? true:false, name="porcasdb" value="ok")
+									label(for="porcasdbok") ok					
+								.col.s5
+									input(type="radio" id="porcasdbnotok" name='porcasdb' value="not ok")
+									label(for="porcasdbnotok") not ok
+							else
+								.col.s2
+									label(for="porcasdb") <span data-i18n="demo.inspdiaria_form.porcas"></span>
+								.col.s5
+									input.bom(type="radio" id="porcasdbok" name="porcasdb" value="ok")
+									label(for="porcasdbok") ok					
+								.col.s5
+									input(type="radio" id="porcasdbnotok" , checked="#{Bowser[0].porcas}"=="not ok"? true:false, name='porcasdb' value="not ok")
+									label(for="porcasdbnotok") not ok
+								-if(Bowser[0].razaoPorcas.length>0)
+									.col.s12#porcasRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoPorcas.length; i++)
+												option(value="#{Bowser[0].razaoPorcas[i]}" selected) #{Bowser[0].razaoPorcas[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="porcasdb") <span data-i18n="demo.inspdiaria_form.porcas"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="porcasdbok" name="porcasdb" value="ok")
+								label(for="porcasdbok") ok					
+							.col.s5
+								input(type="radio" id="porcasdbnotok" name='porcasdb' value="not ok")
+								label(for="porcasdbnotok") not ok
+							.row#porcasRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoPorcas", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Desapertadas") Desapertadas
+										option(value="Partidas") Partidas
+										option(value="Ausencia") Ausencia
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoPorcas", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Desapertadas") Loosened
+										option(value="Partidas") Broken
+										option(value="Ausencia") Absence
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="travoesdb")
+						if Bowser
+							if Bowser[0].travoes=="ok"
+								.col.s2
+									label(for="travoesdb") <span data-i18n="demo.inspdiaria_form.travao"></span>
+								.col.s5
+									input.bom(type="radio" id="travoesdbok" , checked="#{Bowser[0].travoes}"=="ok"? true:false, name="travoesdb" value="ok")
+									label.bom(for="travoesdbok") ok					
+								.col.s5
+									input(type="radio" id="travoesdbnotok" name='travoesdb' value="not ok")
+									label(for="travoesdbnotok") not ok
+							else
+								.col.s2
+									label(for="travoes") <span data-i18n="demo.inspdiaria_form.travao"></span>
+								.col.s5
+									input.bom(type="radio" id="travoesdbok"  name="travoesdb" value="ok")
+									label.bom(for="travoesdbok") ok					
+								.col.s5
+									input(type="radio" id="travoesdbnotok" , checked="#{Bowser[0].travoes}"=="not ok"? true:false, name='travoesdb' value="not ok")
+									label(for="travoesnotok") not ok
+								-if(Bowser[0].razaoTravoes.length>0)
+									.col.s12#travoesRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoTravoes.length; i++)
+												option(value="#{Bowser[0].razaoTravoes[i]}" selected) #{Bowser[0].razaoTravoes[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="travoesdb") <span data-i18n="demo.inspdiaria_form.travao"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="travoesdbok"  name="travoesdb" value="ok")
+								label.bom(for="travoesdbok") ok					
+							.col.s5
+								input(type="radio" id="travoesdbnotok"  name='travoesdb' value="not ok")
+								label(for="travoesdbnotok") not ok
+							.row#travoesRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoTravoes", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Calço Rebentado") Calço Rebentado
+										option(value="Balatas Gastas") Balatas Gastas
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoTravoes", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Calço Rebentado") Brake
+										option(value="Balatas Gastas") Worn Balatas
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="suplentesdb")
+						if Bowser
+							if Bowser[0].roda_suplente=="ok"
+								.col.s2
+									label(for="suplentesdb") Roda Suplente
+								.col.s5
+									input.bom(type="radio" id="suplentesdbok" , checked="#{Bowser[0].roda_suplente}"=="ok"? true:false, name="suplentesdb" value="ok")
+									label.bom(for="suplentesdbok") ok					
+								.col.s5
+									input(type="radio" id="suplentesdbnotok" name='suplentesdb' value="not ok")
+									label(for="suplentesdbnotok") not ok
+							else
+								.col.s2
+									label(for="suplentesdb") Roda Suplente
+								.col.s5
+									input.bom(type="radio" id="suplentesdbok"  name="suplentesdb" value="ok")
+									label.bom(for="suplentesdbok") ok					
+								.col.s5
+									input(type="radio" id="suplentesdbnotok" , checked="#{Bowser[0].roda_suplente}"=="not ok"? true:false, name='suplentesdb' value="not ok")
+									label(for="suplentesdbnotok") not ok
+								-if(Bowser[0].razaoRoda_suplente.length>0)
+									.col.s12#travoesRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoRoda_suplente.length; i++)
+												option(value="#{Bowser[0].razaoRoda_suplente[i]}" selected) #{Bowser[0].razaoRoda_suplente[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="suplentesdb") Roda Suplente</span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="suplentesdbok"  name="suplentesdb" value="ok")
+								label.bom(for="suplentesdbok") ok					
+							.col.s5
+								input(type="radio" id="suplentesdbnotok"  name='suplentesdb' value="not ok")
+								label(for="suplentesdbnotok") not ok
+							.row#suplentesRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoSuplentes", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Pneus Gastos") Pneus Gastos
+										option(value="Baixa Pressao") Baixa Pressao
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoSuplentes", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Pneus Gastos") Worn Tires
+										option(value="Baixa Pressao") Low Pressure
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="descansodb")
+						if Bowser
+							if Bowser[0].roda_descanso=="ok"
+								.col.s2
+									label(for="descansodb") Roda de Descanso
+								.col.s5
+									input.bom(type="radio" id="descansodbok" , checked="#{Bowser[0].roda_descanso}"=="ok"? true:false, name="descansodb" value="ok")
+									label.bom(for="descansodbok") ok					
+								.col.s5
+									input(type="radio" id="descansodbnotok" name='descansodb' value="not ok")
+									label(for="descansodbnotok") not ok
+							else
+								.col.s2
+									label(for="roda_descanso") Roda de Descanso
+								.col.s5
+									input.bom(type="radio" id="descansodbok"  name="descansodb" value="ok")
+									label.bom(for="descansodbok") ok					
+								.col.s5
+									input(type="radio" id="descansodbnotok" , checked="#{Bowser[0].roda_descanso}"=="not ok"? true:false, name='descansodb' value="not ok")
+									label(for="descansodbnotok") not ok
+								-if(Bowser[0].razaoRoda_descanso.length>0)
+									.col.s12#travoesRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoRoda_descanso.length; i++)
+												option(value="#{Bowser[0].razaoRoda_descanso[i]}" selected) #{Bowser[0].razaoRoda_descanso[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="descansodb") Roda de Descanso</span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="descansodbok"  name="descansodb" value="ok")
+								label.bom(for="descansodbok") ok					
+							.col.s5
+								input(type="radio" id="descansodbnotok"  name='descansodb' value="not ok")
+								label(for="descansodbnotok") not ok
+							.row#descansoRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoDescanso", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Empenada" ) Empenada
+										option(value="Rachada" ) Rachada
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoDescanso", multiple)
+										option(value="" disabled selected ) Select the Part(s)
+										option(value="Empenada" ) Warped
+										option(value="Rachada" ) Cracked
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+			fieldset
+				h2(class="fs-title") Luzes</span>
+				.row
+					.row(id="luzesdb")
+						if Bowser
+							if Bowser[0].luzes=="ok"
+								.col.s2
+									label(for="luzesdb") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+								.col.s5
+									input.bom(type="radio" id="luzesok" , checked="#{Bowser[0].luzes}"=="ok"? true:false, name="luzesdb" value="ok")
+									label.bom(for="luzesdbok") ok					
+								.col.s5
+									input(type="radio" id="luzesdbnotok" name='luzesdb' value="not ok")
+									label(for="luzesdbnotok") not ok
+							else
+								.col.s2
+									label(for="luzesdb") <span data-i18n="demo.inspdiaria_form.luzes"></span>
+								.col.s5
+									input.bom(type="radio" id="luzesdbok" name="luzesdb" value="ok")
+									label.bom(for="luzesdbok") ok					
+								.col.s5
+									input(type="radio" id="luzesdbnotok" , checked="#{Bowser[0].luzes}"=="not ok"? true:false, name='luzesdb' value="not ok")
+									label(for="luzesdbnotok") not ok
+								-if(Bowser[0].razaoLuzes.length>0)
+									.col.s12#luzesParte(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoLuzes.length; i++)
+												option(value="#{Bowser[0].razaoLuzes[i]}" selected) #{Bowser[0].razaoLuzes[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="luzesdb") <span data-i18n="demo.inspdiaria_form.luzes"></span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="luzesdbok"  name="luzesdb" value="ok")
+								label.bom(for="luzesdbok") ok					
+							.col.s5
+								input(type="radio" id="luzesdbnotok" name='luzesdb' value="not ok")
+								label(for="luzesdbnotok") not ok
+							.row#luzesParte.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoLuzes", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Ficha Macho") Ficha Macho
+										option(value="Cabo") Cabo
+										option(value="Ficha Femea") Ficha Femea
+										option(value="Lampada") Lampada
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoLuzes", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Ficha Macho") Male Plug
+										option(value="Cabo") Cable
+										option(value="Ficha Femea") Female Plug
+										option(value="Lampada") Lamp
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+			fieldset
+				h2(class="fs-title") Sistema de Abastecimento
+				.row
+					.row(id="sistema_abastecimentodb")
+						if Bowser
+							if Bowser[0].bomba_abastecimento=="ok"
+								.col.s12.m2
+									label(for="bomba_abastecimentodb") Bomba de Abastecimento
+								.col.s6.m5
+									input.bom(type="radio" id="bomba_abastecimentodbok" , checked="#{Bowser[0].bomba_abastecimento}"=="ok"? true:false, name="bomba_abastecimentodb" value="ok")
+									label.bom(for="bomba_abastecimentodbok") ok					
+								.col.s6.m5
+									input(type="radio" id="bomba_abastecimentodbnotok" name='bomba_abastecimentodb' value="not ok")
+									label(for="bomba_abastecimentodbnotok") not ok
+							else
+								.col.s12.m2
+									label(for="bomba_abastecimentodb") Bomba de Abastecimento
+								.col.s6.m5
+									input.bom(type="radio" id="bomba_abastecimentodbok" name="bomba_abastecimentodb" value="ok")
+									label.bom(for="bomba_abastecimentodbok") ok					
+								.col.s6.m5
+									input(type="radio" id="bomba_abastecimentodbnotok" , checked="#{Bowser[0].bomba_abastecimento}"=="not ok"? true:false name='bomba_abastecimentodb' value="not ok")
+									label(for="bomba_abastecimentodbnotok") not ok
+								-if(Bowser[0].razaobomba_abastecimento.length>0)
+									.col.s12#vidrosRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaobomba_abastecimento.length; i++)
+												option(value="#{Bowser[0].razaobomba_abastecimento[i]}" selected) #{Bowser[0].razaobomba_abastecimento[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s12.m2
+								label(for="bomba_abastecimentodb") Bomba de Abastecimento
+							.col.s6.m5
+								input.bom(type="radio" id="bomba_abastecimentodbok"  name="bomba_abastecimentodb" value="ok")
+								label.bom(for="bomba_abastecimentodbok") ok					
+							.col.s6.m5
+								input(type="radio" id="bomba_abastecimentodbnotok" name='bomba_abastecimentodb' value="not ok")
+								label(for="bomba_abastecimentodbnotok") not ok
+							.row#bombaAbastecimentoRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoBombaAbastecimento", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Não Funciona") Não Funciona
+										option(value="Lenta") Lenta
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoBombaAbastecimento", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Não Funciona") Do not work
+										option(value="Lenta") Slow
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="pistoladb")
+						if Bowser
+							if Bowser[0].pistola=="ok"
+								.col.s12.m2
+									label(for="pistoladb") Pistola
+								.col.s6.m5
+									input.bom(type="radio" id="pistolaok" , checked="#{Bowser[0].pistola}"=="ok"? true:false, name="pistoladb" value="ok")
+									label.bom(for="pistoladbok") ok					
+								.col.s6.m5
+									input(type="radio" id="pistoladbnotok" name='pistoladb' value="not ok")
+									label(for="pistoladbnotok") not ok
+							else
+								.col.s12.m2
+									label(for="pistoladb") Pistola
+								.col.s6.m5
+									input.bom(type="radio" id="pistoladbok" name="pistoladb" value="ok")
+									label.bom(for="pistoladbok") ok					
+								.col.s6.m5
+									input(type="radio" id="pistoladbnotok" , checked="#{Bowser[0].pistola}"=="not ok"? true:false, name='pistoladb' value="not ok")
+									label(for="pistoladbnotok") not ok
+								-if(Bowser[0].razaoPistola.length>0)
+									.col.s12#vidrosRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoPistola.length; i++)
+												option(value="#{Bowser[0].razaoPistola[i]}" selected) #{Bowser[0].razaoPistola[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s12.m2
+								label(for="pistoladb") Pistola
+							.col.s6.m5
+								input.bom(type="radio" id="pistoladbok"  name="pistoladb" value="ok")
+								label.bom(for="pistoladbok") ok					
+							.col.s6.m5
+								input(type="radio" id="pistoladbnotok" name='pistoladb' value="not ok")
+								label(for="pistoladbnotok") not ok
+							.row#pistolaRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoPistola", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Quebrada") Quebrada
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoPistola", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Quebrada") Broken
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="mangueiradb")
+						if Bowser
+							if Bowser[0].mangueira=="ok"
+								.col.s12.m2
+									label(for="mangueiradb") Mangueira
+								.col.s6.m5
+									input.bom(type="radio" id="mangueiradbok" , checked="#{Bowser[0].mangueira}"=="ok"? true:false, name="mangueiradb" value="ok")
+									label.bom(for="mangueiradbok") ok					
+								.col.s6.m5
+									input(type="radio" id="mangueiradbnotok" name='mangueiradb' value="not ok")
+									label(for="mangueiradbnotok") not ok
+							else
+								.col.s12.m2
+									label(for="mangueiradb") Mangueira
+								.col.s6.m5
+									input.bom(type="radio" id="mangueiradbok" name="mangueiradb" value="ok")
+									label.bom(for="mangueiradbok") ok					
+								.col.s6.m5
+									input(type="radio" id="mangueiradbnotok" , checked="#{Bowser[0].mangueira}"=="not ok"? true:false, name='mangueiradb' value="not ok")
+									label(for="mangueiradbnotok") not ok
+								-if(Bowser[0].razaomangueira.length>0)
+									.col.s12#vidrosRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaomangueira.length; i++)
+												option(value="#{Bowser[0].razaomangueira[i]}" selected) #{Bowser[0].razaomangueira[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s12.m2
+								label(for="mangueiradb") Mangueira
+							.col.s6.m5
+								input.bom(type="radio" id="mangueiradbok"  name="mangueiradb" value="ok")
+								label.bom(for="mangueiradbok") ok					
+							.col.s6.m5
+								input(type="radio" id="mangueiradbnotok" name='mangueiradb' value="not ok")
+								label(for="mangueiradbnotok") not ok
+							.row#mangueiraRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoMangueira", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Furada") Furada
+										option(value="Cortada") Cortada
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoMangueira", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Furada") Punctured
+										option(value="Cortada") Cut
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+					.row(id="contadordb")
+						if Bowser
+							if Bowser[0].contador=="ok"
+								.col.s12.m2
+									label(for="contadordb") Contador
+								.col.s6.m5
+									input.bom(type="radio" id="contadordbok" , checked="#{Bowser[0].contador}"=="ok"? true:false, name="contadordb" value="ok")
+									label.bom(for="contadordbok") ok					
+								.col.s6.m5
+									input(type="radio" id="contadordbnotok" name='contadordb' value="not ok")
+									label(for="contadordbnotok") not ok
+							else
+								.col.s12.m2
+									label(for="contadordb") Contador
+								.col.s6.m5
+									input.bom(type="radio" id="contadordbok" name="contadordb" value="ok")
+									label.bom(for="contadordbok") ok					
+								.col.s6.m5
+									input(type="radio" id="contadordbnotok" , checked="#{Bowser[0].contador}"=="not ok"? true:false, name='contadordb' value="not ok")
+									label(for="contadordbnotok") not ok
+								-if(Bowser[0].razaoContador.length>0)
+									.col.s12#vidrosRazao(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoContador.length; i++)
+												option(value="#{Bowser[0].razaoContador[i]}" selected) #{Bowser[0].razaoContador[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s12.m2
+								label(for="contadordb") Contador
+							.col.s6.m5
+								input.bom(type="radio" id="contadordbok"  name="contadordb" value="ok")
+								label.bom(for="contadordbok") ok					
+							.col.s6.m5
+								input(type="radio" id="contadordbnotok" name='contadordb' value="not ok")
+								label(for="contadordbnotok") not ok
+							.row#contadorRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoContador", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Ecra Partido") Ecrã Partido
+										option(value="Nao Marca") Não Marca
+										option(value="Ausencia") Ausência
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoContador", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Ecra Partido") Broken Screen
+										option(value="Nao Marca") Do not mark
+										option(value="Ausencia") Absence
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+			fieldset
+				h2(class="fs-title") Sistema de Engate
+				.row
+					.row(id="sistema_engatedb")
+						if Bowser
+							if Bowser[0].sistema_engate=="ok"
+								.col.s2
+									label(for="sistema_engatedb") Sistema de Engate
+								.col.s5
+									input.bom(type="radio" id="sistema_engatedbok" , checked="#{Bowser[0].sistema_engate}"=="ok"? true:false, name="sistema_engatedb" value="ok")
+									label.bom(for="sistema_engatedbok") ok					
+								.col.s5
+									input(type="radio" id="sistema_engatedbok" name='sistema_engatedb' value="not ok")
+									label(for="sistema_engatedbok") not ok
+							else
+								.col.s2
+									label(for="sistema_engatedb") Sistema de Engate
+								.col.s5
+									input.bom(type="radio" id="sistema_engatedbok" name="sistema_engatedb" value="ok")
+									label.bom(for="sistema_engatedbok") ok					
+								.col.s5
+									input(type="radio" id="sistema_engatedbnotok" , checked="#{Bowser[0].sistema_engate}"=="not ok"? true:false, name='sistema_engatedb' value="not ok")
+									label(for="sistema_engatedbnotok") not ok
+								-if(Bowser[0].razaoSistema_engate.length>0)
+									.sistema_engatedb.s12#luzesParte(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoSistema_engate.length; i++)
+												option(value="#{Bowser[0].razaoSistema_engate[i]}" selected) #{Bowser[0].razaoSistema_engate[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="luzes") Sistema de Engate </span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="sistema_engatedbok"  name="sistema_engatedb" value="ok")
+								label.bom(for="sistema_engatedbok") ok					
+							.col.s5
+								input(type="radio" id="sistema_engatedbnotok" name='sistema_engatedb' value="not ok")
+								label(for="sistema_engatedbnotok") not ok
+							.row#engateRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoEngate", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Bola Gasta") Bola Gasta
+										option(value="Gancho Gasto") Gancho Gasto
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoEngate", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Bola Gasta") Worn Ball
+										option(value="Gancho Gasto") Worn Hook
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+			fieldset
+				h2(class="fs-title") Molas de Suspensão
+				.row
+					.row(id="molas_suspensaodb")
+						if Bowser
+							if Bowser[0].molas_suspensao=="ok"
+								.col.s2
+									label(for="molas_suspensaodb") Molas de Suspensão
+								.col.s5
+									input.bom(type="radio" id="molas_suspensaodbok" , checked="#{Bowser[0].molas_suspensao}"=="ok"? true:false, name="molas_suspensaodb" value="ok")
+									label.bom(for="molas_suspensaodbok") ok					
+								.col.s5
+									input(type="radio" id="molas_suspensaodbnotok" name='molas_suspensaodb' value="not ok")
+									label(for="molas_suspensaodbnotok") not ok
+							else
+								.col.s2
+									label(for="molas_suspensaodb") Molas de Suspensão
+								.col.s5
+									input.bom(type="radio" id="molas_suspensaodbok" name="molas_suspensaodb" value="ok")
+									label.bom(for="molas_suspensaodbok") ok					
+								.col.s5
+									input(type="radio" id="molas_suspensaodbnotok" , checked="#{Bowser[0].molas_suspensao}"=="not ok"? true:false, name='molas_suspensaodb' value="not ok")
+									label(for="molas_suspensaodbnotok") not ok
+								-if(Bowser[0].razaoMolas_suspensao.length>0)
+									.col.s12#nivelPartescol(style="border:none !important")
+										select(multiple)
+											-for(var i=0; i<Bowser[0].razaoMolas_suspensao.length; i++)
+												option(value="#{Bowser[0].razaoMolas_suspensao[i]}" selected) #{Bowser[0].razaoMolas_suspensao[i].replace(/[\[\]'"]+/g,'')}
+						else
+							.col.s2
+								label(for="molas_suspensaodb") Molas de Suspensão</span><span class="red-text bold">*</span>
+							.col.s5
+								input.bom(type="radio" id="molas_suspensaodbok"  name="molas_suspensaodb" value="ok")
+								label.bom(for="molas_suspensaodbok") ok					
+							.col.s5
+								input(type="radio" id="molas_suspensaodbnotok" name='molas_suspensaodb' value="not ok")
+								label(for="molas_suspensaodbnotok") not ok
+							.row#suspensaoRazao.hide
+								.col.s10.ptgues.hide(style="border:none !important")
+									select(id="razaoSuspensao", multiple)
+										option(value="" disabled selected ) Selecione a(s) Parte(s)
+										option(value="Partida") Partida
+										option(value="Parafuso Solto") Parafuso Solto
+										option(value="Ponta de mola partida") Ponta de mola partida
+								.col.s10.ingles.hide(style="border:none !important")
+									select(id="razaoSuspensao", multiple)
+										option(value="" disabled selected ) Select the part(s)
+										option(value="Partida") Broken
+										option(value="Parafuso Solto") Loose screw
+										option(value="Ponta de mola partida") Broken Spring Tip
+								.col.s2
+									img(class="hide-on-med-and-up" src="/img/okk.png")
+			fieldset
+					h2(class="fs-title") Folgas no Cubo
+					.row
+						.row(id="folgas_cubodb")
+							if Bowser
+								if Bowser[0].folgas_cubo=="ok"
+									.col.s12.m2
+										label(for="folgas_cubodb") Folgas no Cubo
+									.col.s6.m5
+										input.bom(type="radio" id="folgas_cubodbok" , checked="#{Bowser[0].folgas_cubo}"=="ok"? true:false, name="folgas_cubodb" value="ok")
+										label(for="folgas_cubodbok") ok					
+									.col.s6.m5
+										input(type="radio" id="folgas_cubodbnotok" name='folgas_cubodb' value="not ok")
+										label(for="folgas_cubodbnotok") not ok
+								else
+									.col.s12.m2
+										label(for="folgas_cubodb") Folgas no Cubo
+									.col.s6.m5
+										input.bom(type="radio" id="folgas_cubodbok"  name="folgas_cubodb" value="ok")
+										label(for="folgas_cubodbok") ok					
+									.col.s6.m5
+										input(type="radio" id="folgas_cubodbnotok" , checked="#{Bowser[0].folgas_cubo}"=="not ok"? true:false, name='folgas_cubodb' value="not ok")
+										label(for="folgas_cubodbnotok") not ok
+									-if(Bowser[0].razaoFolgas_cubo.length>0)
+										.col.s12#cameraRazao(style="border:none !important")
+											select(multiple)
+												-for(var i=0; i<Bowser[0].razaoFolgas_cubo.length; i++)
+													option(value="#{Bowser[0].razaoFolgas_cubo[i]}" selected) #{Bowser[0].razaoFolgas_cubo[i].replace(/[\[\]'"]+/g,'')}
+							else
+								.col.s12.m2
+									label(for="folgas_cubodb") Folgas no Cubo
+								.col.s6.m5
+									input.bom(type="radio" id="folgas_cubodbok"  name="folgas_cubodb" value="ok")
+									label(for="folgas_cubodbok") ok					
+								.col.s6.m5
+									input(type="radio" id="folgas_cubodbnotok" name='folgas_cubodb' value="not ok")
+									label(for="folgas_cubodbnotok") not ok
+								.row#folgasRazao.hide
+									.col.s10.ptgues.hide(style="border:none !important")
+										select(id="razaofolgas", multiple, value)
+											option(value="" disabled selected ) Selecione a(s) Parte(s)
+											option(value="Rolamento Gasto" ) Rolamento Gasto
+											option(value="Ausencia da Tampa") Ausencia da Tampa
+									.col.s10.ingles.hide(style="border:none !important")
+										select(id="razaofolgas", multiple, value)
+											option(value="" disabled selected ) Select the Part(s)
+											option(value="Rolamento Gasto" ) Worn Bearing
+											option(value="Ausencia da Tampa") Absence of Lid
+									.col.s2
+										img(class="hide-on-med-and-up" src="/img/okk.png")
+					if !Bowser
+						input#captardbowser(type="submit", name="submit", class="submit action-button", value="Save")
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+			
+			$(".next").click(function(){ 
+			
+
+
+				if(animating) return false;
+				animating = true;
+				current_fs = $(this).parent();
+				next_fs = $(this).parent().next();
+
+				//activate next step on progressbar using the index of next_fs
+				$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+				//show the next fieldset
+				next_fs.show(); 
+				//hide the current fieldset with style
+				current_fs.animate({opacity: 0}, {
+				step: function(now, mx) {
+				//as the opacity of current_fs reduces to 0 - stored in "now"
+				//1. scale current_fs down to 80%
+				scale = 1 - (1 - now) * 0.2;
+				//2. bring next_fs from the right(50%)
+				left = (now * 50)+"%";
+				//3. increase opacity of next_fs to 1 as it moves in
+				opacity = 1 - now;
+				current_fs.css({
+				'transform': 'scale('+scale+')',
+				'position': 'relative'
+				});
+				next_fs.css({'left': left, 'opacity': opacity});
+				}, 
+				duration: 800, 
+				complete: function(){
+				current_fs.hide();
+				animating = false;
+				}, 
+				//this comes from the custom easing plugin
+				easing: 'easeInOutBack'
+				});
+				
+			});
+
+			$(".inspdiariaIcon").click(function(e){
+			e.preventDefault();
+			$("#progressbar li:not(:first)").removeClass("active");
+
+			$("fieldset").hide();
+
+			// if(animating) return false;
+			// animating = true;
+			var maximo= $(this).index(".inspdiariaIcon");
+
+		
+			for(var i=0; i<maximo; i++){
+			$("#progressbar li").eq((i+1)).addClass("active");
+			console.log("happme************")
+			}
+
+			console.log(maximo);
+			$("fieldset").eq(maximo).show()
+
+
+
+			})
+
+			$(".previous").click(function(){
+			//- let current_fs, next_fs, previous_fs; //fieldsets
+			//- let left, opacity, scale; //fieldset properties which we will animate
+			//- let animating; //flag to prevent quick multi-click glitches
+
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			//- $(".inspdiariaIcon").click(function(e){
+			//- if(animating) return false;
+			//- animating = true;
+
+			//- console.log($(this).index(".inspdiariaIcon"));
+
+			//- })
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setTimeout(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

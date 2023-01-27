@@ -1,0 +1,52 @@
+extends layout
+block content
+	.seccao.container.white
+		if !Ferramenta
+			form(id="formulario", method="POST")
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold Diesel Bowser
+					.row
+						.col.s12.m6.input-field
+							label(for="dbowser") Diesel Bowser
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="dbowser" ,name="dbowser", value="#{Oficina? Oficina[0].marca : ''}")
+						.col.s12.m6.input-field
+							label(for="dbMatricula") Matricula
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="dbMatricula" ,name="dbMatricula", value="#{Oficina? Oficina[0].marca : ''}")
+				fieldset.no-border
+					.row.buttons-container
+						if !Oficina
+							.col.s12.m6.left-button
+								button(type="button", class="btn", id="registar_novoDBowser") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+							.col.s12.m6.right-button
+								button(type="button", class="btn red", id="cancel_action2") <span data-i18n="demo.utilizador_form.cancelar"></span>
+						else
+							.col.s12.center
+								butoon#cancel_action(type="button", class="btn waves-efect waves-light activarAzul") << Back
+		else 
+			form(id="formulario", method="POST")
+				fieldset.no-border.legend-border
+					legend.selmecAzul.bold Diesel Bowser
+					.row
+						.col.s12.m6.input-field
+							label(for="dbowser") Diesel Bowser
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="dbowser" ,name="dbowser", value="#{Ferramenta? Ferramenta[0].dieselbowser : ''}")
+						.col.s12.m6.input-field
+							label(for="dbMatricula") Matricula
+							input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="dbMatricula" ,name="dbMatricula", value="#{Ferramenta? Ferramenta[0].matricula : ''}")
+				fieldset.no-border
+					.row.buttons-container
+						if editar
+							.col.s12.m6.left-button
+								button(type="button", class="btn", id="editar_DBowser", data-bowser='#{Dados}') <span data-i18n="demo.utilizador_form.gravar"></span>
+	block js
+			script(type="text/javascript" src="/js/jquery.mask.js")
+			script.
+				setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+				setTimeout(function(){
+				if(window.innerWidth<600){
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("main").style.width="100%";
+				document.getElementById("main").style.marginBottom="0";}
+				}, 50);

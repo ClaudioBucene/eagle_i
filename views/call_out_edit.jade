@@ -1,0 +1,114 @@
+extends layout
+block content
+	form
+		fieldset.no-border.legend-border
+			legend.selmecAzul.bold Detalhes 
+			.row
+				.col.s12.m6
+					label(for="departamento") <span data-i18n="demo.utilizador_form.departamento"></span> 
+					select.browser-default(id="departamento", name="departamento")
+						-for(let i=0; i<AdMagen[0].departamento.length; i++)
+							-if(DataU.departamento_id==AdMagen[0].departamento[i]._id)
+								option(value="#{AdMagen[0].departamento[i].nome}" , data-cont="#{AdMagen[0].departamento[i]._id}", selected) #{AdMagen[0].departamento[i].nome}
+				.col.s12.m6
+					label(for="jobcard_clienteid") <span data-i18n="demo.ttnumber_form.cliente"></span>
+					select.browser-default(name="cliente_hvac", id="cliente_hvac")
+						-for(var i=0; i<Clientes.length; i++)
+							option(value="#{Clientes[i].nome_cliente}", data-cont="#{Clientes[i]._id}" selected="#{Carregado[0].cliente}"=="#{Clientes[i].cliente_nome}"?true:false) #{Clientes[i].nome_cliente}
+						option(value="Novo") Novo
+				.col.s12.m6
+					label(for="filial") Filial
+					select.browser-default(name="filial", id="filial")
+						option(value="#{Carregado[0].filial}" data-cont="#{Carregado[0].filial_ref}") #{Carregado[0].filial}
+						option(value="Nova filial") Novo
+				.col.s12.m6
+					label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+					select.browser-default(name="regiao", id="regiao", style="font-family:" disabled)
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<AdMagen[0].regiao.length; i++)
+							option(value="#{AdMagen[0].regiao[i].nome}", data-cont="#{AdMagen[0].regiao[i]._id}" selected="#{Carregado[0].regiao}"=="#{AdMagen[0].regiao[i].nome}"?true:false) #{AdMagen[0].regiao[i].nome}
+				.col.s12.m6
+					label <span data-i18n="demo.utilizador_form.provincia"></span>
+					select.browser-default.browser-default(name="provincia_trabalho", id="provincia_trabalho", style="font-family:" disabled)
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<AdMagen[0].provincia.length; i++)
+							option(value="#{AdMagen[0].provincia[i].nome}", data-cont="#{AdMagen[0].provincia[i]._id}" selected="#{Carregado[0].provincia}"=="#{AdMagen[0].provincia[i].nome}"?true:false) #{AdMagen[0].provincia[i].nome}
+				.input-field.col.s12.m6
+					label(for="local") Local
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c", readonly ,id="local", placeholder='', makhapa="#{Clientes1}",name="local" value="#{Carregado[0].local}")
+		fieldset.no-border.legend-border.avacseccao
+			legend.selmecAzul.bold Equipe
+			.row
+				.col.s12.m6
+					label(for="tecnico") Equipe Tecnica
+					select.browser-default(name="tecnico", id="tecnico", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<HvacUsers.length; i++)
+							option(value="#{HvacUsers[i].nome}", data-cont="#{HvacUsers[i]._id}" selected="#{Carregado[0].tecnico}"=="#{HvacUsers[i].nome}"?true:false) #{HvacUsers[i].nome}
+				.col.s12.m6
+					label Matricula da viatura
+					select.browser-default.browser-default(name="viatura", id="viatura", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<Viaturas.length; i++)
+							option(value="#{Viaturas[i].matricula}" selected="#{Carregado[0].viatura}"=="#{Viaturas[i].matricula}"?true:false) #{Viaturas[i].matricula}
+				//- .col.s12.m6(style="margin-top:2px")
+				//- 	label(for="tipo_trabalho") Tipo de trabalho
+				//- 	select.browser-default(name="tipo_trabalho", id="tipo_trabalho")
+				//- 		option(value="" disabled selected) Escolha a opção
+				//- 		option(value="Correctiva") Correctiva
+				//- 		option(value="Preventiva") Preventiva
+				//- 		option(value="Projecto") Projecto
+				.col.s12.m6(style="margin-top:2px")
+					label(for="jobcard_priority") <span data-i18n="demo.ttnumber_form.prioridade"></span>
+					select.browser-default(name="jobcard_priority", id="jobcard_priority")
+						option(value="" disabled selected) Escolha a opção
+						option(value="Alta" selected="#{Carregado[0].prioridade}"=="Alta"?true:false) Alta
+						option(value="Media" selected="#{Carregado[0].prioridade}"=="Media"?true:false) Média
+						option(value="Baixa"  selected="#{Carregado[0].prioridade}"=="Baixa"?true:false) Baixa
+				.input-field.col.s12.m6
+					label(for="data") Data prevista
+					input.datepicker(autocomplete="off", type="text", style="font-family:;color:#12375c" value="#{Carregado[0].data_inicio}" ,id="data", name="data")  
+				.input-field.col.s12.m6
+					label(for="razao") Razao
+					input(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="razao",  value="#{Carregado[0].razao}", name="razao")
+		fieldset.no-border.legend-border
+			legend.selmecAzul.bold Assistentes
+			.row.multi-field-wrapper.col.s12
+				.multi-fields.col.s12
+					.multi-field.col.s12.m6
+						.col.s10
+							label(for="pessoas_permitidas[]") Assistentes
+							select.browser-default.pessoas_permitidas(name="pessoas_permitidas[]",  style="font-family:")
+								option(value="" disabled selected selmecVerde) choose Option
+								-for(let i=0; i<HvacUsers.length; i++)
+									option(value="#{HvacUsers[i].nome}" data-referencia="#{HvacUsers[i]._id}") #{HvacUsers[i].nome}
+				a(class="btn-floating btn-large waves-effect waves-light add-field12 right") +
+			.row
+				.col.s12
+					table.responsive-table.bordered.striped(style="height:auto !important")
+						thead
+							tr.selmecAzul
+								th <span data-i18n="demo.Armazem_form.tecnicos_locados"></span>
+								th
+						tbody(id="myTable_tecnicos_permitidos" style="height:auto !important")
+							-for(let i=0; i<Carregado[0].assistentes.length; i++)
+								tr
+									td.item_nome(data-referenciaa="#{Carregado[0].assistentes[i].referencia}") #{Carregado[0].assistentes[i].nome}
+									td.material-icons.pointer.delete_po delete_forever
+		fieldset.no-border
+				.row.buttons-container
+					.col.s12.center
+						butoon#criacaoeditasxandepto(type="button", entrsa="#{Carregado[0]._id}", class="btn waves-efect waves-light activarAzul") Editar
+	
+	block js
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

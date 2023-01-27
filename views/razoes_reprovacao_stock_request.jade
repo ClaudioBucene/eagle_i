@@ -1,0 +1,70 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Stock Request
+				.row
+					.col.s12.m6.input-field
+						label(for="requested_by") Nome
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="requested_by" ,name="requested_by", readonly value="#{Stock_request[0].requested_by}")
+					.col.s12.m6.input-field
+						label(for="date_request") data
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="date_request" ,name="date_request", readonly value="#{((Stock_request[0].date_request).getDate()<10? '0'+(Stock_request[0].date_request).getDate():(Stock_request[0].date_request).getDate())+'/'+(((Stock_request[0].date_request).getMonth()+1)<10? ('0'+((Stock_request[0].date_request).getMonth()+1)):((Stock_request[0].date_request).getMonth()+1))+'/'+((Stock_request[0].date_request).getFullYear())+'   '+((Stock_request[0].date_request).getHours()<10? ('0'+(Stock_request[0].date_request).getHours()): (Stock_request[0].date_request).getHours() )+' : '+((Stock_request[0].date_request).getMinutes()<10? ('0'+(Stock_request[0].date_request).getMinutes()):(Stock_request[0].date_request).getMinutes())}")
+				.row
+					.col.s12.m6
+						label(for="request_from") Requisitar em:
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c" ,id="request_from" ,name="request_from", readonly value="#{Stock_request[0].request_from}")
+					.col.s12.m6.input-field
+						label(for="Date_required") Data do uso
+						input.preencher( autocomplete="off", type="text", style="font-family: ;color:#12375c",   data-eight="#{Stock_request[0]._id}",id="Date_required" ,name="Date_required", readonly value="#{Stock_request[0].Date_required}")
+				.row
+					.col.s12.m6.input-field
+						label(for="reason") Razoes 
+						input.preencher( autocomplete="off", type="text", id="reason",  readonly value="#{Stock_request[0].reason}", style="font-family:")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Items
+				.row
+					.col.s12
+						table.responsive-table.bordered.striped
+							thead
+								tr.selmecAzul
+									th Descricao
+									th Quantidade
+							tbody(id="myTable_tecnicos_permitidos" style="height:auto !important" )
+								-for(let i=0; i<Stock_request[0].items.length; i++)
+									tr
+										td #{Stock_request[0].items[i].description}
+										td #{Stock_request[0].items[i].quanty}
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Razoes da Negacao
+				.row
+					.col.s12.m6.input-field
+						label(for="decline_reasons") Razoes da negacao
+						textarea.preencher.materialize-textarea( autocomplete="off",  style="font-family:;color:#12375c" ,id="decline_reasons" ,name="decline_reasons")
+			fieldset.no-border
+				.row.buttons-container
+					if Stock_request
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_StRequest_reprovar") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_StRequest") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#cancelar_Po(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+

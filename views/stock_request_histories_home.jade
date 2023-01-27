@@ -1,0 +1,41 @@
+extends layout
+block content
+	.container.seccao.white
+		if !Stock_request || Stock_request.length==0
+			p.center-align.selmecAzul.bold Sem Historico para Mostrar!
+		else
+			.row
+				.col.s12.m6
+				.col.s12.m6.right.input-field
+					i.material-icons.prefix search
+					label(for="pesquisador") <span data-i18n="demo.pesquisar"></span>
+					input(type="text", id="pesquisador", name="pesquisador", style="border-bottom:none !important;")
+			h1.center-align.selmecAzul.bold(style="font-size: 1.5em") Historico de #{Stock_request[0].nome_item}
+			fieldset.no-border.legend-border
+						legend.selmecAzul.bold
+			table.responsive-table.bordered.striped
+				thead
+					tr.selmecAzul
+						th Referencia
+						th Benefiaciario
+						th quantidade
+						th recebido de
+						th data
+				tbody(id="myTable")
+					-for(var index = Stock_request.length-1; index>=0; index--)
+						tr.highlight(data-funcionario="#{Stock_request[index]._id}")
+							td #{Stock_request[index].numero}
+							td #{Stock_request[index].beneficiario}
+							td #{Stock_request[index].beneficiario_ref==benefficiario? ('+'+ Stock_request[index].quantidade) :('-'+Stock_request[index].quantidade)}
+							td #{Stock_request[index].request_from}
+							td #{((Stock_request[index].data).getDate()<10? '0'+(Stock_request[index].data).getDate():(Stock_request[index].data).getDate())+'/'+(((Stock_request[index].data).getMonth()+1)<10? ('0'+((Stock_request[index].data).getMonth()+1)):((Stock_request[index].data).getMonth()+1))+'/'+((Stock_request[index].data).getFullYear())+'   '+((Stock_request[index].data).getHours()<10? ('0'+(Stock_request[index].data).getHours()): (Stock_request[index].data).getHours() )+' : '+((Stock_request[index].data).getMinutes()<10? ('0'+(Stock_request[index].data).getMinutes()):(Stock_request[index].data).getMinutes())}
+	block js
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

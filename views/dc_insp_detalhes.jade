@@ -1,0 +1,248 @@
+extends layout
+block content
+	.row
+		div(class="fixed-action-btn horizontal fixed-add-bottom")
+			a.verde-policial-bg.activarAzul(data-position="left", data-delay="10", data-tooltip="Back", class="btn-floating btn-large waves-effect waves-light" href="/inspdiaria") <i class=" activarAzul material-icons">reply</i>
+		form(id="msform", method="post", style="color:#12375c;")
+			ul(id="progressbar")
+				li.inspdiariaIcon(class="active" style="user-select:none")  <span class="hide-on-small-only"><span data-i18n="demo.inspdiaria_form.dados_gerais"></span></span> <span class="hide-on-med-only"> <img class="hide-on-med-and-up" style="width:20px" src="/img/dados.png">
+				li.inspdiariaIcon#elalvo(mestre="#{DC_insp._id}" style="user-select:none") <span class="hide-on-small-only">Info DC</span> <span class="hide-on-med-and-up"> <img class="hide-on-med-and-up" src="/img/addinfo.png" style="width:20px">
+				-if(DC_insp.signature)
+					li.inspdiariaIcon#elalvo(mestre="#{DC_insp._id}" style="user-select:none") <span class="hide-on-small-only">Signature</span> <span class="hide-on-med-and-up"> <img class="hide-on-med-and-up" src="/img/signature3.png" style="width:20px">
+				//- li.inspdiariaIcon(style="user-select:none") <span class="hide-on-small-only"> Bowser</span> <span class="tiny"> <img class="hide-on-med-and-up" style="width:20px" src="/img/trailer.png">
+			fieldset
+				h2(class="fs-title selmecAzul") <span data-i18n="demo.inspdiaria_form.dados_gerais"></span>
+					.row#verificar
+						.input-field.col.s12.m6(oninput="this.className = ''")
+							label(for="site") Site
+							input(id="site", autocomplete="off",readonly, type="text", name="site", value="#{DC_insp.site_number}")
+						.input-field.col.s12.m6(oninput="this.className = ''")
+							label(for="nome") Nome
+							input.preencher(type="text", id="matricula", readonly,name="nome", value="#{DC_insp.site_name}")
+						.input-field.col.s12.m6
+							label(for="datta") Semana
+							input.preencher(type="text", id="datta", readonly, name="data", value="#{((DC_insp.from).getDate()<10? '0'+(DC_insp.from).getDate():(DC_insp.from).getDate())+'/'+(((DC_insp.from).getMonth()+1)<10? ('0'+((DC_insp.from).getMonth()+1)):((DC_insp.from).getMonth()+1))+'/'+((DC_insp.from).getFullYear())} A #{((DC_insp.to).getDate()<10? '0'+(DC_insp.to).getDate():(DC_insp.to).getDate())+'/'+(((DC_insp.to).getMonth()+1)<10? ('0'+((DC_insp.to).getMonth()+1)):((DC_insp.to).getMonth()+1))+'/'+((DC_insp.to).getFullYear())}")
+						.input-field.col.s12.m6
+							label(for="craiddo_por") Criado por
+							input.preencher(type="text", id="craiddo_por",  name="craiddo_por", value="#{DC_insp.created_by}")
+				input.hide(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset(style="padding:25px;")
+					.row#recolherid()
+						.col.m4.s6
+							.card.hover-reveal.personalised#access_control_dc.dc_checklist
+								.card-image.waves-block
+									img(src="/img/security.png" style="width:20px !important;  ")
+								.card-content
+									h6 <span class="#{DC_insp.access_control.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.access_control.length}</a></span>
+									h6.bold A.Control
+						.col.m4.s6
+							.card.hover-reveal.personalised#fire_control_dc.dc_checklist
+								.card-image.waves-block
+									img.icn(src="/img/controlpanel.png" style="width:20px !important" )
+								.card-content
+									h6 <span class="#{DC_insp.fire_panel.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.fire_panel.length}</a></span>
+									h6.bold Fire panel
+						.col.m4.s6
+							.card.hover-reveal.personalised#bms_dc.dc_checklist
+								.card-image.waves-block
+									img.icn.dc_pic(src="/img/mast.png" style="width:20px !important" )
+								.card-content
+									h6 <span class="#{DC_insp.bms.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.bms.length}</a></span>
+									h6.bold BMS
+						.col.m4.s6
+							.card.hover-reveal.personalised#dc_insp_dc.dc_checklist
+								.card-image.waves-block
+									img.icn.dc_pic(src="/img/ups.png" style="width:20px" )
+								.card-content
+									h6 <span class="#{DC_insp.ups.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.ups.length}</a></span>
+									h6.bold UPS
+						.col.m4.s6
+							.card.hover-reveal.personalised#dc_hvac_dc.dc_checklist
+								.card-image.waves-block
+									img.icn.dc_pic(src="/img/acond.png" style="width:20px" )
+								.card-content
+									h6 <span class="#{DC_insp.hvac.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.hvac.length}</a></span>
+									h6.bold HVAC
+						.col.m4.s6
+							.card.hover-reveal.personalised#dc_generator_dc.dc_checklist
+								.card-image.waves-block
+									img.icn.dc_pic(src="/img/generator.png" style="width:20px" )
+								.card-content
+									h6 <span class="#{DC_insp.generator_A_B.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.generator_A_B.length}</a></span>
+									h6.bold Generator
+						.col.m4.s6
+							.card.hover-reveal.personalised#dc_civil_dc.dc_checklist
+								.card-image.waves-block
+									img.icn.dc_pic(src="/img/environmental.png" style="width:20px" )
+								.card-content
+									h6 <span class="#{DC_insp.civil.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.civil.length}</a></span>
+									h6.bold Civil
+						.col.m4.s6
+
+							.card.hover-reveal.personalised#dc_lights_dc.dc_checklist
+								.card-image.waves-block(style="border-radius:126px;")
+									img.icn.dc_pic(src="/img/electrical.png" style="width:20px" )
+								.card-content(style="z-index:-1 !important")
+									h6 <span class="#{DC_insp.lights.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.lights.length}</a></span>
+									h6.bold Lights
+						.col.m4.s6
+							.card.hover-reveal.personalised#dc_retifier_dc.dc_checklist
+								.card-image.waves-block
+									img.icn.dc_pic(src="/img/retifier.png" style="width:20px" )
+								.card-content
+									h6 <span class="#{DC_insp.retifier.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.retifier.length}</a></span>
+									h6.bold Retifier
+						.col.m4.s6
+							.card.hover-reveal.personalised.dc_checklist#dc_pdu_dc
+								.card-image.waves-block
+									img.icn.dc_pic(src="/img/pdu.png" style="width:20px" )
+								.card-content
+									h6 <span class="#{DC_insp.pdu.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.pdu.length}</a></span>
+									h6.bold PDU
+						.col.m4.s6
+							.card.hover-reveal.personalised.dc_checklist#dc_assinatura
+								.card-image.waves-block
+									img.icn.dc_pic(src="/img/signature3.png" style="width:20px" )
+								.card-content
+									h6 <span class="#{DC_insp.pdu.findIndex(x=>x.observacao=='red')!=-1? 'bolas_dashboard red':'bolas_dashboard green' }"><a class="pointer" style="color:white">#{DC_insp.pdu.length}</a></span>
+									h6.bold Assinatura
+			-if(DC_insp.signature)						
+				fieldset(style="padding:25px")
+					h2(class="fs-title selmecAzul" ) Assinatura do Cliente
+					.div
+						img(src="#{DC_insp.signature}" style="width:65vw !important; height:50vh")
+
+
+
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+			
+			$(".next").click(function(){ 
+			
+
+
+				if(animating) return false;
+				animating = true;
+				current_fs = $(this).parent();
+				next_fs = $(this).parent().next();
+
+				//activate next step on progressbar using the index of next_fs
+				$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+				//show the next fieldset
+				next_fs.show(); 
+				//hide the current fieldset with style
+				current_fs.animate({opacity: 0}, {
+				step: function(now, mx) {
+				//as the opacity of current_fs reduces to 0 - stored in "now"
+				//1. scale current_fs down to 80%
+				scale = 1 - (1 - now) * 0.2;
+				//2. bring next_fs from the right(50%)
+				left = (now * 50)+"%";
+				//3. increase opacity of next_fs to 1 as it moves in
+				opacity = 1 - now;
+				current_fs.css({
+				'transform': 'scale('+scale+')',
+				'position': 'relative'
+				});
+				next_fs.css({'left': left, 'opacity': opacity});
+				}, 
+				duration: 800, 
+				complete: function(){
+				current_fs.hide();
+				animating = false;
+				}, 
+				//this comes from the custom easing plugin
+				easing: 'easeInOutBack'
+				});
+				
+			});
+
+			$(".inspdiariaIcon").click(function(e){
+			e.preventDefault();
+			$("#progressbar li:not(:first)").removeClass("active");
+
+			$("fieldset").hide();
+
+			// if(animating) return false;
+			// animating = true;
+			var maximo= $(this).index(".inspdiariaIcon");
+
+		
+			for(var i=0; i<maximo; i++){
+			$("#progressbar li").eq((i+1)).addClass("active");
+			console.log("happme************")
+			}
+
+			console.log(maximo);
+			$("fieldset").eq(maximo).show()
+
+
+
+			})
+
+			$(".previous").click(function(){
+			//- let current_fs, next_fs, previous_fs; //fieldsets
+			//- let left, opacity, scale; //fieldset properties which we will animate
+			//- let animating; //flag to prevent quick multi-click glitches
+
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			//- $(".inspdiariaIcon").click(function(e){
+			//- if(animating) return false;
+			//- animating = true;
+
+			//- console.log($(this).index(".inspdiariaIcon"));
+
+			//- })
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setTimeout(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<910){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

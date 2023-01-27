@@ -1,0 +1,166 @@
+extends layout 
+block content
+	.container(style="padding-top:20px")
+		if(DadosProjects[0]!= undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.sparesusedproject(data-user-new="#{DadosProjects[0]._id}" data-user-name="#{DadosProjects[0].jobcard_tecnicoid}")
+					.card-image.waves-block
+						img.icn(src="/img/boxspares.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.baterias.Spares"></span>
+		if(DadosProjects[0].baterias != undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.bateryinfoprojects(data-user-new="#{DadosProjects[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/batterybanks.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.baterias.bateriadetalhes"></span>
+		if(DadosProjects[0].transformador != undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.tranformadorinfoprojects(data-user-new="#{DadosProjects[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/transformador.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.transformadorproject.transformador"></span>
+		if(DadosProjects[0].retificador != undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.retificadorinfoprojects(data-user-new="#{DadosProjects[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/rectificador.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.rectificadorprojectos.rectificador"></span>
+			//-a.tooltipped.pointer.equipmentrepairsproject(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Equipment Repairs", data-user-new="#{Projects[index]._id}") <i class="material-icons selmecAzul">build</i>	
+		
+		if(DadosProjects[0].generatorArrayJobcard != undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.generatordetalhesproject.hide(data-user-new="#{DadosProjects[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/generator.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.generator"></span>
+			.col.m4.s6
+				.card.hover-reveal.personalised.equipmentrepairsproject(data-user-new="#{DadosProjects[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/preventive.png" style="width:100px")
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.generator"></span>
+		if(DadosProjects[0].jobcardaircondinfo === undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.aircondprojects.hide(data-user-new="#{DadosProjects[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/acond.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.aircond"></span>
+		if(DadosProjects[0].jobcardphotoinfo.length == 0 || DadosProjects[0].jobcardphotoinfo.length > 0)
+			.col.m4.s6
+				.card.hover-reveal.personalised.photoinfoprojects(data-user-new="#{DadosProjects[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/photo.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.photo"></span>
+		//- if(DadosProjects[0].assinatura.length == 0 || DadosProjects[0].assinatura.length > 0)
+		if(DadosProjects[0].assinatura == "" || DadosProjects[0].assinatura == undefined)
+			.col.m4.s6
+				.card.hover-reveal.personalised.hvacsignature(data-user-new="#{DadosProjects[0]._id}")
+					.card-image.waves-block
+						img.icn(src="/img/signature3.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.preventative_maint.assin"></span>
+	.row.center
+		input.voltaraomenuproject(type="button", name="submit", class="submit action-button", value="Back" style="width:180px; margin-top:250px")
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar2 li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar2 li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

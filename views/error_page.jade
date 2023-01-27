@@ -1,0 +1,17 @@
+extends layout
+block content
+	.container.seccao.white
+		-if true
+			p.center-align.selmecAzul.bold pagina nao encontrada
+		
+
+	block js
+		script.
+			setInterval(function(){document.getElementById("viaturaId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="auto";}
+			}, 50);

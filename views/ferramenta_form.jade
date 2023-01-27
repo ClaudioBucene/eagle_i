@@ -1,0 +1,226 @@
+extends layout
+block content
+	.container.white(style="font-family:; ")
+		form(id="inspeccao", method="post", style="color:#12375c")
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold  Formulário Inspecção de Pre-utilização
+				.row
+					.input-field.col.s12.m4
+						if Ferramenta
+							label(for="utilizador") Utilizador<span class="red-text">*</span>
+							input(id="utilizador", readonly,style="font-family:; ", type="text", name="utilizador", value="#{Ferramenta[0].utilizador}")
+						else
+							label(for="utilizador") Utilizador<span class="red-text">*</span>
+							input(id="utilizador", readonly ,style="font-family:; ", type="text", name="utilizador", value="#{dadosUser.nome}")
+					.col.s12.m4
+						label(for="nome") Nome da Ferramenta
+						select.browser-default.preencher(name="nome", id="nome",style="font-family:")
+							if Ferramenta
+								-for(var i = 0; i < Nome_ferramentas.length; i++)
+									if Ferramenta[0].nome == Nome_ferramentas[i]
+										option(value="#{Nome_ferramentas[i]}", selected="selected") #{Nome_ferramentas[i]}
+									else
+										option(value="#{Nome_ferramentas[i]}") #{Nome_ferramentas[i]}
+							else
+								option(value="" disabled selected) Escolha nome da ferramenta
+								-for(var i = 0; i < Nome_ferramentas.length; i++)
+									option(value="#{Nome_ferramentas[i]}") #{Nome_ferramentas[i]}
+					.col.s12.m4.center.imagem
+						if Ferramenta
+							img#imagem(src="/img/Facilities/#{Ferramenta[0].nome}.jpg", Style="width:100px; margin-top:2px")
+						else
+							img#imagem(src="/img/1.jpg", Style="width:100px; margin-top:2px")
+				.row
+					.col.s12.m4
+							label(for="_estado_geral") Estado geral<span class="red-text">*</span>
+							select.browser-default(name="_estado_geral", id="_estado_geral", style="font-family:")
+								if Ferramenta
+									if Ferramenta[0].estado_geral == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Ferramenta[0].estado_geral == 'defeituoso' 
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											if Ferramenta[0].estado_geral == 'moderado'
+												option(value="moderado", selected="selected", style="color:red !important;") Moderado
+											else
+												option(value="nao definido", selected="selected") Não definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="moderado") Moderado
+									option(value="defeituoso") Defeituoso
+					.col.s12.m4
+							label(for="cabos_mangueira") Cabos ou Mangueiras
+							select.browser-default(name="cabos_mangueira", id="cabos_mangueira", style="font-family:")
+								if Ferramenta
+									if Ferramenta[0].cabos_mangueira == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Ferramenta[0].cabos_mangueira == 'defeituoso'
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											if Ferramenta[0].cabos_mangueira == "nao aplicavel"
+												option(value="nao aplicavel", selected="selected") Não Aplicavel
+											else
+												option(value="nao definido", selected="selected") Não Definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+									option(value="nao aplicavel") Não Aplicavel
+					.col.s12.m4
+							label(for="interruptores") Interruptores
+							select.browser-default(name="interruptores", id="interruptores", style="font-family:")
+								if Ferramenta
+									if Ferramenta[0].interruptores == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Ferramenta[0].interruptores == 'defeituoso'
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											if Ferramenta[0].interruptores == "nao aplicavel"
+												option(value="nao aplicavel", selected="selected") Não Aplicavel
+											else
+												option(value="nao definido", selected="selected") Não Definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+									option(value="nao aplicavel") Não Aplicavel
+				.row
+					.col.s12.m4
+							label(for="ruido") Ruido
+							select.browser-default(name="ruido", id="ruido", style="font-family:")
+								if Ferramenta
+									if Ferramenta[0].ruido == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Ferramenta[0].ruido == 'defeituoso'
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											if Ferramenta[0].ruido == "nao aplicavel"
+												option(value="nao aplicavel", selected="selected") Não Aplicavel
+											else
+												option(value="nao definido", selected="selected") Não Definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+									option(value="nao aplicavel") Não Aplicavel
+					.col.s12.m4
+							label(for="funcionamento") Funcionamento
+							select.browser-default(name="funcionamento", id="funcionamento", style="font-family:")
+								if Ferramenta
+									if Ferramenta[0].funcionamento == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Ferramenta[0].funcionamento == 'defeituoso'
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											if Ferramenta[0].funcionamento == "nao funciona"
+												option(value="nao funciona", selected="selected") Não funciona
+											else
+												option(value="nao definido", selected="selected") Não Definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+									option(value="nao funciona") Não funciona
+					.col.s12.m4
+							label(for="manometro") Manómetros
+							select.browser-default(name="manometro", id="manometro", style="font-family:")
+								if Ferramenta
+									if Ferramenta[0].manometro == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Ferramenta[0].manometro == 'defeituoso'
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											if Ferramenta[0].manometro == "nao aplicavel"
+												option(value="nao aplicavel", selected="selected") Não Aplicavel
+											else
+												option(value="nao definido", selected="selected") Não Definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+									option(value="nao aplicavel") Não Aplicavel
+				.row
+					.col.s12.m4
+							label(for="macarico") Maçarico
+							select.browser-default(name="macarico", id="macarico", style="font-family:")
+								if Ferramenta
+									if Ferramenta[0].macarico == 'bom'
+										option(value="bom", selected="selected") Bom Estado
+									else
+										if Ferramenta[0].macarico == 'defeituoso'
+											option(value="defeituoso", selected="selected") Defeituoso
+										else
+											if Ferramenta[0].macarico == "nao aplicavel"
+												option(value="nao aplicavel", selected="selected") Não Aplicavel
+											else
+												option(value="nao definido", selected="selected") Não Definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="bom") Bom Estado
+									option(value="defeituoso") Defeituoso
+									option(value="nao aplicavel") Não Aplicavel
+					.col.s12.m4
+							label(for="nivel_oleo") Nível do óleo
+							select.browser-default(name="nivel_oleo", id="nivel_oleo", style="font-family:")
+								if Ferramenta
+									if Ferramenta[0].nivel_oleo == 'alto'
+										option(value="alto", selected="selected") Alto
+									else
+										if Ferramenta[0].nivel_oleo == 'medio'
+											option(value="medio", selected="selected") Medio
+										else
+											if Ferramenta[0].nivel_oleo == "baixo"
+												option(value="baixo", selected="selected") Baixo
+											else
+												if Ferramenta[0].nivel_oleo == "nao aplicavel"
+													option(value="nao aplicavel" selected="selected") Não aplicavel
+												else
+													option(value="nao definido", selected="selected") Não Definido
+								else
+									option(value="" disabled selected selmecVerde) Escolha a Opcao
+									option(value="alto") Alto
+									option(value="medio") Médio
+									option(value="baixo") Baixo
+									option(value="nao aplicavel") Não Aplicavel
+					.input-field.col.s12.m4
+						.material-icons.prefix mode_edit
+						textarea#observacao.materialize-textarea(style="font-family:; color:#12375c" ) #{Ferramenta? Ferramenta[0].observacao: ''}
+						if Ferramenta
+							label(for="icon_prefix2") Observação
+						else
+							label(for="icon_prefix2") Escreva sua Observação
+				.row(style="margin-top:7px !important")
+						if !Ferramenta
+							.col.s12.m6.center(style="margin-bottom: 10px;")
+								button#captarFerramenta(type="button", class="btn center waves-efect waves-light") registar
+							.col.s12.m6.center
+								button#cancelarFerramenta(type="button", class="btn waves-efect waves-light red") cancelar
+						else
+							.col.s12.center
+								butoon#voltarFerramenta(type="button", class="btn waves-efect waves-light activarAzul") << Voltar
+			block js
+				script.
+					document.getElementById("nome").addEventListener("change", function(){
+					var valor= document.getElementById("nome").value
+					valor="/img/Facilities/"+valor+".jpg";
+					document.getElementById("imagem").src=valor;
+
+
+					});
+					setInterval(function(){document.getElementById("equipamentoId").className="activarAzul"}, 50);
+					setTimeout(function(){
+					if(window.innerWidth<780){
+					document.getElementById("mySidebar").style.width = "0";
+					document.getElementById("main").style.marginLeft= "0";
+					document.getElementById("main").style.width="100%";
+					document.getElementById("main").style.marginBottom="0";}
+					}, 50);
+	
+	

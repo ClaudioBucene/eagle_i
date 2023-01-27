@@ -1,0 +1,516 @@
+extends layout
+block content
+	.row
+		form(id="msform", method="POST", action="", style="color:#12375c;", enctype="multipart/form-data")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.roofTop_form.rooftop"></span>
+				h2(class="fs-title") <span data-i18n="demo.roofTop_form.pergunta1"></span>
+				.row
+					.row(id="mounting_poles")
+						if Site
+							if Site[0].roofTop.mounting_poles=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="mounting_polesok" name="mounting_poles" checked value="ok")
+									label(for="mounting_polesok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="mounting_polesnotok", name='mounting_poles', value="not ok")
+									label(for="mounting_polesnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="mounting_polesna", name='mounting_poles', value="na")
+									label(for="mounting_polesna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="mounting_poles_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+									input(id="mounting_poles_comment", autocomplete="off", type="text", name="mounting_poles_comment", value="#{Site? Site[0].roofTop.mounting_poles_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].roofTop.mounting_poles_image.length!=0)
+										-for(let i=0;i<Site[0].roofTop.mounting_poles_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].roofTop.mounting_poles_image[i]}")							
+							else
+								if Site[0].roofTop.mounting_poles=="not ok"
+									.col.s12
+										span.
+										
+									.col.s4.m3
+										input.bom(type="radio" id="mounting_polesok" name="mounting_poles"  value="ok")
+										label(for="mounting_polesok") ok					
+									.col.s4.m3
+										input.mau(type="radio", id="mounting_polesnotok", name='mounting_poles', checked value="not ok")
+										label(for="mounting_polesnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="mounting_polesna", name='mounting_poles', value="na")
+										label(for="mounting_polesna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="mounting_poles_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+										input(id="mounting_poles_comment", autocomplete="off", type="text", name="mounting_poles_comment", value="#{Site? Site[0].roofTop.mounting_poles_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].roofTop.mounting_poles_image.length!=0)
+											-for(let i=0;i<Site[0].roofTop.mounting_poles_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].roofTop.mounting_poles_image[i]}")
+								else
+									.col.s12
+										span.
+										
+									.col.s4.m3
+										input.bom(type="radio" id="mounting_polesok" name="mounting_poles"  value="ok")
+										label(for="mounting_polesok") ok					
+									.col.s4.m3
+										input.mau(type="radio", id="mounting_polesnotok", name='mounting_poles', value="not ok")
+										label(for="mounting_polesnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="mounting_polesna", name='mounting_poles', checked, value="na")
+										label(for="mounting_polesna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="mounting_polesok" name="mounting_poles"  value="ok")
+								label(for="mounting_polesok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="mounting_polesnotok", name='mounting_poles', value="not ok")
+								label(for="mounting_polesnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="mounting_polesna", name='mounting_poles', value="na")
+								label(for="mounting_polesna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="mounting_poles_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+								input(id="mounting_poles_comment", autocomplete="off", type="text", name="mounting_poles_comment", value="#{Site? Site[0].mounting_poles_comment:''}")
+							.col.s12.m6.input-field
+								span <span data-i18n="demo.roofTop_form.imagem"></span>
+								input.preencher(type="file", id="mounting_poles_image", multiple, name="mounting_poles_image",autocomplete="off", value="#{Site ? Site[0].mounting_poles_image:''}")
+								table
+									tbody#roofTop1.roofTop1
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.roofTop_form.rooftop"></span>
+				h2(class="fs-title") <span data-i18n="demo.roofTop_form.pergunta2"></span>
+				.row
+					.row(id="poles_corrosions")
+						if Site
+							if Site[0].roofTop.poles_corrosions=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="poles_corrosionsok" name="poles_corrosions" checked value="ok")
+									label(for="poles_corrosionsok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="poles_corrosionsnotok", name='poles_corrosions', value="not ok")
+									label(for="poles_corrosionsnotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="poles_corrosionsna", name='poles_corrosions', value="na")
+									label(for="poles_corrosionsna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="poles_corrosions_comment")<span data-i18n="demo.roofTop_form.comentarios"></span>
+									input(id="poles_corrosions_comment", autocomplete="off", type="text", name="poles_corrosions_comment", value="#{Site? Site[0].roofTop.poles_corrosions_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].roofTop.poles_corrosions_image.length!=0)
+										-for(let i=0;i<Site[0].roofTop.poles_corrosions_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].roofTop.poles_corrosions_image[i]}")
+							else
+								if Site[0].roofTop.poles_corrosions=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="poles_corrosionsok" name="poles_corrosions"  value="ok")
+										label(for="poles_corrosionsok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="poles_corrosionsnotok", name='poles_corrosions', checked value="not ok")
+										label(for="poles_corrosionsnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="poles_corrosionsna", name='poles_corrosions', value="na")
+										label(for="poles_corrosionsna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="poles_corrosions_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+										input(id="poles_corrosions_comment", autocomplete="off", type="text", name="poles_corrosions_comment", value="#{Site? Site[0].roofTop.poles_corrosions_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].roofTop.poles_corrosions_image.length!=0)
+											-for(let i=0;i<Site[0].roofTop.poles_corrosions_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].roofTop.poles_corrosions_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="poles_corrosionsok" name="poles_corrosions"  value="ok")
+										label(for="poles_corrosionsok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="poles_corrosionsnotok", name='poles_corrosions', value="not ok")
+										label(for="poles_corrosionsnotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="poles_corrosionsna", name='poles_corrosions', checked, value="na")
+										label(for="poles_corrosionsna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="poles_corrosionsok" name="poles_corrosions"  value="ok")
+								label(for="poles_corrosionsok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="poles_corrosionsnotok", name='poles_corrosions', value="not ok")
+								label(for="poles_corrosionsnotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="poles_corrosionsna", name='poles_corrosions', value="na")
+								label(for="poles_corrosionsna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="poles_corrosions_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+								input(id="poles_corrosions_comment", autocomplete="off", type="text", name="poles_corrosions_comment", value="#{Site? Site[0].poles_corrosions_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.roofTop_form.imagem"></span>
+								input.preencher(type="file", id="poles_corrosions_image", multiple, name="poles_corrosions_image",autocomplete="off")
+								table
+									tbody#roofTop2.roofTop2
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.roofTop_form.rooftop"></span>
+				h2(class="fs-title") <span data-i18n="demo.roofTop_form.pergunta3"></span>
+				.row
+					.row(id="poles_earthed")
+						if Site
+							if Site[0].roofTop.poles_earthed=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="poles_earthedok" name="poles_earthed" checked value="ok")
+									label(for="poles_earthedok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="poles_earthednotok", name='poles_earthed', value="not ok")
+									label(for="poles_earthednotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="poles_earthedna", name='poles_earthed', value="na")
+									label(for="poles_earthedna") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="poles_earthed_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+									input(id="poles_earthed_comment", autocomplete="off", type="text", name="poles_earthed_comment", value="#{Site? Site[0].roofTop.poles_earthed_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].roofTop.poles_earthed_image.length!=0)
+										-for(let i=0;i<Site[0].roofTop.poles_earthed_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].roofTop.poles_earthed_image[i]}")
+							else
+								if Site[0].roofTop.poles_earthed=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="poles_earthedok" name="poles_earthed"  value="ok")
+										label(for="poles_earthedok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="poles_earthednotok", name='poles_earthed', checked value="not ok")
+										label(for="poles_earthednotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="poles_earthedna", name='poles_earthed', value="na")
+										label(for="poles_earthedna") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="poles_earthed_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+										input(id="poles_earthed_comment", autocomplete="off", type="text", name="poles_earthed_comment", value="#{Site? Site[0].roofTop.poles_earthed_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].roofTop.poles_earthed_image.length!=0)
+											-for(let i=0;i<Site[0].roofTop.poles_earthed_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].roofTop.poles_earthed_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="poles_earthedok" name="poles_earthed"  value="ok")
+										label(for="poles_earthedok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="poles_earthednotok", name='poles_earthed', value="not ok")
+										label(for="poles_earthednotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="poles_earthedna", name='poles_earthed', checked, value="na")
+										label(for="poles_earthedna") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="poles_earthedok" name="poles_earthed"  value="ok")
+								label(for="poles_earthedok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="poles_earthednotok", name='poles_earthed', value="not ok")
+								label(for="poles_earthednotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="poles_earthedna", name='poles_earthed', value="na")
+								label(for="poles_earthedna") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="poles_earthed_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+								input(id="poles_earthed_comment", autocomplete="off", type="text", name="poles_earthed_comment", value="#{Site? Site[0].poles_earthed_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.roofTop_form.imagem"></span>
+								input.preencher(type="file", id="poles_earthed_image", multiple, name="poles_earthed_image",autocomplete="off")
+								table
+									tbody#roofTop3.roofTop3
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.roofTop_form.rooftop"></span>
+				h2(class="fs-title") <span data-i18n="demo.roofTop_form.pergunta4"></span>
+				.row
+					.row(id="cabinet_damage")
+						if Site
+							if Site[0].roofTop.cabinet_damage=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="cabinet_damageok" name="cabinet_damage" checked value="ok")
+									label(for="cabinet_damageok") ok					
+								.col.s4.m3
+									input.mau(type="radio", id="cabinet_damagenotok", name='cabinet_damage', value="not ok")
+									label(for="cabinet_damagenotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="cabinet_damagena", name='cabinet_damage', value="na")
+									label(for="cabinet_damagena") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="cabinet_damage_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+									input(id="cabinet_damage_comment", autocomplete="off", type="text", name="cabinet_damage_comment", value="#{Site? Site[0].roofTop.cabinet_damage_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].roofTop.cabinet_damage_image.length!=0)
+										-for(let i=0;i<Site[0].roofTop.cabinet_damage_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].roofTop.cabinet_damage_image[i]}")
+							else
+								if Site[0].roofTop.cabinet_damage=="not ok"
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="cabinet_damageok" name="cabinet_damage"  value="ok")
+										label(for="cabinet_damageok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="cabinet_damagenotok", name='cabinet_damage', checked value="not ok")
+										label(for="cabinet_damagenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="cabinet_damagena", name='cabinet_damage', value="na")
+										label(for="cabinet_damagena") N/A
+									.input-field.col.s12(style="text-align: left !important")
+										label(for="cabinet_damage_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+										input(id="cabinet_damage_comment", autocomplete="off", type="text", name="cabinet_damage_comment", value="#{Site? Site[0].roofTop.cabinet_damage_comment:''}")
+									.col.s12.m6.input-field
+										-if(Site[0].roofTop.cabinet_damage_image.length!=0)
+											-for(let i=0;i<Site[0].roofTop.cabinet_damage_image.length; i++)
+												img.verimagem(style="width:100px", src="#{Site[0].roofTop.cabinet_damage_image[i]}")
+								else
+									.col.s12
+										span.
+											
+									.col.s4.m3
+										input.bom(type="radio" id="cabinet_damageok" name="cabinet_damage"  value="ok")
+										label(for="cabinet_damageok") ok
+									.col.s4.m3
+										input.mau(type="radio", id="cabinet_damagenotok", name='cabinet_damage', value="not ok")
+										label(for="cabinet_damagenotok") not ok
+									.col.s4.m3
+										input.moderado(type="radio", id="cabinet_damagena", name='cabinet_damage', checked, value="na")
+										label(for="cabinet_damagena") N/A
+						else
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="cabinet_damageok" name="cabinet_damage"  value="ok")
+								label(for="cabinet_damageok") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="cabinet_damagenotok", name='cabinet_damage', value="not ok")
+								label(for="cabinet_damagenotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="cabinet_damagena", name='cabinet_damage', value="na")
+								label(for="cabinet_damagena") N/A
+							.input-field.col.s12.m6(style="text-align: left !important")
+								label(for="cabinet_damage_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+								input(id="cabinet_damage_comment", autocomplete="off", type="text", name="cabinet_damage_comment", value="#{Site? Site[0].cabinet_damage_comment:''}")
+							.col.s12.m6.input-field
+								<span data-i18n="demo.roofTop_form.imagem"></span>
+								input.preencher(type="file", id="cabinet_damage_image", multiple, name="cabinet_damage_image",autocomplete="off")
+								table
+									tbody#roofTop4.roofTop4
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				input(type="button", name="next", class="next action-button", value="Next >>")
+			fieldset
+				h1(class="fs-title") <span data-i18n="demo.roofTop_form.rooftop"></span>
+				h2(class="fs-title") <span data-i18n="demo.roofTop_form.pergunta5"></span>
+				.row(id="transmission_radio")
+					if Site
+						if Site[0].roofTop.transmission_radio=="ok"
+							.col.s12
+								span.
+									
+							.col.s4.m3
+								input.bom(type="radio" id="transmission_radiook" name="transmission_radio"   checked value="ok")
+								label(for="transmission_radiook") ok					
+							.col.s4.m3
+								input.mau(type="radio", id="transmission_radionotok", name='transmission_radio', value="not ok")
+								label(for="transmission_radionotok") not ok
+							.col.s4.m3
+								input.moderado(type="radio", id="transmission_radiona", name='transmission_radio', value="na")
+								label(for="transmission_radiona") N/A
+							.input-field.col.s12(style="text-align: left !important")
+								label(for="transmission_radio_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+								input(id="transmission_radio_comment", autocomplete="off", type="text", name="transmission_radio_comment", value="#{Site? Site[0].roofTop.transmission_radio_comment:''}")
+							.col.s12.m6.input-field
+								-if(Site[0].roofTop.transmission_radio_image.length!=0)
+									-for(let i=0;i<Site[0].roofTop.transmission_radio_image.length; i++)
+										img.verimagem(style="width:100px", src="#{Site[0].roofTop.transmission_radio_image[i]}")
+						else
+							if Site[0].roofTop.transmission_radio=="ok"
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="transmission_radiook" name="transmission_radio"  value="ok")
+									label(for="transmission_radiook") ok
+								.col.s4.m3
+									input.mau(type="radio", id="transmission_radionotok", name='transmission_radio', checked value="not ok")
+									label(for="transmission_radionotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="transmission_radiona", name='transmission_radio', value="na")
+									label(for="transmission_radiona") N/A
+								.input-field.col.s12(style="text-align: left !important")
+									label(for="transmission_radio_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+									input(id="transmission_radio_comment", autocomplete="off", type="text", name="transmission_radio_comment",  value="#{Site? Site[0].roofTop.transmission_radio_comment:''}")
+								.col.s12.m6.input-field
+									-if(Site[0].roofTop.transmission_radio_image.length!=0)
+										-for(let i=0;i<Site[0].roofTop.transmission_radio_image.length; i++)
+											img.verimagem(style="width:100px", src="#{Site[0].roofTop.transmission_radio_image[i]}")
+							else
+								.col.s12
+									span.
+										
+								.col.s4.m3
+									input.bom(type="radio" id="transmission_radiook" name="transmission_radio"  value="ok")
+									label(for="transmission_radiook") ok
+								.col.s4.m3
+									input.mau(type="radio", id="transmission_radionotok", name='transmission_radio', value="not ok")
+									label(for="transmission_radionotok") not ok
+								.col.s4.m3
+									input.moderado(type="radio", id="transmission_radiona", name='transmission_radio', checked, value="na")
+									label(for="transmission_radiona") N/A
+					else
+						.col.s12
+							span.
+								
+						.col.s4.m3
+							input.bom(type="radio" id="transmission_radiook" name="transmission_radio"  value="ok")
+							label(for="transmission_radiook") ok					
+						.col.s4.m3
+							input.mau(type="radio", id="transmission_radionotok", name='transmission_radio', value="not ok")
+							label(for="transmission_radionotok") not ok
+						.col.s4.m3
+							input.moderado(type="radio", id="transmission_radiona", name='transmission_radio', value="na")
+							label(for="transmission_radiona") N/A
+						.input-field.col.s12.m6(style="text-align: left !important")
+							label(for="transmission_radio_comment") <span data-i18n="demo.roofTop_form.comentarios"></span>
+							input(id="transmission_radio_comment", autocomplete="off", type="text", name="transmission_radio_comment", value="#{Site? Site[0].transmission_radio_comment:''}")
+						.col.s12.m6.input-field
+							<span data-i18n="demo.roofTop_form.imagem"></span>
+							input.preencher(type="file", id="transmission_radio_imageRF", name="transmission_radio_imageRF",autocomplete="off", multiple)
+							table
+								tbody#roofTop5.roofTop5
+				input(type="button", name="previous", class="previous action-button", value="<< Prev")
+				if !Site
+					input#captarRoofTop(type="submit", dataref="#{referencia._id}", numSite= "#{referencia.siteNumber}", nomesessiondetalhes= "#{DataU.nome}", name="submit", class="submit action-button", value="Save")
+				else
+					if Site[0].mast.aw_light
+						input#captarRoofTopDetalhes(type="button", name="next", dataref="#{op}", class="next action-button", value="Next >>")
+		
+		block js
+		script.
+			//jQuery time
+			var current_fs, next_fs, previous_fs; //fieldsets
+			var left, opacity, scale; //fieldset properties which we will animate
+			var animating; //flag to prevent quick multi-click glitches
+
+			$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+			'transform': 'scale('+scale+')',
+			'position': 'relative'
+			});
+			next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+			current_fs.hide();
+			animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+			});
+			});
+
+			$(".submit").click(function(){
+			return false;
+			})
+
+			setInterval(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,70 @@
+extends layout
+block content
+	.container(style="padding-top:20px")
+		-if(DataU.departamento_id != "611e45e68cd71c1f48cf45bd")
+			.col.m4.s6
+				.card.hover-reveal.personalised#verTabelaClientes
+					.card-image.waves-block
+						img.icn(src="/img/profile3.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.cliente_form.cliente"></span>
+			.col.m4.s6
+				.card.hover-reveal.personalised#verTabelaClienteshvac
+					.card-image.waves-block
+						img.icn(src="/img/profile3.png" style="width:100px" )
+					.card-content
+						h6.bold <span data-i18n="demo.cliente_form.clientehvac"></span>
+			.col.m4.s6
+				.card.hover-reveal.personalised#verTabelaFornecedores
+					.card-image.waves-block
+						img.icn(src="/img/supplier1.png" style="width:100px" data-activates='dropdown2')
+					.card-content
+						h6.bold <span data-i18n="demo.cliente_form.fornecedor"></span>
+		-else
+			.col.m4.s6
+				.card.hover-reveal.personalised#verTabelaClienteshvac
+					.card-image.waves-block
+						img.icn(src="/img/profile3.png" style="width:100px" )
+					.card-content
+						h6.bold Clientes
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+//- extends layout
+//- block content
+//- 	.container(style="padding-top:20px")
+//- 		.col.m4.s6
+//- 			.card.hover-reveal.personalised#verTabelaClientes
+//- 				.card-image.waves-block
+//- 					img.icn(src="/img/profile3.png" style="width:100px" )
+//- 				.card-content
+//- 					h6.bold <span data-i18n="demo.cliente_form.cliente"></span>
+//- 		.col.m4.s6
+//- 			.card.hover-reveal.personalised#verTabelaFornecedores
+//- 				.card-image.waves-block
+//- 					img.icn(src="/img/supplier1.png" style="width:100px" data-activates='dropdown2')
+//- 				.card-content
+//- 					h6.bold <span data-i18n="demo.cliente_form.fornecedor"></span>
+//- 	block js
+//- 		script(type="text/javascript" src="/js/jquery.mask.js")
+//- 		script.
+//- 			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+//- 			setTimeout(function(){
+//- 			if(window.innerWidth<780){
+//- 			document.getElementById("mySidebar").style.width = "0";
+//- 			document.getElementById("main").style.marginLeft= "0";
+//- 			document.getElementById("main").style.width="100%";
+//- 			document.getElementById("main").style.marginBottom="0";
+//- 			document.getElementByClassName("capitalize").style.class="pequeno";
+//- 			}
+//- 			}, 50);

@@ -1,0 +1,45 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold Recepcao do Stock
+				-for(var i=0; i<Stock_request[0].items.length; i++)
+					.row
+						.col.s12.m6.input-field
+							label(for="description_item") Descricao do item
+							input.decricao( autocomplete="off", type="text", readonly,  style="font-family:;color:#12375c" , referencia="#{Stock_request[0].items[i].referencia}", serialized="#{Stock_request[0].items[i].serialized}", id="{'description_item'+i}" ,name="{'description_item'+i}", value="#{Stock_request[0].items[i].description}")
+						.col.s6.m2.input-field
+							label(for="#{'quanty_max'+i}") Returning
+							input( autocomplete="off", type="number", readonly, style="font-family:;color:#12375c" ,id="#{'quanty_max'+i}" ,name="#{'quanty_max'+i}" , value="#{Stock_request[0].items[i].quanty}")
+						.col.s6.m2.input-field
+							label(for="#{'quanty_disponivel'+i}" ) In Possession
+							input( autocomplete="off", type="number",  data_max="#{'quanty_max'+i}" style="font-family:;color:#12375c" ,readonly, id="#{'quanty_disponivel'+i}" ,name="#{'quanty_disponivel'+i}", min=0, , value="#{Disponivel[i]}")
+						.col.s6.m2.input-field
+							label(for="#{'quanty_recebido'+i}" ) Book in
+							input.quantyy.preencher( autocomplete="off", type="number",  data_max="#{'quanty_max'+i}" style="font-family:;color:#12375c" ,id="#{'quanty_recebido'+i}" , serialized="#{Stock_request[0].items[i].serialized}" ,name="#{'quanty_recebido'+i}", min=0, value=0, max= (Disponivel[i] >Stock_request[0].items[i].quanty)? "#{Stock_request[0].items[i].quanty}" :"#{ Disponivel[i]}")
+			fieldset.no-border
+				.row.buttons-container
+					if Stock_request[0].items.length>0
+						.col.s12.m6.left-button
+							button(type="button", class="btn", data_user_new="#{Stock_request[0]._id}", local="#{Stock_request[0].returned_by_ref}" , araman="#{Stock_request[0].return_to_ref}", id="receber_stock_warehouse") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="cancelar_stock_item") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
