@@ -11833,6 +11833,7 @@ router.get("/detalhesDevolverJobcard/:id",  function(req, res){
 
 
 router.get("/detalhesAccaoPrioridadeProject/:id", async  function(req, res){
+
 	var userData= req.session.usuario;
 	console.log('traa')
 	
@@ -11847,7 +11848,7 @@ router.get("/detalhesAccaoPrioridadeProject/:id", async  function(req, res){
 		var dataUsuarios = await model.find({$or:[{nome_supervisor:userData.nome},{regiao_id:userData.regiao_id}]}, {nome:1}).sort({nome:1}).lean();
 	console.log(data)
 	console.log(dataUsuarios)
-	res.render("jobcard_accaoPrioridade_projects", {DataU:userData, Usuarios:dataUsuarios, Projects:data, title: 'EAGLEI'});
+res.render("jobcard_accaoPrioridade_projects", {DataU:userData, Usuarios:dataUsuarios, Projects:data, title: 'EAGLEI'});
 			
 });
 
@@ -12341,6 +12342,7 @@ router.get("/detalhesJobcardCallOutProject/:id",async  function(req, res){
 										res.render("jobcard_viewcallout_project", {DataU:userData, DadosSiteArray:arrSite, DadosProjects:JSON.stringify(dadosprojects), DadosClientes:JSON.stringify(dataClientes), SiteCliente:JSON.stringify(dataSiteCliente), Clientes:dataClientes, NomeSession:userData.nome, Projects:data, title: 'EAGLEI'});
 									}
 								}).lean();
+								
 							}
 						});
 
@@ -12483,7 +12485,7 @@ router.get("/detalhesMapaProject/:id", async function(req, res){
 						
 				}
 				else
-					res.redirect("/manutencao/ttnumberhome/new")
+					res.redirect("/manutencao/jobcardprojectshome/inprogress")
 			}
 
 			// res.render("jobcard_viewmapa", {DataU:userData, Jobcards:data, DadosJobcards:JSON.stringify(data), title: 'EAGLEI'});
@@ -25467,7 +25469,7 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 		var todayhours = new Date();
 		var todaytime = todayhours.getHours() + ":" + todayhours.getMinutes();
 		console.log('tra3')
-		console.log(jobcard)
+		console.log(jobcard);
 
 		var procurajobcard = await jobcardprojects.findOne({_id:jobcard.jobcard_id}, {jobcard_tecnicoid:1,jobcard_controladorintervenientes:1, }).lean();
 		if(procurajobcard == null)
@@ -25477,7 +25479,7 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 
 		// jobcard.jobcard_controlador = [1];
 		
-		jobcard.ttnumber_status = "In Progress";
+		jobcard.ttnumber_status = "New";
 		jobcard.jobcard_estadoactual = "On hold";
 		jobcard.jobcard_wait = "sim";
 		jobcard.geolocationJobcardInfo = [];
@@ -25509,6 +25511,10 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 		if(tt.n==0)
 			var tt = await energia_projects.updateOne({_id:jobcard.jobcard_id},{$set:{jobcard_estadoactual:jobcard.jobcard_estadoactual,jobcard_holdreason:jobcard.jobcard_holdreason, ttnumber_status:jobcard.ttnumber_status, jobcard_wait:jobcard.jobcard_wait, geolocationJobcardInfo:jobcard.geolocationJobcardInfo},$unset:{jobcard_tecarrivaldate:"", jobcard_tecarrivaltime:"", jobcard_sitearrivaldate:"", jobcard_sitearrivaltime:"", jobcard_sitedeparturedate:"", jobcard_sitedeparturetime:"", jobcard_tecarrivalduration:"", jobcard_arrivaldepartureduration:"", jobcard_workstatus:"", jobcard_remedialaction:"", jobcard_healthsafety:"", jobcard_hsreason:"", jobcard_healthsafety:""}, $push:{jobcard_audittrail:audittrailObject}});
 	});
+
+
+
+	
 
 	router.post("/tomaraccaoprioridadedifftecnicohvac",  upload.any(), async function(req, res){
 
@@ -25663,6 +25669,7 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 			else{
 
 				console.log("Jobcard update");
+				res.redirect("/inicio");
 			}
 
 	});
@@ -25766,6 +25773,7 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 			else{
 
 				console.log("Jobcard update");
+				res.redirect("/inicio");
 			}
 
 		});
@@ -27823,7 +27831,7 @@ router.post("/novojobcard", upload.any(), async function(req, res){
 				}
 		
 
-		}else{
+		}else if(jobcard.geolocationlatitude != "" || jobcard.geolocationlongitude != ""){
 
 			var geolocationJobcardInfo2 = {};
 
@@ -27835,7 +27843,7 @@ router.post("/novojobcard", upload.any(), async function(req, res){
 			procurasite.siteinfo_sitename = "";
 
 		}
-		if(jobcard.geolocationlatitude =="" || jobcard.geolocationlatitude== undefined ) {
+		if(jobcard.geolocationlatitude == "" || jobcard.geolocationlongitude == "") {
 			var geolocationJobcardInfo1 = {};
 			geolocationJobcardInfo1.jobcard_latitude = "-25.97140974040271";
 			geolocationJobcardInfo1.jobcard_longitude = "32.57944374200045";

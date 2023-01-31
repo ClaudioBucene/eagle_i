@@ -90,11 +90,11 @@ block content
 												a.tooltipped.pointer.sparesusedprojectenergia(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Spares Used", data-user-new="#{Projects[index]._id}", data-user-name="#{Projects[index].jobcard_tecnicoid}") <img width="30px" src="/img/boxspares.png" style="margin-bottom:-2px">
 										-if ((DataU.nome==Projects[index].jobcard_controladorintervenientes[1]) && (Projects[index].jobcard_controlador.length == 1 || Projects[index].jobcard_estadoactual =='On hold'))
 											a.pointer.aprovarenergiaproject(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Accept the jobcard", data-user-new="#{Projects[index]._id}", datajobtype="#{Projects[index].jobcard_jobtype}") <i class="material-icons bold">thumb_up</i>
-										-if ((DataU.nome==Projects[index].jobcard_controladorintervenientes[1]) && (Projects[index].jobcard_controlador.length == 2))
-											-if ((Projects[index].jobcard_tecarrivaldate != undefined) && Projects[index].jobcard_sitearrivaldate == undefined)
+										-if (DataU.nome==Projects[index].jobcard_controladorintervenientes[1] && Projects[index].jobcard_controlador.length == 2) 
+											-if ((Projects[index].jobcard_tecarrivaldate != undefined && Projects[index].jobcard_sitearrivaldate == undefined) || Projects[index].jobcard_estadoactual == "On route")
 												a.pointer.chegadasiteprojectenergia(style="margin-left: 30px; color:green",data-position="top", data-delay="10", data-tooltip="Site Arrival", data-user-new="#{Projects[index]._id}") <i class="material-icons selmecAzul">location_on</i>
 											-else
-												-if(Projects[index].jobcard_sitearrivaldate != undefined)
+												-if(Projects[index].jobcard_sitearrivaldate != undefined && Projects[index].jobcard_estadoactual == "On site")
 													a.tooltipped.pointer.generatordetalhesproject(style="margin-left: 0px; color:green",data-position="top", data-delay="10", data-tooltip="Generator Details", datareferencia="#{Projects[index]._id}", datasiteid="#{Projects[index].jobcard_siteid}") <img width="27px" src="/img/generator.png" style="margin-bottom:-2px">
 													//-a.tooltipped.pointer.equipmentrepairsproject(style="margin-left: 5px; color:green",data-position="top", data-delay="10", data-tooltip="Equipment Repairs", data-user-new="#{Projects[index]._id}") <i class="material-icons selmecAzul">build</i>
 													a.tooltipped.pointer.photoinfoprojectenergia(style="margin-left: 5px; color:green",data-position="top", id = "photoinfoprojectenergia" data-delay="10", data-tooltip="Jobcard photos", datajobtype="#{Projects[index].jobcard_jobtype}" ,data-user-new="#{Projects[index]._id}") <img width="30px" src="/img/photo.png" style="margin-bottom:-2px">

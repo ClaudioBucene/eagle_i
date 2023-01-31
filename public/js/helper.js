@@ -8059,6 +8059,7 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 
 	    var referencia = $("#recolherdados").attr("dadosreferenciaprojecto");
 	    var referenciastatus = $("#recolherdados").attr("dadosreferenciastatus");
+
 	    var controlador = 0;
 
 	    var jobcard_holdactioncont = $("#jobcard_holdaction").val();
@@ -8136,19 +8137,11 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 	              xhr.open('POST',rule, true);
 	              xhr.send(jobcardformdata);
 
-	              if(referenciastatus == "New"){
-
 	                setTimeout(function(){
 	                   window.location.href="/manutencao/jobcardprojectshome/new";
 	                  }, 4000);
 
-	              }else{
-
-	                setTimeout(function(){
-	                   window.location.href="/manutencao/jobcardprojectshome/inprogress";
-	                  }, 4000);
-	              }
-
+	              
 								
 	        });
 
@@ -8156,6 +8149,8 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 	      }
 
 	});
+
+	
 	$('#hvac_holdaction').change(function(){
 
 		var hvac_holdaction = $("#hvac_holdaction").val();
@@ -8177,10 +8172,16 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 		
 	});
 
+
+
 	$('#hvacactionprioridade_yes_btn').click(function(){
 
 		var referencia = $("#recolherdados").attr("dadosreferenciajobcard");
-		var dadojobtype = $("#recolherdados").attr("dadosjobtype");
+	   var dadojobtype = $("#recolherdados").attr("dadosjobtype");
+
+		console.log("JOBTYPE 1");
+		console.log(dadojobtype);
+		
 		var controlador = 0;
 		var jobcardstatus = $("#recolherdados").attr("dadosjobstatus");
 
@@ -8267,6 +8268,9 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 							xhr.open('POST',rule, true);
 							xhr.send(jobcardformdata);
 
+							console.log("Job TYPE 2");
+							console.log(dadojobtype);
+							
 							if(dadojobtype == "Preventative Maintenance"){
 
 								setTimeout(function(){
@@ -16249,7 +16253,8 @@ $('.captarinqueritoair').click(function(){
 	$('#jobcaranaliseriscoAmbiental_yes_btn').click(function(){
 		$('#loading').fadeIn().delay(20000).fadeOut();
 		var referencia = $("#formulario2").attr("dataref");
-		var dadojobtype =$(this).attr("datajobtype");
+		var dadojobtype = $(this).attr("datajobtype");
+		var call = $(this).attr("jobcardcall");
 
 		// var referencia = $(this).attr("data-user-new");
 		// var dadojobtype =$(this).attr("datajobtype");
@@ -16295,16 +16300,19 @@ $('.captarinqueritoair').click(function(){
 						xhr.open('POST',rule, true);
 						xhr.send(jobcardformdata);
 
-					console.log(dadojobtype)	
-					console.log(dadojobtype)	
-					console.log(dadojobtype)	
-					console.log(dadojobtype)	
+					console.log("JOB TYPE");	
+					console.log(dadojobtype);
+					
+					console.log("JOB CAll");	
+					console.log(call);
+				
 					setTimeout(function(){
-						if(dadojobtype=="Callout")
+						if(dadojobtype=="Callout" && call != "Project")
 							window.location.href="/manutencao/ttnumberhome/inprogress"
-						else if(dadojobtype=="Preventative Maintenance")
+						else if(dadojobtype=="Preventative Maintenance" && call != "Project")
 							window.location.href="/manutencao/preventativemaint/inprogress"
 						else
+							if(call == "Project")
 							window.location.href="/manutencao/jobcardprojectshome/inprogress"
 
 					}, 1000);
