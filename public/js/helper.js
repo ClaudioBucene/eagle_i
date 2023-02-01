@@ -6806,10 +6806,14 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 		$('#loading').fadeIn().delay(20000).fadeOut();
 
 			var dadosjobcard = JSON.parse($("#detalhesJobcardMapa").attr("dataa"));
+			
+			
+			var jobcard_traveldistance = $("#mostrarinfoviagem").attr("jobcard_traveldistance");
+			var jobcard_travelduration = $("#mostrarinfoviagem").attr("jobcard_travelduration");
+			var jobcard_traveldurationms = $("#mostrarinfoviagem").attr("source");
 
-			var jobcard_traveldistance =$("#mostrarinfoviagem").attr("jobcard_traveldistance");
-			var jobcard_travelduration =$("#mostrarinfoviagem").attr("jobcard_travelduration");
-			var jobcard_traveldurationms =$("#mostrarinfoviagem").attr("jobcard_traveldurationms");
+			console.log("JOBCARD TRAVEL DURATION");
+			console.log(jobcard_traveldurationms);
 
 			var calljobcard = ["Project"];
 			var jobcard_call = dadosjobcard[0].jobcard_call;

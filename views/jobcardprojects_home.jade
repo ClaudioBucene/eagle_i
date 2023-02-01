@@ -59,7 +59,7 @@ block content
 							th
 					tbody(id="myTableUser1")
 						-for(var index = 0; index < Projects.length; index++)
-							-if ((DataU.nome==Projects[index].jobcard_controladorintervenientes[1]) && (Projects[index].jobcard_controlador[3] == 0))
+							-if ((DataU.nome==Projects[index].jobcard_controladorintervenientes[1]) && (Projects[index].jobcard_controlador[3] == 0) && Projects[index].ttnumber_status != "New")
 								tr.highlight(style="font-family:;color:#ff0000")
 									td #{Projects[index].jobcard_projectnumber}
 									td #{Projects[index].jobcard_site}
