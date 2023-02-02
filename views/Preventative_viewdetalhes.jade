@@ -724,8 +724,10 @@ block content
 				.row#recolherdados(data-user-new="#{Carregado[0]._id}")
 					-if(Carregado[0].jobcard_audittrail.length>2)
 						button#mostrarDetalhesMapaPlanned(type="button", data-user-new="#{Carregado[0]._id}", class="btn waves-efect waves-light activarAzul") Mapa
-					-if((Carregado[0].jobcard_estadoactual !='On hold' && DataU.nome == Carregado[0].jobcard_controladorintervenientes[1]) && ((Carregado[0].jobcard_controlador.length) < 3 || (Carregado[0].jobcard_controlador[3] == 0)))
-						input.sendapprovalproject(type="button", name="submit", data-user-new="#{Carregado[0]._id}", class="submit action-button", value="Send for approval" style="width:180px")
+					-if((Carregado[0].jobcard_estadoactual !='On hold' && DataU.nome == Carregado[0].jobcard_controladorintervenientes[1]) && ((Carregado[0].jobcard_controlador.length) < 3 || (Carregado[0].jobcard_controlador[3] == 0)) && (Carregado[0].jobcard_jobtype == "Project" || Carregado[0].jobcard_call=="Project"))
+							input.sendapprovalproject(type="button", name="submit", data-user-new="#{Carregado[0]._id}", class="submit action-button", value="Send for approval" style="width:180px")
+					-if((Carregado[0].jobcard_estadoactual !='On hold' && DataU.nome == Carregado[0].jobcard_controladorintervenientes[1]) && ((Carregado[0].jobcard_controlador.length) < 3 || (Carregado[0].jobcard_controlador[3] == 0)) )
+							input.sendapprovalhvac(type="button", name="submit", data-user-new="#{Carregado[0]._id}", class="submit action-button", value="Send for approval" style="width:180px")
 					-else
 						-if(DataU.nome == "David De Almeida" || DataU.funcao == "Call Center" || DataU.funcao =="Rogerio Galrito")
 							input.editjobcard_project(type="button", name="submit", class="submit action-button", value="Update Jobcard" style="width:180px")

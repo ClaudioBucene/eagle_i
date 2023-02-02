@@ -431,6 +431,9 @@ function sendEmailCallcenterchegadasite(dados, usuarios, manageremail){
 }
 
 function sendEmailSendJobcardAprrovalhvac(dados,usuarios, comercialemail){
+    console.log('DADOS');
+    console.log(dados);
+
     if(!smtpTransport){
         return;
     }
@@ -443,25 +446,25 @@ function sendEmailSendJobcardAprrovalhvac(dados,usuarios, comercialemail){
         mailrecip.push(usuarios);
         mailrecip.push(comercialemail[0].email);
     
-    if(dados.cliente == dados.filial){
+    if(dados.jobcard_clientenome == dados.filial){
         var mail = {
             from: '"COMSERV" <comservsystem@comserv.co.mz>',
             to: mailrecip,  
-            subject: 'Tarefa Correctiva / Ticket ' + dados.jobcard_cod + ' / Local ' + dados.cliente + ' - Sede  - Aprovação Requerida', // Subject line
+            subject: 'Tarefa Correctiva / Ticket ' + dados.jobcard_cod + ' / Local ' + dados.jobcard_clientenome + ' - Sede  - Aprovação Requerida', // Subject line
         }
     
     
-        mail.html = "Saudações <br> A tarefa com o código <b>" + dados.jobcard_cod + "</b> em <b>" + dados.cliente + " - Sede </b>, alocada ao técnico <b>" + dados.tecnico + "</b> foi enviado para a sua avaliação, por favor verifique e dê a sua aprovação se tudo estiver em ordem. <br> Acesse o <i>Eagle I</i> para tomar uma acção <br> Cumprimentos"
+        mail.html = "Saudações <br> A tarefa com o código <b>" + dados.jobcard_cod + "</b> em <b>" + dados.jobcard_clientenome + " - Sede </b>, alocada ao técnico <b>" + dados.tecnico + "</b> foi enviado para a sua avaliação, por favor verifique e dê a sua aprovação se tudo estiver em ordem. <br> Acesse o <i>Eagle I</i> para tomar uma acção <br> Cumprimentos"
 
     }else{
         var mail = {
             from: '"COMSERV" <comservsystem@comserv.co.mz>',
             to: mailrecip,  
-            subject: 'Tarefa Correctiva / Ticket ' + dados.jobcard_cod + ' / Local ' + dados.cliente + ' - ' + dados.filial + ' - Aprovação Requerida', // Subject line
+            subject: 'Tarefa Correctiva / Ticket ' + dados.jobcard_cod + ' / Local ' + dados.jobcard_clientenome + ' - ' + dados.filial + ' - Aprovação Requerida', // Subject line
         }
     
     
-        mail.html = "Saudações <br> A tarefa com o código <b>" + dados.jobcard_cod + "</b> em <b>" + dados.cliente + " - " + dados.filial + "</b>, alocada ao técnico <b>" + dados.tecnico + "</b> foi enviado para a sua avaliação, por favor verifique e dê a sua aprovação se tudo estiver em ordem. <br> Acesse o <i>Eagle I</i> para tomar uma acção <br> Cumprimentos"
+        mail.html = "Saudações <br> A tarefa com o código <b>" + dados.jobcard_cod + "</b> em <b>" + dados.jobcard_clientenome + " - " + dados.filial + "</b>, alocada ao técnico <b>" + dados.tecnico + "</b> foi enviado para a sua avaliação, por favor verifique e dê a sua aprovação se tudo estiver em ordem. <br> Acesse o <i>Eagle I</i> para tomar uma acção <br> Cumprimentos"
     }
     
 

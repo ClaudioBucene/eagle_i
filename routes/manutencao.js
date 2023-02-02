@@ -14751,18 +14751,28 @@ router.post("/updatephotoinfoHvacInfo/:id",  uploadcallhvac.any(), async functio
 		jobcard_audittrail.jobcard_audittraildate = todaydate + "  " + todayhours;
 		console.log(jobcard);
 
-		var procura = await jobcards.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
+			var procura = await jobcards.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
 		if(procura == null)
-		var procura = await jobcardprojects.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
+			var procura = await hvac_db.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
 		if(procura == null)
-			var procura = await hvac_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
+			var procura = await energia.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
 		if(procura == null)
-			var procura = await energia_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
+			var procura = await jobcardprojects.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
+		if(procura == null)
+			var procura = await hvac_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
+		if(procura == null)
+			var procura = await energia_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1,  jobcard_tecniconome:1}).lean();
+
+		console.log("PROCURA");
+		console.log(procura);
 
 		var procurauser = await model.findOne({nome:userData.nome_supervisor},{idioma:1, email:1}).lean();
 	
 		emailSender.createConnection();
-		emailSender.sendEmailSendJobcardAprrovalProject(procura,procurauser);
+
+		if(jobcard_jobtype == "Project" || jobcard_call=="Project")
+			emailSender.sendEmailSendJobcardAprrovalProject(procura,procurauser);
+	
 		
 		var data = await jobcardprojects.findOneAndUpdate({_id:jobcard.jobcard_id}, {$push:{jobcard_controladorintervenientes:userData.nome, jobcard_audittrail:jobcard_audittrail}, $set:{data_ultimaactualizacaojobcard:new Date() ,jobcard_estadoactual:jobcard.jobcard_estadoactual,jobcard_controlador:jobcard.jobcard_controlador}});
 		console.log(data);
@@ -28835,6 +28845,7 @@ router.get("/saidasiteproject/:idjobcard",async  function(req, res){
 
 	router.post("/sendforapprovalhvac",  uploadcallhvac.any(), async function(req, res){
 
+		var jobcard = req.body;
 
 		var dia = ((new Date()).getDate()<10) ? ("0" + (new Date()).getDate()): ((new Date()).getDate());
 		var mes = (((new Date()).getMonth()+1)<10) ? ("0" + ((new Date()).getMonth()+1)): (((new Date()).getMonth())+1);
@@ -28857,10 +28868,10 @@ router.get("/saidasiteproject/:idjobcard",async  function(req, res){
 		var usuarios = await [];
 		var id = jobcard.jobcardhvacid;
 
-		var procurajobcard = await hvac_db.findOne({_id:id});
+		var procurajobcard = await hvac_db.findOne({_id:jobcard.jobcard_id});
 		console.log(procurajobcard)
 		if(procurajobcard==null)
-			var procurajobcard = await energia.findOne({_id:id});
+			var procurajobcard = await energia.findOne({_id:jobcard.jobcard_id});
 		var callcenter = await users_db.find({funcao:"Call Center"}, {email:1});
 		for(var i = 0; i<callcenter.length; i++){
 			usuarios.push(callcenter[i].email);
@@ -28883,9 +28894,9 @@ router.get("/saidasiteproject/:idjobcard",async  function(req, res){
 		var hsreason = await jobcard.jobcard_hsreason;
 
 		// if(procurajobcard.jobcard_departamentoid=="611e45e68cd71c1f48cf45bd"){
-		var j = await hvac_db.updateOne({_id:jobcard.jobcardhvacid},{$set:{data_ultimaactualizacaojobcard:new Date(), jobcard_estadoactual:"Awaiting approval",remedialaction, healthsafety, hsreason, jobcard_sitearrivaldate:new Date(), jobcard_controlador}, $push:{jobcard_audittrail:ob, reportetrabalho:report}});
+		var j = await hvac_db.updateOne({_id:jobcard.jobcard_id},{$set:{data_ultimaactualizacaojobcard:new Date(), jobcard_estadoactual:"Awaiting approval",remedialaction, healthsafety, hsreason, jobcard_sitearrivaldate:new Date(), jobcard_controlador}, $push:{jobcard_audittrail:ob, reportetrabalho:report}});
 		if(j.n==0)
-			var j = await energia.updateOne({_id:jobcard.jobcardhvacid},{$set:{data_ultimaactualizacaojobcard:new Date(), jobcard_estadoactual:"Awaiting approval",remedialaction, healthsafety, hsreason, jobcard_sitearrivaldate:new Date(), jobcard_controlador}, $push:{jobcard_audittrail:ob, reportetrabalho:report}});
+			var j = await energia.updateOne({_id:jobcard.jobcard_id},{$set:{data_ultimaactualizacaojobcard:new Date(), jobcard_estadoactual:"Awaiting approval",remedialaction, healthsafety, hsreason, jobcard_sitearrivaldate:new Date(), jobcard_controlador}, $push:{jobcard_audittrail:ob, reportetrabalho:report}});
 
 		console.log("Sent for approval")
 		res.redirect("/inicio");

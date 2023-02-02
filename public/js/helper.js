@@ -7741,8 +7741,8 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 
 	$('#reprovarrazaohvac_yes_btn').click(function(){
 
-		var referencia=$("#recolherdados").attr("dadosreferenciajobcard");
-		var dadojobtype =$("#recolherdados").attr("datajobtype");
+		var referencia = $("#recolherdados").attr("dadosreferenciajobcard");
+		var dadojobtype = $("this").attr("source");
 		// console.log(referencia, datajobtype);datajobtype
 		// var dadoscall = JSON.parse($("#recolherdados").attr("detalhescall"));
 		// var calljobcard = ["Project"];
@@ -8181,7 +8181,7 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 	$('#hvacactionprioridade_yes_btn').click(function(){
 
 		var referencia = $("#recolherdados").attr("dadosreferenciajobcard");
-	   var dadojobtype = $("this").attr("source");
+	   var dadojobtype = $(this).attr("source");
 
 		console.log("JOBTYPE 1");
 		console.log(dadojobtype);
@@ -8797,6 +8797,39 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 			}, 4000);
 		});
 	});
+
+
+	$(".sendapprovalhvac").click(function(){
+
+		var novo=$("#recolherdados").attr("data-user-new");
+		var dadousuario = $("#recolherdados").attr("detalhessession");
+		
+
+	$('#yes_no_title_modal').html((($(".lang-picker").attr("value")=="pt")?'Messagem do Sistema':'System Message'))
+	$('#yes_no_content_modal').html((($(".lang-picker").attr("value")=="pt")?'Deseja mandar para a aprovação ':'Do you want to send for approval <b>') +(($(".lang-picker").attr("value")=="pt")?'</b> ?':"</b>?"))
+	$('#yes_no_modal').openModal({dismissible:false});
+	$('#no_btn_modal_').click(function(e){ e.stopPropagation(); window.location.href="#"; });
+	$('#yes_btn_modal').click(function(e){
+		$('#loading').fadeIn().delay(20000).fadeOut();
+		e.stopPropagation();
+		// e.stopImmediatePropagation();
+		var jobcardformdata = new FormData();
+
+		var rule="/manutencao/sendforapprovalhvac";
+
+		var jobcard_id = novo;
+		jobcardformdata.append("jobcard_id", jobcard_id);
+		
+		var xhr = new XMLHttpRequest();
+		// Add any event handlers here...
+		xhr.open('POST',rule, true);
+		xhr.send(jobcardformdata);
+
+		setTimeout(function(){
+					window.location.href="/manutencao/ttnumberhome/inprogress";
+		}, 4000);
+	});
+});
 
 	// $('#pettycashreportano').change(function(){
 

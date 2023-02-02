@@ -7,7 +7,7 @@ block content
 				.col.s12.m6.input-field
 					label(for="jobcardhvac_razaoreprovar" style="font-size:15px") <span data-i18n="demo.ttnumber_form.reprazao"></span>
 					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcardhvac_razaoreprovar" ,name="jobcardhvac_razaoreprovar")
-			button(type="button", id="reprovarrazaohvac_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat" style="margin-top:20px; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
+			button(source=[Jobcards[0].jobcard_jobtype] type="button", id="reprovarrazaohvac_yes_btn", class="btn modal-action modal-close waves-effect waves-green btn-flat" style="margin-top:20px; font-size:12px") <span data-i18n="demo.ttnumber_form.guardar"></span>
 	//- if Projects
 	//- 	form#ttnumberform(class="col s12")
 	//- 		h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.reprovarrazao"></span>
