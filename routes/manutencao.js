@@ -25256,7 +25256,7 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 		jobcard.ttnumber_status = "New";
 		jobcard.jobcard_estadoactual = "New";
 		jobcard.jobcard_wait = "nao";
-		jobcard.geolocationJobcardInfo = [];
+		jobcard.geolocationJobcardInfo = procurajobcard.geolocationJobcardInfo[0];
 
 		var procuralinemanager = await model.findOne({nome:procurauser.nome_supervisor}, function(err,dataUser){
 			if(err){
@@ -25478,19 +25478,19 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 		console.log('tra3')
 		console.log(jobcard);
 
-		var procurajobcard = await jobcardprojects.findOne({_id:jobcard.jobcard_id}, {jobcard_tecnicoid:1,jobcard_controladorintervenientes:1, }).lean();
+		var procurajobcard = await jobcardprojects.findOne({_id:jobcard.jobcard_id}, {jobcard_tecnicoid:1,jobcard_controladorintervenientes:1, geolocationJobcardInfo:1 }).lean();
 		if(procurajobcard == null)
-			var procurajobcard = await hvac_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_tecnicoid:1,jobcard_controladorintervenientes:1, }).lean();
+			var procurajobcard = await hvac_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_tecnicoid:1,jobcard_controladorintervenientes:1, geolocationJobcardInfo:1}).lean();
 		if(procurajobcard== null)
-			var procurajobcard = await energia_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_tecnicoid:1,jobcard_controladorintervenientes:1,}).lean();
+			var procurajobcard = await energia_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_tecnicoid:1,jobcard_controladorintervenientes:1, geolocationJobcardInfo:1}).lean();
 
 		// jobcard.jobcard_controlador = [1];
 		
 		jobcard.ttnumber_status = "New";
 		jobcard.jobcard_estadoactual = "On hold";
 		jobcard.jobcard_wait = "sim";
-		jobcard.geolocationJobcardInfo = [];
-
+		jobcard.geolocationJobcardInfo = procurajobcard.geolocationJobcardInfo[0];
+		console.log(jobcard.geolocationJobcardInfo)
 
 		var audittrailObject = {};
 
@@ -25539,7 +25539,7 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 
 		console.log("Diff tecnico");
 		console.log(jobcard);
-		var procurajobcard = await hvac_db.findOne({_id:jobcard.jobcard_id}, {jobcard_tecniconome:1, jobcard_tecnicoid:1, jobcard_clienteid:1, jobcard_cod:1, jobcard_clientenome:1}, function(err, data){
+		var procurajobcard = await hvac_db.findOne({_id:jobcard.jobcard_id}, {jobcard_tecniconome:1, geolocationJobcardInfo:1, jobcard_tecnicoid:1, jobcard_clienteid:1, jobcard_cod:1, jobcard_clientenome:1}, function(err, data){
 			if(err){
 				console.log(err);
 	   		}else{

@@ -112,7 +112,6 @@ router.post('/', function(req, res){
 	})
 })
 
-
 function getUser(body){
 	var userr= {};
 	userr.username=body.username.replace(/[{}$\/*-+/#@!)()><?\\^\'%$&:,;`]/g,'');
@@ -121,8 +120,6 @@ function getUser(body){
 	return userr;
 
 }
-
-
 
 
 // (
@@ -153,31 +150,31 @@ function getUser(body){
 // 				await auditoria.push(hjs);
 // 			})
 // 			)
-// 			// var h=await [];
-// 			// await Promise.all(obj.spares_usados.map(async(obj2, i2)=>{
-// 			// 	let hd= await {};
-// 			// 	hd.jobcard_itemid = await obj2.referencia
-// 			// 	hd.jobcard_item=await obj2.descricao;
-// 			// 	hd.jobcard_quantityuse = await obj2.quantidade;
-// 			// 	await h.push(hd);
-// 			// }))
+// 			var h=await [];
+// 			await Promise.all(obj.spares_usados.map(async(obj2, i2)=>{
+// 				let hd= await {};
+// 				hd.jobcard_itemid = await obj2.referencia
+// 				hd.jobcard_item=await obj2.descricao;
+// 				hd.jobcard_quantityuse = await obj2.quantidade;
+// 				await h.push(hd);
+// 			}))
 			
-// 			// console.log(obj.jobcard_jobtype)
-// 			// if(obj.jobcard_jobtype=="Callout"){
-// 			// 	var pp = obj.criado_por;
-// 			// }else{
-// 			// 	var pp = obj.jobcard_loggedby;
-// 			// }
-// 			// var t=[];
-// 			// console.log(obj.jobcard_jobtype)
-// 			// if(obj.jobcard_jobtype=="Callout"){ 
-// 			// 	t=[ obj.criado_por, obj.tecnico, "Rogerio Galrito"];
-// 			// }else{
-// 			// 	t=["Planned", obj.tecnico, "Rogerio Galrito"];
-// 			// }
-// 			// var te=await hvac_db.updateOne({_id:obj._id},{$set:{jobcard_info:[""], jobcard_departamento:"Climatização e Electricidade", jobcard_hsreason:obj.razao, sparesArrayJobcard:h, data_registojobcard:obj.data_criacao, jobcard_loggedby:pp, jobcard_prioritycomments:[""], jobcard_siteid:obj.filial_ref, jobcard_tecnicoid:obj.tecnico_ref, jobcard_callcenteractions:[""],jobcard_controladorintervenientes:t, jobcard_departamentoid:"611e45e68cd71c1f48cf45bd", jobcard_controlador:obj.controlador, ttnumber_status:obj.status,jobcard_tecniconome:obj.tecnico, jobcard_estadoactual:obj.estadoactual, jobcard_regiao:obj.regiao,jobcard_audittrail:auditoria, jobcard_clientenome:obj.cliente, jobcard_clienteid:obj.cliente_ref, jobcard_priority:obj.prioridade, jobcard_site:obj.filial}});
+// 			console.log(obj.jobcard_jobtype)
+// 			if(obj.jobcard_jobtype=="Callout"){
+// 				var pp = obj.criado_por;
+// 			}else{
+// 				var pp = obj.jobcard_loggedby;
+// 			}
+// 			var t=[];
+// 			console.log(obj.jobcard_jobtype)
+// 			if(obj.jobcard_jobtype=="Callout"){ 
+// 				t=[ obj.criado_por, obj.tecnico, "Rogerio Galrito"];
+// 			}else{
+// 				t=["Planned", obj.tecnico, "Rogerio Galrito"];
+// 			}
+// 			var te=await hvac_db.updateOne({_id:obj._id},{$set:{jobcard_info:[""], jobcard_departamento:"Climatização e Electricidade", jobcard_hsreason:obj.razao, sparesArrayJobcard:h, data_registojobcard:obj.data_criacao, jobcard_loggedby:pp, jobcard_prioritycomments:[""], jobcard_siteid:obj.filial_ref, jobcard_tecnicoid:obj.tecnico_ref, jobcard_callcenteractions:[""],jobcard_controladorintervenientes:t, jobcard_departamentoid:"611e45e68cd71c1f48cf45bd", jobcard_controlador:obj.controlador, ttnumber_status:obj.status,jobcard_tecniconome:obj.tecnico, jobcard_estadoactual:obj.estadoactual, jobcard_regiao:obj.regiao,jobcard_audittrail:auditoria, jobcard_clientenome:obj.cliente, jobcard_clienteid:obj.cliente_ref, jobcard_priority:obj.prioridade, jobcard_site:obj.filial}});
 		
-// 			var te=await hvac_db.updateOne({_id:obj._id},{$set:{}});
+// 			// var te=await hvac_db.updateOne({_id:obj._id},{$set:{}});
 // 		},0)
 
 // 		// var tt=await Promise.all(gg.map(async function(e){

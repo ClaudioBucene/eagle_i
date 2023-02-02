@@ -6851,13 +6851,13 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 				xhr.open('POST',rule, true);
 				xhr.send(jobcardformdata);
 
-			 if(jobcard_jobtype == "Callout"){
+			 if(jobcard_jobtype == "Project" || jobcard_call=="Project"){
 
-					setTimeout(function(){
-						
-						window.location.href="/manutencao/ttnumberhome/inprogress";
-					 }, 3500);
-				
+					
+					 setTimeout(function(){
+				 
+						window.location.href="/manutencao/jobcardprojectshome/inprogress";
+					   }, 3500);
 				
 			 }else if(jobcard_jobtype== "Preventative Maintenance"){
 				
@@ -6866,11 +6866,11 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 				 window.location.href="/manutencao/preventativemaint/inprogress";
 				}, 3500);
 			}else {
-
 				setTimeout(function(){
-				 
-					window.location.href="/manutencao/jobcardprojectshome/inprogress";
-				   }, 3500);
+						
+					window.location.href="/manutencao/ttnumberhome/inprogress";
+				 }, 3500);
+				
 			}
 
 
