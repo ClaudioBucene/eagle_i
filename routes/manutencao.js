@@ -11874,7 +11874,7 @@ router.get("/detalhesAccaoPrioridade/:id",  function(req, res){
 					}
 				}).sort({nome:1}).lean();
 			}else{
-				hvac_db.find({_id:req.params.id}, {status:1}, function(err, data1){
+				hvac_db.find({_id:req.params.id}, {status:1, ttnumber_status:1}, function(err, data1){
 					if (err) {
 						console.log("Ocorreu um erro ao tentar aceder à manutenção "+ err);
 					} else {
@@ -12011,6 +12011,11 @@ router.get("/detalhesJobcardCallOut/:id",  function(req, res){
 		}
 	}).lean();
 });
+
+
+
+
+
 
 router.get("/detalhesDevolverJobcardhvac/:id",  function(req, res){
 	var userData= req.session.usuario;
@@ -14744,8 +14749,10 @@ router.post("/updatephotoinfoHvacInfo/:id",  uploadcallhvac.any(), async functio
 		jobcard_audittrail.jobcard_audittrailname = userData.nome;
 		jobcard_audittrail.jobcard_audittrailaction = "Send for approval";
 		jobcard_audittrail.jobcard_audittraildate = todaydate + "  " + todayhours;
-		console.log(jobcard)
+		console.log(jobcard);
 
+		var procura = await jobcards.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
+		if(procura == null)
 		var procura = await jobcardprojects.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
 		if(procura == null)
 			var procura = await hvac_projects.findOne({_id:jobcard.jobcard_id}, {jobcard_linemanagerid:1, jobcard_projectnumber:1, jobcard_projectnumber:1, jobcard_tecniconome:1}).lean();
@@ -25570,8 +25577,6 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 		jobcard.jobcard_linemanager = procurauser.nome_supervisor;
 
 		if (Array.isArray(jobcard.assistente)) {
-			
-			
 			for(var i = 0; i < jobcard.assistente.length; i++){
 				var assistenteObject = {};
 				assistenteObject.nome = jobcard.assistente[i];
@@ -25599,6 +25604,8 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 
 		var data = await hvac_db.updateOne({_id:jobcard.jobcard_id},{$set:{data_ultimaactualizacaojobcard:new Date(), jobcard_holdreason:jobcard.jobcard_holdreason, jobcard_holdaction:jobcard.jobcard_holdaction, jobcard_controladorintervenientes:jobcard.jobcard_controladorintervenientes, wait:jobcard.jobcard_wait, jobcard_tecnicoid:jobcard.jobcard_tecnicoid1, jobcard_tecniconome:procurauser.nome, jobcard_controlador:jobcard.jobcard_controlador, jobcard_estadoactual:jobcard.jobcard_estadoactual, assistentes:assistentes},$unset:{jobcard_traveldurationms:"",jobcard_travelduration:"",jobcard_traveldistance:"",jobcard_estimahorachegada:"", jobcard_estimadadatachegadams:"", jobcard_estimadadatachegada:"",jobcard_tecarrivaldate:"", jobcard_tecarrivaltime:"", jobcard_sitearrivaldate:"", jobcard_sitearrivaltime:"", jobcard_sitedeparturetime:"", jobcard_tecarrivalduration:"", jobcard_arrivaldepartureduration:"", jobcard_workstatus:"", jobcard_remedialaction:"", jobcard_healthsafety:"", jobcard_hsreason:"", jobcard_healthsafety:"", sitearrivaldate:""}, $push:{jobcard_audittrail:jobcard_audittrail}});
 
+				console.log("Jobcard update");
+				res.redirect("/inicio");
 	});
 
 	router.post("/tomaraccaoprioridadesametecnicohvac",  upload.any(), async function(req, res){
@@ -25667,7 +25674,6 @@ router.post("/printplannedrefuelreport", upload.any(), async function(req, res){
 				console.log("ocorreu um erro ao tentar aceder os dados" + err)
 			}
 			else{
-
 				console.log("Jobcard update");
 				res.redirect("/inicio");
 			}

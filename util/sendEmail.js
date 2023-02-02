@@ -1257,17 +1257,25 @@ function sendEmailHSProblemPlanned(dados,userhs1, problemashs, dadossiteinfo, us
 }
 
 function sendEmailSendJobcardAprrovalProject(dados,usuario){
+console.log("DADOS");
+   console.log(dados);
+
     if(!smtpTransport){
         return;
     }
     // comservsystems@comserv.co.mz
     if((!usuario.idioma) || (usuario.idioma == "pt")){
+
+    
+
+
         var mail = {
             from: '"COMSERV" <comservsystem@comserv.co.mz>',
             to: usuario.email,  
             subject: 'Projecto Número / ' +  dados.jobcard_projectnumber + ' - Aprovação Requerida', // Subject line
         }
 
+      
 
         mail.html = "Saudações <b>" + usuario.nome + "</b> <br> O projecto número <b>" + dados.jobcard_projectnumber + "</b> para o site <b>" + dados.jobcard_site + "</b> , alocada ao técnico <b>" + dados.jobcard_tecniconome + "</b> foi enviado para a sua avaliação, por favor verifique e dê a sua aprovação se tudo estiver em ordem. <br> Acesse o <i>Eagle I</i> para tomar uma acção <br> Cumprimentos"
 

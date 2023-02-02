@@ -8181,13 +8181,13 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 	$('#hvacactionprioridade_yes_btn').click(function(){
 
 		var referencia = $("#recolherdados").attr("dadosreferenciajobcard");
-	   var dadojobtype = $("#recolherdados").attr("dadosjobtype");
+	   var dadojobtype = $("this").attr("source");
 
 		console.log("JOBTYPE 1");
 		console.log(dadojobtype);
 		
 		var controlador = 0;
-		var jobcardstatus = $("#recolherdados").attr("dadosjobstatus");
+
 
 		var jobcard_holdactioncont = $("#hvac_holdaction").val();
 		var jobcard_holdreasoncont = $("#jobcard_holdreason").val();
@@ -8250,6 +8250,7 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 							jobcardformdata.append("jobcard_holdreason", jobcard_holdreason);
 
 							var jobcard_tecnicoid1 = $("#jobcard_tecnicoid1").val();
+
 							if(jobcard_tecnicoid1 == null){
 								jobcard_tecnicoid1 = "";
 								

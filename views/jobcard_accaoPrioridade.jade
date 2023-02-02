@@ -5,21 +5,15 @@ block content
 		.row#recolherdados(style="margin-bottom:0px" dadosreferenciajobcard="#{Jobcards[0]._id}" dadosjobtype="#{Jobcards[0].jobcard_jobtype}" dadosjobstatus ="#{Jobcards[0].ttnumber_status}" detalhescall="#{JSON.stringify(Jobcards[0].jobcard_call)}")
 			.col.s12.m6(style="margin-top:2px")
 				label(style="margin-left:0.2rem;") <span data-i18n="demo.ttnumber_form.nivelprioridadeaccao"></span>
-				-if(Jobcards[0].ttnumber_status == "New" && ((Jobcards[0].jobcard_jobinfo.includes("Generator Abnormal")) || (Jobcards[0].jobcard_jobinfo.includes("Generator Low Fuel")) || (Jobcards[0].jobcard_jobinfo.includes("Generator Running"))) )
-					select.browser-default(name="jobcard_holdaction", id="jobcard_holdaction", style="font-family:")
-						option(value="" disabled selected selmecVerde) Escolha uma opção
-						option(value="Em Espera") Em espera
-						option(value="Atribuir a outra equipa") Atribuir a outra equipa
-				-else if(Jobcards[0].ttnumber_status == "New")
-					select.browser-default(name="jobcard_holdaction", id="jobcard_holdaction", style="font-family:")
-						option(value="" disabled selected selmecVerde) Escolha uma opção
-						option(value="Atribuir a outra equipa") Atribuir a outra equipa
-				-else
-					select.browser-default(name="jobcard_holdaction", id="jobcard_holdaction", style="font-family:")
-						option(value="" disabled selected selmecVerde) Escolha uma opção
-						option(value="Em Espera") Em espera
-						option(value="Atribuir a outra equipa") Atribuir a outra equipa
-			.col.s12.m6.input-field(style="margin-top:17px")
+							select.browser-default(name="jobcard_holdaction", id="jobcard_holdaction", style="font-family:")
+								if (Jobcards[0].ttnumber_status == "New")
+									option(value="" disabled selected selmecVerde) Escolha uma opção
+									option(value="Atribuir a outra pessoa") Atribuir a outra pessoa
+								else 
+									option(value="" disabled selected selmecVerde) Escolha uma opção
+									option(value="Em Espera") Colocar em espera
+									option(value="Atribuir a outra pessoa") Atribuir a outra pessoa
+									//- option(value="Cancelar jobcard") Cancelar jobcard
 				label(for="jobcard_holdreason") <span data-i18n="demo.manutencao_form.holdreason"></span>
 				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_holdreason" ,name="jobcard_holdreason")
 		.row#mostrartecnicosubst.hide(style="margin-bottom:0px")

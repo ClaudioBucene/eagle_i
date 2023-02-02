@@ -2,7 +2,7 @@ extends layout
 block content
 	.row#detalhesJobcardMapa(dataa = "#{DadosJobcards}")
 	form#ttnumberform(class="col s12")
-		if((Jobcards[0].jobcard_traveldurationms != 0 || Jobcards[0].jobcard_traveldurationms == undefined) && (Jobcards[0].jobcard_estadoactual == "On route") && (Jobcards[0].jobcard_controladorintervenientes[1] == DataU.nome))
+		if(Jobcards[0].jobcard_estadoactual == "On route" && Jobcards[0].jobcard_controladorintervenientes[1] == DataU.nome)
 			button(source=[Jobcards[0].jobcard_traveldurationms]  type="button", id="mostrarinfoviagem", class="btn modal-action modal-close waves-effect waves-green btn-flat" style="margin-top:20px; font-size:12px") <span data-i18n="demo.manutencao_form.continuarvigem"></span>
 	div#map(style="margin-top:150px")
 	block js
