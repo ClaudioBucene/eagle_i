@@ -11874,7 +11874,7 @@ router.get("/detalhesAccaoPrioridade/:id",  function(req, res){
 					}
 				}).sort({nome:1}).lean();
 			}else{
-				hvac_db.find({_id:req.params.id}, {status:1, ttnumber_status:1}, function(err, data1){
+				hvac_db.find({_id:req.params.id}, {status: 1, jobcard_jobtype:1, jobcard_call:1, ttnumber_status:1, jobcard_jobinfo:1}, function(err, data1){
 					if (err) {
 						console.log("Ocorreu um erro ao tentar aceder à manutenção "+ err);
 					} else {

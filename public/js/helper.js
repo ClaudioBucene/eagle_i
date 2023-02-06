@@ -8181,10 +8181,10 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 	$('#hvacactionprioridade_yes_btn').click(function(){
 
 		var referencia = $("#recolherdados").attr("dadosreferenciajobcard");
-	   var dadojobtype = $(this).attr("source");
+		var dadojobtype = $("#recolherdados").attr("dadosjobtype");
 
 		console.log("JOBTYPE 1");
-		console.log(referencia);
+		console.log(dadojobtype);
 		
 		var controlador = 0;
 
