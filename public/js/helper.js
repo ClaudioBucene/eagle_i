@@ -8184,7 +8184,7 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 	   var dadojobtype = $(this).attr("source");
 
 		console.log("JOBTYPE 1");
-		console.log(dadojobtype);
+		console.log(referencia);
 		
 		var controlador = 0;
 

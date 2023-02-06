@@ -27990,6 +27990,9 @@ router.post("/novojobcard", upload.any(), async function(req, res){
 		res.redirect("/inicio");
 		});
 
+
+
+
 	router.post("/aprovarttnumber",  upload.any(), async function(req, res){
 		var userData= req.session.usuario;
 		var jobcard = req.body;
@@ -27998,9 +28001,6 @@ router.post("/novojobcard", upload.any(), async function(req, res){
 		var geolocationJobcardInfo = [];
 
 		var procurajobcard = await jobcards.findOne({_id:jobcard.jobcard_id}, {jobcard_siteid:1, jobcard_linemanagerid:1, jobcard_loggedby:1, jobcard_ttnumber:1, jobcard_departamentoid:1,jobcard_site:1, jobcard_tecniconome:1}).lean();
-
-		console.log("Find User")
-		console.log(procurajobcard)
 		if(procurajobcard == null)
 			var procurajobcard = await hvac_db.findOne({_id:jobcard.jobcard_id});
 		if(procurajobcard == null)
@@ -28080,6 +28080,7 @@ router.post("/novojobcard", upload.any(), async function(req, res){
 		geolocationJobcardInfo.push(geolocationJobcardInfo1);
 		console.log(geolocationJobcardInfo)
 	}
+
 
 		jobcard.ttnumber_status = "In Progress";
 		jobcard.jobcard_controlador = [1, 1];
@@ -28866,12 +28867,18 @@ router.get("/saidasiteproject/:idjobcard",async  function(req, res){
 
 		console.log("jobcard",jobcard);
 		var usuarios = await [];
+		
 		var id = jobcard.jobcardhvacid;
+		if (id == null)
+			id = jobcard.jobcard_id;
 
-		var procurajobcard = await hvac_db.findOne({_id:jobcard.jobcard_id});
-		console.log(procurajobcard)
+
+		var procurajobcard = await jobcards.findOne({_id:jobcard._id});
 		if(procurajobcard==null)
-			var procurajobcard = await energia.findOne({_id:jobcard.jobcard_id});
+				procurajobcard = await hvac_db.findOne({_id:id});
+		if(procurajobcard==null)
+				procurajobcard = await energia.findOne({_id:jobcard._id});
+
 		var callcenter = await users_db.find({funcao:"Call Center"}, {email:1});
 		for(var i = 0; i<callcenter.length; i++){
 			usuarios.push(callcenter[i].email);
@@ -28892,19 +28899,17 @@ router.get("/saidasiteproject/:idjobcard",async  function(req, res){
 		var remedialaction = await jobcard.jobcard_remedialaction;
 		var healthsafety = await jobcard.jobcard_healthsafety;
 		var hsreason = await jobcard.jobcard_hsreason;
-
-		// if(procurajobcard.jobcard_departamentoid=="611e45e68cd71c1f48cf45bd"){
-		var j = await hvac_db.updateOne({_id:jobcard.jobcard_id},{$set:{data_ultimaactualizacaojobcard:new Date(), jobcard_estadoactual:"Awaiting approval",remedialaction, healthsafety, hsreason, jobcard_sitearrivaldate:new Date(), jobcard_controlador}, $push:{jobcard_audittrail:ob, reportetrabalho:report}});
+		
+		var j = await hvac_db.updateOne({_id:id},{$set:{data_ultimaactualizacaojobcard:new Date(), jobcard_estadoactual:"Awaiting approval",remedialaction, healthsafety, hsreason, jobcard_sitearrivaldate:new Date(), jobcard_controlador}, $push:{jobcard_audittrail:ob, reportetrabalho:report}});
 		if(j.n==0)
 			var j = await energia.updateOne({_id:jobcard.jobcard_id},{$set:{data_ultimaactualizacaojobcard:new Date(), jobcard_estadoactual:"Awaiting approval",remedialaction, healthsafety, hsreason, jobcard_sitearrivaldate:new Date(), jobcard_controlador}, $push:{jobcard_audittrail:ob, reportetrabalho:report}});
 
 		console.log("Sent for approval")
 		res.redirect("/inicio");
 	
-		// }else if(procurajobcard.jobcard_departamentoid=="61532293699ee012d00db4e8"){
-
-		// }
-	}); 
+			
+		}
+	); 
 
 router.post("/updateJobcardPlanned/:id",  upload.any(), async function(req, res){
 
