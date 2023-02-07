@@ -31,10 +31,10 @@ block content
 							th <span data-i18n="demo.manutencao_form.tecniconome1"></span>
 							th <span data-i18n="demo.manutencao_form.maintenancedate"></span>
 							th Credelec Number
-							th 
-							th Credelec Amount
-							th Credelec Current
-							th Credelec After
+							th Transaction Value
+							th Energy value
+							th Current Kw/h
+							th Kw/h Units
 							th Generator 
 							th Electricity_Supply_Type
 							th 
@@ -49,10 +49,10 @@ block content
 								td #{Jobcards[index].jobcard_tecniconome}
 								td #{Jobcards[index].data_ultimaactualizacaojobcard.getDate()+'/'+(Jobcards[index].data_ultimaactualizacaojobcard.getMonth()+1)+'/'+(Jobcards[index].data_ultimaactualizacaojobcard.getFullYear())}
 								td #{Jobcards[index].jobcard_credelecnr}
-								td
 								td #{Jobcards[index].jobcard_amountadded}
+								td #{Jobcards[index].jobcard_amount}
 								td #{Jobcards[index].jobcard_currentkwh}
-								td #{Jobcards[index].jobcard_kwhafter}
+								td #{Jobcards[index].jobcard_payamount}
 								td #{Jobcards[index].generator}
 								td #{Jobcards[index].type}
 								td.center-align

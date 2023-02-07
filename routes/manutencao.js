@@ -16608,8 +16608,9 @@ router.post("/updatephotoinfoHvacInfo/:id",  uploadcallhvac.any(), async functio
 					tt.data_ultimaactualizacaojobcard = await gen[0].data_ultimaactualizacaojobcard? gen[0].data_ultimaactualizacaojobcard:'';
 					tt.jobcard_credelecnr = await gen[0].jobcard_credelecinfo[i1].jobcard_credelecnr?  gen[0].jobcard_credelecinfo[i1].jobcard_credelecnr:'';
 					tt.jobcard_amountadded = await gen[0].jobcard_credelecinfo[i1].jobcard_amountadded?  gen[0].jobcard_credelecinfo[i1].jobcard_amountadded:'';
+					tt.jobcard_amount = await gen[0].jobcard_credelecinfo[i1].jobcard_amount?  gen[0].jobcard_credelecinfo[i1].jobcard_amount:'';
 					tt.jobcard_currentkwh = await gen[0].jobcard_credelecinfo[i1].jobcard_currentkwh? gen[0].jobcard_credelecinfo[i1].jobcard_currentkwh:'';
-					tt.jobcard_kwhafter = await gen[0].jobcard_credelecinfo[i1].jobcard_kwhafter? gen[0].jobcard_credelecinfo[i1].jobcard_kwhafter:'';
+					tt.jobcard_payamount = await gen[0].jobcard_credelecinfo[i1].jobcard_payamount? gen[0].jobcard_credelecinfo[i1].jobcard_payamount:'';
 
 					var site = await parseInt(tt.jobcard_site)
 					console.log(site);
@@ -28263,6 +28264,7 @@ router.get("/detalhesCredelecJobcard/:idjobcard", async  function(req, res){
 
 	res.render("jobcard_detalhesCredelec", {DataU:userData, Jobcard:dataJobcard, site:site, title: 'EAGLEI'});
 });
+
 
 router.get("/detalhesCredelecJobcard/:idjobcard/:idindex",  function(req, res){
 	var userData= req.session.usuario;

@@ -4298,6 +4298,9 @@ var controle = $("input[name='travelinfo_proposito']:checked").val();
 	});
 
 
+
+
+	
 	$('#reportsmaintenance_region').change(function(){
 
 		var reportsmaintenance_region = $("#reportsmaintenance_region").val();
