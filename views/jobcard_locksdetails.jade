@@ -105,7 +105,7 @@ block content
 					label(for="jobcard_locksM3na") N/A
 			.row(style="margin-bottom:18px;")
 				.col.s12.m12.input-field
-					label(for="jobcard_lockscomments") <span data-i18n="demo.preventative_maint.comentarios"></span>
+					h3(class="fs-title") <span data-i18n="demo.preventative_maint.preucupacoes"></span>
 					input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_lockscomments" ,name="jobcard_lockscomments" value="#{Jobcards[0].jobcardlocks.jobcard_lockscomments}")
 			a(class="waves-effect waves-light action-button" style="width:100px; font-size:15px" href="/manutencao/detalhesJobcardPlanned/#{Jobcards[0]._id}") << Back
 	else
@@ -181,7 +181,7 @@ block content
 				input(type="button", name="previous", class="previous action-button", value="<< Prev")
 				input(type="button", name="next", class="next action-button", value="Next >>")
 			fieldset(style="padding:0px")
-				h3(class="fs-title") <span data-i18n="demo.preventative_maint.comentarios"></span>
+				h3(class="fs-title") <span data-i18n="demo.preventative_maint.preucupacoes"></span>
 				.row(style="margin-bottom:20px")
 					.col.s12.m12.input-field
 						input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_lockscomments" ,name="jobcard_lockscomments")

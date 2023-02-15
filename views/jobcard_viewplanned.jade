@@ -838,7 +838,7 @@ block content
 			-if((JSON.stringify(Jobcards[0].jobcardsignage) != "{}") || (JSON.stringify(Jobcards[0].jobcardcontainer) != "{}") || (JSON.stringify(Jobcards[0].jobcardmast) != "{}") || (JSON.stringify(Jobcards[0].jobcardcleaning) != "{}") || (JSON.stringify(Jobcards[0].jobcardlocks) != "{}") || (JSON.stringify(Jobcards[0].jobcardenvironmental) != "{}") || (JSON.stringify(Jobcards[0].jobcardfallarrest) != "{}") || (JSON.stringify(Jobcards[0].jobcardgeneratorinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardedBoardinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardelectricalinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardrectifierinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardbatterybanksinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardaircondinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardantennasinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardeainfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardtxinfo) != "{}") || (JSON.stringify(Jobcards[0].jobcardvsatinfo) != "{}") || (Jobcards[0].jobcardphotoinfo.length != 0) || (JSON.stringify(Jobcards[0].jobcardconcernsinfo) != "{}"))
 				fieldset(style="padding:25px;")
 					.row#recolherid(data_id="#{Jobcards[0]._id}")
-						-if(Jobcards[0].jobcardsignage != undefined)
+						-if(JSON.stringify(Jobcards[0].jobcardsignage) != "{}")
 							.col.m4.s6
 								.card.hover-reveal.personalised.signageModalDetails(datajobcardsignage="#{JSON.stringify(Jobcards[0].jobcardsignage)}")
 									.card-image.waves-block

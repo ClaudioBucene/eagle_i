@@ -15237,6 +15237,9 @@ $('.captarinqueritoair').click(function(){
    });
 
 
+
+
+
 	$('#jobcardsignage_yes_btn').click(function(){
 		$('#loading').fadeIn().delay(20000).fadeOut();
 
@@ -15291,6 +15294,10 @@ $('.captarinqueritoair').click(function(){
 		});
 
 
+
+
+
+
 	$('.containerModal').click(function(){
 
 		var referencia = $(this).attr("dataref");
@@ -15339,6 +15346,9 @@ $('.captarinqueritoair').click(function(){
 
 				var jobcard_powerskirting=$("input[name='jobcard_powerskirting']:checked").val();
 				jobcardformdata.append("jobcard_powerskirting", jobcard_powerskirting);
+
+				var jobcard_concerns=$("#jobcard_concerns").val();
+				jobcardformdata.append("jobcard_concerns", jobcard_concerns);
 
 
 				var xhr = new XMLHttpRequest();
@@ -32720,6 +32730,11 @@ var demoJson = {
 							"pt": "A actualizar",
 							"en": "Updating"
 					},
+
+					"preucupacoes": {
+						"pt": "Preucupações",
+						"en": "Concerns"
+				},
 
 					"comentarios": {
 							"pt": "Comentários",

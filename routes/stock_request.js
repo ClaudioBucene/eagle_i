@@ -167,10 +167,12 @@ if(userData.nivel_acesso=="admin"){
 			}).sort({date_request:-1})		
 })
 
+
+
 router.get("/expedientes", function(req, res){
 	
 var userData= req.session.usuario;
-if(userData.nivel_acesso=="admin" || userData.funcao_id=="627e4995cba3d2105c26ed34"){
+if(userData.nivel_acesso=="admin" || userData.funcao_id=="627e4995cba3d2105c26ed34" || userData.funcao_id=="611e3b3d6ed713019c50cf79"){
 	stock_request_db.find({ estagio:{$size:1}, actual_situation:{$ne:"aprovado"}, returned_reason:{$exists:false} }, function(err, data){
 		if(err)
 			console.log("ocorreu um erro ao tentar selecionar stock_items!!")

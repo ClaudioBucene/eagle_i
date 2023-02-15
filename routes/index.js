@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
   res.render("login", {title:'EAGLEI'});
 });
 
+
 router.post("/change", function(req, res){
 	var user1=getUser(req.body)
 	if((user1.username!=user1.senha) && (user1.senha.length>=7)){
@@ -50,6 +51,8 @@ router.get("/inicio", function(req, res){
 	else
 	res.redirect("/")
 })
+
+
 
 router.post('/', function(req, res){
 	var user1=getUser(req.body)
@@ -111,6 +114,8 @@ router.post('/', function(req, res){
 				res.render("login",{err:true})
 	})
 })
+
+
 
 function getUser(body){
 	var userr= {};
